@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <Appenders>
-        <File name="trace" fileName="/home/muhammad/agrimarket.trace.log">
+        <!--"/home/muhammad/agrimarket/agrimarket.trace.log " for linux-->
+        <File name="trace" fileName="/home/muhammad/agrimarket/agrimarket.trace.log">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
