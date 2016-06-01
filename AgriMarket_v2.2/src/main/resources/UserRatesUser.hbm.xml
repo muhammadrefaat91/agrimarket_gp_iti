@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 29, 2016 4:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="agrimarket_schema" name="org.iti.agrimarket.model.pojo.UserRatesUser" table="user_rates_user">
+    <composite-id class="org.iti.agrimarket.model.pojo.UserRatesUserId" name="id">
+      <key-property name="raterId" type="int">
+        <column name="Rater_id"/>
+      </key-property>
+      <key-property name="ratedId" type="int">
+        <column name="Rated_id"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="org.iti.agrimarket.model.pojo.User" fetch="select" insert="false" name="userByRatedId" update="false">
+      <column name="Rated_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="org.iti.agrimarket.model.pojo.User" fetch="select" insert="false" name="userByRaterId" update="false">
+      <column name="Rater_id" not-null="true"/>
+    </many-to-one>
+    <property name="rate" type="int">
+      <column name="rate" not-null="true"/>
+    </property>
+    <property name="review" type="string">
+      <column length="16777215" name="review"/>
+    </property>
+  </class>
+</hibernate-mapping>

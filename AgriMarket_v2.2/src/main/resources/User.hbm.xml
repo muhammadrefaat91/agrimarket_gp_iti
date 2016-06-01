@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 29, 2016 4:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class catalog="agrimarket_schema" name="org.iti.agrimarket.model.pojo.User" table="user">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property name="mail" type="string">
+            <column length="100" name="mail" not-null="true"/>
+        </property>
+        <property name="password" type="string">
+            <column length="45" name="password" not-null="true"/>
+        </property>
+        <property name="fullName" type="string">
+            <column length="100" name="full_name" not-null="true"/>
+        </property>
+        <property name="mobile" type="string">
+            <column length="45" name="mobile" not-null="true"/>
+        </property>
+        <property name="registrationChannel" type="int">
+            <column name="registration_channel" not-null="true"/>
+        </property>
+        <property name="lat" type="double">
+            <column name="lat" not-null="true" precision="22" scale="0"/>
+        </property>
+        <property name="long_" type="double">
+            <column name="`long`" not-null="true" precision="22" scale="0"/>
+        </property>
+        <property name="governerate" type="string">
+            <column length="100" name="governerate"/>
+        </property>
+        <property name="imageUrl" type="string">
+            <column length="200" name="image_url"/>
+        </property>
+        <property name="ratesAverage" type="int">
+            <column name="rates_average" not-null="true"/>
+        </property>
+        <property name="loggedIn" type="boolean">
+            <column name="logged_in" not-null="true"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="userDatas" table="user_data">
+            <key>
+                <column name="User_id" not-null="true"/>
+            </key>
+            <one-to-many class="org.iti.agrimarket.model.pojo.UserData"/>
+        </set>
+        <set fetch="select" inverse="false" lazy="true" name="products" table="user_interested_in_product">
+            <key>
+                <column name="User_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="org.iti.agrimarket.model.pojo.Product">
+                <column name="Product_id" not-null="true"/>
+            </many-to-many>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="userPlantsPlants" table="user_plants_plant">
+            <key>
+                <column name="User_id" not-null="true"/>
+            </key>
+            <one-to-many class="org.iti.agrimarket.model.pojo.UserPlantsPlant"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="userOfferProductFixeds" table="user_offer_product_fixed">
+            <key>
+                <column name="User_id" not-null="true"/>
+            </key>
+            <one-to-many class="org.iti.agrimarket.model.pojo.UserOfferProductFixed"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="histories" table="history">
+            <key>
+                <column name="User_id" not-null="true"/>
+            </key>
+            <one-to-many class="org.iti.agrimarket.model.pojo.History"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="userRatesUsersForRatedId" table="user_rates_user">
+            <key>
+                <column name="Rated_id" not-null="true"/>
+            </key>
+            <one-to-many class="org.iti.agrimarket.model.pojo.UserRatesUser"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="userRatesUsersForRaterId" table="user_rates_user">
+            <key>
+                <column name="Rater_id" not-null="true"/>
+            </key>
+            <one-to-many class="org.iti.agrimarket.model.pojo.UserRatesUser"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 29, 2016 4:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="agrimarket_schema" name="org.iti.agrimarket.model.pojo.Encryption" table="encryption">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="user" type="string">
+      <column length="25" name="user" not-null="true"/>
+    </property>
+    <property name="privateKey" type="string">
+      <column length="100" name="`private key`" not-null="true"/>
+    </property>
+    <property name="publicKey" type="string">
+      <column length="100" name="`public key`" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 29, 2016 4:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="agrimarket_schema" name="org.iti.agrimarket.model.pojo.Unit" table="unit">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="nameAr" type="string">
+      <column length="45" name="name_ar"/>
+    </property>
+    <property name="nameEn" type="string">
+      <column length="45" name="name_en"/>
+    </property>
+    <property name="type" type="string">
+      <column length="45" name="type" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="historiesForPricePerUnitId" table="history">
+      <key>
+        <column name="price_per_unit_id" not-null="true"/>
+      </key>
+      <one-to-many class="org.iti.agrimarket.model.pojo.History"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="historiesForUnitId" table="history">
+      <key>
+        <column name="Unit_id" not-null="true"/>
+      </key>
+      <one-to-many class="org.iti.agrimarket.model.pojo.History"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="userPlantsPlants" table="user_plants_plant">
+      <key>
+        <column name="AreaUnit_id" not-null="true"/>
+      </key>
+      <one-to-many class="org.iti.agrimarket.model.pojo.UserPlantsPlant"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="userOfferProductFixedsForUnitId" table="user_offer_product_fixed">
+      <key>
+        <column name="Unit_id" not-null="true"/>
+      </key>
+      <one-to-many class="org.iti.agrimarket.model.pojo.UserOfferProductFixed"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="userOfferProductFixedsForPricePerUnitId" table="user_offer_product_fixed">
+      <key>
+        <column name="price_per_unit_id" not-null="true"/>
+      </key>
+      <one-to-many class="org.iti.agrimarket.model.pojo.UserOfferProductFixed"/>
+    </set>
+  </class>
+</hibernate-mapping>
