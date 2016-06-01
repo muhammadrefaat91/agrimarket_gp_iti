@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/agrimarket_schema"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+    
+    <!--
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/agrimarket_schema"/>
+        <property name="username" value="itiam"/>
+        <property name="password" value="FR2wrAre_953#!"/>
+    </bean>
+    -->
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mappingResources">
+            <list>
+                <value>Category.hbm.xml</value>
+                <value>Encryption.hbm.xml</value>
+                <value>History.hbm.xml</value>
+                <value>Product.hbm.xml</value>
+                <value>Season.hbm.xml</value>
+                <value>Unit.hbm.xml</value>
+                <value>User.hbm.xml</value>
+                <value>UserData.hbm.xml</value>
+                <value>UserOfferProductFixed.hbm.xml</value>
+                <value>UserPlantsPlant.hbm.xml</value>
+                <value>UserRatesUser.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect=org.hibernate.dialect.MySQLDialect
+            </value>
+        </property>
+        
+    </bean> 
+    
+    <bean id="template" class="org.springframework.orm.hibernate4.HibernateTemplate">  
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>  
+    
+    
+    <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="tt" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="txManager" />
+    </bean>
+    
+    
+    
+</beans>

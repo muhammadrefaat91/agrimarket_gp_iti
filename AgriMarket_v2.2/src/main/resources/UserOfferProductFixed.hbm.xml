@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 29, 2016 4:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="agrimarket_schema" name="org.iti.agrimarket.model.pojo.UserOfferProductFixed" table="user_offer_product_fixed">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="org.iti.agrimarket.model.pojo.Product" fetch="select" name="product">
+      <column name="Product_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="org.iti.agrimarket.model.pojo.Unit" fetch="select" name="unitByUnitId">
+      <column name="Unit_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="org.iti.agrimarket.model.pojo.Unit" fetch="select" name="unitByPricePerUnitId">
+      <column name="price_per_unit_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="org.iti.agrimarket.model.pojo.User" fetch="select" name="user">
+      <column name="User_id" not-null="true"/>
+    </many-to-one>
+    <property name="startDate" type="date">
+      <column length="10" name="start_date" not-null="true"/>
+    </property>
+    <property name="price" type="float">
+      <column name="price" not-null="true" precision="12" scale="0"/>
+    </property>
+    <property name="quantity" type="float">
+      <column name="quantity" not-null="true" precision="12" scale="0"/>
+    </property>
+    <property name="userPhone" type="string">
+      <column length="45" name="user_phone"/>
+    </property>
+    <property name="userLocation" type="string">
+      <column length="100" name="user_location"/>
+    </property>
+    <property name="recommended" type="java.lang.Boolean">
+      <column name="recommended"/>
+    </property>
+    <property name="imageUrl" type="string">
+      <column length="200" name="image_url"/>
+    </property>
+    <property name="description" type="string">
+      <column length="500" name="description"/>
+    </property>
+  </class>
+</hibernate-mapping>

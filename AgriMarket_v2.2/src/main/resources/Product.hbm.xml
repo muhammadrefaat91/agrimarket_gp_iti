@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 29, 2016 4:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="agrimarket_schema" name="org.iti.agrimarket.model.pojo.Product" table="product">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="org.iti.agrimarket.model.pojo.Category" fetch="select" name="category">
+      <column name="Category_id" not-null="true"/>
+    </many-to-one>
+    <property name="nameAr" type="string">
+      <column length="45" name="name_ar"/>
+    </property>
+    <property name="nameEn" type="string">
+      <column length="45" name="name_en"/>
+    </property>
+    <property name="imageUrl" type="string">
+      <column length="200" name="image_url"/>
+    </property>
+    <property name="organic" type="java.lang.Boolean">
+      <column name="organic"/>
+    </property>
+    <property name="soundUrl" type="string">
+      <column length="200" name="sound_url"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="userOfferProductFixeds" table="user_offer_product_fixed">
+      <key>
+        <column name="Product_id" not-null="true"/>
+      </key>
+      <one-to-many class="org.iti.agrimarket.model.pojo.UserOfferProductFixed"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="histories" table="history">
+      <key>
+        <column name="Product_id" not-null="true"/>
+      </key>
+      <one-to-many class="org.iti.agrimarket.model.pojo.History"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="userPlantsPlants" table="user_plants_plant">
+      <key>
+        <column name="Product_id" not-null="true"/>
+      </key>
+      <one-to-many class="org.iti.agrimarket.model.pojo.UserPlantsPlant"/>
+    </set>
+    <set fetch="select" inverse="false" lazy="true" name="users" table="user_interested_in_product">
+      <key>
+        <column name="Product_id" not-null="true"/>
+      </key>
+      <many-to-many entity-name="org.iti.agrimarket.model.pojo.User">
+        <column name="User_id" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set fetch="select" inverse="false" lazy="true" name="seasons" table="plant_has_season">
+      <key>
+        <column name="Product_id" not-null="true"/>
+      </key>
+      <many-to-many entity-name="org.iti.agrimarket.model.pojo.Season">
+        <column name="Season_id" not-null="true"/>
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

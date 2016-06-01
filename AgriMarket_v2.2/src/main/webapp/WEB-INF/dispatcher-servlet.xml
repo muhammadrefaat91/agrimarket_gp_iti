@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+       
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    
+    
+    <mvc:annotation-driven/>
+    
+  
+    
+    <context:component-scan base-package="org.iti.agrimarket.model"/>
+    <context:component-scan base-package="org.iti.agrimarket.business"/>
+     <context:component-scan base-package="org.iti.agrimarket.view"/>
+    <context:component-scan base-package="org.iti.agrimarket.service"/>
+    <context:component-scan base-package="org.iti.agrimarket.util.requestprocessor"/>
+    
+    <!-- link css, javascript-->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    
+    <!--<bean id="controllerAspect" class="org.iti.agrimarket.util.LoggerAspect" />-->
+
+    
+      <!-- Aop-->
+     <!--<aop:aspectj-autoproxy  />-->
+    
+    <bean  id="imagesPath"  class="java.lang.String">
+        <constructor-arg value="C:/AgriMarket/"/>         
+        <!--<constructor-arg value="/home/muhammad/offer/"/>-->         
+    </bean>
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="2000000"/>
+    </bean>
+
+<!--    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+     
+     Configure bean to convert JSON to POJO and vice versa 
+    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    </bean>-->
+
+    <!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>-->
+
+   
+<!--    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="index.htm">indexController</prop>
+            </props>
+        </property>
+    </bean>-->
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/"
+          p:suffix=".jsp" />
+
+    <!--
+    The index controller.
+    -->
+    
+        
+    <!--static pages-->
+    <mvc:view-controller path="/about.htm" view-name="about" />
+    <mvc:view-controller path="/index.htm" view-name="index" />
+    <mvc:view-controller path="/login.htm" view-name="sign_in" />
+    <mvc:view-controller path="/offers.htm" view-name="offers_page" />
+    <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />
+    <mvc:view-controller path="/web/user.htm" view-name="view_user" />
+    <mvc:view-controller path="/web/preview.htm" view-name="preview" />
+    
+<!--    <bean name="indexController"
+          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+          p:viewName="index" />-->
+
+</beans>
