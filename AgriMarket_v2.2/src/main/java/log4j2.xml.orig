@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
     <Appenders>
-        <!--Helllloooooooooooooooooooooooooooooooooooooooooooooooooooooo-->
+<<<<<<< HEAD
         <!--<File name="trace" fileName="/home/muhammad/agrimarket.trace.log">-->
         <File name="trace" fileName="C:/AgriMarket/logs/agrimarket.trace.log">
+=======
+        <!--"/home/muhammad/agrimarket/agrimarket.trace.log " for linux-->
+        <File name="trace" fileName="/home/muhammad/agrimarket/agrimarket.trace.log">
+>>>>>>> cdd6ed58aa81f1d2cf8cad929ac3f99611d596b5
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
