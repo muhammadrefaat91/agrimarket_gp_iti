@@ -69,6 +69,27 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
         });
     }
 
+    
+    
+    
+    
+     @Override
+    public void update(UserOfferProductFixed userOfferProductFixed) {
+        transactionTemplate.execute((TransactionStatus ts) -> {
+            try {
+                Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+               session.update(userOfferProductFixed);
+               
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                ts.setRollbackOnly();
+            }
+            return -1;
+        });
+    }
+
+    
     @Override
     public void edit(UserOfferProductFixed userOfferProductFixed) {
         transactionTemplate.execute((TransactionStatus ts) -> {

@@ -65,7 +65,7 @@
     <!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>-->
 
    
-<!--    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <!--    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
                 <prop key="index.htm">indexController</prop>
@@ -87,13 +87,15 @@
     <mvc:view-controller path="/about.htm" view-name="about" />
     <mvc:view-controller path="/index.htm" view-name="index" />
     <mvc:view-controller path="/login.htm" view-name="sign_in" />
+    <mvc:view-controller path="/uploadimage.htm" view-name="uploadimage" />
     <mvc:view-controller path="/offers.htm" view-name="offers_page" />
     <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />
     <mvc:view-controller path="/web/user.htm" view-name="view_user" />
     <mvc:view-controller path="/web/preview.htm" view-name="preview" />
-    
-<!--    <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="index" />-->
+   
+   
+    <!--    <bean name="indexController"
+    class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+    p:viewName="index" />-->
 
 </beans>

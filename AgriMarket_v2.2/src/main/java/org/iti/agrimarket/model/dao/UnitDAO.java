@@ -95,4 +95,26 @@ public class UnitDAO implements UnitDAOInterface {
     }
    
 
+    
+    
+    
+    /**
+     * @Author Amr 
+     * get all the units of Certain type
+     * @param type its the type of units
+     * @return json array of opjects of units
+     * @throws Database (Hibernate) error if there is server error
+     * @throws server error if there is server error
+     */
+    @Override
+
+    public List<Unit> getAllUnits(){
+
+        
+      
+        return (List<Unit>) getHibernateTemplate().execute((Session session) -> session.createQuery("from Unit u").list());
+
+    }
+    
+    
 }

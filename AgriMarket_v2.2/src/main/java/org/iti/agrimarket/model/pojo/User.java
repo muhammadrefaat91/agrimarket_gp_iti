@@ -23,7 +23,7 @@ public class User implements java.io.Serializable {
     @NotNull(message = "You can't leave this empty.")
     private String fullName;
     @Expose
-    @Phone(message = "You can't leave this empty.")
+    //@Phone(message = "You can't leave this empty.")
     private String mobile;
     @Expose
     @NotNull

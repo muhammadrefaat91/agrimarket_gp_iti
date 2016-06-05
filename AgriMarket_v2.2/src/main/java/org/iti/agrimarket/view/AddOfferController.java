@@ -47,23 +47,32 @@ import org.springframework.web.bind.annotation.RestController;
 import org.iti.agrimarket.business.UserService;
 import java.io.BufferedOutputStream;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.iti.agrimarket.business.ProductService;
+import org.iti.agrimarket.business.UnitService;
 import org.iti.agrimarket.constant.Constants;
+import org.iti.agrimarket.model.pojo.Product;
+import org.iti.agrimarket.model.pojo.Unit;
 import org.iti.agrimarket.model.pojo.User;
+import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.iti.agrimarket.request.param.LogOutParam;
 import org.iti.agrimarket.request.param.UserCheckParam;
 import org.iti.agrimarket.util.requestprocessor.param.extraction.ParamExtractor;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  *
  * @author Amr
  */
 @Controller
-public class SignUpController extends HttpServlet {
+
+public class AddOfferController extends HttpServlet {
 
     private Logger logger;
 
@@ -71,10 +80,16 @@ public class SignUpController extends HttpServlet {
     UserService userService;
 
     @Autowired
+    ProductService productService;
+
+    @Autowired
+    UnitService unitService;
+
+    @Autowired
     OfferService offerService;
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signUp(@ModelAttribute("userForm") @Valid User user, BindingResult br, Model model) {
+    //  @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signUp2(@ModelAttribute("userForm") @Valid User user, BindingResult br, Model model) {
 
         if (br.hasErrors()) {
             return "signup";
@@ -137,11 +152,30 @@ public class SignUpController extends HttpServlet {
         return "index";
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public ModelAndView drawSignUpForm() {
-        User user = new User();
-        System.out.println("hello################");
-        return new ModelAndView("signup", "userForm", user);
+    @RequestMapping(value = "/addoffer", method = RequestMethod.GET)
+    public ModelAndView drawAddOfferPage(Model model) {
+//
+//        int[] productsArr = {1, 2, 3, 4, 5};
+//
+//        int[] unitsArr = {1, 2, 3, 4, 5};
+
+      //  List<Product>
+        List<Unit> units;
+       
+            units = unitService.getAllUnits();
+
+            System.out.println(units.get(1).getNameEn());
+            
+            model.addAttribute("units", units);
+
+      
+        List<Product> products = productService.getAllProducts();
+     System.out.println(products.get(1).getNameEn());
+       
+        model.addAttribute("products", products);
+
+        System.out.println("hello################  new offer");
+        return new ModelAndView("addoffer");
     }
 
     @InitBinder
@@ -150,7 +184,7 @@ public class SignUpController extends HttpServlet {
         binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/uploadimage")
+    //  @RequestMapping(method = RequestMethod.POST, value = "/uploadimage")
     public String handleFileUpload(@RequestParam("name") String name,
             @RequestParam("file") MultipartFile file,
             RedirectAttributes redirectAttributes) {
@@ -189,98 +223,109 @@ public class SignUpController extends HttpServlet {
      * upload image and form data
      *
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/saveuser")
-    public String saveUser(@RequestParam("fullName") String fullName, @RequestParam("password") String password, @RequestParam("mail") String mail, @RequestParam("mobile") String mobil, @RequestParam("governerate") String governerate, @RequestParam("name") String name,
+    @RequestMapping(method = RequestMethod.POST, value = "/addoffer")
+    public String addOffer(@RequestParam("description") String description,
+            @RequestParam("quantity") float quantity,
+            @RequestParam("quantityunit") int quantityunit,
+            @RequestParam("unitprice") int unitprice,
+            @RequestParam("price") float price,
+            @RequestParam("mobile") String mobile,
+            @RequestParam("governerate") String governerate,
+            @RequestParam("name") String name,
+            @RequestParam("product") int product,
             @RequestParam("file") MultipartFile file,
             RedirectAttributes redirectAttributes) {
 
         System.out.println("save user func ---------");
-        System.out.println("full Name :" + fullName);
-        System.out.println("mobile:" + mobil);
+        System.out.println("full Name :" + description);
+        System.out.println("mobile:" + description);
 
-        User user = new User();
-        user.setFullName(fullName);
-        user.setPassword(password);
-        user.setGovernerate(governerate);
+        UserOfferProductFixed userOfferProductFixed = new UserOfferProductFixed();
 
-        user.setMail(mail);
-        user.setMobile(mobil);
-
-        user.setLat(0.0);
-        user.setLong_(0.0);
-        user.setLoggedIn(true);
-        user.setRatesAverage(0);
-        user.setRegistrationChannel(0);   // web
-        user.setImageUrl("images/amr.jpg");
-
-        if (!Validation.validateUser(user)) {
-
-            return "signup";
-
-        }
-
-        int res = userService.addUser(user);
-
-//          if (user.getId() == null) {
-//         //   logger.trace(Constants.DB_ERROR);
-//           return "signup";
-//        }
-//            if (name.contains("/")) {
-//                redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-//                return "redirect:/";
-//            }
-//            if (name.contains("/")) {
-//                redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-//                return "redirect:/";
-//            }
-        if (!file.isEmpty()) {
+        userOfferProductFixed.setDescription(description);
+        userOfferProductFixed.setPrice(price);
+        userOfferProductFixed.setRecommended(Boolean.FALSE);
+        userOfferProductFixed.setQuantity(quantity);
+        userOfferProductFixed.setProduct(productService.getProduct(product));
+        userOfferProductFixed.setUnitByUnitId(unitService.getUnit(quantityunit));
+        userOfferProductFixed.setUnitByPricePerUnitId(unitService.getUnit(unitprice));
+        userOfferProductFixed.setUser(userService.getUser(1));
+        userOfferProductFixed.setUserLocation(governerate);
+        userOfferProductFixed.setUserPhone(mobile);
+        userOfferProductFixed.setStartDate(new Date());
+        
+        int res =offerService.addOffer(userOfferProductFixed);
+        
         
 
-//                    
-//                    BufferedOutputStream stream = new BufferedOutputStream(
-//                            new FileOutputStream(new File("C:\\AgriMarket\\images\\users\\" + name)));
-//                    FileCopyUtils.copy(file.getInputStream(), stream);
-//                    stream.close();
-//                    redirectAttributes.addFlashAttribute("message",
-//                            "You successfully uploaded " + name + "!");
-//                    
 //
-//                    System.out.println("succccccccccccc");
-                String fileName = user.getId() + String.valueOf(new Date().getTime());
-
-             
-                    try {
-                        byte[] bytes = file.getBytes();
-                        MagicMatch match = Magic.getMagicMatch(bytes);
-                        final String ext = "." + match.getExtension();
-
-                        File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
-                        if (!parentDir.isDirectory()) {
-                            parentDir.mkdirs();
-                        }
-                        BufferedOutputStream stream
-                                = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName)));
-                        stream.write(bytes);
-                        stream.close();
-                        user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
-                        userService.updateUser(user);
-
-                    } catch (Exception e) {
-      //                  logger.error(e.getMessage());
-                        userService.deleteUser(user); // delete the category if something goes wrong
-                        
-                                 redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload " + name + " because the file was empty");
-                        return "signup";
-                    }
-
-                }
-            else {
-            redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload " + name + " because the file was empty");
-        }
-
-            return "redirect:index.htm";
-        }
-
+//        if (!Validation.validateUser(user)) {
+//
+//            return "signup";
+//
+//        }
+//
+//        int res = userService.addUser(user);
+//
+////          if (user.getId() == null) {
+////         //   logger.trace(Constants.DB_ERROR);
+////           return "signup";
+////        }
+////            if (name.contains("/")) {
+////                redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
+////                return "redirect:/";
+////            }
+////            if (name.contains("/")) {
+////                redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
+////                return "redirect:/";
+////            }
+//        if (!file.isEmpty()) {
+//        
+//
+////                    
+////                    BufferedOutputStream stream = new BufferedOutputStream(
+////                            new FileOutputStream(new File("C:\\AgriMarket\\images\\users\\" + name)));
+////                    FileCopyUtils.copy(file.getInputStream(), stream);
+////                    stream.close();
+////                    redirectAttributes.addFlashAttribute("message",
+////                            "You successfully uploaded " + name + "!");
+////                    
+////
+////                    System.out.println("succccccccccccc");
+//                String fileName = userOfferProductFixed.getId() + String.valueOf(new Date().getTime());
+//
+//             
+//                    try {
+//                        byte[] bytes = file.getBytes();
+//                        MagicMatch match = Magic.getMagicMatch(bytes);
+//                        final String ext = "." + match.getExtension();
+//
+//                        File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
+//                        if (!parentDir.isDirectory()) {
+//                            parentDir.mkdirs();
+//                        }
+//                        BufferedOutputStream stream
+//                                = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName)));
+//                        stream.write(bytes);
+//                        stream.close();
+//                        userOfferProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
+//                        userOfferProductFixed.setImageUrl(userOfferProductFixed);
+//
+//                    } catch (Exception e) {
+//      //                  logger.error(e.getMessage());
+//                        userService.deleteUser(user); // delete the category if something goes wrong
+//                        
+//                                 redirectAttributes.addFlashAttribute("message",
+//                    "You failed to upload " + name + " because the file was empty");
+//                        return "signup";
+//                    }
+//
+//                }
+//            else {
+//            redirectAttributes.addFlashAttribute("message",
+//                    "You failed to upload " + name + " because the file was empty");
+//        }
+        return "redirect:index.htm";
     }
+
+}

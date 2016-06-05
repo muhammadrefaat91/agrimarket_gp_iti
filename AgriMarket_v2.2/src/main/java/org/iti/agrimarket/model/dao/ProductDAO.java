@@ -136,6 +136,26 @@ public class ProductDAO implements ProductDAOInterface {
         });
     }
 
+    //amr
+    
+     @Override
+    public List<Product> getAllProducts() {
+        return (List<Product>) getHibernateTemplate().execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                try {
+                    List<Category> result = session.createQuery("from Product p").list();
+                    return result;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+
+                    return null;
+                }
+            }
+        });
+    }
+    
+    
     @Override
     public List<Product> searchProduct(String productName) {
         return (List<Product>) getHibernateTemplate().execute(new HibernateCallback() {

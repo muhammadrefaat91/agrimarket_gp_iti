@@ -27,5 +27,10 @@ public interface ProductService {
     public Product getProduct(Integer id);
     
     public List<Product> getChildrenOf(Integer categoryId);   
-    public List<Product> searchProduct(String name);   
+    public List<Product> searchProduct(String name); 
+    
+    
+    //amr
+      public List<Product> getAllProducts();
+    
 }
