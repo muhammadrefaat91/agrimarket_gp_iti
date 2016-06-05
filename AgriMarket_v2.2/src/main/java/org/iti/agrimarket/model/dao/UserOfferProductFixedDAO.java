@@ -14,6 +14,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.hibernate.Session;
+import org.iti.agrimarket.constant.Constants;
 import org.iti.agrimarket.model.pojo.Product;
 import org.iti.agrimarket.model.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +120,27 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
             }
         });
     }
+    
+    
+    @Override
+    public List<UserOfferProductFixed> findLimitedOffers(Product product, int pageNo) {
+
+        return (List<UserOfferProductFixed>) getHibernateTemplate().execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                try {
+                    List<UserOfferProductFixed> results = session.createQuery("from UserOfferProductFixed userOffer where userOffer.product = :product").setEntity("product", product).setFirstResult((pageNo-1)*Constants.PAGE_SIZE).setMaxResults(Constants.PAGE_SIZE).list();
+                    return results;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+
+                    return null;
+                }
+            }
+        });
+    }
+    
+    
 //Refaat
 
     @Override
@@ -242,10 +264,8 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
                 try {
                     Logger logger = LogManager.getLogger(UserOfferProductFixed.class);
                     logger.debug(criteria);
-
-                    Query newCriteria=session.createQuery("from UserOfferProductFixed userOffer where date(userOffer.startDate) "+criteria+" date(:date) "+
-                            (criteria.equals("between")?" and date(:maxDate) ":"")).setDate("date", date);
-                    
+                    Query newCriteria=session.createQuery("from UserOfferProductFixed userOffer where date(userOffer.startDate) "+criteria+" :date "+
+                            (criteria.equals("between")?" and :maxDate ":"")).setDate("date", date);
                     if (criteria.equals("between")) {
                         newCriteria=newCriteria.setDate("maxDate", maxDate);
                     }

@@ -22,6 +22,8 @@ public interface OfferService {
     boolean deleteOffer(Integer id);
 
     List<UserOfferProductFixed> getOffers(Product productId);
+    
+    List<UserOfferProductFixed> getLimitedOffers(Product productId,int pageNo);
 
     List<UserOfferProductFixed> getUserOffers(User user);
 

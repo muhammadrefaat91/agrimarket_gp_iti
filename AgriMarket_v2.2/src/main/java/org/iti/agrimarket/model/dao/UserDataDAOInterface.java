@@ -21,6 +21,7 @@ public interface UserDataDAOInterface {
     public void destroy(Integer id);
     
     public List<UserData> findUserDataEntities() ;
+    
 
     public UserData findUserData(Integer id);
     

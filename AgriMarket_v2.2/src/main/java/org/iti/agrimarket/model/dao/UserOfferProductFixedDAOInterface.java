@@ -24,6 +24,8 @@ public interface UserOfferProductFixedDAOInterface {
     public boolean destroy(Integer id);
 
     public List<UserOfferProductFixed> findOffers(Product product);
+    
+    public List<UserOfferProductFixed> findLimitedOffers(Product product, int pageNo);
 
     public List<UserOfferProductFixed> findUserOffers(User user);
 

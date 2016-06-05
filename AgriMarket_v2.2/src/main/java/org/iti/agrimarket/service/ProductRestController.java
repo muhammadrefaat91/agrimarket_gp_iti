@@ -21,11 +21,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import java.io.BufferedOutputStream;
 import java.util.Date;
+import java.util.List;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
 import org.iti.agrimarket.business.CategoryService;
 import org.iti.agrimarket.business.ProductService;
 import org.iti.agrimarket.constant.Constants;
+import org.iti.agrimarket.request.param.GetChildrenParam;
+import org.iti.agrimarket.request.param.GetPlantsParam;
+import org.iti.agrimarket.util.SerializerForCategory;
+import org.iti.agrimarket.util.SerializerForProduct;
 import org.iti.agrimarket.util.requestprocessor.param.extraction.ParamExtractor;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -46,6 +51,9 @@ public class ProductRestController {
     private CategoryService categorySrevice;
     @Autowired
     private ParamExtractor paramExtractor;
+    @Autowired
+    private CategoryService categoryService;
+    private static final Integer ID_OF_CROPS = 7;
 
     /**
      * Responsible for adding new product
@@ -124,23 +132,48 @@ public class ProductRestController {
         return Response.ok(Constants.SUCCESS_JSON, MediaType.APPLICATION_JSON).build();
     }
 
-    /**
-     * Parse Json to AddProductParam
-     *
-     * @param json
-     * @return AddProductParam parameter object
-     */
-    private Product getAddProductParam(String json) {
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-        Product parsedParam = null;
-        try {
-            parsedParam = gson.fromJson(json, Product.class);
+    @RequestMapping(value = Constants.GET_PLANTS_URL, method = RequestMethod.POST)
+    public Response getPlants(@RequestBody String param) {
 
-        } catch (Exception exception) {
-            return null;
+        //Parse json
+        GetPlantsParam parsedParam = paramExtractor.getParam(param, GetPlantsParam.class);
+        if (parsedParam == null || parsedParam.getLanguage() == null || parsedParam.getLanguage().isEmpty()) {
+
+            logger.trace(Constants.INVALID_PARAM);
+            return Response.status(Constants.PARAM_ERROR).entity(Constants.INVALID_PARAM).build();
         }
-        return parsedParam;
+
+        //Extract params
+        String language = parsedParam.getLanguage();
+
+        //Get gson object using language customized serialzers
+        Gson gson = getCustomAdaptedGson(language);
+
+        List<Product> products = null;
+        //Get children categories
+        List<Category> categories = categoryService.getChildrenOf(ID_OF_CROPS);
+        for (int i = 0; i < categories.size(); i++) {
+            Category get = categories.get(i);
+            List<Category> children = categoryService.getChildrenOf(get.getId());
+            if (children != null && children.size() > 0) {
+                categories.addAll(children);
+            } else {
+                List<Product> temp = productService.getChildrenOf(get.getId());
+                if (temp != null && temp.size() > 0) {
+                    if (products == null) {
+                        products = temp;
+                    } else {
+                        products.addAll(temp);
+                    }
+                }
+            }
+
+        }
+
+        if (products == null) {
+            return Response.status(Constants.DB_ERROR).build();
+        }
+        return Response.ok(gson.toJson(products), MediaType.APPLICATION_JSON).build();
     }
 
     public ProductRestController() {
@@ -171,4 +204,35 @@ public class ProductRestController {
         this.paramExtractor = paramExtractor;
     }
 
+    public Logger getLogger() {
+        return logger;
+    }
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
+
+    public CategoryService getCategoryService() {
+        return categoryService;
+    }
+
+    public void setCategoryService(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    /**
+     * User custom language serializers in building Gson object
+     *
+     * @param language
+     * @return Gson object using language custom serializers
+     */
+    private Gson getCustomAdaptedGson(String language) {
+        GsonBuilder builder = new GsonBuilder();
+
+        SerializerForProduct serializerForProduct = new SerializerForProduct();
+        serializerForProduct.setLanguage(language);
+        builder.registerTypeAdapter(Product.class, serializerForProduct);
+
+        return builder.create();
+    }
 }
