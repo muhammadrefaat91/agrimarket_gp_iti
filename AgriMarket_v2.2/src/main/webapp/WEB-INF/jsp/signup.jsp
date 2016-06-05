@@ -25,12 +25,63 @@
             }
 
         </script>
+        
+        
+          <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <title>jQuery Example</title>
+  <script>
+ $(document).ready(function() {
+  $.ajaxSetup({ cache: true });
+  $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+    FB.init({
+      appId: '600728280015510',
+      version: 'v2.5' // or v2.0, v2.1, v2.2, v2.3
+    });     
+    $('#loginbutton,#feedbutton').removeAttr('disabled');
+    FB.getLoginStatus(updateStatusCallback);
+  });
+});
+  </script>
+        
+        
+  
+  
+  
+  
+  
+        
     </head>
     <!--style="background-image: url(resources/images/istock-000016896298xlarge-4200x2833-56.jpg);"-->
     <body  >
 
+                             
+         
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=600728280015510";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=600728280015510";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+
         <!---include header description -->
 
+        
         <jsp:include page="header/headertop_desc.jsp" />
 
         <!---include header top -->
@@ -75,36 +126,22 @@
                         <div class="col-sm-12">
 
                             <div class="col-sm-8 col-sm-offset-2">
-                                <form:form  action="signup"  method="post"  commandName="userForm">
+                                <form   method="post" enctype="multipart/form-data" action="saveuser" >
                                     <div align="center">
                                         <%--<spring:message code="name" />--%>
 
                                         <div class="form-group">
 
 
-
-                                            <label>full name :</label> <form:input   path="fullName" class="form-control"  />
-                                            <form:errors path="fullName"/> 
+                                            <label>full name :</label> <input type="text"    name="fullName" class="form-control"  />
 
 
                                         </div>
-
-
 
 
                                         <div class="form-group">
                                             <label>Password: </label>
                                             <input   id="fullName" type="password" class="form-control"  name="password" required />
-                                            <form:errors path="fullName"/>
-                                        </div>
-
-
-
-
-                                        <div class="form-group">
-
-                                            <label>Telephone: </label><form:input   name="mobile" path="mobile" class="form-control" />
-                                            <form:errors path="mobile"/> 
 
                                         </div>
 
@@ -113,9 +150,19 @@
 
                                         <div class="form-group">
 
-                                            <label>Governerate: </label><form:input type="text"   name="governerate" path="governerate" class="form-control"/>
+                                            <label>Telephone: </label><input type="tel"   name="mobile"  class="form-control" />
 
-                                            <form:errors path="governerate"/> 
+
+                                        </div>
+
+
+
+
+                                        <div class="form-group">
+
+                                            <label>Governerate: </label><input type="text"   name="governerate"class="form-control"/>
+
+
 
                                         </div>
 
@@ -123,18 +170,27 @@
                                         <div class="form-group">
 
                                             <label>Email : </label>
-                                            
-                                            
-                                            <form:input type="email"  name="mail"  path="mail" class="form-control" />
-                                            <form:errors path="mail"/> 
+
+
+                                            <input type="email"  name="mail"   class="form-control" />
+
 
                                         </div>
 
-<!--
+                                        <!--
+                                                                                <div class="form-group">
+                                        
+                                                                                    <label>image :</label><input type="file"  name="image"  class="form-control"/>
+                                                                                </div>-->
                                         <div class="form-group">
+                                            <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+                                        </div>
 
-                                            <label>image :</label><input type="file"  name="image"  class="form-control"/>
-                                        </div>-->
+
+                                        <tr><td>Name:</td><td><input type="text" name="name" /></td></tr>
+
+
+
 
                                         <div class="form-group">
 
@@ -142,18 +198,46 @@
                                         </div>
 
 
+
+
                                     </div>
-                                    <form:errors path="*"/>
-                                </form:form>
+
+                                </form>
 
 
 
                             </div>
 
+                            <!--
+                                                        <form action='signupimage' method='post' ENCTYPE='MULTIPART/FORM-DATA'>
+                                                            <table><tr><td>Upload:<input type='file' name='fileUpload' /></td><td>&nbsp;&nbsp;<input type='submit' value='Upload'/></td></tr>
+                                                            </table> </form>-->
 
-                            <form action='signupimage' method='post' ENCTYPE='MULTIPART/FORM-DATA'>
-                                <table><tr><td>Upload:<input type='file' name='fileUpload' /></td><td>&nbsp;&nbsp;<input type='submit' value='Upload'/></td></tr>
-                                </table> </form>
+
+                            <div>
+                                <form method="POST" enctype="multipart/form-data" action="uploadimage.">
+                                    <table>
+                                        <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+                                        <tr><td>Name:</td><td><input type="text" name="name" /></td></tr>
+                                        <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+     
+                                    
+                                    
+                                    
+                                    </table>
+                                    
+                 
+<div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+
+                    <div class="fb-login-button" data-max-rows="3" data-size="large" data-show-faces="true" data-auto-logout-link="true" ></div>              
+                                        
+                   
+                                    
+                                    
+                                    
+                                </form>
+                            </div>
+
 
 
 
@@ -162,6 +246,7 @@
                 </div>
             </div>
         </section>
-
+                                        
+           
         <jsp:include  page="footer/footer.jsp"/>
     </body>

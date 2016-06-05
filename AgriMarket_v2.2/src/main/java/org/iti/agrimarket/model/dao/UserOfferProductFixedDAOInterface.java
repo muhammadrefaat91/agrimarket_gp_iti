@@ -49,4 +49,7 @@ public interface UserOfferProductFixedDAOInterface {
     public List<UserOfferProductFixed> findAllOfferProducts();
         public List<UserOfferProductFixed> findUserOfferProductByProductAndCategory(String productName,String categoryName);
 
+         public void update(UserOfferProductFixed userOfferProductFixed);
+        
+        
 }

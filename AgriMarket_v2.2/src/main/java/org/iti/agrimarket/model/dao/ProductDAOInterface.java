@@ -32,4 +32,8 @@ public interface ProductDAOInterface {
     
     
     public List<Product> searchProduct(String productName);
+
+//amr
+  public List<Product> getAllProducts();
+
 }
