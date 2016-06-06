@@ -200,7 +200,7 @@ public class SignUpController extends HttpServlet {
 
         User user = new User();
         user.setFullName(fullName);
-        user.setPassword(password);
+//        user.setPassword(password);
         user.setGovernerate(governerate);
 
         user.setMail(mail);

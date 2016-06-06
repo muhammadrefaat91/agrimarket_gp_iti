@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.iti.agrimarket.business.ProductService;
 import org.iti.agrimarket.constant.Constants;
 import static org.iti.agrimarket.constant.Constants.*;
+import org.iti.agrimarket.model.pojo.GroupedOffers;
 import org.iti.agrimarket.request.param.GetLimitedOffersParam;
 import org.iti.agrimarket.request.param.GetMainCategoriesParam;
 import org.iti.agrimarket.request.param.GetOffersParam;
@@ -236,9 +237,14 @@ public class OfferProductRestController {
         if (productId != 0) {
             //check if product existed 
             product = productServiceInterface.getProduct(productId);
-            List<UserOfferProductFixed> offers = offerService.getLimitedOffers(product, parsedParam.getPageNo());
-            if (offers!=null) {
-                return Response.ok( gson.toJson(offers), MediaType.APPLICATION_JSON).build();
+            if (product == null) {
+
+                logger.trace(Constants.INVALID_PARAM);
+                return Response.status(Constants.PARAM_ERROR).entity(Constants.INVALID_PARAM).build();
+            }
+            GroupedOffers offers = offerService.getLimitedOffers(product, parsedParam.getPageNo(), parsedParam.getSortType());
+            if (offers != null) {
+                return Response.ok(gson.toJson(offers), MediaType.APPLICATION_JSON).build();
             } else {
                 return Response.status(Constants.DB_ERROR).build();
             }

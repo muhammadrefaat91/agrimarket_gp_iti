@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.iti.agrimarket.model.dao.UserOfferProductFixedDAOInterface;
+import org.iti.agrimarket.model.pojo.GroupedOffers;
 import org.iti.agrimarket.model.pojo.Product;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
+import org.iti.agrimarket.request.param.GetLimitedOffersParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -122,8 +124,37 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public List<UserOfferProductFixed> getLimitedOffers(Product productId, int pageNo) {
-
-        return dAOInterface.findLimitedOffers(productId, pageNo);
+    public GroupedOffers getLimitedOffers(Product productId, int pageNo, int sortType) {
+        List<UserOfferProductFixed> rawResult = dAOInterface.findLimitedOffers(productId, pageNo, sortType);
+        GroupedOffers groupedOffers = new GroupedOffers();
+        for (int i = 0; i < rawResult.size(); i++) {
+            UserOfferProductFixed get = rawResult.get(i);
+            if (get.getRecommended()) {
+                if (!groupedOffers.getOffersGroups().containsKey(0)) {
+                    groupedOffers.getOffersGroups().put(0, new ArrayList<>());
+                }
+                groupedOffers.getOffersGroups().get(0).add(get);
+            } else if (sortType != GetLimitedOffersParam.DATE_SORT) {
+                if (sortType == GetLimitedOffersParam.QUANTITY_SORT) {
+                    if (!groupedOffers.getOffersGroups().containsKey(get.getUnitByUnitId().getId())) {
+                        groupedOffers.getOffersGroups().put(get.getUnitByUnitId().getId(), new ArrayList<>());
+                    }
+                    groupedOffers.getOffersGroups().get(get.getUnitByUnitId().getId()).add(get);
+                } else if (sortType == GetLimitedOffersParam.PRICE_SORT) {
+                    if (!groupedOffers.getOffersGroups().containsKey(get.getUnitByPricePerUnitId().getId())) {
+                        groupedOffers.getOffersGroups().put(get.getUnitByPricePerUnitId().getId(), new ArrayList<>());
+                    }
+                    groupedOffers.getOffersGroups().get(get.getUnitByPricePerUnitId().getId()).add(get);
+                }
+            }else{
+                
+                if (!groupedOffers.getOffersGroups().containsKey(-1)) {
+                    groupedOffers.getOffersGroups().put(-1, new ArrayList<>());
+                }
+                groupedOffers.getOffersGroups().get(-1).add(get);
+            }
+        }
+        return groupedOffers;
+//        return dAOInterface.findLimitedOffers(productId, pageNo, sortType);
     }
 }

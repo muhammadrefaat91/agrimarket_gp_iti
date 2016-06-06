@@ -9,32 +9,31 @@ package org.iti.agrimarket.request.param;
  *
  * @author Israa
  */
-public class GetLimitedOffersParam {
-    private int productId;
+public class SearchLimitedOffersByProductNameParam {
+    private String productName;
     private int pageNo;
     private int sortType;
     public static final int DATE_SORT=1;
     public static final int PRICE_SORT=2;
     public static final int QUANTITY_SORT=3;
 
-    public int getProductId() {
-        return productId;
+
+    public SearchLimitedOffersByProductNameParam() {
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public GetLimitedOffersParam() {
-    }
-
-    public GetLimitedOffersParam(int productId, int pageNo, int sortType) {
-        this.productId = productId;
+    public SearchLimitedOffersByProductNameParam(String productName, int pageNo, int sortType) {
+        this.productName = productName;
         this.pageNo = pageNo;
         this.sortType = sortType;
     }
 
-   
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
     public int getPageNo() {
         return pageNo;

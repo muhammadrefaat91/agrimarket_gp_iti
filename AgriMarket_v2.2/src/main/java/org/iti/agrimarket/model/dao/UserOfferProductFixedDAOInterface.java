@@ -25,7 +25,6 @@ public interface UserOfferProductFixedDAOInterface {
 
     public List<UserOfferProductFixed> findOffers(Product product);
     
-    public List<UserOfferProductFixed> findLimitedOffers(Product product, int pageNo);
 
     public List<UserOfferProductFixed> findUserOffers(User user);
 
@@ -50,6 +49,8 @@ public interface UserOfferProductFixedDAOInterface {
         public List<UserOfferProductFixed> findUserOfferProductByProductAndCategory(String productName,String categoryName);
 
          public void update(UserOfferProductFixed userOfferProductFixed);
+
+    public List<UserOfferProductFixed> findLimitedOffers(Product productId, int pageNo, int sortType);
         
         
 }
