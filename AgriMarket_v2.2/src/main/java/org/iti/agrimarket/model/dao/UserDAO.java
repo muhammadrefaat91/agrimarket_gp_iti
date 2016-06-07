@@ -10,7 +10,7 @@ import org.hibernate.Hibernate;
 import org.iti.agrimarket.model.pojo.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.iti.agrimarket.model.pojo.Category;
+import org.iti.agrimarket.model.pojo.UserRatesUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -188,6 +188,7 @@ public class UserDAO implements UserDAOInterface {
                 .setString("mail", email).setString("password", password).uniqueResult());
 
     }
+
     @Override
     public User findUserEager(Integer id) {
 
@@ -195,12 +196,22 @@ public class UserDAO implements UserDAOInterface {
 
             @Override
             public Object doInHibernate(Session sn) throws HibernateException {
-                User user =  (User) sn.createQuery("from User u where u.id=:id").setInteger("id", id).uniqueResult();
+                User user = (User) sn.createQuery("from User u where u.id=:id").setInteger("id", id).uniqueResult();
                 Hibernate.initialize(user.getUserOfferProductFixeds());
+                Hibernate.initialize(user.getUserRatesUsersForRatedId());
+                UserRatesUser u1;
+                for (Object u : user.getUserRatesUsersForRatedId()) {
+                    if (u instanceof UserRatesUser) {
+                        u1 = (UserRatesUser) u;
+                       Hibernate.initialize( u1.getUserByRaterId());
+                    }
+                }
+//                Hibernate.initialize(user.getUserRatesUsersForRaterId());
+
                 return user;
             }
         });
-                
+
     }
 
 }

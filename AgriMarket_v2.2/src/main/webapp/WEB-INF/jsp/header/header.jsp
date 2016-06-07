@@ -10,10 +10,11 @@
 	     
     <div class="header_slide">
         <div class="header_bottom_left">				
-            <div class="categories">
+            <div class="advertisements">
                 <ul>
-                    <h3>Categories</h3>
-                    <li><a href="#">Mobile Phones</a></li>
+                    <h3>advertisements</h3>
+                    <!-- view advertisements images-->
+<!--                    <li><a href="#">Mobile Phones</a></li>
                     <li><a href="#">Desktop</a></li>
                     <li><a href="#">Laptop</a></li>
                     <li><a href="#">Accessories</a></li>
@@ -24,13 +25,13 @@
                     <li><a href="#">Clothing</a></li>
                     <li><a href="#">Home Decor &amp; Kitchen</a></li>
                     <li><a href="#">Beauty &amp; Healthcare</a></li>
-                    <li><a href="#">Toys, Kids &amp; Babies</a></li>
+                    <li><a href="#">Toys, Kids &amp; Babies</a></li>-->
                 </ul>
             </div>					
         </div>
         <div class="header_bottom_right">					 
             <div class="slider">					     
-                <div id="slider">
+                <div id="slider"><!-- view special  offers ads-->
                     <div id="mover">
                         <div id="slide-1" class="slide">			                    
                             <div class="slider-img">

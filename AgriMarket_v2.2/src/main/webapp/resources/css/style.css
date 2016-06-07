@@ -241,10 +241,10 @@ body {
 	float:left;
 	width:25%;
 }
-.categories{
+.advertisements{
 	border:1px solid #EEE;
 }
-.categories h3{
+.advertisements h3{
 	font-size:1.2em;
 	color:#FFF;
 	padding:10px;
@@ -252,7 +252,7 @@ body {
 	text-transform:uppercase;
 	font-family: 'ambleregular';	
 }
-.categories li a{
+.advertisements li a{
 	display:block;
 	font-size:0.8em;
 	padding:8px 15px;
@@ -263,10 +263,10 @@ body {
     border-bottom: 1px solid #EEE;
     text-transform:uppercase;	
 }
-.categories li:last-child a{
+.advertisements li:last-child a{
 	border:none;
 }
-.categories li a:hover{
+.advertisements li a:hover{
 	color:#B81D22;
 }
 .header_bottom_right{
@@ -312,6 +312,7 @@ body {
 .see {
 	float: right;
 	padding-top:8px;
+        padding-right: 6px;
 }
 .see p a{
 	display: inline;
@@ -804,7 +805,10 @@ body {
     font-family: 'ambleregular';
 }
 .your-review div{
-	padding:5px 0;
+/*	padding:5px 0;*/
+padding: 0px 0;
+    margin-top: 6px;
+    margin-bottom: 3px;
 }
 .your-review span{
 	display:block;
@@ -1095,13 +1099,13 @@ body {
 	padding:10px;
 }
 .panel{
-	background:#222;
+	background :antiquewhite;
 }
 .panel p{
 	color:#C0C0C0;
 	font-size:0.95em;
 	line-height: 1.8em;
-	padding:5px 20px;
+	/*padding:5px 20px;*/
 }
 /****** News **************************/
 .image {

@@ -65,14 +65,6 @@
     <!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>-->
 
    
-<!--    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="mappings">
-            <props>
-                <prop key="index.htm">indexController</prop>
-            </props>
-        </property>
-    </bean>-->
-
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
@@ -87,13 +79,16 @@
     <mvc:view-controller path="/about.htm" view-name="about" />
     <mvc:view-controller path="/index.htm" view-name="index" />
     <mvc:view-controller path="/login.htm" view-name="sign_in" />
+    <!--<mvc:view-controller path="/web/login.htm" view-name="sign_in" />-->
     <mvc:view-controller path="/offers.htm" view-name="offers_page" />
     <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />
     <mvc:view-controller path="/web/user.htm" view-name="view_user" />
     <mvc:view-controller path="/web/preview.htm" view-name="preview" />
+    <mvc:view-controller path="/news.htm" view-name="news" />
     
-<!--    <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="index" />-->
-
+    
+    <!--Resource bundle -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="localization"  />
+    </bean>
 </beans>

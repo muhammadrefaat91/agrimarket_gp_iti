@@ -5,6 +5,7 @@
  */
 package org.iti.agrimarket.business;
 
+import java.util.List;
 import org.iti.agrimarket.model.pojo.UserRatesUser;
 import org.iti.agrimarket.model.pojo.UserRatesUserId;
 
@@ -15,4 +16,5 @@ import org.iti.agrimarket.model.pojo.UserRatesUserId;
 public interface UserRateService {
     UserRatesUser getUserRate(UserRatesUserId id);
     public void addUserRate(UserRatesUser rate);
+    public List calUserWeights(int raterId,int ratedID,int rate,String reviewText);
 }

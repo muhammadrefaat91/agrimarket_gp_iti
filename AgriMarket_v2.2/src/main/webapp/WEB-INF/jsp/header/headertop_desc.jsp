@@ -15,9 +15,9 @@
             <ul>
                 <li><a href="#">Register</a></li>
                 <li><a href="${pageContext.request.contextPath}/login.htm">Login</a></li>
-                <li><a href="#">Delivery</a></li>
+<!--                <li><a href="#">Delivery</a></li>
                 <li><a href="#">Checkout</a></li>
-                <li><a href="#">My Account</a></li>
+                <li><a href="#">My Account</a></li>-->
             </ul>
         </div>
         <div class="clear"></div>

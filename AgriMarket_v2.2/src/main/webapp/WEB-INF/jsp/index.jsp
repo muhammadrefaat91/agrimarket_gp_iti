@@ -45,7 +45,8 @@
                         <h3>New Products</h3>
                     </div>
                     <div class="see">
-                        <p><a href="offers.htm">See all Products</a></p>
+                        
+                        <p><a href="offers.htm"><spring:message code="link.all.Products" /></a></p>
                     </div>
                     <div class="clear"></div>
                 </div>

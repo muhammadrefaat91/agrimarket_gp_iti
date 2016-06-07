@@ -8,7 +8,7 @@
 
 <!DOCTYPE HTML>
 <head>
-    <title>Free Home Shoppe Website Template | Home :: w3layouts</title>
+    <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -85,7 +85,7 @@
                     <%-- end list--%>
                     <div class="see">
 
-                        <p><a href="offers.htm">See all Products</a></p>
+                        <!--<p><a href="offers.htm">See all Products</a></p>-->
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -106,7 +106,7 @@
                                     <p><span class="rupees">$${offer.price}</span></p>
                                 </div>
                                 <div class="add-cart">								
-                                    <h4><a href="preview.htm?id=${offer.id}">More details...</a></h4>
+                                    <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
                                 </div>
                                 <div class="clear"></div>
                             </div>

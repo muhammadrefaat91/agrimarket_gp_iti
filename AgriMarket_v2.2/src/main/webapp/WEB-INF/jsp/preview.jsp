@@ -82,7 +82,7 @@
                     <div class="clear"></div>
                 </div>
                         </div>  
-                <!--		<div class="product_desc">	
+<!--                		<div class="product_desc">	
                                         <div id="horizontalTab">
                                                 <ul class="resp-tabs-list">
                                                         <li>Product Details</li>

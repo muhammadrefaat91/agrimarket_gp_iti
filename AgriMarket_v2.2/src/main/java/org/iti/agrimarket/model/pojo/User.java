@@ -16,27 +16,27 @@ public class User implements java.io.Serializable {
     @Expose
     private Integer id;
     @Expose
-    @NotNull(message = "You can't leave mail filed  empty.")
-    @Email(message = "Enter your full email address, including the '@'.")
+//    @NotNull(message = "You can't leave mail filed  empty.")
+//    @Email(message = "Enter your full email address, including the '@'.")
     private String mail;
     @Expose
-    @NotNull(message = "You can't leave this empty.")
+//    @NotNull(message = "You can't leave this empty.")
     private String fullName;
     @Expose
-    @Phone(message = "You can't leave this empty.")
+//    @Phone(message = "You can't leave this empty.")
     private String mobile;
     @Expose
-    @NotNull
+//    @NotNull
     private int registrationChannel;
     @Expose
-    @NotNull
+//    @NotNull
     private double lat;
     @Expose
-    @NotNull
+//    @NotNull
     private double long_;
     private String password;
     @Expose
-    @NotNull
+//    @NotNull
     private String governerate;
     @Expose
     private String imageUrl;

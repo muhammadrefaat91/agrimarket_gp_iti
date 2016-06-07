@@ -2,8 +2,8 @@
 <Configuration>
     <Appenders>
         <!--Helllloooooooooooooooooooooooooooooooooooooooooooooooooooooo-->
-        <!--<File name="trace" fileName="/home/muhammad/agrimarket.trace.log">-->
-        <File name="trace" fileName="C:/AgriMarket/logs/agrimarket.trace.log">
+        <File name="trace" fileName="/home/muhammad/agrimarket.trace.log">
+        <!--<File name="trace" fileName="C:/AgriMarket/logs/agrimarket.trace.log">-->
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
