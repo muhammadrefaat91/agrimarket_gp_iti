@@ -10,9 +10,6 @@
         <property name="mail" type="string">
             <column length="100" name="mail" not-null="true"/>
         </property>
-<!--        <property name="password" type="string">
-            <column length="45" name="password" not-null="true"/>
-        </property>-->
         <property name="fullName" type="string">
             <column length="100" name="full_name" not-null="true"/>
         </property>
