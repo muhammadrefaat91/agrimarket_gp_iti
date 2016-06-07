@@ -23,8 +23,7 @@ public class User implements java.io.Serializable {
 //    @NotNull(message = "You can't leave this empty.")
     private String fullName;
     @Expose
-
-    //@Phone(message = "You can't leave this empty.")
+//    @Phone(message = "You can't leave this empty.")
     private String mobile;
     @Expose
 //    @NotNull
@@ -35,6 +34,7 @@ public class User implements java.io.Serializable {
     @Expose
 //    @NotNull
     private double long_;
+    private String password;
     @Expose
 //    @NotNull
     private String governerate;
@@ -67,6 +67,15 @@ public class User implements java.io.Serializable {
         this.ratesAverage = ratesAverage;
         this.loggedIn = loggedIn;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public User(String mail, String fullName, String mobile, int registrationChannel, double lat, double long_, String governerate, String imageUrl, int ratesAverage, boolean loggedIn, Set userDatas, Set products, Set userPlantsPlants, Set userOfferProductFixeds, Set histories, Set userRatesUsersForRatedId, Set userRatesUsersForRaterId) {
         this.mail = mail;
         this.fullName = fullName;
