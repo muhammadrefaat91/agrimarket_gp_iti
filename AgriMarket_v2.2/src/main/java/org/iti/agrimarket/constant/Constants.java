@@ -12,6 +12,7 @@ package org.iti.agrimarket.constant;
 public class Constants {
 
     public static final boolean DEBUG_MODE = true;
+    public static final int PAGE_SIZE = 10;
 
     public static final String PARAM = "param";
     public static final String USER_PARAM = "user";
@@ -26,9 +27,9 @@ public class Constants {
 //    public static final String IMAGE_EXT = ".png";
 
    
-//    public static final String ROOT_PATH = "C:/AgriMarket/";
+    public static final String ROOT_PATH = "C:/AgriMarket/";
 //    public static final String ROOT_PATH = "/home/zipline/agrimarket/";
-    public static final String ROOT_PATH = "/home/muhammad/agrimarket/" ;
+//    public static final String ROOT_PATH = "/home/muhammad/agrimarket/" ;
     public static final String IMAGE_PATH = ROOT_PATH+"images/";
 
     public static final String SOUND_PATH = ROOT_PATH+"sound/";
@@ -44,10 +45,12 @@ public class Constants {
     public static final String SOUND_PRE_URL = "/sound/";
 
     public static final String GET_CHILDREN_URL = "/getchildren";
+    public static final String GET_PLANTS_URL = "/getplants";
     public static final String ADD_PRODUCT_URL = "/addproduct";
     public static final String ADD_CATEGORY_URL = "/addcategory";
     public static final String ADD_USER_URL = "/adduser";
     public static final String UPDATE_USER_URL = "/updateuser";
+    public static final String GET_USER_URL = "/getuser";
     public static final String GET_UNIT_URL = "/getunit";
     public static final String GET_UNITS_OF_URL = "/getunitsof";
     public static final String GET_MAIN_CATEGORIES_URL = "/getmaincategories";
@@ -93,6 +96,8 @@ public class Constants {
     public static final String POST_OFFER_NAME = "Image-offer";
     public static final String ADD_OFFER_URL = "/service/addoffer";
     public static final String GET_OFFERS_URL = "/service/getoffers";
+    public static final String GET_LIMITED_OFFERS_URL = "/service/getofferslimited";
+    public static final String SEARCH_LIMITED_OFFERS_URL = "/offerslimited/product";
     public static final String GET_USER_OFFERS_URL = "/service/getuseroffers";
 
 }

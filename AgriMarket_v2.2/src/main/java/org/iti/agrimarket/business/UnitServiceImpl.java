@@ -67,8 +67,14 @@ public class UnitServiceImpl implements UnitService{
        
     
     
-     
-    
+     @Override
+
+    public List<Unit> getAllUnits(){
+
+         return  unitDAOInterface.getAllUnits();
+         
+         
+    }
     
     
 }

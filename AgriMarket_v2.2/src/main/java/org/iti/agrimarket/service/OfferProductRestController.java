@@ -33,6 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.iti.agrimarket.business.ProductService;
 import org.iti.agrimarket.constant.Constants;
 import static org.iti.agrimarket.constant.Constants.*;
+import org.iti.agrimarket.model.pojo.GroupedOffers;
+import org.iti.agrimarket.request.param.GetLimitedOffersParam;
 import org.iti.agrimarket.request.param.GetMainCategoriesParam;
 import org.iti.agrimarket.request.param.GetOffersParam;
 import org.iti.agrimarket.request.param.GetUserOffersParam;
@@ -204,6 +206,49 @@ public class OfferProductRestController {
             }
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+
+    }
+
+    /**
+     * is responsible to Get all offers
+     *
+     * @author Muhammad
+     * @param param to get all offers associated with an id
+     * @return JSON list of all offers on a product
+     */
+    @RequestMapping(value = GET_LIMITED_OFFERS_URL, method = RequestMethod.POST)
+    public Response getLimitedOffers(@RequestBody String param) {
+
+        GetLimitedOffersParam parsedParam = paramExtractor.getParam(param, GetLimitedOffersParam.class);
+
+        if (parsedParam == null || parsedParam.getProductId() == 0 || parsedParam.getPageNo() <= 0) {
+            logger.trace(Constants.INVALID_PARAM);
+            return Response.status(Constants.PARAM_ERROR).entity(Constants.INVALID_PARAM).build();
+        }
+
+        int productId = parsedParam.getProductId();
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.excludeFieldsWithoutExposeAnnotation();
+        Gson gson = builder.create();
+
+        Product product = null;
+
+        //check if product existed 
+        product = productServiceInterface.getProduct(productId);
+        if (product == null) {
+
+            logger.trace(Constants.INVALID_PARAM);
+            return Response.status(Constants.PARAM_ERROR).entity(Constants.INVALID_PARAM).build();
+        }
+        GroupedOffers offers = offerService.getGroupedLimitedOffers(product, parsedParam.getPageNo(), parsedParam.getSortType());
+
+//            List<UserOfferProductFixed> offers = offerService.getLimitedOffers(product, parsedParam.getPageNo(), parsedParam.getSortType());
+        if (offers != null) {
+            return Response.ok(gson.toJson(offers), MediaType.APPLICATION_JSON).build();
+        } else {
+            return Response.status(Constants.DB_ERROR).build();
         }
 
     }

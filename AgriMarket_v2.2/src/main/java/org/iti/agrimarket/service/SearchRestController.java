@@ -18,10 +18,14 @@ import org.iti.agrimarket.business.ProductService;
 import org.iti.agrimarket.business.UnitService;
 import org.iti.agrimarket.business.UserService;
 import org.iti.agrimarket.constant.Constants;
+import static org.iti.agrimarket.constant.Constants.GET_LIMITED_OFFERS_URL;
+import static org.iti.agrimarket.constant.Constants.SEARCH_LIMITED_OFFERS_URL;
 import org.iti.agrimarket.model.pojo.Category;
+import org.iti.agrimarket.model.pojo.GroupedOffers;
 import org.iti.agrimarket.model.pojo.Product;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
+import org.iti.agrimarket.request.param.GetLimitedOffersParam;
 import org.iti.agrimarket.request.param.SearchByCategoryParam;
 import org.iti.agrimarket.request.param.SearchByOfferDateParam;
 import org.iti.agrimarket.request.param.SearchByOfferLocationParam;
@@ -31,6 +35,7 @@ import org.iti.agrimarket.request.param.SearchByOfferProductNameParam;
 import org.iti.agrimarket.request.param.SearchByOfferQuantityParam;
 import org.iti.agrimarket.request.param.SearchByProductParam;
 import org.iti.agrimarket.request.param.SearchByUserParam;
+import org.iti.agrimarket.request.param.SearchLimitedOffersByProductNameParam;
 import org.iti.agrimarket.util.requestprocessor.param.extraction.ParamExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -173,7 +178,7 @@ public class SearchRestController {
     public Response searchOfferByDate(@RequestBody String paramJson) {
 
         SearchByOfferDateParam param = paramExtractor.getParam(paramJson, SearchByOfferDateParam.class);
-        if (param == null || param.getCriteria() == null || param.getDate() == null || (param.getCriteria().equals("between") && param.getMaxDate() ==null)) {
+        if (param == null || param.getCriteria() == null || param.getDate() == null || (param.getCriteria().equals("between") && param.getMaxDate() == null)) {
             logger.error(Constants.INVALID_PARAM);
             return Response.status(Constants.PARAM_ERROR).entity(Constants.INVALID_PARAM).build();
         }
@@ -181,7 +186,7 @@ public class SearchRestController {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         return Response.ok(gson.toJson(offers), MediaType.APPLICATION_JSON).build();
     }
-    
+
     @RequestMapping(value = Constants.OFFER_URL + Constants.QUANTITY_URL, method = RequestMethod.POST)
     public Response searchOfferByQuantity(@RequestBody String paramJson) {
 
@@ -199,6 +204,32 @@ public class SearchRestController {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
         return Response.ok(gson.toJson(offers), MediaType.APPLICATION_JSON).build();
+    }
+
+    @RequestMapping(value = SEARCH_LIMITED_OFFERS_URL, method = RequestMethod.POST)
+    public Response getLimitedOffersByProductName(@RequestBody String param) {
+
+        SearchLimitedOffersByProductNameParam parsedParam = paramExtractor.getParam(param, SearchLimitedOffersByProductNameParam.class);
+
+        if (parsedParam == null || parsedParam.getProductName() == null || parsedParam.getProductName().isEmpty() || parsedParam.getPageNo() <= 0) {
+            logger.trace(Constants.INVALID_PARAM);
+            return Response.status(Constants.PARAM_ERROR).entity(Constants.INVALID_PARAM).build();
+        }
+
+        String productName = parsedParam.getProductName();
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.excludeFieldsWithoutExposeAnnotation();
+        Gson gson = builder.create();
+
+        GroupedOffers offers = offerService.searchGroupedLimitedOffers(productName, parsedParam.getPageNo(), parsedParam.getSortType());
+//        List<UserOfferProductFixed> offers = offerService.searchLimitedOffers(productName, parsedParam.getPageNo(), parsedParam.getSortType());
+        if (offers != null) {
+            return Response.ok(gson.toJson(offers), MediaType.APPLICATION_JSON).build();
+        } else {
+            return Response.status(Constants.DB_ERROR).build();
+        }
+
     }
 
     public ParamExtractor getParamExtractor() {

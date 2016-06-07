@@ -5,6 +5,8 @@
  */
 package org.iti.agrimarket.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.File;
 import java.io.FileOutputStream;
 import javax.ws.rs.core.MediaType;
@@ -23,7 +25,10 @@ import net.sf.jmimemagic.MagicMatch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.iti.agrimarket.constant.Constants;
+import org.iti.agrimarket.model.pojo.Unit;
 import org.iti.agrimarket.model.pojo.User;
+import org.iti.agrimarket.request.param.GetUnitParam;
+import org.iti.agrimarket.request.param.GetUserParam;
 import org.iti.agrimarket.request.param.LogOutParam;
 import org.iti.agrimarket.request.param.UserCheckParam;
 import org.iti.agrimarket.util.requestprocessor.param.extraction.ParamExtractor;
@@ -37,7 +42,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping(value = "/service")
 public class UserRestController {
-
 
     @Autowired
     private UserService userServiceInterface;
@@ -56,7 +60,7 @@ public class UserRestController {
     public Response addUser(@RequestBody String param) {
 
         User user = paramExtractor.getParam(param, User.class);
-        
+
         if (!validateUser(user)) {
             // return missing parameter error 
 
@@ -175,12 +179,12 @@ public class UserRestController {
 
         //check if this email is correct or not
         if (userObj == null) {
-            return Response.ok("{\""+Constants.USER_ID_PARAM+"\":" + -1 + "}", MediaType.APPLICATION_JSON).build();
+            return Response.ok("{\"" + Constants.USER_ID_PARAM + "\":" + -1 + "}", MediaType.APPLICATION_JSON).build();
         } //if email matched return the value of logged_in
         else {
             userObj.setLoggedIn(true);
             userServiceInterface.updateUser(userObj);
-            return Response.ok("{\""+Constants.USER_ID_PARAM+"\":" + userObj.getId() + "}", MediaType.APPLICATION_JSON).build();
+            return Response.ok("{\"" + Constants.USER_ID_PARAM + "\":" + userObj.getId() + "}", MediaType.APPLICATION_JSON).build();
         }
     }
 
@@ -229,7 +233,34 @@ public class UserRestController {
 
     }
 
-    
+    @RequestMapping(value = Constants.GET_USER_URL, method = RequestMethod.POST)
+    public Response getUser(@RequestBody String paramJson) {
+
+        //parse getUnit String to Json object
+        GetUserParam userParam = paramExtractor.getParam(paramJson, GetUserParam.class);
+        User user = null;
+        // validate  propertise of userParam object 
+        if (userParam != null && userParam.getId() != null) {
+            // Get unit object from DB by id
+            user = userServiceInterface.getUser(userParam.getId());
+            GsonBuilder builder=new GsonBuilder();
+            builder.excludeFieldsWithoutExposeAnnotation();
+            Gson gson = builder.create();
+            if (user != null) {
+                return Response.ok(gson.toJson(user), MediaType.APPLICATION_JSON).build();
+            } else {
+                // return missing parameter error 
+
+                logger.trace(Constants.INVALID_PARAM);
+                return Response.status(Constants.PARAM_ERROR).entity(Constants.INVALID_PARAM).build();
+            }
+        } else {
+            // return missing parameter error 
+
+            logger.trace(Constants.INVALID_PARAM);
+            return Response.status(Constants.PARAM_ERROR).entity(Constants.INVALID_PARAM).build();
+        }
+    }
 
     public UserService getUserServiceInterface() {
         return userServiceInterface;

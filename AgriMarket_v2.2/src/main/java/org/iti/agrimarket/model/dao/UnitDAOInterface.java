@@ -26,4 +26,7 @@ public interface UnitDAOInterface {
     
     public List<Unit> getUnitsOf(String type) throws HibernateException , Exception;
 
+         public List<Unit> getAllUnits();
+         
+         
 }

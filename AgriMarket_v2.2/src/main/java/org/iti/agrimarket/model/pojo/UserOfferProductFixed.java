@@ -12,12 +12,16 @@ public class UserOfferProductFixed implements java.io.Serializable {
     @Expose
     private Integer id;
 
+    @Expose
     private Product product;
 
+    @Expose
     private Unit unitByUnitId;
 
+    @Expose
     private Unit unitByPricePerUnitId;
 
+    @Expose
     private User user;
 
     @Expose
