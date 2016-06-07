@@ -97,6 +97,7 @@ public class Constants {
     public static final String ADD_OFFER_URL = "/service/addoffer";
     public static final String GET_OFFERS_URL = "/service/getoffers";
     public static final String GET_LIMITED_OFFERS_URL = "/service/getofferslimited";
+    public static final String SEARCH_LIMITED_OFFERS_URL = "/offerslimited/product";
     public static final String GET_USER_OFFERS_URL = "/service/getuseroffers";
 
 }

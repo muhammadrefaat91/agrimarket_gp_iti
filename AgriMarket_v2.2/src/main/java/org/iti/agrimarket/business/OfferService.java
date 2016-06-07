@@ -46,5 +46,10 @@ public interface OfferService {
     public List<UserOfferProductFixed> getOffersByProductAndCategory(String productName, String categoryName);
     public UserOfferProductFixed getOfferProductEager(Integer id);
 
-    public GroupedOffers getLimitedOffers(Product product, int pageNo, int sortType);
+    public List<UserOfferProductFixed> getLimitedOffers(Product product, int pageNo, int sortType);
+    
+    public GroupedOffers getGroupedLimitedOffers(Product productId, int pageNo, int sortType);
+    
+    public GroupedOffers searchGroupedLimitedOffers(String productName, int pageNo, int sortType);
+    public List<UserOfferProductFixed> searchLimitedOffers(String productName, int pageNo, int sortType);
 }

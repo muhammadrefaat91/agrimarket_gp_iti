@@ -19,8 +19,8 @@ public class User implements java.io.Serializable {
     @NotNull(message = "You can't leave mail filed  empty.")
     @Email(message = "Enter your full email address, including the '@'.")
     private String mail;
-    @Expose
     @NotNull(message = "You can't leave this empty.")
+    @Expose
     private String fullName;
     @Expose
     //@Phone(message = "You can't leave this empty.")

@@ -7,6 +7,7 @@ package org.iti.agrimarket.business;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import org.iti.agrimarket.model.dao.UserOfferProductFixedDAOInterface;
 import org.iti.agrimarket.model.pojo.GroupedOffers;
@@ -124,7 +125,47 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public GroupedOffers getLimitedOffers(Product productId, int pageNo, int sortType) {
+    public List<UserOfferProductFixed> getLimitedOffers(Product productId, int pageNo, int sortType) {
+        List<UserOfferProductFixed> rawResult = dAOInterface.findLimitedOffers(productId, pageNo, sortType);
+        List<UserOfferProductFixed> processedResult = new ArrayList<>();
+        GroupedOffers groupedOffers = new GroupedOffers();
+        for (int i = 0; i < rawResult.size(); i++) {
+            UserOfferProductFixed get = rawResult.get(i);
+            if (get.getRecommended()) {
+                if (!groupedOffers.getOffersGroups().containsKey(0)) {
+                    groupedOffers.getOffersGroups().put(0, new ArrayList<>());
+                }
+                groupedOffers.getOffersGroups().get(0).add(get);
+            } else if (sortType != GetLimitedOffersParam.DATE_SORT) {
+                if (sortType == GetLimitedOffersParam.QUANTITY_SORT) {
+                    if (!groupedOffers.getOffersGroups().containsKey(get.getUnitByUnitId().getId())) {
+                        groupedOffers.getOffersGroups().put(get.getUnitByUnitId().getId(), new ArrayList<>());
+                    }
+                    groupedOffers.getOffersGroups().get(get.getUnitByUnitId().getId()).add(get);
+                } else if (sortType == GetLimitedOffersParam.PRICE_SORT) {
+                    if (!groupedOffers.getOffersGroups().containsKey(get.getUnitByPricePerUnitId().getId())) {
+                        groupedOffers.getOffersGroups().put(get.getUnitByPricePerUnitId().getId(), new ArrayList<>());
+                    }
+                    groupedOffers.getOffersGroups().get(get.getUnitByPricePerUnitId().getId()).add(get);
+                }
+            } else {
+                if (!groupedOffers.getOffersGroups().containsKey(-1)) {
+                    groupedOffers.getOffersGroups().put(-1, new ArrayList<>());
+                }
+                groupedOffers.getOffersGroups().get(-1).add(get);
+            }
+        }
+        for (Iterator<Integer> iterator = groupedOffers.getOffersGroups().keySet().iterator(); iterator.hasNext();) {
+            Integer nextKey = iterator.next();
+            processedResult.addAll(groupedOffers.getOffersGroups().get(nextKey));
+
+        }
+        return processedResult;
+//        return dAOInterface.findLimitedOffers(productId, pageNo, sortType);
+    }
+
+    @Override
+    public GroupedOffers getGroupedLimitedOffers(Product productId, int pageNo, int sortType) {
         List<UserOfferProductFixed> rawResult = dAOInterface.findLimitedOffers(productId, pageNo, sortType);
         GroupedOffers groupedOffers = new GroupedOffers();
         for (int i = 0; i < rawResult.size(); i++) {
@@ -146,8 +187,8 @@ public class OfferServiceImpl implements OfferService {
                     }
                     groupedOffers.getOffersGroups().get(get.getUnitByPricePerUnitId().getId()).add(get);
                 }
-            }else{
-                
+            } else {
+
                 if (!groupedOffers.getOffersGroups().containsKey(-1)) {
                     groupedOffers.getOffersGroups().put(-1, new ArrayList<>());
                 }
@@ -155,6 +196,84 @@ public class OfferServiceImpl implements OfferService {
             }
         }
         return groupedOffers;
-//        return dAOInterface.findLimitedOffers(productId, pageNo, sortType);
+
     }
+    
+    
+    
+    
+    @Override
+    public List<UserOfferProductFixed> searchLimitedOffers(String productName, int pageNo, int sortType) {
+        List<UserOfferProductFixed> rawResult = dAOInterface.findLimitedOffersByProductName(productName, pageNo, sortType);
+        List<UserOfferProductFixed> processedResult = new ArrayList<>();
+        GroupedOffers groupedOffers = new GroupedOffers();
+        for (int i = 0; i < rawResult.size(); i++) {
+            UserOfferProductFixed get = rawResult.get(i);
+            if (get.getRecommended()) {
+                if (!groupedOffers.getOffersGroups().containsKey(0)) {
+                    groupedOffers.getOffersGroups().put(0, new ArrayList<>());
+                }
+                groupedOffers.getOffersGroups().get(0).add(get);
+            } else if (sortType != GetLimitedOffersParam.DATE_SORT) {
+                if (sortType == GetLimitedOffersParam.QUANTITY_SORT) {
+                    if (!groupedOffers.getOffersGroups().containsKey(get.getUnitByUnitId().getId())) {
+                        groupedOffers.getOffersGroups().put(get.getUnitByUnitId().getId(), new ArrayList<>());
+                    }
+                    groupedOffers.getOffersGroups().get(get.getUnitByUnitId().getId()).add(get);
+                } else if (sortType == GetLimitedOffersParam.PRICE_SORT) {
+                    if (!groupedOffers.getOffersGroups().containsKey(get.getUnitByPricePerUnitId().getId())) {
+                        groupedOffers.getOffersGroups().put(get.getUnitByPricePerUnitId().getId(), new ArrayList<>());
+                    }
+                    groupedOffers.getOffersGroups().get(get.getUnitByPricePerUnitId().getId()).add(get);
+                }
+            } else {
+                if (!groupedOffers.getOffersGroups().containsKey(-1)) {
+                    groupedOffers.getOffersGroups().put(-1, new ArrayList<>());
+                }
+                groupedOffers.getOffersGroups().get(-1).add(get);
+            }
+        }
+        for (Integer nextKey : groupedOffers.getOffersGroups().keySet()) {
+            processedResult.addAll(groupedOffers.getOffersGroups().get(nextKey));
+        }
+        return processedResult;
+//        return dAOInterface.findLimitedOffersByProductName(productName, pageNo, sortType);
+    }
+
+    @Override
+    public GroupedOffers searchGroupedLimitedOffers(String productName, int pageNo, int sortType) {
+        List<UserOfferProductFixed> rawResult = dAOInterface.findLimitedOffersByProductName(productName, pageNo, sortType);
+        GroupedOffers groupedOffers = new GroupedOffers();
+        for (int i = 0; i < rawResult.size(); i++) {
+            UserOfferProductFixed get = rawResult.get(i);
+            if (get.getRecommended()) {
+                if (!groupedOffers.getOffersGroups().containsKey(0)) {
+                    groupedOffers.getOffersGroups().put(0, new ArrayList<>());
+                }
+                groupedOffers.getOffersGroups().get(0).add(get);
+            } else if (sortType != GetLimitedOffersParam.DATE_SORT) {
+                if (sortType == GetLimitedOffersParam.QUANTITY_SORT) {
+                    if (!groupedOffers.getOffersGroups().containsKey(get.getUnitByUnitId().getId())) {
+                        groupedOffers.getOffersGroups().put(get.getUnitByUnitId().getId(), new ArrayList<>());
+                    }
+                    groupedOffers.getOffersGroups().get(get.getUnitByUnitId().getId()).add(get);
+                } else if (sortType == GetLimitedOffersParam.PRICE_SORT) {
+                    if (!groupedOffers.getOffersGroups().containsKey(get.getUnitByPricePerUnitId().getId())) {
+                        groupedOffers.getOffersGroups().put(get.getUnitByPricePerUnitId().getId(), new ArrayList<>());
+                    }
+                    groupedOffers.getOffersGroups().get(get.getUnitByPricePerUnitId().getId()).add(get);
+                }
+            } else {
+
+                if (!groupedOffers.getOffersGroups().containsKey(-1)) {
+                    groupedOffers.getOffersGroups().put(-1, new ArrayList<>());
+                }
+                groupedOffers.getOffersGroups().get(-1).add(get);
+            }
+        }
+        return groupedOffers;
+
+    }
+
+    
 }

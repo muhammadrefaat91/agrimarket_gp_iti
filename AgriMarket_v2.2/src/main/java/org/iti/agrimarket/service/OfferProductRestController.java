@@ -234,24 +234,21 @@ public class OfferProductRestController {
         Gson gson = builder.create();
 
         Product product = null;
-        if (productId != 0) {
-            //check if product existed 
-            product = productServiceInterface.getProduct(productId);
-            if (product == null) {
 
-                logger.trace(Constants.INVALID_PARAM);
-                return Response.status(Constants.PARAM_ERROR).entity(Constants.INVALID_PARAM).build();
-            }
-            GroupedOffers offers = offerService.getLimitedOffers(product, parsedParam.getPageNo(), parsedParam.getSortType());
-            if (offers != null) {
-                return Response.ok(gson.toJson(offers), MediaType.APPLICATION_JSON).build();
-            } else {
-                return Response.status(Constants.DB_ERROR).build();
-            }
-        } else {
+        //check if product existed 
+        product = productServiceInterface.getProduct(productId);
+        if (product == null) {
+
             logger.trace(Constants.INVALID_PARAM);
             return Response.status(Constants.PARAM_ERROR).entity(Constants.INVALID_PARAM).build();
+        }
+        GroupedOffers offers = offerService.getGroupedLimitedOffers(product, parsedParam.getPageNo(), parsedParam.getSortType());
 
+//            List<UserOfferProductFixed> offers = offerService.getLimitedOffers(product, parsedParam.getPageNo(), parsedParam.getSortType());
+        if (offers != null) {
+            return Response.ok(gson.toJson(offers), MediaType.APPLICATION_JSON).build();
+        } else {
+            return Response.status(Constants.DB_ERROR).build();
         }
 
     }
