@@ -26,7 +26,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class UserPlantsPlantDAO implements UserPlantsPlantDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private HibernateTemplate hibernateTemplate;
+    private static HibernateTemplate hibernateTemplate;
 
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
@@ -37,13 +37,13 @@ public class UserPlantsPlantDAO implements UserPlantsPlantDAOInterface {
         this.transactionTemplate = tt;
     }
 
-    public HibernateTemplate getHibernateTemplate() {
+    public static HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
     @Autowired
-    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        this.hibernateTemplate = hibernateTemplate;
+    public static void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        UserPlantsPlantDAO.hibernateTemplate = hibernateTemplate;
     }
 
     @Override
@@ -51,8 +51,9 @@ public class UserPlantsPlantDAO implements UserPlantsPlantDAOInterface {
         return (boolean) transactionTemplate.execute((TransactionStatus ts) -> {
             try {
                 Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-                if(session.save(userPlantsPlant)==null)
+                if (session.save(userPlantsPlant) == null) {
                     return false;
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();

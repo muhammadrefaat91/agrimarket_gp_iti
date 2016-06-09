@@ -5,6 +5,7 @@
  */
 package org.iti.agrimarket.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.iti.agrimarket.business.OfferService;
@@ -37,29 +38,20 @@ public class OfferProductsController {
     }
 
     @RequestMapping(value = "/getoffers")
-    public String OfferProducts(HttpServletRequest request ,@RequestParam(value = "category", required = false) String categoryName,
-            @RequestParam(value = "search", required = false) String offerName, Model model) {
-        System.out.println("all offer products: " + categoryName);
+    public String OfferProducts(HttpServletRequest request,
+            @RequestParam(value = "name", required = false) String productName, Model model) {
         List<UserOfferProductFixed> offerproducts = null;
-        request.setAttribute("okkllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll", request.getParameter("category"));
-        System.out.println("attribute: "+request.getAttribute("selectedModule"));
-
-        if (categoryName != null && !categoryName.equals("") && !categoryName.equals("Select Category")
-                && (offerName == null || offerName.equals(""))) {
-            offerproducts = offerService.getOffersByParent(categoryName);
-        } else if (offerName != null && !offerName.equals("") && (categoryName == null || categoryName.equals("Select Category"))) {
-            System.out.println("producct%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-            offerproducts = offerService.getOffersByProduct(offerName);
-        } else if (offerName != null && categoryName != null && !categoryName.equals("")) {
-            offerproducts = offerService.getOffersByProductAndCategory(offerName, categoryName);
-////            if (offerproducts.isEmpty()) {
-//                model.addAttribute("getAllOfferProducts", "dcddcdc");
-//                return  "offers_page";
-//            }
-        } else {
+        System.out.println("name!!!!!!!!!!!!!!!"+productName);
+        if(productName != null && !productName.equals("")){
+           offerproducts = offerService.getOffersByProduct(productName);
+         }
+        else  {
             offerproducts = offerService.getAllOfferProducts();
-        }
-        model.addAttribute("getAllOfferProducts", offerproducts);
+         }  
+        
+        
+            model.addAttribute("getAllOfferProducts", offerproducts);
+        
         return "offers_page";
     }
 }

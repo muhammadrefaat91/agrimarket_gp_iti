@@ -6,7 +6,6 @@
 package org.iti.agrimarket.model.dao;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,7 +34,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private HibernateTemplate hibernateTemplate;
+    private static HibernateTemplate hibernateTemplate;
 
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
@@ -46,13 +45,13 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
         this.transactionTemplate = tt;
     }
 
-    public HibernateTemplate getHibernateTemplate() {
+    public  HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
     @Autowired
-    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        this.hibernateTemplate = hibernateTemplate;
+    public  void setHibernateTemplate(HibernateTemplate hibernateTempl) {
+        UserOfferProductFixedDAO.hibernateTemplate = hibernateTempl;
     }
 
     //Refaat
@@ -219,7 +218,6 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
                 try {
-//                "productName", "%" + productName + "%"
                     List<UserOfferProductFixed> results = session.createQuery("from UserOfferProductFixed userOffer where userOffer.product.nameAr LIKE :productName or userOffer.product.nameEn LIKE :productName").setString("productName", "%" + productName + "%").list();
                     return results;
                 } catch (Exception ex) {
@@ -373,9 +371,7 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
             }
         });
     }
-    
-    
-    
+
     @Override
     public List<UserOfferProductFixed> findLimitedOffersByProductName(String productName, int pageNo, int sortType) {
 
@@ -402,7 +398,7 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
                         queryString += " , " + sortField;
                     }
                     Query query = session.createQuery(queryString)
-                            .setString("product", "%"+productName+"%")
+                            .setString("product", "%" + productName + "%")
                             .setFirstResult((pageNo - 1) * Constants.PAGE_SIZE)
                             .setMaxResults(Constants.PAGE_SIZE);
                     List<UserOfferProductFixed> results = query.list();

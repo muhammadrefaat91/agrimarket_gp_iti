@@ -27,7 +27,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class ProductDAO implements ProductDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private HibernateTemplate hibernateTemplate;
+    private static HibernateTemplate hibernateTemplate;
 
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
@@ -38,13 +38,13 @@ public class ProductDAO implements ProductDAOInterface {
         this.transactionTemplate = tt;
     }
 
-    public HibernateTemplate getHibernateTemplate() {
+    public static HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
     @Autowired
-    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        this.hibernateTemplate = hibernateTemplate;
+    public static void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        ProductDAO.hibernateTemplate = hibernateTemplate;
     }
 
     //Israa
@@ -111,7 +111,9 @@ public class ProductDAO implements ProductDAOInterface {
     public List<Product> findProductEntities() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     //Refaat
+
     @Override
     public Product findProduct(Integer id) {
         return (Product) getHibernateTemplate().execute((Session sn) -> sn.createQuery("from Product p where p.id=:id")
@@ -137,8 +139,7 @@ public class ProductDAO implements ProductDAOInterface {
     }
 
     //amr
-    
-     @Override
+    @Override
     public List<Product> getAllProducts() {
         return (List<Product>) getHibernateTemplate().execute(new HibernateCallback() {
             @Override
@@ -154,8 +155,7 @@ public class ProductDAO implements ProductDAOInterface {
             }
         });
     }
-    
-    
+
     @Override
     public List<Product> searchProduct(String productName) {
         return (List<Product>) getHibernateTemplate().execute(new HibernateCallback() {

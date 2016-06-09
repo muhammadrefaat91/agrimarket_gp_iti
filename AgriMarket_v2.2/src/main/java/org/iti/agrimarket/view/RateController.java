@@ -7,7 +7,6 @@ package org.iti.agrimarket.view;
 
 
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import org.iti.agrimarket.business.UserRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +35,7 @@ public class RateController {
     }
     
     
-List<Integer> list;
+
     @RequestMapping(value = "/addRate",method = RequestMethod.GET)
     public @ResponseBody String addRate(@RequestParam(value = "rating", required = true) int rating,
            @RequestParam(value = "reviewText", required = false) String reviewText ,@RequestParam(value = "uID", required = true) int userId, Model model) {
