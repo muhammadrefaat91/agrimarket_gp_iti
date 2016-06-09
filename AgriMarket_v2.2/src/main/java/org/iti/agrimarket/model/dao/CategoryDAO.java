@@ -25,7 +25,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private static HibernateTemplate hibernateTemplate;
+    private  HibernateTemplate hibernateTemplate;
 
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
@@ -36,13 +36,13 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
         this.transactionTemplate = tt;
     }
 
-    public static HibernateTemplate getHibernateTemplate() {
-        return hibernateTemplate;
+    public HibernateTemplate getHibernateTemplate() {
+        return this.hibernateTemplate;
     }
 
     @Autowired
-    public static void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        CategoryDAO.hibernateTemplate = hibernateTemplate;
+    public  void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 
     @Override

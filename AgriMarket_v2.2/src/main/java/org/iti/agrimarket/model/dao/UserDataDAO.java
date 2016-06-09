@@ -21,7 +21,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class UserDataDAO implements UserDataDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private static HibernateTemplate hibernateTemplate;
+    private HibernateTemplate hibernateTemplate;
 
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
@@ -37,8 +37,8 @@ public class UserDataDAO implements UserDataDAOInterface {
     }
 
     @Autowired
-    public   void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        UserDataDAO.hibernateTemplate = hibernateTemplate;
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 
     @Override

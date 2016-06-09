@@ -18,7 +18,7 @@ import org.springframework.transaction.support.TransactionTemplate;
  */
 //Israa
 @Repository
-public class SeasonDAO implements SeasonDAOInterface {
+public class SeasonDAO implements SeasonDAOInterface{
 
     private TransactionTemplate transactionTemplate;
     private static HibernateTemplate hibernateTemplate;

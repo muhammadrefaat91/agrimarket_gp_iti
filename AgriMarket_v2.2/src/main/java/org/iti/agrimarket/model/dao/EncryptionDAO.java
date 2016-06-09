@@ -21,8 +21,9 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class EncryptionDAO implements EncryptionDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private static HibernateTemplate hibernateTemplate;
+    private HibernateTemplate hibernateTemplate;
 
+    
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
     }
@@ -32,13 +33,13 @@ public class EncryptionDAO implements EncryptionDAOInterface {
         this.transactionTemplate = tt;
     }
 
-    public static HibernateTemplate getHibernateTemplate() {
+    public HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
     @Autowired
-    public static void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        EncryptionDAO.hibernateTemplate = hibernateTemplate;
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 
     @Override
