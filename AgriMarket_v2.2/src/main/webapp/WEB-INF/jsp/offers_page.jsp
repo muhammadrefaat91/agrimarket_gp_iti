@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -13,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
     <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet">
+    <link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
@@ -21,30 +23,21 @@
     <script type="text/javascript" src="resources/js/move-top.js"></script>
     <script type="text/javascript" src="resources/js/easing.js"></script>
     <script type="text/javascript" src="resources/js/startstop-slider.js"></script>
+    
     <script type="text/javascript">
-
-        var posotion = 0;
-        //get all categories from category controller
-//        $.ajax({
-//            url: "/web/allgategories",
-//            type: 'GET',
-//            contentType: 'application/json',
-//            dataType: 'json'
-//        });
-
-
-        $("document").ready(function () {
-            window.onunload = function () {
-        <%          //remove object from session once user redirect to another page
-        request.getSession().removeAttribute("getAllOfferProducts");
-        %>
-            };
-        });
-
+        onunload = function ()
+        {
+            var foo = document.getElementById('sort');
+            self.name = 'sortidx' + foo.selectedIndex;
+        }
+        onload = function ()
+        {
+            var idx, foo = document.getElementById('sort');
+            foo.selectedIndex = (idx = self.name.split('sortidx')) ? idx[1] : 0;
+        }
     </script>
 </head>
 <body>
-
     <div class="wrap">
         <!-- header--->
         <jsp:include page="header/headertop_desc.jsp" />
@@ -60,23 +53,24 @@
                     <div class="heading">
 
                         <div class="bs-example">
-                            <!--drop down for search!-->
-                            <c:if test="${empty allcategories}" >
-                                <c:redirect url="/web/allgategories" />
-                            </c:if>
-                            <div>
-                                <form action="${pageContext.request.contextPath}/web/getoffers" method="get">
+             
+                             <div>
+<!--                                <form action="${pageContext.request.contextPath}/web/getoffers" method="get">
 
-                                    <input maxlength="100" type="text" value="${param.search}" placeholder="search for new Offers.."   name="search" />
-
-                                    <select   class="pcategory"   id="category" name="category"  >
-                                        <option selected>Select Category</option>
-                                        <c:forEach items="${allcategories}" var="module"> 
-
-                                            <option   ${module.nameEn == selectedModule ? 'selected':''}>${module.nameEn} </option>  
-                                        </c:forEach>
-                                    </select>
+                                    <input maxlength="100" type="text" value="${param.searchText}" placeholder="search for products.."   name="searchText" />
                                     <input  type="submit" value="submit"/>
+                                </form>-->
+
+                                
+                                <form action="${pageContext.request.contextPath}/web/sort" method="get">
+                                   <label>Sort by:</label>
+                                    <select value="${param.searchType}"  class="pcategory"   id="sort" name="searchType"  onchange="this.form.submit()" >
+                                        <option >Relevance</option>
+                                        <option value="Newest" >Newest</option>
+                                        <option value="Price">Price</option>
+                                        <option value="Quantity">Quantity</option>
+                                    </select>
+                                    <input type="hidden" value="${param.name}"  name="name"/>
                                 </form>
                             </div>
                             <!--end drop down for search!-->
@@ -92,12 +86,13 @@
                 <!--view all offers -->
                 <div class="section group">
 
-                    <c:if test="${empty getAllOfferProducts}" >
-                        <c:redirect url="/web/getoffers" />
-                    </c:if>
-                    <c:forEach items="${getAllOfferProducts}" var="offer">
+                    <%--<c:if test="${empty getAllOfferProducts}" >--%>
+                        <%--<c:redirect url="/web/getoffers?name=${param['pName']}" />--%>
+                    <%--</c:if>--%>
+                    <%--<c:if test="${not empty getAllOfferProducts}">--%>
+                        <c:forEach items="${getAllOfferProducts}" var="offer">
                         <div class="grid_1_of_4 images_1_of_4">
-                            <a href="preview.html">
+                            <a href="preview.htm?id=${offer.id}">
                                 <img  
                                     style="border: 1.1px solid #2969b0;
                                     border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
@@ -112,6 +107,7 @@
                             </div>
                         </div>
                     </c:forEach>
+                    <%--</c:if>--%>
                 </div>
             </div>
         </div>
@@ -124,6 +120,7 @@
 
 
     <a href="#" id="toTop"><span id="toTopHover"> </span></a>
+    
 </body>
 </html>
 

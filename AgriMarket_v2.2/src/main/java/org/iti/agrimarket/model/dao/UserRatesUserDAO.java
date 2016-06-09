@@ -29,7 +29,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class UserRatesUserDAO implements UserRatesUserDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private HibernateTemplate hibernateTemplate;
+    private static HibernateTemplate hibernateTemplate;
 
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
@@ -40,13 +40,13 @@ public class UserRatesUserDAO implements UserRatesUserDAOInterface {
         this.transactionTemplate = tt;
     }
 
-    public HibernateTemplate getHibernateTemplate() {
+    public static HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
     @Autowired
-    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        this.hibernateTemplate = hibernateTemplate;
+    public   void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        UserRatesUserDAO.hibernateTemplate = hibernateTemplate;
     }
 
     @Override
@@ -124,6 +124,7 @@ public class UserRatesUserDAO implements UserRatesUserDAOInterface {
 
     /**
      * get count and sum for number of users and sum of user rates
+     *
      * @param
      */
     public List calUserWeights(int id) {
@@ -133,7 +134,7 @@ public class UserRatesUserDAO implements UserRatesUserDAOInterface {
                 String hql = "SELECT count(userRatesUser.id.ratedId),sum(userRatesUser.rate) FROM UserRatesUser userRatesUser where userRatesUser.id.ratedId = :id";
                 Query query = session.createQuery(hql).setInteger("id", id);
                 List results = query.list();
-              
+
                 return results;
             }
 
@@ -142,40 +143,42 @@ public class UserRatesUserDAO implements UserRatesUserDAOInterface {
 
     @Override
     public UserRatesUser findUserRateUser(int raterId, int ratedId) {
-        return (UserRatesUser)getHibernateTemplate().execute(new HibernateCallback() {
+        return (UserRatesUser) getHibernateTemplate().execute(new HibernateCallback() {
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
                 try {
-                    UserRatesUser result = (UserRatesUser) session.createQuery("FROM UserRatesUser userRatesUser where userRatesUser.id.ratedId = :ratedId and userRatesUser.id.raterId = :raterId").setInteger("raterId",raterId).setInteger("ratedId", ratedId).uniqueResult();
-                    if(result != null)
-                        
-                    return result;
+                    UserRatesUser result = (UserRatesUser) session.createQuery("FROM UserRatesUser userRatesUser where userRatesUser.id.ratedId = :ratedId and userRatesUser.id.raterId = :raterId").setInteger("raterId", raterId).setInteger("ratedId", ratedId).uniqueResult();
+                    if (result != null) {
+                        return result;
+                    }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     return null;
                 }
-               return null; 
+                return null;
             }
         });
-          
+
     }
+
     @Override
-    public int userHasRate( int ratedId) {
-        return (int)getHibernateTemplate().execute(new HibernateCallback() {
+    public int userHasRate(int ratedId) {
+        return (int) getHibernateTemplate().execute(new HibernateCallback() {
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
                 try {
                     UserRatesUser result = (UserRatesUser) session.createQuery("FROM UserRatesUser userRatesUser where userRatesUser.id.ratedId = :ratedId ").setInteger("ratedId", ratedId).uniqueResult();
-                    if(result != null)
-                    return 1;
+                    if (result != null) {
+                        return 1;
+                    }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     return 0;
                 }
-               return 0; 
+                return 0;
             }
         });
-           
+
     }
 
 }

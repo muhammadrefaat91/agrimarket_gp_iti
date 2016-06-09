@@ -71,7 +71,6 @@ public class CategoryRestController {
     @RequestMapping(value = Constants.GET_CHILDREN_URL, method = RequestMethod.POST)
     public Response getChildren(@RequestBody String param) {
 
-        System.out.println("1234567890");
         //Parse json
         GetChildrenParam parsedParam = paramExtractor.getParam(param, GetChildrenParam.class);
         if (parsedParam == null || parsedParam.getLanguage() == null || parsedParam.getLanguage().isEmpty() || parsedParam.getCategoryId() == null) {

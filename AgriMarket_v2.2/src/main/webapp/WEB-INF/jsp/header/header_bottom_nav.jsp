@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring"
            uri="http://www.springframework.org/tags"%>
@@ -14,10 +15,11 @@
 			    	<div class="clear"></div>
      			</ul>
 	     	</div>
-<!--	     	<div class="search_box">
-	     		<form>
-	     			<input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">
+	     	<div class="search_box">
+                    <form action="${pageContext.request.contextPath}/web/getoffers" method="get">
+                        <input type="text" value="${param.name}" name="name" placeholder="search for  products..">
+                            <input type="submit" value="" >
 	     		</form>
-	     	</div>-->
+	     	</div>
 	     	<div class="clear"></div>
 	     </div>

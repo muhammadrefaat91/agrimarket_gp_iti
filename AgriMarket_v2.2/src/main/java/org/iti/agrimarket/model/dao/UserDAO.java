@@ -27,7 +27,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class UserDAO implements UserDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private HibernateTemplate hibernateTemplate;
+    private static HibernateTemplate hibernateTemplate;
 
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
@@ -38,13 +38,13 @@ public class UserDAO implements UserDAOInterface {
         this.transactionTemplate = tt;
     }
 
-    public HibernateTemplate getHibernateTemplate() {
+    public  static HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
     @Autowired
-    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        this.hibernateTemplate = hibernateTemplate;
+    public   void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        UserDAO.hibernateTemplate = hibernateTemplate;
     }
 
     /**
@@ -203,10 +203,10 @@ public class UserDAO implements UserDAOInterface {
                 for (Object u : user.getUserRatesUsersForRatedId()) {
                     if (u instanceof UserRatesUser) {
                         u1 = (UserRatesUser) u;
-                       Hibernate.initialize( u1.getUserByRaterId());
+                        Hibernate.initialize(u1.getUserByRaterId());
                     }
                 }
-//                Hibernate.initialize(user.getUserRatesUsersForRaterId());
+                Hibernate.initialize(user.getUserRatesUsersForRaterId());
 
                 return user;
             }

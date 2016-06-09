@@ -31,9 +31,9 @@
                     type: "GET",
                     data: {rating: selectedVal, uID:${userHasOffer.id}, reviewText: reviewText},
                     success: function (data) {
-                        console.log('success'+data);
-                        if(data==='no_errors')
-                            location.href = "http://localhost:8085/${pageContext.request.contextPath}/web/getUser?id=${param['id']}";
+                        console.log('success' + data);
+                        if (data === 'no_errors')
+                            location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/getUser?id=${param['id']}";
                     },
                     error: function (e) {
                         console.log('error:' + e.data);
@@ -157,22 +157,30 @@
                         <!--                        <li class="list-group-item text-right"><span class="pull-left"><strong class="">Role: </strong></span> Pet Sitter
                                                 </li>-->
                     </ul>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Average Rate
+                        <div class="panel panel-default" style="height: 2px;">
+                        <div class="panel-heading">Rate
 
                         </div>
-                        <div class="panel-body">
-                            <span class="rating">
-                                <c:forEach begin="1" end="${5-userHasOffer.ratesAverage}">
-                                    <input   type="radio" class="rating-input"
-                                             id="rating-input-1-4"  />
-                                    <label  class="rating-star"></label>
-                                </c:forEach>
+                        <div class="panel-body" style="    width: 112%;
+                             margin-left: -15px;
+                             margin-top: -15px;">
+                            <div class="rating-block">
+                                <!--<h4>Average user rating</h4>-->
+                                <h2 class="bold padding-bottom-7">${userHasOffer.ratesAverage} <small>/ 5</small></h2>
                                 <c:forEach begin="1" end="${userHasOffer.ratesAverage}">
-                                    <input style="background-position: 0 0;" type="radio" class="rating-input"
-                                           id="rating-input-1-5" name="rating-input-1"/>
-                                    <label style="background-position: 0 0;" for="rating-input-1-5" class="rating-star"></label>
-                                </c:forEach>   
+                                    <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    </button>
+                                </c:forEach>
+                                <c:forEach begin="1" end="${5-userHasOffer.ratesAverage}">
+
+                                    <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    </button>
+                                </c:forEach>
+                            </div>
+                            <span class="rating">
+
                             </span>
                         </div>
                     </div>
@@ -257,6 +265,7 @@
                                                 <!--<div class="review-block-date">January 29, 2016<br/>1 day ago</div>-->
                                             </div>
                                             <div class="col-sm-9">
+                                                <h2 class="bold padding-bottom-7">${rater.rate} <small>/ 5</small></h2>
                                                 <div class="review-block-rate">
                                                     <c:forEach begin="1" end="${rater.rate}">
                                                         <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
