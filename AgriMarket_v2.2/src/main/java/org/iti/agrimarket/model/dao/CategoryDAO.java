@@ -9,7 +9,6 @@ import java.util.List;
 import org.iti.agrimarket.model.pojo.Category;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;

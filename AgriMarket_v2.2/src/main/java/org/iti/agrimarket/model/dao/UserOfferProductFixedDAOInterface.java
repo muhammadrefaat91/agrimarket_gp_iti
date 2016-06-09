@@ -51,5 +51,8 @@ public interface UserOfferProductFixedDAOInterface {
 
     public List<UserOfferProductFixed> findLimitedOffers(Product productId, int pageNo, int sortType);
     public List<UserOfferProductFixed> findLimitedOffersByProductName(String productName, int pageNo, int sortType);
+    
+    
+    public List<UserOfferProductFixed> findLatestOffers();
 
 }

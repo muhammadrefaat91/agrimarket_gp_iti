@@ -3,29 +3,28 @@
            uri="http://www.springframework.org/tags"%>
 
 <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" />
-    <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />	
+<link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />	
 
 
 <div class="header">
-	     
+
     <div class="header_slide">
         <div class="header_bottom_left">				
             <div class="advertisements">
                 <ul>
-                    <h3>advertisements</h3>
+                    <h3>Categories</h3>
                     <!-- view advertisements images-->
-<!--                    <li><a href="#">Mobile Phones</a></li>
-                    <li><a href="#">Desktop</a></li>
-                    <li><a href="#">Laptop</a></li>
-                    <li><a href="#">Accessories</a></li>
-                    <li><a href="#">Software</a></li>
-                    <li><a href="#">Sports &amp; Fitness</a></li>
-                    <li><a href="#">Footwear</a></li>
-                    <li><a href="#">Jewellery</a></li>
-                    <li><a href="#">Clothing</a></li>
-                    <li><a href="#">Home Decor &amp; Kitchen</a></li>
-                    <li><a href="#">Beauty &amp; Healthcare</a></li>
-                    <li><a href="#">Toys, Kids &amp; Babies</a></li>-->
+                    <c:forEach items="${allcategories}" var="module"> 
+
+                        <li><a href="#">${module.nameEn}</a></li>
+                        </c:forEach>
+                    <!--                                    <li><a href="#">Sports &amp; Fitness</a></li>
+                                        <li><a href="#">Footwear</a></li>
+                                        <li><a href="#">Jewellery</a></li>
+                                        <li><a href="#">Clothing</a></li>
+                                        <li><a href="#">Home Decor &amp; Kitchen</a></li>
+                                        <li><a href="#">Beauty &amp; Healthcare</a></li>
+                                        <li><a href="#">Toys, Kids &amp; Babies</a></li>-->
                 </ul>
             </div>					
         </div>

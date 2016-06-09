@@ -8,23 +8,26 @@ package org.iti.agrimarket.view;
 import java.util.List;
 import javax.servlet.ServletContext;
 import org.iti.agrimarket.business.CategoryService;
+import org.iti.agrimarket.business.OfferService;
 import org.iti.agrimarket.model.pojo.Category;
+import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
- * @author muhammad
+ * @author Israa
  */
 @Controller
-@RequestMapping("web")
-public class CategoryController {
+public class IndexController {
 
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private OfferService offerService;
     @Autowired
     private ServletContext servletContext;
 
@@ -44,30 +47,30 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @RequestMapping(value = {"/allgategories"}, method = RequestMethod.GET)
-    public String allCategories() {
+    public OfferService getOfferService() {
+        return offerService;
+    }
+
+    public void setOfferService(OfferService offerService) {
+        this.offerService = offerService;
+    }
+
+    @RequestMapping(value = {"index.htm"}, method = RequestMethod.GET)
+    public String allCategories(Model model) {
         List<Category> categorys = null;
-        System.out.println("allcategories");
+        System.out.println("index controller");
         if (servletContext.getAttribute("allcategories") == null) {
             categorys = categoryService.getChildrenOf(1);
-//            servletContext.setAttribute("allcategories", categorys);
-        } else {
-            categorys = (List<Category>) servletContext.getAttribute("allcategories");
         }
+        System.out.println("categories = " + categorys);
         servletContext.setAttribute("allcategories", categorys);
 
-        return "offers_page";
-    }
-    
-    
-    @RequestMapping(value = {"/allcategories"}, method = RequestMethod.GET)
-    public String allCategories1() {
-        List<Category> categorys = null;
-        System.out.println("allcategories1");
-        if (servletContext.getAttribute("allcategories1") == null) {
-            categorys = categoryService.getChildrenOf(1);
-        servletContext.setAttribute("allcategories1", categorys);}
+        List<UserOfferProductFixed> latestOffers = offerService.getLatestOffers();
 
+        System.out.println("latest offers : "+latestOffers);
+        model.addAttribute("latestOffers", latestOffers);
+        System.out.println(model.containsAttribute("latestOffers"));
         return "index";
     }
+
 }
