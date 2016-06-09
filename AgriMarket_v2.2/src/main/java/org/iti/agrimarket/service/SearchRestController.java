@@ -7,6 +7,7 @@ package org.iti.agrimarket.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -23,6 +24,7 @@ import static org.iti.agrimarket.constant.Constants.SEARCH_LIMITED_OFFERS_URL;
 import org.iti.agrimarket.model.pojo.Category;
 import org.iti.agrimarket.model.pojo.GroupedOffers;
 import org.iti.agrimarket.model.pojo.Product;
+import org.iti.agrimarket.model.pojo.Unit;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.iti.agrimarket.request.param.GetLimitedOffersParam;
@@ -36,6 +38,9 @@ import org.iti.agrimarket.request.param.SearchByOfferQuantityParam;
 import org.iti.agrimarket.request.param.SearchByProductParam;
 import org.iti.agrimarket.request.param.SearchByUserParam;
 import org.iti.agrimarket.request.param.SearchLimitedOffersByProductNameParam;
+import org.iti.agrimarket.util.LazySerializerForProduct;
+import org.iti.agrimarket.util.LazySerializerForUnit;
+import org.iti.agrimarket.util.LazySerializerForUser;
 import org.iti.agrimarket.util.requestprocessor.param.extraction.ParamExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -222,10 +227,45 @@ public class SearchRestController {
         builder.excludeFieldsWithoutExposeAnnotation();
         Gson gson = builder.create();
 
-        GroupedOffers offers = offerService.searchGroupedLimitedOffers(productName, parsedParam.getPageNo(), parsedParam.getSortType());
-//        List<UserOfferProductFixed> offers = offerService.searchLimitedOffers(productName, parsedParam.getPageNo(), parsedParam.getSortType());
+//        GroupedOffers offers = offerService.searchGroupedLimitedOffers(productName, parsedParam.getPageNo(), parsedParam.getSortType());
+        List<UserOfferProductFixed> offers = offerService.searchLimitedOffers(productName, parsedParam.getPageNo(), parsedParam.getSortType());
         if (offers != null) {
-            return Response.ok(gson.toJson(offers), MediaType.APPLICATION_JSON).build();
+
+            List<UserOfferProductFixed> newOffers = new ArrayList<>();
+            for (UserOfferProductFixed userOffer : offers) {
+                UserOfferProductFixed newOffer = new UserOfferProductFixed();
+                newOffer.setId(userOffer.getId());
+                newOffer.setDescription(userOffer.getDescription());
+                newOffer.setImageUrl(userOffer.getImageUrl());
+                newOffer.setPrice(userOffer.getPrice());
+                newOffer.setQuantity(userOffer.getQuantity());
+                newOffer.setRecommended(userOffer.getRecommended());
+                newOffer.setStartDate(userOffer.getStartDate());
+                newOffer.setUserLocation(userOffer.getUserLocation());
+                newOffer.setUserPhone(userOffer.getUserPhone());
+                User user = new User();
+                user.setId(userOffer.getUser().getId());
+                user.setFullName(userOffer.getUser().getFullName());
+                newOffer.setUser(user);
+                Product newProduct = new Product();
+                newProduct.setId(userOffer.getProduct().getId());
+                newProduct.setNameAr(userOffer.getProduct().getNameAr());
+                newProduct.setNameEn(userOffer.getProduct().getNameEn());
+                newOffer.setProduct(newProduct);
+                Unit newUnitQuantity = new Unit();
+                newUnitQuantity.setId(userOffer.getUnitByUnitId().getId());
+                newUnitQuantity.setNameAr(userOffer.getUnitByUnitId().getNameAr());
+                newUnitQuantity.setNameEn(userOffer.getUnitByUnitId().getNameEn());
+                newOffer.setUnitByUnitId(newUnitQuantity);
+                Unit newUnitPrice = new Unit();
+                newUnitPrice.setId(userOffer.getUnitByPricePerUnitId().getId());
+                newUnitPrice.setNameAr(userOffer.getUnitByPricePerUnitId().getNameAr());
+                newUnitPrice.setNameEn(userOffer.getUnitByPricePerUnitId().getNameEn());
+                newOffer.setUnitByPricePerUnitId(newUnitPrice);
+
+                newOffers.add(newOffer);
+            }
+            return Response.ok(getCustomAdaptedGson().toJson(newOffers), MediaType.APPLICATION_JSON).build();
         } else {
             return Response.status(Constants.DB_ERROR).build();
         }
@@ -291,6 +331,19 @@ public class SearchRestController {
 
     public void setOfferService(OfferService offerService) {
         this.offerService = offerService;
+    }
+    
+      private Gson getCustomAdaptedGson() {
+        GsonBuilder builder = new GsonBuilder();
+
+        LazySerializerForProduct serializerForProduct = new LazySerializerForProduct();
+        builder.registerTypeAdapter(Product.class, serializerForProduct);
+        LazySerializerForUnit serializerForUnit = new LazySerializerForUnit();
+        builder.registerTypeAdapter(Unit.class, serializerForUnit);
+        LazySerializerForUser serializerForUser = new LazySerializerForUser();
+        builder.registerTypeAdapter(User.class, serializerForUser);
+
+        return builder.create();
     }
 
 }

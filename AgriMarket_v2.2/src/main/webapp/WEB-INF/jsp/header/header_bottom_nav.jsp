@@ -8,10 +8,9 @@
 	     	<div class="menu">
 	     		<ul>
 			    	<li class="active"><a href="${pageContext.request.contextPath}/index.htm">Home</a></li>
-			    	<li><a href="about.htm">About</a></li>
-			    	<li><a href="Farmers.htm">Farmers</a></li>
-			    	<li><a href="news.htm">News</a></li>
-			    	<li><a href="contact.htm">Contact</a></li>
+			    	<li><a href="${pageContext.request.contextPath}/offers.htm">Products</a></li>
+			    	<li><a href="${pageContext.request.contextPath}/about.htm">About</a></li>
+			    	<li><a href="${pageContext.request.contextPath}/contact.htm">Contact</a></li>
 			    	<div class="clear"></div>
      			</ul>
 	     	</div>

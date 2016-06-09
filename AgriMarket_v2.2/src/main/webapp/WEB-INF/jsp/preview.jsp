@@ -48,7 +48,7 @@
                             <div id="products_example">
                                 <div id="products">
                                     <img style="border: 1.1px solid #2969b0;
-                                    border-bottom: none; width: 250px;height: 250px;" src="${pageContext.request.contextPath}/image/${offerProduct.imageUrl}" alt=" " />                                                        
+                                    border-bottom: none; width: 250px;height: 250px;" src="${pageContext.request.contextPath}${offerProduct.imageUrl}" alt=" " />                                                        
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                         <p>${offerProduct.description}</p>					
                         <div class="price">
                             <p>Quantity: <span>${offerProduct.quantity} ${offerProduct.unitByUnitId.nameEn}</span></p>
-                            <p>Price: <span>${offerProduct.price} ${offerProduct.unitByPricePerUnitId.nameEn}/${offerProduct.unitByUnitId.nameEn}</span></p>
+                            <p>Price: <span>${offerProduct.price} L.E/${offerProduct.unitByUnitId.nameEn}</span></p>
                         </div>
                         <div class="available">
                             <p>User Name: <a href="${pageContext.request.contextPath}/web/user.htm?id=${offerProduct.user.id}"><span>${offerProduct.user.fullName}</span></a></p>

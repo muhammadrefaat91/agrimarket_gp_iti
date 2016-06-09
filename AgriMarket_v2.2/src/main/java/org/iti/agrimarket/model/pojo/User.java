@@ -22,13 +22,13 @@ public class User implements java.io.Serializable {
     @Expose
 //    @Phone(message = "You can't leave this empty.")
     private String mobile;
-    @Expose
+//    @Expose
 //    @NotNull
     private int registrationChannel;
-    @Expose
+//    @Expose
 //    @NotNull
     private double lat;
-    @Expose
+//    @Expose
 //    @NotNull
     private double long_;
     @Expose
@@ -36,9 +36,9 @@ public class User implements java.io.Serializable {
     private String governerate;
     @Expose
     private String imageUrl;
-    @Expose
+//    @Expose
     private int ratesAverage;
-    @Expose
+//    @Expose
     private boolean loggedIn;
     @Expose
     private byte[] image;

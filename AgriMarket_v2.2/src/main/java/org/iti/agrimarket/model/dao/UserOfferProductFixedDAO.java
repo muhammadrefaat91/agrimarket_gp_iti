@@ -175,6 +175,14 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
                         Hibernate.initialize(get.getUnitByUnitId());
                         Hibernate.initialize(get.getUser());
                         Hibernate.initialize(get.getProduct());
+                        
+//                        System.out.println(get.getUnitByUnitId().getNameAr());
+//                        System.out.println(get.getUnitByUnitId().getNameEn());
+//                        System.out.println(get.getUnitByPricePerUnitId().getNameAr());
+//                        System.out.println(get.getUnitByPricePerUnitId().getNameEn());
+//                        System.out.println(get.getProduct().getNameAr());
+//                        System.out.println(get.getProduct().getNameEn());
+//                        System.out.println(get.getUser().getFullName());
                     }
 //                    }
                     return results;
@@ -389,10 +397,10 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
                             sortField = "userOffer.startDate desc";
                             break;
                         case GetLimitedOffersParam.PRICE_SORT:
-                            sortField = "userOffer.price";
+                            sortField = "userOffer.unitByPricePerUnitId.id , userOffer.price";
                             break;
                         case GetLimitedOffersParam.QUANTITY_SORT:
-                            sortField = "userOffer.quantity";
+                            sortField = "userOffer.unitByUnitId.id , userOffer.quantity";
                             break;
                     }
                     String queryString = "from UserOfferProductFixed userOffer where userOffer.product.nameEn like :product or  userOffer.product.nameAr like :product";
@@ -413,12 +421,30 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
                         Hibernate.initialize(get.getUser());
                         Hibernate.initialize(get.getProduct());
                     }
+                    session.clear();
                     return results;
                 } catch (Exception ex) {
                     ex.printStackTrace();
 
                     return null;
                 }
+            }
+        });
+    }
+
+    @Override
+    public List<UserOfferProductFixed> findLatestOffers() {
+        return (List<UserOfferProductFixed>) getHibernateTemplate().execute((Session session) -> {
+            try {
+                List<UserOfferProductFixed> results = session.createQuery("from UserOfferProductFixed userOffer ORDER BY userOffer.startDate").setMaxResults(Constants.PAGE_SIZE).setFirstResult(0).list();
+                for (int i = 0; i < results.size(); i++) {
+                    UserOfferProductFixed get = results.get(i);
+                    Hibernate.initialize(get.getProduct());
+                }
+                return results;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return null;
             }
         });
     }

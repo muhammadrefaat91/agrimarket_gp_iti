@@ -141,7 +141,7 @@
         <hr class="">
         <div class="container target">
             <div class="row">
-                <div class="col-sm-2"><a href="/users" class="pull-right"><img style="height: 117px;margin-right: 85px;" title="profile image" class="img-circle img-responsive" src="${pageContext.request.contextPath}/image/${userHasOffer.imageUrl}"></a>
+                <div class="col-sm-2"><a href="/users" class="pull-right"><img style="height: 117px;margin-right: 85px;" title="profile image" class="img-circle img-responsive" src="${pageContext.request.contextPath}${userHasOffer.imageUrl}"></a>
 
                 </div>
             </div>
@@ -193,7 +193,7 @@
                                 <c:forEach items="${userHasOffer.userOfferProductFixeds}" var="offer">
                                     <div class="col-md-4">
                                         <div class="thumbnail">
-                                            <img alt="300x200" src="${pageContext.request.contextPath}/image/${offer.imageUrl}" />
+                                            <img alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" />
                                             <div style="margin-left: 14px;" class="caption">
                                                 <h3>
                                                     ${offer.price}

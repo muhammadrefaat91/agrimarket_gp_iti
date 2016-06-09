@@ -77,7 +77,8 @@
         
     <!--static pages-->
     <mvc:view-controller path="/about.htm" view-name="about" />
-    <mvc:view-controller path="/index.htm" view-name="index" />
+    <mvc:view-controller path="/contact.htm" view-name="contact" />
+<!--    <mvc:view-controller path="/index.htm" view-name="index" />-->
     <mvc:view-controller path="/login.htm" view-name="sign_in" />
     <!--<mvc:view-controller path="/web/login.htm" view-name="sign_in" />-->
     <mvc:view-controller path="/offers.htm" view-name="offers_page" />

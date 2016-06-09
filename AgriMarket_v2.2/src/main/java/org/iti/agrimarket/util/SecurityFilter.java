@@ -70,35 +70,35 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private boolean autheniticate(HttpServletRequest hsr) throws ClassNotFoundException, IOException {
 
-        String jsonBody = readRequestBody(hsr);
-
-        Gson gson = new Gson();
-        JsonParams jsonParams = gson.fromJson(jsonBody, JsonParams.class);
-        String encryptedKey = jsonParams.getKeyService();
-
-        ObjectInputStream os = new ObjectInputStream(new FileInputStream(EncryptionUtil.PRIVATE_KEY_FILE));
-        final PrivateKey privateKey = (PrivateKey) os.readObject();
-        String decryptedTimeStamp = EncryptionUtil.decrypt(encryptedKey, privateKey);
-
-        decryptedTimeStamp=decryptedTimeStamp.substring(0, decryptedTimeStamp.length() - 5);
-
-        long ts = 0;
-        try {
-            ts = Long.valueOf(decryptedTimeStamp);
-        } catch (Exception e) {
-
-            return false;
-        }
-
-        long currTs = new Date().getTime();
+//        String jsonBody = readRequestBody(hsr);
+//
+//        Gson gson = new Gson();
+//        JsonParams jsonParams = gson.fromJson(jsonBody, JsonParams.class);
+//        String encryptedKey = jsonParams.getKeyService();
+//
+//        ObjectInputStream os = new ObjectInputStream(new FileInputStream(EncryptionUtil.PRIVATE_KEY_FILE));
+//        final PrivateKey privateKey = (PrivateKey) os.readObject();
+//        String decryptedTimeStamp = EncryptionUtil.decrypt(encryptedKey, privateKey);
+//
+//        decryptedTimeStamp=decryptedTimeStamp.substring(0, decryptedTimeStamp.length() - 5);
+//
+//        long ts = 0;
+//        try {
+//            ts = Long.valueOf(decryptedTimeStamp);
+//        } catch (Exception e) {
+//
+//            return false;
+//        }
+//
+//        long currTs = new Date().getTime();
+//        
+//        if (Math.abs(currTs - ts) <= (30 * 60 * 1000)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
         
-        if (Math.abs(currTs - ts) <= (30 * 60 * 1000)) {
-            return true;
-        } else {
-            return false;
-        }
-        
-//        return true;
+        return true;
     }
 
     public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {

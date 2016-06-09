@@ -198,10 +198,7 @@ public class OfferServiceImpl implements OfferService {
         return groupedOffers;
 
     }
-    
-    
-    
-    
+
     @Override
     public List<UserOfferProductFixed> searchLimitedOffers(String productName, int pageNo, int sortType) {
         List<UserOfferProductFixed> rawResult = dAOInterface.findLimitedOffersByProductName(productName, pageNo, sortType);
@@ -275,5 +272,9 @@ public class OfferServiceImpl implements OfferService {
 
     }
 
-    
+    @Override
+    public List<UserOfferProductFixed> getLatestOffers() {
+        return dAOInterface.findLatestOffers();
+    }
+
 }
