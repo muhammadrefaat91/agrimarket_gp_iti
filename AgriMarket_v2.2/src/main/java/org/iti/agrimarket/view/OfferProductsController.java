@@ -39,7 +39,7 @@ public class OfferProductsController {
         this.offerService = offerService;
     }
 
-    @RequestMapping(value = "/getoffers")
+    @RequestMapping(value = {"getoffers.htm"})
     public String OfferProducts(HttpServletRequest request,
             @RequestParam(value = "lang", required = false) Locale locale,
             @RequestParam(value = "name", required = false) String productName, Model model) {

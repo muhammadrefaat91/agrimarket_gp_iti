@@ -43,7 +43,7 @@
         <!-- header--->
         <jsp:include page="header/headertop_desc.jsp" />
         <div class="call" style="    margin-top: -34px;">
-            <p> Language : <a href="?name=${param['name']}&lang=en">English</a>|<a href="?name=${param['name']}&lang=ar_EG">عربي</a></p>
+            <p> Language : <a href="?lang=en">English</a>|<a href="?lang=ar_EG">عربي</a></p>
         </div>
         <jsp:include page="header/header_bottom_nav.jsp" />
 

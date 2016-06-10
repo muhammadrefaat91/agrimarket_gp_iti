@@ -33,16 +33,11 @@
     
     <!-- link css, javascript-->
     <mvc:resources mapping="/resources/**" location="/resources/" />
-    
-    <!--<bean id="controllerAspect" class="org.iti.agrimarket.util.LoggerAspect" />-->
-
-    
-      <!-- Aop-->
-     <!--<aop:aspectj-autoproxy  />-->
+ 
     
     <bean  id="imagesPath"  class="java.lang.String">
-        <constructor-arg value="C:/AgriMarket/"/>         
-        <!--<constructor-arg value="/home/muhammad/offer/"/>-->         
+        <!--<constructor-arg value="C:/AgriMarket/"/>-->         
+        <constructor-arg value="/home/muhammad/offer/"/>         
     </bean>
     
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

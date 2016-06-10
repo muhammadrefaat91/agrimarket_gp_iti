@@ -21,7 +21,7 @@
         <jsp:include page="header/header_bottom_nav.jsp" />
     
     <c:if test="${empty offerProduct}" >
-        <c:redirect url="/web/getOffer?id=${param['id']}" />
+        <c:redirect url="/web/getOffer.htm?id=${param['id']}" />
     </c:if>
         <div class="main" style="height: 400px;" >
     <div class="content">

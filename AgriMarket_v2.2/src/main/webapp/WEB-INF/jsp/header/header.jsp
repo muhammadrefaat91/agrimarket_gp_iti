@@ -12,7 +12,7 @@
         <div class="header_bottom_left">				
             <div class="advertisements">
                 <ul>
-                    <h3>Categories</h3>
+                    <h3><spring:message code="text.header.categories" /></h3>
                     <!-- view advertisements images-->
                     <c:forEach items="${allcategories}" var="module"> 
 

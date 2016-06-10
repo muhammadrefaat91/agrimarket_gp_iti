@@ -52,7 +52,7 @@
         </div>
             <jsp:include page="header/header_bottom_nav.jsp" />
             <c:if test="${empty userHasOffer}" >
-                <c:redirect url="/web/getUser?id=${param['id']}" />
+                <c:redirect url="/web/getUser.htm?id=${param['id']}" />
             </c:if>
         </div>
         <!--profile-->

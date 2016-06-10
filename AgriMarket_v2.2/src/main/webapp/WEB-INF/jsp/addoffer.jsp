@@ -11,9 +11,9 @@
 <html>
     <head>
         <!-- Site made with Mobirise Website Builder v2.9, https://mobirise.com -->
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" >
 
-        <title>Sign In</title>
+        <title><spring:message code="title.addoffer.addproduct" /></title>
         <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" >
         <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" >
         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -30,7 +30,7 @@
     <!--style="background-image: url(resources/images/istock-000016896298xlarge-4200x2833-56.jpg);"-->
     <body  >
 
-
+        <div class="wrap">
 
         <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 
@@ -39,7 +39,7 @@
 
         <jsp:include page="header/headertop_desc.jsp" />
       <div class="call" style="    margin-top: -34px;">
-            <p> Language : <a href="?name=${param['name']}&lang=en">English</a>|<a href="?name=${param['name']}&lang=ar_EG">عربي</a></p>
+            <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
         </div>
         <!---include header top -->
         <%--<jsp:include page="header/header_top.jsp" />--%>
@@ -77,7 +77,7 @@
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2" >
                             <c:if test="${not empty error}">
-                                <p style="margin-bottom: 5px; color: red;">Error: ${error}</p>
+                                <p style="margin-bottom: 5px; color: red;"><spring:message code="text.addoffer.error" /> ${error}</p>
                             </c:if>
                         </div>
                         <div class="col-sm-12">
@@ -90,14 +90,14 @@
                                         <div class="form-group">
 
 
-                                            <label>Description :</label> <input type="text"    name="description" class="form-control"  />
+                                            <label><spring:message code="text.addoffer.description" /> </label> <input type="text"    name="description" class="form-control"  />
 
 
                                         </div>
 
 
                                         <div class="form-group">
-                                            <label>Quantity: </label>
+                                            <label><spring:message code="text.preview.quantity" /> </label>
                                             <input   id="quantity" type="number" class="form-control"  name="quantity" required />
 
                                         </div>
@@ -121,7 +121,7 @@
                                                                                 </div>-->
 
                                         <div class="form-group">
-                                            <label>Quantity Unit :</label> 
+                                            <label><spring:message code="text.addoffer.quantityunit" /> </label> 
 
                                             <select name="quantityunit">
                                                 <c:forEach var="item" items="${units}">
@@ -133,7 +133,7 @@
 
                                         <div class="form-group">
 
-                                            <label>price Unit :</label>  
+                                            <label><spring:message code="text.addoffer.priceunit" /></label>  
                                             <select name="unitprice">
                                                 <c:forEach var="item" items="${units}">
                                                     <option class="form-control" value="${item.id}">${item.nameEn}</option>
@@ -144,7 +144,7 @@
 
 
                                         <div class="form-group">
-                                            <label>Price: </label>
+                                            <label><spring:message code="text.addoffer.price" /> </label>
                                             <input   id="quantity" type="number" class="form-control"  name="price" required />
 
                                         </div>
@@ -152,7 +152,7 @@
 
                                         <div class="form-group">
 
-                                            <label>Product : </label>
+                                            <label><spring:message code="text.addoffer.product" /> </label>
                                             
                                             <select name="product">
                                                 <c:forEach var="item" items="${products}">
@@ -165,7 +165,7 @@
 
                                         <div class="form-group">
 
-                                            <label>Telephone: </label><input type="tel"   name="mobile"  class="form-control" />
+                                            <label><spring:message code="text.addoffer.mobile" /> </label><input type="tel"   name="mobile"  class="form-control" />
 
 
                                         </div>
@@ -175,7 +175,7 @@
 
                                         <div class="form-group">
 
-                                            <label>Governerate: </label><input type="text"   name="governerate" class="form-control"/>
+                                            <label><spring:message code="text.addoffer.governerate" /> </label><input type="text"   name="governerate" class="form-control"/>
 
 
 
@@ -192,11 +192,11 @@
 
 
                                         <div class="form-group">
-                                            <tr><td>Image :</td><td><input type="file" name="file"  class="form-control" /></td></tr>
+                                            <tr><td><spring:message code="text.addoffer.image" /></td><td><input type="file" name="file"  class="form-control" /></td></tr>
                                         </div>
 
 
-                                        <tr><td>Name:</td><td><input type="text" name="name" class="form-control" /></td></tr>
+                                        <tr><td><spring:message code="text.addoffer.name" /></td><td><input type="text" name="name" class="form-control" /></td></tr>
 
 
 
@@ -204,7 +204,7 @@
 
                                         <div class="form-group">
 
-                                            <input type="submit" value="Submit" id="add" /><br/>
+                                            <input type="submit" value="<spring:message code="button.addoffer.add" />" id="add" /><br/>
                                         </div>
 
 
@@ -332,7 +332,7 @@
 
   </form>
 </div>-->
-
+        </div>
 </body>
 </html>
 

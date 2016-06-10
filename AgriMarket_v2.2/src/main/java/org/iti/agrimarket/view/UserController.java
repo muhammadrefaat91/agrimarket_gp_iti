@@ -36,7 +36,7 @@ public class UserController {
 
    
 
-    @RequestMapping(value = "/getUser")
+    @RequestMapping(value = {"/getUser.htm"})
     public String OfferProducts(@RequestParam(value = "id", required = true) int offerId, Model model) {
         User user = null;
         System.out.println("id@@@@@@@@@@@@@@@@@@" + offerId);
