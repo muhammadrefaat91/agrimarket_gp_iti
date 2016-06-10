@@ -35,7 +35,7 @@ public class OfferProductController {
         this.offerService = offerService;
     }
 
-    @RequestMapping(value = "/getOffer")
+    @RequestMapping(value = {"/getOffer.htm"})
     public String OfferProducts(@RequestParam(value = "id", required = true) int offerId, Model model) {
         UserOfferProductFixed offerProductFixed = null;
         System.out.println("id" + offerId);

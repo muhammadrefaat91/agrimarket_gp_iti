@@ -71,19 +71,5 @@ public class SortOffersController {
 
         return "offers_page";
     }
-    
- 
-   
 
-     
-
-//    static void quickSortDate(Date arr[], int left, int right) {
-//        int index = partitionDate(arr, left, right);
-//        if (left < index - 1) {
-//            quickSortDate(arr, left, index - 1);
-//        }
-//        if (index < right) {
-//            quickSortDate(arr, index, right);
-//        }
-//    }
 }

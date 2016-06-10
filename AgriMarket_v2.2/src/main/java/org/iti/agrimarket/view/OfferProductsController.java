@@ -7,10 +7,12 @@ package org.iti.agrimarket.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import org.iti.agrimarket.business.OfferService;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,11 +39,16 @@ public class OfferProductsController {
         this.offerService = offerService;
     }
 
-    @RequestMapping(value = "/getoffers")
+    @RequestMapping(value = {"getoffers.htm"})
     public String OfferProducts(HttpServletRequest request,
+            @RequestParam(value = "lang", required = false) Locale locale,
             @RequestParam(value = "name", required = false) String productName, Model model) {
+         locale = LocaleContextHolder.getLocale();
+        
+    String  language = locale.getLanguage();
         List<UserOfferProductFixed> offerproducts = null;
-        System.out.println("name!!!!!!!!!!!!!!!"+productName);
+        System.out.println("language!!!!!!!!!!!!!!!"+language);
+        
         if(productName != null && !productName.equals("")){
            offerproducts = offerService.getOffersByProduct(productName);
          }

@@ -15,23 +15,23 @@
             $("#about").attr("class", "active");
         else if (window.location.pathname == "${pageContext.request.contextPath}/index.htm")
             $("#home").attr("class", "active");
-        else if (window.location.pathname == "${pageContext.request.contextPath}/offers.htm")
+        else if (window.location.pathname == "${pageContext.request.contextPath}/web/getoffers.htm")
             $("#products").attr("class", "active");
     });
 </script>
 <div class="header_bottom">
     <div class="menu">
         <ul>
-            <li id="home" name="home" ><a href="${pageContext.request.contextPath}/index.htm">Home</a></li>
-            <li id="products" name="products" ><a href="${pageContext.request.contextPath}/offers.htm">Products</a></li>
-            <li id="about" name="about" ><a href="${pageContext.request.contextPath}/about.htm">About</a></li>
-            <li id="contact" name="contact" ><a href="${pageContext.request.contextPath}/contact.htm">Contact</a></li>
+			    	<li id="home" name="home"><a href="${pageContext.request.contextPath}/index.htm"><spring:message code="link.home" /></a></li>
+			    	<li id="products" name="products" ><a href="${pageContext.request.contextPath}/web/getoffers.htm"><spring:message code="link.nav.products" /></a></li>
+			    	<li id="about" name="about" ><a href="${pageContext.request.contextPath}/about.htm"><spring:message code="link.nav.about" /></a></li>
+			    	<li id="contact" name="contact" ><a href="${pageContext.request.contextPath}/contact.htm"><spring:message code="link.nav.contact" /></a></li>
             <div class="clear"></div>
         </ul>
     </div>
     <div class="search_box">
-        <form action="${pageContext.request.contextPath}/web/getoffers" method="get">
-            <input type="text" value="${param.name}" name="name" placeholder="search for  products..">
+                    <form action="${pageContext.request.contextPath}/web/getoffers.htm" method="get">
+                        <input type="text" value="${param.name}" name="name" placeholder="<spring:message code="input.header_bottom.searchtext" />">
             <input type="submit" value="" >
         </form>
     </div>

@@ -9,7 +9,7 @@
 
 <!DOCTYPE HTML>
 <head>
-    <title>Mhsoln2</title>
+    <title><spring:message code="title.index" /></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -35,6 +35,9 @@
         <!---include header description -->
 
         <jsp:include page="header/headertop_desc.jsp" />
+        <div class="call" style="    margin-top: -34px;">
+            <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+        </div>
 
         <!---include header top -->
         <jsp:include page="header/header_top.jsp" />
@@ -49,7 +52,7 @@
             <div class="content">
                 <div class="content_top">
                     <div class="heading">
-                        <h3>New Products</h3>
+                        <h3><spring:message code="text.index.newproduct" /></h3>
                     </div>
                     <div class="see">
 
