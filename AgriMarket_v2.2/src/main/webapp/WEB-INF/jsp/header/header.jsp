@@ -16,7 +16,7 @@
                     <!-- view advertisements images-->
                     <c:forEach items="${allcategories}" var="module"> 
 
-                        <li><a href="#">${module.nameEn}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/offers.htm?category=${module.id}">${module.nameEn}</a></li>
                         </c:forEach>
                     <!--                                    <li><a href="#">Sports &amp; Fitness</a></li>
                                         <li><a href="#">Footwear</a></li>
