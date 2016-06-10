@@ -10,7 +10,7 @@
 <!DOCTYPE HTML >
 <html lang="ar_EG">
 <head>
-    <title></title>
+    <title><spring:message code="title.offer_page" /></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -43,7 +43,7 @@
         <!-- header--->
         <jsp:include page="header/headertop_desc.jsp" />
         <div class="call" style="    margin-top: -34px;">
-            <p> Language : <a href="?lang=en">English</a>|<a href="?lang=ar_EG">عربي</a></p>
+            <p> <spring:message code="text.lang" /> : <a href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
         </div>
         <jsp:include page="header/header_bottom_nav.jsp" />
 
@@ -59,20 +59,13 @@
                         <div class="bs-example">
              
                              <div>
-<!--                                <form action="${pageContext.request.contextPath}/web/getoffers" method="get">
-
-                                    <input maxlength="100" type="text" value="${param.searchText}" placeholder="search for products.."   name="searchText" />
-                                    <input  type="submit" value="submit"/>
-                                </form>-->
-
-                                
                                 <form action="${pageContext.request.contextPath}/web/sort" method="get">
-                                   <label>Sort by:</label>
+                                   <label><spring:message code="text.offer_page.sortby" /></label>
                                     <select value="${param.searchType}"  class="pcategory"   id="sort" name="searchType"  onchange="this.form.submit()" >
-                                        <option >Relevance</option>
-                                        <option value="Newest" >Newest</option>
-                                        <option value="Price">Price</option>
-                                        <option value="Quantity">Quantity</option>
+                                        <option ><spring:message code="dropdown.offer_page.relevance" /></option>
+                                        <option  ><spring:message code="dropdown.offer_page.newest" /></option>
+                                        <option ><spring:message code="dropdown.offer_page.price" /></option>
+                                        <option  ><spring:message code="dropdown.offer_page.quantity" /></option>
                                     </select>
                                     <input type="hidden" value="${param.name}"  name="name"/>
                                 </form>
@@ -83,17 +76,11 @@
                     <%-- end list--%>
                     <div class="see">
 
-                        <!--<p><a href="offers.htm">See all Products</a></p>-->
                     </div>
                     <div class="clear"></div>
                 </div>
                 <!--view all offers -->
                 <div class="section group">
-
-                    <%--<c:if test="${empty getAllOfferProducts}" >--%>
-                        <%--<c:redirect url="/web/getoffers?name=${param['pName']}" />--%>
-                    <%--</c:if>--%>
-                    <%--<c:if test="${not empty getAllOfferProducts}">--%>
                         <c:forEach items="${getAllOfferProducts}" var="offer">
                         <div class="grid_1_of_4 images_1_of_4">
                             <a href="preview.htm?id=${offer.id}">
@@ -111,7 +98,6 @@
                             </div>
                         </div>
                     </c:forEach>
-                    <%--</c:if>--%>
                 </div>
             </div>
         </div>

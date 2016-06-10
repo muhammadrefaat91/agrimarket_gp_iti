@@ -6,7 +6,7 @@
            uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE HTML>
 <head>
-    <title>M2hsol</title>
+    <title>${userHasOffer.fullName}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -48,8 +48,8 @@
         <div class="header">
             <jsp:include page="header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
-            <p> Language : <a href="?id=${param['id']}&lang=en">English</a>|<a href="?id=${param['id']}&lang=ar_EG">عربي</a></p>
-        </div>
+                <p> <spring:message code="text.lang" /> : <a href="?id=${param['id']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?id=${param['id']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+            </div>
             <jsp:include page="header/header_bottom_nav.jsp" />
             <c:if test="${empty userHasOffer}" >
                 <c:redirect url="/web/getUser.htm?id=${param['id']}" />
@@ -60,7 +60,7 @@
         <hr class="">
         <div class="container target">
             <div class="row">
-                <div class="col-sm-2"><a href="/users" class="pull-right"><img style="height: 117px;margin-right: 85px;" title="profile image" class="img-circle img-responsive" src="${pageContext.request.contextPath}${userHasOffer.imageUrl}"></a>
+                <div class="col-sm-2"><a href="/users" class="pull-right"><img style="height: 117px;margin-right: 85px;" title="<spring:message code="img.title.text.view_user.profileimage" />" class="img-circle img-responsive" src="${pageContext.request.contextPath}${userHasOffer.imageUrl}"></a>
 
                 </div>
             </div>
@@ -71,13 +71,12 @@
                     <ul class="list-group">
                         <li class="list-group-item text-muted" contenteditable="false">${userHasOffer.fullName}</li>
                         <!--<li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined</strong></span> 2.13.2014</li>-->
-                        <li class="list-group-item text-right"><span class="pull-left"><strong class="">Mobile</strong></span>${userHasOffer.mobile}</li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong class="">E-Mail</strong></span> ${userHasOffer.mail}</li>
-                        <!--                        <li class="list-group-item text-right"><span class="pull-left"><strong class="">Role: </strong></span> Pet Sitter
-                                                </li>-->
+                        <li class="list-group-item text-right"><span class="pull-left"><strong class=""><spring:message code="text.user.mobile" /></strong></span>${userHasOffer.mobile}</li>
+                        <li class="list-group-item text-right"><span class="pull-left"><strong class=""><spring:message code="text.user.email" /></strong></span> ${userHasOffer.mail}</li>
+                     
                     </ul>
-                        <div class="panel panel-default" style="height: 2px;">
-                        <div class="panel-heading">Rate
+                    <div class="panel panel-default" style="height: 2px;">
+                        <div class="panel-heading"><spring:message code="text.view_user.rate" />
 
                         </div>
                         <div class="panel-body" style="    width: 112%;
@@ -109,9 +108,9 @@
 
                     <div class="panel panel-default target" style="background: antiquewhite;">
                         <div class="see">
-                            <p><a href="${pageContext.request.contextPath}/offers.htm">See all Products</a></p>
+                            <p><a href="${pageContext.request.contextPath}/offers.htm"><spring:message code="link.all.Products" /></a></p>
                         </div>
-                        <div class="panel-heading" contenteditable="false">User Products</div>
+                        <div class="panel-heading" contenteditable="false"><spring:message code="text.user.products" /></div>
 
                         <div class="panel-body" style="max-height: 345px;
                              border: 1px solid gray;
@@ -139,7 +138,7 @@
                         </div>
                     </div>
                     <div class="panel panel-default" style="    width: 79%;">
-                        <div class="panel-heading"><a style="cursor: pointer;" data-toggle="collapse" data-target="#demo">How Do You Rate This User?</a></div>
+                        <div class="panel-heading"><a style="cursor: pointer;" data-toggle="collapse" data-target="#demo"><spring:message code="text.user.ratetext" /></a></div>
                         <div class="review collapse" id="demo"  >
                             <div class="your-review" style="    margin-left: 23px;">
                                 <div class="panel-body">
@@ -149,20 +148,20 @@
                                     <input type="radio" name="rating" value="4" class="star">
                                     <input type="radio" name="rating" value="5" class="star">
                                 </div>
-                                <p>Write Your Own Review?</p>
+                                <p><spring:message code="text.user.review" /></p>
 
                                 <div>
-                                    <span><textarea id="review-text" placeholder="Tell others what you think about this book. Would you recommend it, and why?"> </textarea></span>
+                                    <span><textarea id="review-text" placeholder="<spring:message code="placeholder.user.review" />"> </textarea></span>
                                 </div>
                                 <div>
-                                    <span><input type="submit" id="submit-review" value="SUBMIT REVIEW"></span>
+                                    <span><input type="submit" id="submit-review" value="<spring:message code="button.submit.review" />"></span>
                                 </div>
                             </div>	
                         </div>
                     </div>
                     <div class="panel panel-default" style="    width: 79.333333%;margin-left: 0px; margin-top: 2px;">
                         <div class="panel-heading">
-                            <a style="cursor: pointer;     margin-left: -9px;" data-toggle="collapse" data-target="#demo2">Reviews</a></div>
+                            <a style="cursor: pointer;     margin-left: -9px;" data-toggle="collapse" data-target="#demo2"><spring:message code="text.view_user.reviews" /></a></div>
                         <div class="row" style="    margin-left: -14px;">
                             <div class="col-sm-7" style="width: 99.333333%; margin-top: 3px;">
                                 <!--<hr/>-->
@@ -203,7 +202,7 @@
             <!--    </div>-->
         </div>
     </div>
-<jsp:include page="footer/footer.jsp" />
+    <jsp:include page="footer/footer.jsp" />
 </body>
 </html>
 

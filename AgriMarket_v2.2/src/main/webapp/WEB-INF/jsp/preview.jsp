@@ -2,9 +2,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring"
+           uri="http://www.springframework.org/tags"%>
 <!DOCTYPE HTML>
 <head>
-    <title>Free Home Shoppe Website Template | Preview :: w3layouts</title>
+    <title>${offerProduct.product.nameEn}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,7 +18,7 @@
          
         <jsp:include page="header/headertop_desc.jsp" />
         <div class="call" style="    margin-top: -34px;">
-            <p> Language : <a href="?id=${param['id']}&lang=en">English</a>|<a href="?id=${param['id']}&lang=ar_EG">عربي</a></p>
+            <p> <spring:message code="text.lang" /> : <a href="?id=${param['id']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?id=${param['id']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
         </div>
         <jsp:include page="header/header_bottom_nav.jsp" />
     
@@ -42,12 +44,14 @@
                         <h2>${offerProduct.product.nameEn}</h2>
                         <p>${offerProduct.description}</p>					
                         <div class="price">
-                            <p>Quantity: <span>${offerProduct.quantity} ${offerProduct.unitByUnitId.nameEn}</span></p>
-                            <p>Price: <span>${offerProduct.price} L.E/${offerProduct.unitByUnitId.nameEn}</span></p>
+                            <spring:message code="text.preview.quantity"  />
+                            <p><span>${offerProduct.quantity} ${offerProduct.unitByUnitId.nameEn}</span></p>
+                            <spring:message code="text.preview.price" />
+                            <p><span>${offerProduct.price} L.E/${offerProduct.unitByUnitId.nameEn}</span></p>
                         </div>
                         <div class="available">
-                            <p>User Name: <a href="${pageContext.request.contextPath}/web/user.htm?id=${offerProduct.user.id}"><span>${offerProduct.user.fullName}</span></a></p>
-                            <p>Location: <span>${offerProduct.userLocation}</span></p>
+                            <p><spring:message code="text.preview.name" /> <a href="${pageContext.request.contextPath}/web/user.htm?id=${offerProduct.user.id}"><span>${offerProduct.user.fullName}</span></a></p>
+                            <p><spring:message code="text.preview.location" /> <span>${offerProduct.userLocation}</span></p>
                         </div>   
                     </div>
                     <div class="clear"></div>
