@@ -1,9 +1,4 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <head>
 <title>Free Home Shoppe Website Template | Contact :: w3layouts</title>
@@ -17,6 +12,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <body>
   <div class="wrap">
   <jsp:include page="header/headertop_desc.jsp" />
+              <div class="call" style="    margin-top: -34px;">
+            <p> Language : <a href="?lang=en">English</a>|<a href="?lang=ar_EG">عربي</a></p>
+        
+  </div>
         <jsp:include page="header/header_bottom_nav.jsp" />
  <div class="main">
     <div class="content">

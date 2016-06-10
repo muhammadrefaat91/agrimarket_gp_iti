@@ -1,4 +1,4 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring"
            uri="http://www.springframework.org/tags"%>
@@ -42,95 +42,14 @@
             });
         });
     </script>
-    <style type="text/css">
-        .rating {
-            overflow: hidden;
-            display: inline-block;
-            font-size: 0;
-            position: relative;
-        }
-        .rating-input {
-            float: right;
-            width: 16px;
-            height: 16px;
-            padding: 0;
-            margin: 0 0 0 -16px;
-            opacity: 0;
-        }
-        .rating:hover .rating-star:hover,
-        .rating:hover .rating-star:hover ~ .rating-star,
-        .rating-input:checked ~ .rating-star {
-            background-position: 0 0;
-        }
-        .rating-star,
-        .rating:hover .rating-star {
-            position: relative;
-            float: right;
-            display: block;
-            width: 16px;
-            height: 16px;
-            /*background-color: yellow;*/
-            background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
-        }
-
-        /* Just for the demo */
-        body {
-            margin: 20px;
-        }
-
-        body {
-            padding-top: 70px;
-        }
-        .btn-grey{
-            background-color:#D8D8D8;
-            color:#FFF;
-        }
-        .rating-block{
-            background-color:#FAFAFA;
-            border:1px solid #EFEFEF;
-            padding:15px 15px 20px 15px;
-            border-radius:3px;
-        }
-        .bold{
-            font-weight:700;
-        }
-        .padding-bottom-7{
-            padding-bottom:7px;
-        }
-
-        .review-block{
-            background-color:#FAFAFA;
-            border:1px solid #EFEFEF;
-            padding:15px;
-            border-radius:3px;
-            margin-bottom:15px;
-        }
-        .review-block-name{
-            font-size:12px;
-            margin:10px 0;
-        }
-        .review-block-date{
-            font-size:12px;
-        }
-        .review-block-rate{
-            font-size:13px;
-            margin-bottom:15px;
-        }
-        .review-block-title{
-            font-size:15px;
-            font-weight:700;
-            margin-bottom:10px;
-        }
-        .review-block-description{
-            font-size:13px;
-        }
-
-    </style>
 </head>
 <body>
     <div class="wrap">
         <div class="header">
             <jsp:include page="header/headertop_desc.jsp" />
+            <div class="call" style="    margin-top: -34px;">
+            <p> Language : <a href="?id=${param['id']}&lang=en">English</a>|<a href="?id=${param['id']}&lang=ar_EG">عربي</a></p>
+        </div>
             <jsp:include page="header/header_bottom_nav.jsp" />
             <c:if test="${empty userHasOffer}" >
                 <c:redirect url="/web/getUser?id=${param['id']}" />
@@ -221,19 +140,14 @@
                     </div>
                     <div class="panel panel-default" style="    width: 79%;">
                         <div class="panel-heading"><a style="cursor: pointer;" data-toggle="collapse" data-target="#demo">How Do You Rate This User?</a></div>
-
-
                         <div class="review collapse" id="demo"  >
                             <div class="your-review" style="    margin-left: 23px;">
-
                                 <div class="panel-body">
-
                                     <input type="radio" name="rating" value="1" class="star">
                                     <input type="radio" name="rating" value="2" class="star">
                                     <input type="radio" name="rating" value="3" class="star">
                                     <input type="radio" name="rating" value="4" class="star">
                                     <input type="radio" name="rating" value="5" class="star">
-
                                 </div>
                                 <p>Write Your Own Review?</p>
 
@@ -249,10 +163,6 @@
                     <div class="panel panel-default" style="    width: 79.333333%;margin-left: 0px; margin-top: 2px;">
                         <div class="panel-heading">
                             <a style="cursor: pointer;     margin-left: -9px;" data-toggle="collapse" data-target="#demo2">Reviews</a></div>
-
-
-                        <!--<div class="review collapse" id="demo2"  >-->
-                        <!--<div class="container">-->
                         <div class="row" style="    margin-left: -14px;">
                             <div class="col-sm-7" style="width: 99.333333%; margin-top: 3px;">
                                 <!--<hr/>-->
@@ -262,7 +172,6 @@
                                             <div class="col-sm-3">
                                                 <img style="width: 50px;" src="${pageContext.request.contextPath}/image/${rater.userByRaterId.imageUrl}" class="img-rounded">
                                                 <div class="review-block-name"><a href="#">${rater.userByRaterId.fullName}</a></div>
-                                                <!--<div class="review-block-date">January 29, 2016<br/>1 day ago</div>-->
                                             </div>
                                             <div class="col-sm-9">
                                                 <h2 class="bold padding-bottom-7">${rater.rate} <small>/ 5</small></h2>
@@ -294,9 +203,6 @@
             <!--    </div>-->
         </div>
     </div>
-</div>
-</div>
-
 <jsp:include page="footer/footer.jsp" />
 </body>
 </html>

@@ -20,7 +20,7 @@ import org.iti.agrimarket.constant.Constants;
  *
  * @author muhammad
  */
-@WebServlet("/image/*")
+//@WebServlet("/image/*")
 public class ResourceController extends HttpServlet {
 
     @Override

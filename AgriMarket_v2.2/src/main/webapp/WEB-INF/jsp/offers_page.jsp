@@ -7,7 +7,8 @@
 <%@ taglib prefix="spring"
            uri="http://www.springframework.org/tags"%>
 
-<!DOCTYPE HTML>
+<!DOCTYPE HTML >
+<html lang="ar_EG">
 <head>
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -41,11 +42,14 @@
     <div class="wrap">
         <!-- header--->
         <jsp:include page="header/headertop_desc.jsp" />
+        <div class="call" style="    margin-top: -34px;">
+            <p> Language : <a href="?name=${param['name']}&lang=en">English</a>|<a href="?name=${param['name']}&lang=ar_EG">عربي</a></p>
+        </div>
         <jsp:include page="header/header_bottom_nav.jsp" />
 
 
         <!-- content--->
-        <div class="main">
+        <div class="main" style="height: 400px;">
             <div class="content">
                 <div class="content_top">
                     <!-- search!-->

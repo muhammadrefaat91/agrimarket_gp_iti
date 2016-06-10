@@ -19,20 +19,17 @@
         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="resources/css/style.css">
         <link rel="stylesheet" href="resources/css/mbr-additional.css" type="text/css">
-        <script>
-            function signIn() {
-
-            }
-
-        </script>
+ 
     </head>
-    <!--style="background-image: url(resources/images/istock-000016896298xlarge-4200x2833-56.jpg);"-->
-    <body  >
+     <body  >
         <!--<div class="header">-->
          <div class="wrap">
         <!---include header description -->
 
         <jsp:include page="header/headertop_desc.jsp" />
+        <div class="call" style="    margin-top: -34px;">
+            <p> Language : <a href="?id=${param['id']}&lang=en">English</a>|<a href="?id=${param['id']}&lang=ar_EG">عربي</a></p>
+        </div>
 
         <!---include header top -->
         <%--<jsp:include page="header/header_top.jsp" />--%>
