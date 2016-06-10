@@ -4,10 +4,10 @@
 
 <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" />
     <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />	
-
+ 
 <div class="header_top">
         <div class="logo">
-            <a href="index.html"><img src="resources/images/agri_logo_vs.png" alt="" /></a>
+            <a href="index.html"><img src="${pageContext.request.contextPath}/resources/images/agri_logo_vs.png" alt="" /></a>
         </div>
 <!--        <div class="cart">
             <p>Welcome to our Online Store! <span>Cart:</span><div id="dd" class="wrapper-dropdown-2"> 0 item(s) - $0.00

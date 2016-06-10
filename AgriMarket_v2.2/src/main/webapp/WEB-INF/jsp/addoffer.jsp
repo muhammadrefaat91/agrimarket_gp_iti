@@ -42,7 +42,7 @@
             <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
         </div>
         <!---include header top -->
-        <%--<jsp:include page="header/header_top.jsp" />--%>
+        <jsp:include page="header/header_top.jsp" />
 
         <!---include nav bar -->
         <jsp:include page="header/header_bottom_nav.jsp" />

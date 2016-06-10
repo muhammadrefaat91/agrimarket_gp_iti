@@ -45,6 +45,8 @@
         <div class="call" style="    margin-top: -34px;">
             <p> <spring:message code="text.lang" /> : <a href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
         </div>
+        <!---include header top -->
+        <jsp:include page="header/header_top.jsp" />
         <jsp:include page="header/header_bottom_nav.jsp" />
 
 
