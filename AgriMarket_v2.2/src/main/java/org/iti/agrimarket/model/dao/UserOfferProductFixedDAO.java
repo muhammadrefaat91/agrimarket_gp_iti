@@ -34,7 +34,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private static HibernateTemplate hibernateTemplate;
+    private HibernateTemplate hibernateTemplate;
 
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
@@ -50,8 +50,8 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
     }
 
     @Autowired
-    public  void setHibernateTemplate(HibernateTemplate hibernateTempl) {
-        UserOfferProductFixedDAO.hibernateTemplate = hibernateTempl;
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 
     //Refaat

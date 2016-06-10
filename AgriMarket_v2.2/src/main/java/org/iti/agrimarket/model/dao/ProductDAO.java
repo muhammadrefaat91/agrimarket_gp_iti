@@ -27,7 +27,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class ProductDAO implements ProductDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private static HibernateTemplate hibernateTemplate;
+    private HibernateTemplate hibernateTemplate;
 
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
@@ -38,13 +38,13 @@ public class ProductDAO implements ProductDAOInterface {
         this.transactionTemplate = tt;
     }
 
-    public static HibernateTemplate getHibernateTemplate() {
+    public HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
     @Autowired
-    public static void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        ProductDAO.hibernateTemplate = hibernateTemplate;
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 
     //Israa

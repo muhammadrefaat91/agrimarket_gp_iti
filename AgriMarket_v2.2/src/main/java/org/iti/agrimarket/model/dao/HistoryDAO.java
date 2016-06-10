@@ -21,7 +21,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class HistoryDAO implements HistoryDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private static HibernateTemplate hibernateTemplate;
+    private HibernateTemplate hibernateTemplate;
 
     
     public TransactionTemplate getTransactionTemplate() {
@@ -33,13 +33,13 @@ public class HistoryDAO implements HistoryDAOInterface {
         this.transactionTemplate = tt;
     }
 
-    public static HibernateTemplate getHibernateTemplate() {
+    public HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
     @Autowired
-    public static void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        HistoryDAO.hibernateTemplate = hibernateTemplate;
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 
     @Override

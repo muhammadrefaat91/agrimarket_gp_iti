@@ -22,7 +22,7 @@ import org.hibernate.HibernateException;
 public class UnitDAO implements UnitDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private static HibernateTemplate hibernateTemplate;
+    private HibernateTemplate hibernateTemplate;
 
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
@@ -33,13 +33,13 @@ public class UnitDAO implements UnitDAOInterface {
         this.transactionTemplate = tt;
     }
 
-    public static HibernateTemplate getHibernateTemplate() {
+    public HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
     @Autowired
-    public   void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        UnitDAO.hibernateTemplate = hibernateTemplate;
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 
     @Override
