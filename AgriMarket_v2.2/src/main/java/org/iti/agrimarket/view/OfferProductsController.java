@@ -43,7 +43,7 @@ public class OfferProductsController {
     public String OfferProducts(HttpServletRequest request,
             @RequestParam(value = "lang", required = false) Locale locale,
             @RequestParam(value = "name", required = false) String productName,
-            @RequestParam(value = "category", required = false) String categoryName, Model model) {
+            @RequestParam(value = "category", required = false) Integer categoryName, Model model) {
         locale = LocaleContextHolder.getLocale();
 
         String language = locale.getLanguage();
@@ -52,7 +52,7 @@ public class OfferProductsController {
 
         if (productName != null && !productName.equals("")) {
             offerproducts = offerService.getOffersByProduct(productName);
-        } else if (categoryName != null && !categoryName.equals("")) {
+        } else if (categoryName!=null && categoryName != 0) {
             offerproducts = offerService.getOffersByCategory(categoryName);
         } else {
             offerproducts = offerService.getAllOfferProducts();

@@ -127,7 +127,7 @@ public class ProductDAO implements ProductDAOInterface {
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
                 try {
-                    List<Category> result = session.createQuery("from Product p where p.category.id = :parent").setInteger("parent", categoryId).list();
+                    List<Product> result = session.createQuery("from Product p where p.category.id = :parent").setInteger("parent", categoryId).list();
                     return result;
                 } catch (Exception ex) {
                     ex.printStackTrace();

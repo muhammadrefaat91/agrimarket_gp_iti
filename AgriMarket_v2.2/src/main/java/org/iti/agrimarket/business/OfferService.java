@@ -53,4 +53,6 @@ public interface OfferService {
     public GroupedOffers searchGroupedLimitedOffers(String productName, int pageNo, int sortType);
     public List<UserOfferProductFixed> searchLimitedOffers(String productName, int pageNo, int sortType);
     public List<UserOfferProductFixed> getLatestOffers();
+
+    public List<UserOfferProductFixed> getOffersByCategory(Integer categoryId);
 }
