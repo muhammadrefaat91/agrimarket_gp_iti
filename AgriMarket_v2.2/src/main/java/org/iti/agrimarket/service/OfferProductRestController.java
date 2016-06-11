@@ -379,4 +379,34 @@ public class OfferProductRestController {
         return builder.create();
     }
 
+    
+    
+    /**
+     * @Author Amr delete one offer from the Fixed offers table
+     * @param offerid its the id of the offer
+     * @return json opject {"success":1} if success
+     * @return json opject {"success":0} if deletion error
+     *
+     */
+    @RequestMapping(value = "/service/removeoffer", method = RequestMethod.POST)
+    public Response removeOffer(@RequestParam("offerid") Integer offerId) {
+
+        GsonBuilder builder = new GsonBuilder();
+
+        Gson gson = builder.create();
+        boolean b = false;
+        System.out.println("in delete offer");
+                
+        
+        b = offerService.deleteOffer(offerId);
+        if (b) {
+            return Response.ok("{\"success\":1}", MediaType.APPLICATION_JSON).build();
+        } else {
+
+            return Response.status(Response.Status.BAD_REQUEST).entity("user doesnt exist").build();
+
+        }
+
+    }
+    
 }

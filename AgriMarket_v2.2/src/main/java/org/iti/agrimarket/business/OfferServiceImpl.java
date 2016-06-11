@@ -297,8 +297,10 @@ public class OfferServiceImpl implements OfferService {
     public List<UserOfferProductFixed> getLatestOffers() {
         return dAOInterface.findLatestOffers();
     }
-
-    @Override
+      @Override
+      public UserOfferProductFixed findUserOfferProductFixed(Integer id){
+      return dAOInterface.findUserOfferProductFixed(id);}
+      @Override
     public List<UserOfferProductFixed> getOffersByCategory(Integer categoryId) {
         List<Category> children = categoryService.getChildrenOf(categoryId);
         List<Category> allCategorys = categoryService.getChildrenOf(categoryId);
@@ -325,6 +327,6 @@ public class OfferServiceImpl implements OfferService {
             allOffers.addAll(getOffers(get));
         }
         return allOffers;
-    }
-
+      
+      }
 }

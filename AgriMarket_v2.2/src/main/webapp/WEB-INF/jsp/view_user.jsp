@@ -28,7 +28,7 @@
                 var reviewText = jQuery("textarea#review-text").val();
 //                console.log(reviewText);
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/web/addRate",
+                    url: "${pageContext.request.contextPath}/web/addRate.htm",
                     type: "GET",
                     data: {rating: selectedVal, uID:${userHasOffer.id}, reviewText: reviewText},
                     success: function (data) {

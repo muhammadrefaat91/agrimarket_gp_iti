@@ -55,4 +55,5 @@ public interface OfferService {
     public List<UserOfferProductFixed> getLatestOffers();
 
     public List<UserOfferProductFixed> getOffersByCategory(Integer categoryId);
+    public UserOfferProductFixed findUserOfferProductFixed(Integer id);
 }
