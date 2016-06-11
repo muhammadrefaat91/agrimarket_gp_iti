@@ -16,7 +16,7 @@
                     <!-- view advertisements images-->
                     <c:forEach items="${allcategories}" var="module"> 
 
-                        <li><a href="${pageContext.request.contextPath}/offers.htm?category=${module.id}">${module.nameEn}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/web/getoffers.htm?category=${module.id}">${module.nameEn}</a></li>
                         </c:forEach>
                     <!--                                    <li><a href="#">Sports &amp; Fitness</a></li>
                                         <li><a href="#">Footwear</a></li>
@@ -34,7 +34,7 @@
                     <div id="mover">
                         <div id="slide-1" class="slide">			                    
                             <div class="slider-img">
-                                <a href="preview.html"><img src="resources/images/slider.jpg" alt="learn more" /></a>									    
+                                <a href="#"><img src="resources/images/slider.jpg" alt="AgriMarket" /></a>									    
                             </div>
                             <div class="slider-text">
                                 <h1>AgriMarket<br>

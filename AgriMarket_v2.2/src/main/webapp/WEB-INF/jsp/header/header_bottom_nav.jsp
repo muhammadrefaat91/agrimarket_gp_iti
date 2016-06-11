@@ -6,7 +6,7 @@
 <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" />
 <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />
 
-<script src="resources/js/jquery.min.js"></script>
+<script src="<spring:url value="/resources/js/jquery.min.js" />"></script>
 <script>
     $(document).ready(function () {
         if (window.location.pathname == "${pageContext.request.contextPath}/contact.htm")

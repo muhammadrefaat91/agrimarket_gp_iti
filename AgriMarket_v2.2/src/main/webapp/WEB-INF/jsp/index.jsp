@@ -26,7 +26,7 @@
     <c:if test="${empty allcategories}" >
         <c:redirect url="/index.htm" />
     </c:if>
-    
+
     <c:if test="${empty latestOffers}" >
         <c:redirect url="/index.htm" />
     </c:if>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="see">
 
-                        <p><a href="offers.htm"><spring:message code="link.all.Products" /></a></p>
+                        <p><a href="web/getoffers.htm"><spring:message code="link.all.Products" /></a></p>
                     </div>
                     <div class="clear"></div>
                 </div>
