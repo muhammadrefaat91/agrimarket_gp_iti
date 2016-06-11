@@ -37,13 +37,13 @@
                                 <a href="#"><img src="resources/images/slider.jpg" alt="AgriMarket" /></a>									    
                             </div>
                             <div class="slider-text">
-                                <h1>AgriMarket<br>
+                                <h1><spring:message code="title.index.agrimarket"/><br>
                                     <!--<span>AgriMarket</span></h1>-->
-                                <h2>UPTo 50% OFF</h2>
+                                <h2><spring:message code="title.index.sale"/></h2>
                                 <div class="features_list">
-                                    <h4>Best Selling Prices</h4>							               
+                                    <h4><spring:message code="title.index.bestselling"/></h4>							               
                                 </div>
-                                <a href="addoffer" class="button">Sell Now</a>
+                                <a href="addoffer" class="button"><spring:message code="button.index.sellnow"/></a>
                             </div>			               
                             <div class="clear"></div>				
                         </div>	
