@@ -33,21 +33,26 @@ public interface UserOfferProductFixedDAOInterface {
 
     public List<UserOfferProductFixed> findUserOfferProductByParent(String parentCategoryName);
 
-
     public List<UserOfferProductFixed> findUserOfferProductByLocation(String location);
-    public UserOfferProductFixed findUserOfferProductFixedEager(Integer id);
 
-    
+    public UserOfferProductFixed findUserOfferProductFixedEager(Integer id);
 
     public List<UserOfferProductFixed> findUserOfferProductByPrice(String criteria);
 
     public List<UserOfferProductFixed> findUserOfferProductByQuantity(float quantity, Integer unitId);
 
     public List<UserOfferProductFixed> findUserOfferProductByDate(Date date, Date maxDate, String criteria);
-    public List<UserOfferProductFixed> findAllOfferProducts();
-        public List<UserOfferProductFixed> findUserOfferProductByProductAndCategory(String productName,String categoryName);
 
-         public void update(UserOfferProductFixed userOfferProductFixed);
-        
-        
+    public List<UserOfferProductFixed> findAllOfferProducts();
+
+    public List<UserOfferProductFixed> findUserOfferProductByProductAndCategory(String productName, String categoryName);
+
+    public void update(UserOfferProductFixed userOfferProductFixed);
+
+    public List<UserOfferProductFixed> findLimitedOffers(Product productId, int pageNo, int sortType);
+    public List<UserOfferProductFixed> findLimitedOffersByProductName(String productName, int pageNo, int sortType);
+    
+    
+    public List<UserOfferProductFixed> findLatestOffers();
+
 }

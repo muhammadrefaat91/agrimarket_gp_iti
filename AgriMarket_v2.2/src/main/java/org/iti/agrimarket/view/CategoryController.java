@@ -45,16 +45,29 @@ public class CategoryController {
     }
 
     @RequestMapping(value = {"/allgategories"}, method = RequestMethod.GET)
-    public 
-    String allCategories() {
+    public String allCategories() {
         List<Category> categorys = null;
         System.out.println("allcategories");
         if (servletContext.getAttribute("allcategories") == null) {
             categorys = categoryService.getChildrenOf(1);
-           servletContext.setAttribute("allcategories", categorys);
-        }else
-           categorys =  (List<Category>) servletContext.getAttribute("allcategories");
-         
+//            servletContext.setAttribute("allcategories", categorys);
+        } else {
+            categorys = (List<Category>) servletContext.getAttribute("allcategories");
+        }
+        servletContext.setAttribute("allcategories", categorys);
+
         return "offers_page";
+    }
+    
+    
+    @RequestMapping(value = {"/allcategories"}, method = RequestMethod.GET)
+    public String allCategories1() {
+        List<Category> categorys = null;
+        System.out.println("allcategories1");
+        if (servletContext.getAttribute("allcategories1") == null) {
+            categorys = categoryService.getChildrenOf(1);
+        servletContext.setAttribute("allcategories1", categorys);}
+
+        return "index";
     }
 }

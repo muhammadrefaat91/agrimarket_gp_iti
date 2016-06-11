@@ -23,7 +23,6 @@ public class UserDataDAO implements UserDataDAOInterface {
     private TransactionTemplate transactionTemplate;
     private HibernateTemplate hibernateTemplate;
 
-    
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
     }
@@ -33,7 +32,7 @@ public class UserDataDAO implements UserDataDAOInterface {
         this.transactionTemplate = tt;
     }
 
-    public HibernateTemplate getHibernateTemplate() {
+    public   HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
@@ -67,5 +66,4 @@ public class UserDataDAO implements UserDataDAOInterface {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 }

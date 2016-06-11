@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.hibernate.HibernateException;
+
 /**
  *
  * @author Israa
@@ -23,7 +24,6 @@ public class UnitDAO implements UnitDAOInterface {
     private TransactionTemplate transactionTemplate;
     private HibernateTemplate hibernateTemplate;
 
-    
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
     }
@@ -61,13 +61,12 @@ public class UnitDAO implements UnitDAOInterface {
     public List<Unit> findUnitEntities() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
- 
-    
+
     /**
-     * Refaat 
-     * using detached criteria because otherwise is deprecated
+     * Refaat using detached criteria because otherwise is deprecated
+     *
      * @param id
-     * @return    unit object
+     * @return unit object
      */
     @Override
     public Unit findUnit(Integer id) {
@@ -75,10 +74,9 @@ public class UnitDAO implements UnitDAOInterface {
         return (Unit) getHibernateTemplate().execute((Session sn) -> sn.createQuery("from Unit u where u.id=:id")
                 .setInteger("id", id).uniqueResult());
     }
-    
+
     /**
-     * @Author Amr 
-     * get all the units of Certain type
+     * @Author Amr get all the units of Certain type
      * @param type its the type of units
      * @return json array of opjects of units
      * @throws Database (Hibernate) error if there is server error
@@ -88,19 +86,13 @@ public class UnitDAO implements UnitDAOInterface {
 
     public List<Unit> getUnitsOf(String type) throws HibernateException, Exception {
 
-        
-        System.out.println("type "+type);
+        System.out.println("type " + type);
         return (List<Unit>) getHibernateTemplate().execute((Session session) -> session.createQuery("from Unit u where u.type=:t").setString("t", type).list());
 
     }
-   
 
-    
-    
-    
     /**
-     * @Author Amr 
-     * get all the units of Certain type
+     * @Author Amr get all the units of Certain type
      * @param type its the type of units
      * @return json array of opjects of units
      * @throws Database (Hibernate) error if there is server error
@@ -108,13 +100,10 @@ public class UnitDAO implements UnitDAOInterface {
      */
     @Override
 
-    public List<Unit> getAllUnits(){
+    public List<Unit> getAllUnits() {
 
-        
-      
         return (List<Unit>) getHibernateTemplate().execute((Session session) -> session.createQuery("from Unit u").list());
 
     }
-    
-    
+
 }

@@ -33,16 +33,11 @@
     
     <!-- link css, javascript-->
     <mvc:resources mapping="/resources/**" location="/resources/" />
-    
-    <!--<bean id="controllerAspect" class="org.iti.agrimarket.util.LoggerAspect" />-->
-
-    
-      <!-- Aop-->
-     <!--<aop:aspectj-autoproxy  />-->
+ 
     
     <bean  id="imagesPath"  class="java.lang.String">
-        <constructor-arg value="C:/AgriMarket/"/>         
-        <!--<constructor-arg value="/home/muhammad/offer/"/>-->         
+        <!--<constructor-arg value="C:/AgriMarket/"/>-->         
+        <constructor-arg value="/home/muhammad/offer/"/>         
     </bean>
     
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -65,14 +60,6 @@
     <!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>-->
 
    
-    <!--    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="mappings">
-            <props>
-                <prop key="index.htm">indexController</prop>
-            </props>
-        </property>
-    </bean>-->
-
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
@@ -85,17 +72,40 @@
         
     <!--static pages-->
     <mvc:view-controller path="/about.htm" view-name="about" />
-    <mvc:view-controller path="/index.htm" view-name="index" />
+    <mvc:view-controller path="/contact.htm" view-name="contact" />
+    <mvc:view-controller path="/addOffer.htm" view-name="addoffer" />
     <mvc:view-controller path="/login.htm" view-name="sign_in" />
-    <mvc:view-controller path="/uploadimage.htm" view-name="uploadimage" />
+    <!--<mvc:view-controller path="/web/login.htm" view-name="sign_in" />-->
     <mvc:view-controller path="/offers.htm" view-name="offers_page" />
     <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />
     <mvc:view-controller path="/web/user.htm" view-name="view_user" />
     <mvc:view-controller path="/web/preview.htm" view-name="preview" />
-   
-   
-    <!--    <bean name="indexController"
-    class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-    p:viewName="index" />-->
+    <mvc:view-controller path="/about.htm" view-name="about" />
+    <mvc:view-controller path="/contact.htm" view-name="contact" />
+    <mvc:view-controller path="/select.htm" view-name="news" />
+    
+    
+    <!--Resource bundle -->
+<!--    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="localization"  />
+    </bean>-->
+    
+    <bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="en" />
+		<property name="cookieName" value="myAppLocaleCookie"></property>
+		<property name="cookieMaxAge" value="3600"></property>
+	</bean>
 
+	<mvc:interceptors>
+		<bean
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
+		</bean>
+	</mvc:interceptors>
+    <bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:localization" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
 </beans>

@@ -45,18 +45,11 @@ public class ParamExtractor {
 
             if (parsedParam != null) {
                 String rawParam = parsedParam.getJsonObject();
-                try {
-                    rawParam = CompressionUtil.decompress(rawParam);
-//                    rawParam = decompressor.decompress(EncryptionUtil.decodeBASE64(rawParam), 0, rawParam.length());
-                } catch (Exception ex) {
-                    logger.error(ex);
-                }
-//                byte[] decoded = decoder.decodeObject(rawParam);
-//                System.out.println("length "+ decoded.length);
-//                String param = decompressor.decompress(decoded, 0, decoded.length);
-//                System.out.println("param : "+param);
-//                System.out.println("length : "+param.length());
-//                return param;
+//                try {
+//                    rawParam = CompressionUtil.decompress(rawParam);
+//                } catch (Exception ex) {
+//                    logger.error(ex);
+//                }
                 return rawParam;
             }
         }

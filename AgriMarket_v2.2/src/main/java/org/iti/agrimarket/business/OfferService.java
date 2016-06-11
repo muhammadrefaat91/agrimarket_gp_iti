@@ -7,6 +7,7 @@ package org.iti.agrimarket.business;
 
 import java.util.Date;
 import java.util.List;
+import org.iti.agrimarket.model.pojo.GroupedOffers;
 import org.iti.agrimarket.model.pojo.Product;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
@@ -22,6 +23,7 @@ public interface OfferService {
     boolean deleteOffer(Integer id);
 
     List<UserOfferProductFixed> getOffers(Product productId);
+    
 
     List<UserOfferProductFixed> getUserOffers(User user);
 
@@ -43,6 +45,14 @@ public interface OfferService {
 
     public List<UserOfferProductFixed> getOffersByProductAndCategory(String productName, String categoryName);
     public UserOfferProductFixed getOfferProductEager(Integer id);
+
+    public List<UserOfferProductFixed> getLimitedOffers(Product product, int pageNo, int sortType);
+    
+    public GroupedOffers getGroupedLimitedOffers(Product productId, int pageNo, int sortType);
+    
+    public GroupedOffers searchGroupedLimitedOffers(String productName, int pageNo, int sortType);
+    public List<UserOfferProductFixed> searchLimitedOffers(String productName, int pageNo, int sortType);
+    public List<UserOfferProductFixed> getLatestOffers();
     
     
     public UserOfferProductFixed findUserOfferProductFixed(Integer id);

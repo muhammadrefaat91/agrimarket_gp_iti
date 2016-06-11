@@ -51,8 +51,9 @@ public class UserPlantsPlantDAO implements UserPlantsPlantDAOInterface {
         return (boolean) transactionTemplate.execute((TransactionStatus ts) -> {
             try {
                 Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-                if(session.save(userPlantsPlant)==null)
+                if (session.save(userPlantsPlant) == null) {
                     return false;
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();

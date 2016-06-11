@@ -45,9 +45,13 @@ http://www.springframework.org/schema/context/spring-context.xsd">
             </list>
         </property>
         <property name="hibernateProperties">
-            <value>
+            <!--            <value>
                 hibernate.dialect=org.hibernate.dialect.MySQLDialect
-            </value>
+            </value>-->
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!--<prop key="hibernate.show_sql">true</prop>-->
+            </props>
         </property>
         
     </bean> 

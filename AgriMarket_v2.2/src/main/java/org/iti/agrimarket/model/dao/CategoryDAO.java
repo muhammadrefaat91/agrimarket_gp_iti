@@ -9,7 +9,6 @@ import java.util.List;
 import org.iti.agrimarket.model.pojo.Category;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
@@ -26,7 +25,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInterface {
 
     private TransactionTemplate transactionTemplate;
-    private HibernateTemplate hibernateTemplate;
+    private  HibernateTemplate hibernateTemplate;
 
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
@@ -38,11 +37,11 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
     }
 
     public HibernateTemplate getHibernateTemplate() {
-        return hibernateTemplate;
+        return this.hibernateTemplate;
     }
 
     @Autowired
-    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+    public  void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
     }
 

@@ -24,7 +24,10 @@ public interface UserRatesUserDAOInterface {
     public void destroy(UserRatesUserId id);
     
     public List<UserRatesUser> findUserRatesUserEntities() ;
+    
+    public UserRatesUser findUserRateUser(int raterId,int ratedId);
 
     public UserRatesUser findUserRatesUser(UserRatesUserId id);
-    
+    public List calUserWeights(int id);
+    public int userHasRate( int ratedId);
 }

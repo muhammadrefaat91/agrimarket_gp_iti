@@ -21,9 +21,8 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class SeasonDAO implements SeasonDAOInterface{
 
     private TransactionTemplate transactionTemplate;
-    private HibernateTemplate hibernateTemplate;
+    private static HibernateTemplate hibernateTemplate;
 
-    
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
     }
@@ -33,14 +32,15 @@ public class SeasonDAO implements SeasonDAOInterface{
         this.transactionTemplate = tt;
     }
 
-    public HibernateTemplate getHibernateTemplate() {
+    public static HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
     @Autowired
-    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        this.hibernateTemplate = hibernateTemplate;
+    public static void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        SeasonDAO.hibernateTemplate = hibernateTemplate;
     }
+
     @Override
     public void create(Season season) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -60,8 +60,6 @@ public class SeasonDAO implements SeasonDAOInterface{
     public Season findSeason(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-   
 
     @Override
     public void destroy(Integer id) {

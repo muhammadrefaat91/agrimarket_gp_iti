@@ -7,7 +7,9 @@ package org.iti.agrimarket.model.dao;
 
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.iti.agrimarket.model.pojo.UserRatesUser;
 import org.iti.agrimarket.model.pojo.UserRatesUserId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +119,66 @@ public class UserRatesUserDAO implements UserRatesUserDAOInterface {
         } catch (Exception e) {
             edit(userRatesUser);
         }
+
+    }
+
+    /**
+     * get count and sum for number of users and sum of user rates
+     *
+     * @param
+     */
+    public List calUserWeights(int id) {
+        return (List) getHibernateTemplate().execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                String hql = "SELECT count(userRatesUser.id.ratedId),sum(userRatesUser.rate) FROM UserRatesUser userRatesUser where userRatesUser.id.ratedId = :id";
+                Query query = session.createQuery(hql).setInteger("id", id);
+                List results = query.list();
+
+                return results;
+            }
+
+        });
+    }
+
+    @Override
+    public UserRatesUser findUserRateUser(int raterId, int ratedId) {
+        return (UserRatesUser) getHibernateTemplate().execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                try {
+                    UserRatesUser result = (UserRatesUser) session.createQuery("FROM UserRatesUser userRatesUser where userRatesUser.id.ratedId = :ratedId and userRatesUser.id.raterId = :raterId").setInteger("raterId", raterId).setInteger("ratedId", ratedId).uniqueResult();
+                    if (result != null) {
+                        return result;
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    return null;
+                }
+                return null;
+            }
+        });
+
+    }
+
+    @Override
+    public int userHasRate(int ratedId) {
+        return (int) getHibernateTemplate().execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                try {
+                    UserRatesUser result = (UserRatesUser) session.createQuery("FROM UserRatesUser userRatesUser where userRatesUser.id.ratedId = :ratedId ").setInteger("ratedId", ratedId).uniqueResult();
+                    if (result != null) {
+                        return 1;
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    return 0;
+                }
+                return 0;
+            }
+        });
+
     }
 
 }

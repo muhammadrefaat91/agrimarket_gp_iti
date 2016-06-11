@@ -14,12 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.iti.agrimarket.constant.Constants;
 
 /**
  *
  * @author muhammad
  */
-@WebServlet("/image/*")
+//@WebServlet("/image/*")
 public class ResourceController extends HttpServlet {
 
     @Override
@@ -31,7 +32,7 @@ public class ResourceController extends HttpServlet {
         String imageName = request.getPathInfo().substring(1); // Returns "foo.png".
         // Set content size
         if(imageName != null && !imageName.equals("")){
-        File file = new File("C:\\AgriMarket\\images\\"+imageName);
+        File file = new File(Constants.IMAGE_PATH+imageName);
         response.setContentLength((int) file.length());
 
         // Open the file and output streams
