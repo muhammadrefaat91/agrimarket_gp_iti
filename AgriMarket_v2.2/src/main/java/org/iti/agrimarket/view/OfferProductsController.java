@@ -53,7 +53,7 @@ public class OfferProductsController {
         if (productName != null && !productName.equals("")) {
             offerproducts = offerService.getOffersByProduct(productName);
         } else if (categoryName != null && !categoryName.equals("")) {
-            offerproducts = offerService.getOffersByCategory(categoryName);
+//            offerproducts = offerService.getOffersByCategory(categoryName);
         } else {
             offerproducts = offerService.getAllOfferProducts();
         }
