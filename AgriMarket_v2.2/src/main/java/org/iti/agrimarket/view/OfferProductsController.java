@@ -42,23 +42,24 @@ public class OfferProductsController {
     @RequestMapping(value = {"getoffers.htm"})
     public String OfferProducts(HttpServletRequest request,
             @RequestParam(value = "lang", required = false) Locale locale,
-            @RequestParam(value = "name", required = false) String productName, Model model) {
-         locale = LocaleContextHolder.getLocale();
-        
-    String  language = locale.getLanguage();
+            @RequestParam(value = "name", required = false) String productName,
+            @RequestParam(value = "category", required = false) String categoryName, Model model) {
+        locale = LocaleContextHolder.getLocale();
+
+        String language = locale.getLanguage();
         List<UserOfferProductFixed> offerproducts = null;
-        System.out.println("language!!!!!!!!!!!!!!!"+language);
-        
-        if(productName != null && !productName.equals("")){
-           offerproducts = offerService.getOffersByProduct(productName);
-         }
-        else  {
+        System.out.println("language!!!!!!!!!!!!!!!" + language);
+
+        if (productName != null && !productName.equals("")) {
+            offerproducts = offerService.getOffersByProduct(productName);
+        } else if (categoryName != null && !categoryName.equals("")) {
+            offerproducts = offerService.getOffersByCategory(categoryName);
+        } else {
             offerproducts = offerService.getAllOfferProducts();
-         }  
-        
-        
-            model.addAttribute("getAllOfferProducts", offerproducts);
-        
+        }
+
+        model.addAttribute("getAllOfferProducts", offerproducts);
+
         return "offers_page";
     }
 }

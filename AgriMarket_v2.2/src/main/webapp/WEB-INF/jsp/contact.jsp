@@ -26,27 +26,13 @@
                     <div class="col span_2_of_3">
                         <div class="contact-form">
                             <h2><spring:message code="title.contact" /></h2>
-                            <form method="post" action="contact-post.html">
-                                <div>
-                                    <span><label><spring:message code="text.contact.name" /></label></span>
-                                    <span><input name="userName" type="text" class="textbox" ></span>
-                                </div>
-                                <div>
-                                    <span><label><spring:message code="text.user.email" /></label></span>
-                                    <span><input name="userEmail" type="text" class="textbox"></span>
-                                </div>
-                                <div>
-                                    <span><label><spring:message code="text.contact.companyname" /></label></span>
-                                    <span><input name="userPhone" type="text" class="textbox"></span>
-                                </div>
-                                <div>
-                                    <span><label><spring:message code="text.contact.subject" /></label></span>
-                                    <span><textarea name="userMsg"> </textarea></span>
-                                </div>
-                                <div>
-                                    <span><input type="submit" value="<spring:message code="button.text.send" />"  class="myButton"></span>
-                                </div>
-                            </form>
+                            <br><br>
+                            <ul>
+                                <li><spring:message code="label.contact.mobile" /><span><a href="tel:+201113578260" data-rel=""  title="+201113578260">+20-11-135-78260</a></span></li>
+                                <li><spring:message code="label.contact.fax" /><a href="tel:+20235355538" data-rel=""  title="tel:+20235355538"><span>+202-353-55538</span></a></li>
+                                <li><spring:message code="label.contact.mail" /><span><a href="mailto:israakilany@gmail.com?subject=Support" data-rel=""  title="mail">support@agrimarket.com</a></span></li>
+                                
+                            </ul>
                         </div>
                     </div>
                     <div class="col span_1_of_3">

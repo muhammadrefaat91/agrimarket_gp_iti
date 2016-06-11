@@ -277,4 +277,9 @@ public class OfferServiceImpl implements OfferService {
         return dAOInterface.findLatestOffers();
     }
 
+    @Override
+    public List<UserOfferProductFixed> getOffersByCategory(String categoryName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
