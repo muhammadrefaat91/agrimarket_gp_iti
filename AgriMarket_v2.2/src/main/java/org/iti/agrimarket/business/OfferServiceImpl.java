@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import org.iti.agrimarket.model.dao.UserOfferProductFixedDAOInterface;
+import org.iti.agrimarket.model.pojo.Category;
 import org.iti.agrimarket.model.pojo.GroupedOffers;
 import org.iti.agrimarket.model.pojo.Product;
 import org.iti.agrimarket.model.pojo.User;
@@ -27,6 +28,26 @@ public class OfferServiceImpl implements OfferService {
 
     @Autowired
     private UserOfferProductFixedDAOInterface dAOInterface;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private ProductService productService;
+
+    public CategoryService getCategoryService() {
+        return categoryService;
+    }
+
+    public void setCategoryService(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    public ProductService getProductService() {
+        return productService;
+    }
+
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
+    }
 
     @Override
     public int addOffer(UserOfferProductFixed offerProduct) {
@@ -276,5 +297,36 @@ public class OfferServiceImpl implements OfferService {
     public List<UserOfferProductFixed> getLatestOffers() {
         return dAOInterface.findLatestOffers();
     }
+      @Override
+      public UserOfferProductFixed findUserOfferProductFixed(Integer id){
+      return dAOInterface.findUserOfferProductFixed(id);}
+      @Override
+    public List<UserOfferProductFixed> getOffersByCategory(Integer categoryId) {
+        List<Category> children = categoryService.getChildrenOf(categoryId);
+        List<Category> allCategorys = categoryService.getChildrenOf(categoryId);
+        List<Product> allProducts = new ArrayList<>();
+        List<UserOfferProductFixed> allOffers = new ArrayList<>();
+        if (children != null && !children.isEmpty()) {
+            for (int i = 0; i < children.size(); i++) {
+                Category get = children.get(i);
 
+                System.out.println(get.getId());
+                List<Category> tempChildren = categoryService.getChildrenOf(get.getId());
+                if (tempChildren != null && !tempChildren.isEmpty()) {
+                    children.addAll(tempChildren);
+                } else {
+                    System.out.println(get.getId());
+                    allProducts.addAll(productService.getChildrenOf(get.getId()));
+                }
+            }
+        } else {
+            allProducts.addAll(productService.getChildrenOf(categoryId));
+        }
+        for (int i = 0; i < allProducts.size(); i++) {
+            Product get = allProducts.get(i);
+            allOffers.addAll(getOffers(get));
+        }
+        return allOffers;
+      
+      }
 }
