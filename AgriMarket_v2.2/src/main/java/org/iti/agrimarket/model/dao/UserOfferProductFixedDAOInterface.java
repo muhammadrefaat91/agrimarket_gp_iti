@@ -55,4 +55,5 @@ public interface UserOfferProductFixedDAOInterface {
     
     public List<UserOfferProductFixed> findLatestOffers();
 
+
 }
