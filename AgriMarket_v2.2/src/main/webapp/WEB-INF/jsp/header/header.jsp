@@ -16,7 +16,7 @@
                     <!-- view advertisements images-->
                     <c:forEach items="${allcategories}" var="module"> 
 
-                        <li><a href="#">${module.nameEn}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/web/getoffers.htm?category=${module.id}">${module.nameEn}</a></li>
                         </c:forEach>
                     <!--                                    <li><a href="#">Sports &amp; Fitness</a></li>
                                         <li><a href="#">Footwear</a></li>
@@ -34,16 +34,16 @@
                     <div id="mover">
                         <div id="slide-1" class="slide">			                    
                             <div class="slider-img">
-                                <a href="preview.html"><img src="resources/images/slider.jpg" alt="learn more" /></a>									    
+                                <a href="#"><img src="resources/images/slider.jpg" alt="AgriMarket" /></a>									    
                             </div>
                             <div class="slider-text">
-                                <h1>AgriMarket<br>
+                                <h1><spring:message code="title.index.agrimarket"/><br>
                                     <!--<span>AgriMarket</span></h1>-->
-                                <h2>UPTo 50% OFF</h2>
+                                <h2><spring:message code="title.index.sale"/></h2>
                                 <div class="features_list">
-                                    <h4>Best Selling Prices</h4>							               
+                                    <h4><spring:message code="title.index.bestselling"/></h4>							               
                                 </div>
-                                <a href="addoffer" class="button">Sell Now</a>
+                                <a href="addoffer" class="button"><spring:message code="button.index.sellnow"/></a>
                             </div>			               
                             <div class="clear"></div>				
                         </div>	

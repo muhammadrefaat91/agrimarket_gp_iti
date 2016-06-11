@@ -89,6 +89,7 @@
                                 <img  
                                     style="border: 1.1px solid #2969b0;
                                     border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+                       
                             <div class="price-details">
                                 <div class="price-number">
                                     <p><span class="rupees">$${offer.price}</span></p>

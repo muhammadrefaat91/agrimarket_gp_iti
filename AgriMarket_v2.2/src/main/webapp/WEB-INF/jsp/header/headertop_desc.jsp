@@ -12,7 +12,7 @@
 
         <div class="account_desc">
             <ul>
-                <li><a href="#"><spring:message code="link.signup" /></a></li>
+                <li><a href="${pageContext.request.contextPath}/signup.htm"><spring:message code="link.signup" /></a></li>
                 <li><a href="${pageContext.request.contextPath}/login.htm"><spring:message code="link.login" /></a></li>
 <!--                <li><a href="#">Delivery</a></li>
                 <li><a href="#">Checkout</a></li>
