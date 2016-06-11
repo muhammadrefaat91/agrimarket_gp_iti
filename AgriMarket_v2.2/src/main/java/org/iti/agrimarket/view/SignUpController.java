@@ -51,18 +51,22 @@ import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
 import org.iti.agrimarket.constant.Constants;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.request.param.LogOutParam;
 import org.iti.agrimarket.request.param.UserCheckParam;
 import org.iti.agrimarket.util.requestprocessor.param.extraction.ParamExtractor;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  *
  * @author Amr
  */
 @Controller
+@SessionAttributes("user")
+
 public class SignUpController extends HttpServlet {
 
     private Logger logger;
@@ -72,6 +76,10 @@ public class SignUpController extends HttpServlet {
 
     @Autowired
     OfferService offerService;
+
+    String userName = null;
+
+    String userEmail = null;
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signUp(@ModelAttribute("userForm") @Valid User user, BindingResult br, Model model) {
@@ -234,7 +242,6 @@ public class SignUpController extends HttpServlet {
 //                return "redirect:/";
 //            }
         if (!file.isEmpty()) {
-        
 
 //                    
 //                    BufferedOutputStream stream = new BufferedOutputStream(
@@ -246,41 +253,100 @@ public class SignUpController extends HttpServlet {
 //                    
 //
 //                    System.out.println("succccccccccccc");
-                String fileName = user.getId() + String.valueOf(new Date().getTime());
+            String fileName = user.getId() + String.valueOf(new Date().getTime());
 
-             
-                    try {
-                        byte[] bytes = file.getBytes();
-                        MagicMatch match = Magic.getMagicMatch(bytes);
-                        final String ext = "." + match.getExtension();
+            try {
+                byte[] bytes = file.getBytes();
+                MagicMatch match = Magic.getMagicMatch(bytes);
+                final String ext = "." + match.getExtension();
 
-                        File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
-                        if (!parentDir.isDirectory()) {
-                            parentDir.mkdirs();
-                        }
-                        BufferedOutputStream stream
-                                = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName)));
-                        stream.write(bytes);
-                        stream.close();
-                        user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
-                        userService.updateUser(user);
-
-                    } catch (Exception e) {
-      //                  logger.error(e.getMessage());
-                        userService.deleteUser(user); // delete the category if something goes wrong
-                        
-                                 redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload " + name + " because the file was empty");
-                        return "signup";
-                    }
-
+                File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
+                if (!parentDir.isDirectory()) {
+                    parentDir.mkdirs();
                 }
-            else {
+                BufferedOutputStream stream
+                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName)));
+                stream.write(bytes);
+                stream.close();
+                user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
+                userService.updateUser(user);
+
+            } catch (Exception e) {
+                //                  logger.error(e.getMessage());
+                userService.deleteUser(user); // delete the category if something goes wrong
+
+                redirectAttributes.addFlashAttribute("message",
+                        "You failed to upload " + name + " because the file was empty");
+                return "signup";
+            }
+
+        } else {
             redirectAttributes.addFlashAttribute("message",
                     "You failed to upload " + name + " because the file was empty");
         }
 
+        return "redirect:index.htm";
+    }
+
+    /**
+     * upload image and form data
+     *
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/signupgplus")
+    public String signupUserFb(@RequestParam("name") String name, @RequestParam("email") String email) {
+
+        System.out.println("save user func          google plus---------");
+        System.out.println("full Name : " + name);
+        System.out.println("email : " + email);
+
+        ModelAndView modelAndView = new ModelAndView();
+        User userObj = userService.getUserByEmail(email);
+        if (userObj != null) {
+
+            modelAndView.addObject("user", userObj);
+
+            System.out.println("i uploaded user on the session");
+
             return "redirect:index.htm";
+
+        } else { // store user 
+
+            userName = name;
+            userEmail = email;
+
+            return "redirect:signupstep.htm";
+
         }
 
     }
+
+    /**
+     * Amr
+     *
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/signupgplusstep2")
+    public String signupUserFb() {
+
+        System.out.println("save user func   fb2       google plus---------");
+
+        User user = new User();
+        user.setGovernerate("Giza");
+
+        user.setMail(userEmail);
+        user.setFullName(userName);
+        user.setMobile("12344");
+        user.setLat(0.0);
+        user.setLong_(0.0);
+        user.setLoggedIn(true);
+        user.setRatesAverage(0);
+        user.setRegistrationChannel(0);   // web
+        user.setImageUrl("images/amr.jpg");
+        userService.addUser(user);
+        User uForSession = userService.getUserByEmail(user.getMail());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", uForSession);
+        System.out.println("i Stored user in the DB");
+        return "redirect:index.htm";
+    }
+
+}

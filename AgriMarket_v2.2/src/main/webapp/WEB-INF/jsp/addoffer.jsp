@@ -99,23 +99,6 @@
                         <h2>add offer</h2>
 
 
-                        <form   method="post" enctype="multipart/form-data" action="addoffer" >
-
-                            <%--<spring:message code="name" />--%>
-
-                            
-                   <div >
-
-                                <span><label>Product : </label></span>
-                                <span>
-                                    <select name="product">
-                                        <c:forEach var="item" items="${products}">
-                                            <option value="${item.id}" class="textbox">${item.nameEn}</option>
-                                        </c:forEach>
-                                    </select>
-                                </span>
-                            </div>
-
 
                             <div class="col-sm-8 col-sm-offset-2">
                                 <form   method="post" enctype="multipart/form-data" action="addoffer" >
@@ -367,84 +350,6 @@
 </div>
 
 
-
-
-                                                                                <div class="form-group">
-                                                                                    <label>unit of Quantity: </label>
-                                                                                    <input   id="quantity" type="number" class="form-control"  name="quantityunit" required />
-                                        
-                                                                                </div>
-
-
-
-                                        
-                                                                                <div class="form-group">
-                                                                                    <label>unit of price: </label>
-                                                                                    <input   id="quantity" type="number" class="form-control"  name="unitprice" required />
-                                        
-                                                                                </div>
-
-                                           <label>Quantity Unit :</label> 
-
-                                            <select name="quantityunit">
-                                                <c:forEach var="item" items="${units}">
-                                                    <option value="${item.id}">${item.nameAr}</option>
-                                                </c:forEach>
-                                            </select>
-
-                                           <label>price Unit :</label>  
-                                            <select name="unitprice">
-                                                <c:forEach var="item" items="${units}">
-                                                    <option class="form-control" value="${item.id}">${item.nameEn}</option>
-                                                </c:forEach>
-                                            </select>
-
-                                             <label>Price: </label>
-                                            <input   id="quantity" type="number"   name="price" required />
-
-                                     <label>Product : </label>
-                                            
-                                            <select name="product">
-                                                <c:forEach var="item" items="${products}">
-                                                    <option value="${item.id}" class="form-control">${item.nameEn}</option>
-                                                </c:forEach>
-                                            </select>
-
- 
-
-      
-                                            <label>Telephone: </label><input type="tel"   name="mobile"   />
-
-
-
-
-
-                                           <label>Governerate: </label><input type="text"   name="governerate" />
-
-
-
-                                        <div class="form-group">
-                                            <label>product id: </label>
-                                            <input   id="quantity" type="number" class="form-control"  name="product" required />
-
-                                        </div>
-
-
-
-                                            <tr><td>Image :</td><td><input type="file" name="file"   /></td></tr>
- 
-
-                                        <tr><td>Name:</td><td><input type="text" name="name"  /></td></tr>
-
-
-
-
-                                          <input type="submit" value="Submit" id="add" /><br/>
- 
-
-                                    </div>
-
-  </form>
 </div>-->
         </div>
 </body>
