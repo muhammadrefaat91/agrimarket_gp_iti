@@ -9,8 +9,8 @@
 <div class="header">
 
     <div class="header_slide">
-        <div class="header_bottom_left">				
-            <div class="advertisements">
+        <div class="header_bottom_left" style="float: <spring:message code="header.css.header_bottom_left.float"/>">				
+            <div class="advertisements" style="text-align: <spring:message code="header.css.header_bottom_left.advertise.text-align"/>;">
                 <ul>
                     <h3><spring:message code="text.header.categories" /></h3>
                     <!-- view advertisements images-->
@@ -28,7 +28,7 @@
                 </ul>
             </div>					
         </div>
-        <div class="header_bottom_right">					 
+                    <div class="header_bottom_right" style="margin-left: <spring:message code="header.css.header_bottom_right.margin-left"/>px;">					 
             <div class="slider">					     
                 <div id="slider"><!-- view special  offers ads-->
                     <div id="mover">

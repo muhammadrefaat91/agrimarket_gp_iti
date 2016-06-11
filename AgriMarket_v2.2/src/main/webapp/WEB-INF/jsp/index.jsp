@@ -15,12 +15,9 @@
     <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
     <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet">
 
-    <!--<link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all"/>-->
-    <!--<link href="resources/css/slider.css" rel="stylesheet" type="text/css" media="all"/>-->
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script> 
-    <script type="text/javascript" src="js/move-top.js"></script>
-    <script type="text/javascript" src="js/easing.js"></script>
-    <script type="text/javascript" src="js/startstop-slider.js"></script>
+    <script type="text/javascript" src="<spring:url value="/resources/js/jquery-1.7.2.min.js" />"></script>
+    <script type="text/javascript" src="<spring:url value="/resources/js/jquery.cookie.js" />"></script>
+
 </head>
 <body>
     <c:if test="${empty allcategories}" >
@@ -51,10 +48,10 @@
         <div class="main">
             <div class="content">
                 <div class="content_top">
-                    <div class="heading">
+                    <div class="heading" style="float: <spring:message code="index.css.heading.float" />;">
                         <h3><spring:message code="text.index.newproduct" /></h3>
                     </div>
-                    <div class="see">
+                    <div class="see" style="float: <spring:message code="index.css.see.float" />;">
 
                         <p><a href="web/getoffers.htm"><spring:message code="link.all.Products" /></a></p>
                     </div>
@@ -62,7 +59,7 @@
                 </div>
                 <div class="section group">
                     <c:forEach items="${latestOffers}" var="offer">
-                        <div class="grid_1_of_4 images_1_of_4">
+                        <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
                             <a href="preview.html">
                                 <img  
                                     style="border: 1.1px solid #2969b0;
@@ -88,12 +85,6 @@
 
     <!--Footer--->
     <jsp:include  page="footer/footer.jsp" />
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $().UItoTop({easingType: 'easeOutQuart'});
-
-        });
-    </script>
     <a href="#" id="toTop"><span id="toTopHover"> </span></a>
 </body>
 </html>

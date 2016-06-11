@@ -127,6 +127,10 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
             public Object doInHibernate(Session session) throws HibernateException {
                 try {
                     List<UserOfferProductFixed> results = session.createQuery("from UserOfferProductFixed userOffer where userOffer.product = :product").setEntity("product", product).list();
+                    for (int i = 0; i < results.size(); i++) {
+                        UserOfferProductFixed get = results.get(i);
+                        Hibernate.initialize(get.getProduct());
+                    }
                     return results;
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -227,6 +231,10 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
             public Object doInHibernate(Session session) throws HibernateException {
                 try {
                     List<UserOfferProductFixed> results = session.createQuery("from UserOfferProductFixed userOffer where userOffer.product.nameAr LIKE :productName or userOffer.product.nameEn LIKE :productName").setString("productName", "%" + productName + "%").list();
+                    for (int i = 0; i < results.size(); i++) {
+                        UserOfferProductFixed get = results.get(i);
+                        Hibernate.initialize(get.getProduct());
+                    }
                     return results;
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -340,6 +348,10 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
             public Object doInHibernate(Session session) throws HibernateException {
                 try {
                     List<UserOfferProductFixed> results = session.createQuery("from UserOfferProductFixed ").list();
+                    for (int i = 0; i < results.size(); i++) {
+                        UserOfferProductFixed get = results.get(i);
+                        Hibernate.initialize(get.getProduct());
+                    }
                     return results;
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -444,4 +456,5 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
             }
         });
     }
+
 }
