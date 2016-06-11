@@ -35,9 +35,7 @@
                 };
                 $(".menu ul li:eq(0)").exchangePositionWith(".menu ul li:eq(3)");
                 $(".menu ul li:eq(1)").exchangePositionWith(".menu ul li:eq(2)");
-
             });
-
         }
     </script>
 <div class="header_bottom">

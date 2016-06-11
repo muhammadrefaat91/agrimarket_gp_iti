@@ -26,7 +26,7 @@
         <jsp:include page="header/header_top.jsp" />
         <jsp:include page="header/header_bottom_nav.jsp" />
         <div class="main">
-            <div class="content">
+            <div class="content" style="text-align: <spring:message code="about.css.content.text-align" />">
                 <div class="section group">
                     <div class="col_1_of_3 span_1_of_3">
                         <h3><spring:message code="title.about.whoweare" /> </h3>
