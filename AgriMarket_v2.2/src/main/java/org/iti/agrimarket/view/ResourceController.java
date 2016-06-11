@@ -31,7 +31,7 @@ public class ResourceController extends HttpServlet {
         String imageName = request.getPathInfo().substring(1); // Returns "foo.png".
         // Set content size
         if(imageName != null && !imageName.equals("")){
-        File file = new File("/home/muhammad/agrimarket/images/"+imageName);
+        File file = new File("C:\\AgriMarket\\images\\"+imageName);
         response.setContentLength((int) file.length());
 
         // Open the file and output streams

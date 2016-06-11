@@ -28,7 +28,7 @@ public class Constants {
    
 //    public static final String ROOT_PATH = "C:/AgriMarket/";
 //    public static final String ROOT_PATH = "/home/zipline/agrimarket/";
-    public static final String ROOT_PATH = "/home/muhammad/agrimarket/" ;
+    public static final String ROOT_PATH = "C:/AgriMarket/" ;
     public static final String IMAGE_PATH = ROOT_PATH+"images/";
 
     public static final String SOUND_PATH = ROOT_PATH+"sound/";

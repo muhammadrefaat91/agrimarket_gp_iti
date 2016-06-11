@@ -27,7 +27,46 @@
                 autoheight: false
             });
         });
+        
+        
+        
+        function removeOffer(){
+  $.post("removeoffer",
+        {
+          offerid: ${offer.id},
+      
+        },
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        }
+
+)
+}
+        
     </script>
+    
+                                           
+                                                    
+                                                    <script type="text/javascript">
+document.getElementById('removeoffer').addEventListener("click",function(event) {
+    (
+function (){
+  $.post("removeoffer",
+        {
+          offerid: ${offer.id},
+      
+        },
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        }
+
+)
+})});
+</script>
+
+    
+   
+    
 </head>
 <body>
     <div class="wrap">
@@ -98,6 +137,14 @@
                                                 <p>
 
                                                 </p>
+                                                
+                                                <p>
+                                                     
+             
+    
+                                                    <a href="updateoffer.htm" id="updateoffer" >Update Offer</a>
+                                                    <button  onclick="removeOffer()"  style="color: red" id="removeoffer">Remove Offer</a>
+                                                 </p>
                                             </div>
                                         </div>
                                     </div>

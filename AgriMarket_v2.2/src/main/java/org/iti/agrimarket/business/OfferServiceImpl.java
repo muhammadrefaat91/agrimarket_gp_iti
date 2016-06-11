@@ -120,4 +120,10 @@ public class OfferServiceImpl implements OfferService {
     public UserOfferProductFixed getOfferProductEager(Integer id) {
         return dAOInterface.findUserOfferProductFixedEager(id);
     }
+    
+      @Override
+      public UserOfferProductFixed findUserOfferProductFixed(Integer id){
+      return dAOInterface.findUserOfferProductFixed(id);
+      
+      }
 }

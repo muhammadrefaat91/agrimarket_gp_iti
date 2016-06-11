@@ -43,4 +43,7 @@ public interface OfferService {
 
     public List<UserOfferProductFixed> getOffersByProductAndCategory(String productName, String categoryName);
     public UserOfferProductFixed getOfferProductEager(Integer id);
+    
+    
+    public UserOfferProductFixed findUserOfferProductFixed(Integer id);
 }

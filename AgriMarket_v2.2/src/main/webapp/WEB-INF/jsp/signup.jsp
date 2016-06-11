@@ -10,6 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="//connect.facebook.net/en_US/all.js"></script>
+        
+        
         <!-- Site made with Mobirise Website Builder v2.9, https://mobirise.com -->
         <meta charset="UTF-8">
 
@@ -56,27 +59,115 @@
     <body  >
 
                              
-         
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=600728280015510";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=600728280015510";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+  <div id="fb-root"></div>
 
 
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '600728280015510', // Set YOUR APP ID
+      channelUrl : 'http://hayageek.com/examples/oauth/facebook/oauth-javascript/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+ 
+    FB.Event.subscribe('auth.authResponseChange', function(response) 
+    {
+     if (response.status === 'connected') 
+    {
+        document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
+        //SUCCESS
+ 
+    }    
+    else if (response.status === 'not_authorized') 
+    {
+        document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
+ 
+        //FAILED
+    } else 
+    {
+        document.getElementById("message").innerHTML +=  "<br>Logged Out";
+ 
+        //UNKNOWN ERROR
+    }
+    }); 
+ 
+    };
+ 
+    function Login()
+    {
+ 
+        FB.login(function(response) {
+           if (response.authResponse) 
+           {
+                getUserInfo();
+            } else 
+            {
+             console.log('User cancelled login or did not fully authorize.');
+            }
+         },{scope: 'email,user_photos,user_videos'});
+ 
+    }
+ 
+  function getUserInfo() {
+        FB.api('/me', function(response) {
+ 
+      var str="<b>Name</b> : "+response.name+"<br>";
+          str +="<b>Link: </b>"+response.link+"<br>";
+          str +="<b>Username:</b> "+response.username+"<br>";
+          str +="<b>id: </b>"+response.id+"<br>";
+          str +="<b>Email:</b> "+response.email+"<br>";
+          str +="<input type='button' value='Get Photo' onclick='getPhoto();'/>";
+          str +="<input type='button' value='Logout' onclick='Logout();'/>";
+          document.getElementById("status").innerHTML=str;
+          
+          
+          
+ 
+    });
+    }
+    function getPhoto()
+    {
+      FB.api('/me/picture?type=normal', function(response) {
+ 
+          var str="<br/><b>Pic</b> : <img src='"+response.data.url+"'/>";
+          document.getElementById("status").innerHTML+=str;
+ 
+    });
+ 
+    }
+    function Logout()
+    {
+        FB.logout(function(){document.location.reload();});
+    }
+ 
+  // Load the SDK asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+ 
+</script>
+<div align="center">
+<h2>Facebook Login</h2>
+ 
+<div id="status">
+ Click on Below Image to start the demo: <br/>
+<img src="http://hayageek.com/examples/oauth/facebook/oauth-javascript/LoginWithFacebook.png" style="cursor:pointer;" onclick="Login()"/>
+</div>
+ 
+<br/><br/><br/><br/><br/>
+ 
+<div id="message">
+Logs:<br/>
+</div>
+ 
+</div>
 <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 
         <!---include header description -->
@@ -133,7 +224,7 @@
                                         <div class="form-group">
 
 
-                                            <label>full name :</label> <input type="text"    name="fullName" class="form-control"  />
+                                            <label>Full ame :</label> <input type="text"    name="fullName" class="form-control"  />
 
 
                                         </div>
