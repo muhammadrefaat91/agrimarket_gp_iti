@@ -276,5 +276,9 @@ public class OfferServiceImpl implements OfferService {
     public List<UserOfferProductFixed> getLatestOffers() {
         return dAOInterface.findLatestOffers();
     }
-
+      @Override
+      public UserOfferProductFixed findUserOfferProductFixed(Integer id){
+      return dAOInterface.findUserOfferProductFixed(id);
+      
+      }
 }
