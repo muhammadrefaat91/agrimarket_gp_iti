@@ -622,7 +622,7 @@ body {
 	vertical-align: top;
 }
 .price p span {
-	font-size:2em;
+	font-size:24px;
 	font-family: 'ambleregular';
 	color:#CD1F25;;
 }
@@ -806,7 +806,7 @@ body {
 }
 .your-review div{
 /*	padding:5px 0;*/
-padding: 0px 0;
+padding: 0px 2px;
     margin-top: 6px;
     margin-bottom: 3px;
 }

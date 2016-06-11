@@ -43,29 +43,28 @@ public class SortOffersController {
 
     
     
-    @RequestMapping(value = "/sort",method = RequestMethod.GET)
-    public String addRate(HttpServletRequest request ,@RequestParam(value = "searchType", required = false) String searchType,
+    @RequestMapping(value = "/sort.htm",method = RequestMethod.GET)
+    public String addRate(HttpServletRequest request ,@RequestParam(value = "sortType", required = false) String sortType,
             @RequestParam(value = "searchText", required = false) String productName, Model model) {
         SortOffers sortOffers;
         List<UserOfferProductFixed> offers = (List<UserOfferProductFixed>) request.getSession().getAttribute("getAllOfferProducts");
         System.out.println("List<UserOfferProductFixed> fixeds"+offers);
        
-        System.out.println("Sort....."+searchType);
+        System.out.println("Sort....."+sortType);
 //    List<UserOfferProductFixed> offerproducts = null;
         
-        if (searchType != null &&  searchType.equals("Price")){
+        if (sortType != null &&  (sortType.equals("Price") || sortType.equals("السعر"))){
             sortOffers = new SortOffersByPrice();
             sortOffers.sort(offers, 0, offers.size()-1);
-        }else if(searchType != null &&  searchType.equals("Quantity")){
+        }else if(sortType != null &&  (sortType.equals("Quantity") || sortType.equals("الكميه"))){
             sortOffers = new SortOffersByQuantity();
             sortOffers.sort(offers, 0, offers.size()-1);
-        }else if(searchType != null &&  searchType.equals("Newest")){
+        }else if(sortType != null &&  (sortType.equals("Newest") || sortType.equals("الأحداث"))){
             sortOffers = new SortOffersByDate();
             sortOffers.sort(offers, 0, offers.size()-1);
         }else{
             offers = offerService.getAllOfferProducts();
         }
-//        request.getSession().setAttribute("getAllOfferProducts", offers);
         model.addAttribute("getAllOfferProducts", offers);
         System.out.println("sorted"+offers);
 

@@ -30,27 +30,27 @@
     </c:if>
         <div class="main" style="height: 400px;" >
     <div class="content">
-        <div class="section group">
-            <div class="cont-desc span_1_of_2">
+        <div class="section group" style="direction: <spring:message code="preview.css.dir"  />;">
+            <div class="cont-desc span_1_of_2" style="direction: <spring:message code="preview.css.dir"  />;">
                 <div class="product-details">				
-                    <div class="grid images_3_of_2">
+                    <div class="grid images_3_of_2" style="direction: <spring:message code="preview.css.dir"  />">
                         <div id="container">
                             <div id="products_example">
                                 <div id="products">
-                                    <img style="border: 1.1px solid #2969b0;
+                                    <img style="border: 1.1px solid #2969b0;    margin-left: 800px;
                                     border-bottom: none; width: 250px;height: 250px;" src="${pageContext.request.contextPath}${offerProduct.imageUrl}" alt=" " />                                                        
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="desc span_3_of_2">
-                        <h2>${offerProduct.product.nameEn}</h2>
-                        <p>${offerProduct.description}</p>					
-                        <div class="price">
+                    <div class="desc span_3_of_2" style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />">
+                        <h2 style="margin-right: 45px;">${offerProduct.product.nameEn}</h2>
+                        <p style="    margin-right: <spring:message code="offer_page.css.p.margin.right"  />;white-space: pre-line;">${offerProduct.description}</p>					
+                        <div class="price" style="    margin-left: <spring:message code="preview.css.div.price.margin"/>;">
                             <spring:message code="text.preview.quantity"  />
-                            <p><span>${offerProduct.quantity} ${offerProduct.unitByUnitId.nameEn}</span></p>
+                            <p style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 56px;">${offerProduct.quantity} ${offerProduct.unitByUnitId.nameEn}</span></p>
                             <spring:message code="text.preview.price" />
-                            <p><span>${offerProduct.price} L.E/${offerProduct.unitByUnitId.nameEn}</span></p>
+                            <p style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 26px;">${offerProduct.price} L.E/${offerProduct.unitByUnitId.nameEn}</span></p>
                         </div>
                         <div class="available">
                             <p><spring:message code="text.preview.name" /> <a href="${pageContext.request.contextPath}/web/user.htm?id=${offerProduct.user.id}"><span>${offerProduct.user.fullName}</span></a></p>

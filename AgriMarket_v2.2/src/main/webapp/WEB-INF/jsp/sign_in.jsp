@@ -51,14 +51,15 @@
                                 <c:if test="${not empty user}">
                                     <c:redirect url="index.htm" />
                                 </c:if>
-                                <form:form action="userlogin" method="post" >
+                                <spring:message code="offer_page.css.content_top.dir"  var="margin"/>
+                                <form:form action="userlogin" method="post" dir="${margin}" >
 
                                     <div class="form-group">
-                                        <label><spring:message code="text.user.email" />  </label>
+                                        <label style="margin-bottom: 8px;"><spring:message code="text.user.email" />  </label>
                                         <input type="email"  id="mail"  class="form-control"  name="mail"  required />
                                     </div>
                                     <div class="form-group">
-                                        <label><spring:message code="text.signin.password" /> </label>
+                                        <label style="margin-bottom: 8px;"><spring:message code="text.signin.password" /> </label>
                                         <input   id="fullName" type="password" class="form-control"  name="password" required />
                                         <form:errors path="fullName"/>
                                     </div>

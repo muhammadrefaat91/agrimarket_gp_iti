@@ -53,17 +53,17 @@
         <!-- content--->
         <div class="main" style="height: 400px;">
             <div class="content">
-                <div class="content_top">
+                <div class="content_top" dir="<spring:message code="offer_page.css.content_top.dir" />">
                     <!-- search!-->
 
-                    <div class="heading">
+                    <div class="heading" style="float: <spring:message code="offer_page.css.heading.float" />;">
 
                         <div class="bs-example">
              
                              <div>
-                                <form action="${pageContext.request.contextPath}/web/sort" method="get">
+                                <form action="${pageContext.request.contextPath}/web/sort.htm" method="get">
                                    <label><spring:message code="text.offer_page.sortby" /></label>
-                                    <select value="${param.searchType}"  class="pcategory"   id="sort" name="searchType"  onchange="this.form.submit()" >
+                                    <select value="${param.sortType}"  class="pcategory"   id="sort" name="sortType"  onchange="this.form.submit()" >
                                         <option ><spring:message code="dropdown.offer_page.relevance" /></option>
                                         <option  ><spring:message code="dropdown.offer_page.newest" /></option>
                                         <option ><spring:message code="dropdown.offer_page.price" /></option>
@@ -84,7 +84,7 @@
                 <!--view all offers -->
                 <div class="section group">
                         <c:forEach items="${getAllOfferProducts}" var="offer">
-                        <div class="grid_1_of_4 images_1_of_4">
+                            <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
                             <a href="preview.htm?id=${offer.id}">
                                 <img  
                                     style="border: 1.1px solid #2969b0;
