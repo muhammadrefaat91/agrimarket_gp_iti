@@ -82,7 +82,6 @@
     <mvc:view-controller path="/web/preview.htm" view-name="preview" />
     <mvc:view-controller path="/about.htm" view-name="about" />
     <mvc:view-controller path="/contact.htm" view-name="contact" />
-    <mvc:view-controller path="/select.htm" view-name="news" />
     
     
     <!--Resource bundle -->
