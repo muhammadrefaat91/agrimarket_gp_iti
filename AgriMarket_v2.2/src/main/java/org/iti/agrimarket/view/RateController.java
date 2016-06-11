@@ -36,7 +36,7 @@ public class RateController {
     
     
 
-    @RequestMapping(value = "/addRate",method = RequestMethod.GET)
+    @RequestMapping(value = "/addRate.htm",method = RequestMethod.GET)
     public @ResponseBody String addRate(@RequestParam(value = "rating", required = true) int rating,
            @RequestParam(value = "reviewText", required = false) String reviewText ,@RequestParam(value = "uID", required = true) int userId, Model model) {
 
