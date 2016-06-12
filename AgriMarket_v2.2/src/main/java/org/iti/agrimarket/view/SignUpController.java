@@ -379,6 +379,7 @@ public class SignUpController extends HttpServlet {
         } else {
            
         }
+//        user=userService.getUserEager(user.getId());
 
         model.addAttribute("user", user);
         System.out.println("i Stored user in the DB");
