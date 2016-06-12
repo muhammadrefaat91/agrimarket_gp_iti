@@ -21,7 +21,8 @@
     <script type="text/javascript" src="<spring:url value="/resources/js/jquery.js" />" ></script>
     <script src="<spring:url value="/resources/js/jquery.rating.js" />"></script>
     <script src="<spring:url value="/resources/js/bootstrap.min.js" />"></script>
-
+    <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" />
+    <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />
     <script type="text/javascript" >
         $(document).ready(function () {
             var lang = $.cookie("myAppLocaleCookie");
@@ -33,7 +34,7 @@
                 //if user doesn't login 
                 var user = <% out.print(session.getAttribute("user"));%>;
                 if (user == null)
-                    location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/login.htm";
+                    location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/sign_up.htm";
                 var selectedVal = "";
                 var selected = $("input[type='radio'][name='rating']:checked");
                 selectedVal = selected.val();
@@ -127,9 +128,9 @@
                     </div>
                 </div>
                 <!--/col-3-->
-                <div class="col-sm-9" contenteditable="false" style="margin-top: -109px;">
+                <div class="col-sm-9" contenteditable="false" style="">
 
-                    <div class="panel panel-default target" style="background: antiquewhite;">
+                    <div class="panel panel-default target" style="background: rgba(37, 37, 37, 0.05);">
                         <div class="see">
                             <p><a style="margin-left: <spring:message code="view_user.css.all-products.m-left" />px;" href="${pageContext.request.contextPath}/offers.htm"><spring:message code="link.all.Products" /></a></p>
                         </div>
@@ -165,7 +166,7 @@
                                         <img  
                                             style="border: 1.1px solid #2969b0;
                                             border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
-                                            <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
+                                    <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
                                     <div class="price-details">
                                         <div class="price-number">
                                             <p><span class="rupees">$${offer.price}</span></p>
@@ -184,7 +185,7 @@
                         <div class="panel-heading"><a style="cursor: pointer;margin-left: <spring:message code="view_user.css.panel-heading.margin-left" />px;" data-toggle="collapse" data-target="#demo"><spring:message code="text.user.ratetext" /></a></div>
                         <div class="review collapse" id="demo"  >
                             <div class="your-review" style="    margin-left: 20px; direction: <spring:message code="view_user.css.panel-heading.panel-body.dir" />;   margin-right: <spring:message code="view_user.css.panel-heading.panel-body.margin-right" />px;">
-                                <div class="panel-body" style="margin-left: <spring:message code="view_user.css.panel-heading.panel-body.margin-left" />px;">
+                                <div class="panel-body" style="    margin-top: 4px;margin-left: <spring:message code="view_user.css.panel-heading.panel-body.margin-left" />px;">
                                     <input type="radio" name="rating" value="1" class="star">
                                     <input type="radio" name="rating" value="2" class="star">
                                     <input type="radio" name="rating" value="3" class="star">
