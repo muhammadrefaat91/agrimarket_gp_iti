@@ -67,4 +67,8 @@ public class ProductServiceImpl implements ProductService {
     return productDao.getAllProducts();
     }
     
-}
+    @Override
+      public int create(Product product){
+       return productDao.create(product);
+       }
+    }

@@ -59,4 +59,9 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.searchCategory(name);
     }
 
+    public int createCategory(Category category){
+    return  categoryDao.create(category);
+    
+    }
+    
 }
