@@ -4,8 +4,8 @@
            uri="http://www.springframework.org/tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" />
-<link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />	
+<!--<link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" />
+<link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />	-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <c:if test="${empty user}" >
     <div class="headertop_desc">

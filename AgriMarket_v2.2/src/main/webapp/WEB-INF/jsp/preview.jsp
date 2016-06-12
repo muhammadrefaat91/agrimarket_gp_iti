@@ -50,9 +50,9 @@
                         <p style="    margin-right: <spring:message code="offer_page.css.p.margin.right"  />;white-space: pre-line;">${offerProduct.description}</p>					
                         <div class="price" style="    margin-left: <spring:message code="preview.css.div.price.margin"/>;">
                             <spring:message code="text.preview.quantity"  />
-                            <p style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 56px;">${offerProduct.quantity}  ${requestScope.lang eq 'en'?offerProduct.unitByUnitId.nameEn:offerProduct.unitByUnitId.nameAr} </span></p>
+                            <p style="font-size: 0.6125em; direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 56px;">${offerProduct.quantity}  ${requestScope.lang eq 'en'?offerProduct.unitByUnitId.nameEn:offerProduct.unitByUnitId.nameAr} </span></p>
                             <spring:message code="text.preview.price" />
-                            <p style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 26px;">${offerProduct.price}  <spring:message code="preview.money"  />/ ${requestScope.lang eq 'en'?offerProduct.unitByUnitId.nameEn:offerProduct.unitByUnitId.nameAr}</span></p>
+                            <p style="font-size: 0.6125em; direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 26px;">${offerProduct.price}  <spring:message code="preview.money"  />/ ${requestScope.lang eq 'en'?offerProduct.unitByUnitId.nameEn:offerProduct.unitByUnitId.nameAr}</span></p>
                         </div>
                         <div class="available">
                             <p><spring:message code="text.preview.name" /> <a href="${pageContext.request.contextPath}/web/user.htm?id=${offerProduct.user.id}"><span>${offerProduct.user.fullName}</span></a></p>

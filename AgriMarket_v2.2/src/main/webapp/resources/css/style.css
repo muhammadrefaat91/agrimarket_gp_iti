@@ -313,7 +313,7 @@ body {
 }
 .see {
 	float: right;
-	padding-top:8px;
+	/*padding-top:8px;*/
 }
 .see p a{
 	display: inline;
@@ -610,14 +610,14 @@ body {
 	text-transform: uppercase;
 }
 .span_3_of_2  p{
-	font-size: 0.8125em;
+	font-size: 0.6125em;
 	padding: 0.3em 0;
 	color: #969696;
 	line-height: 1.6em;
 	font-family: verdana, arial, helvetica, helve, sans-serif;
 }
 .price p {
-	font-size: 0.8125em;
+	font-size: 0.6125em;
 	padding:20px 0;
 	color: #666;
 	vertical-align: top;
@@ -806,7 +806,7 @@ body {
     font-family: 'ambleregular';
 }
 .your-review div{
-	padding:5px 0;
+	padding:0px 0;
 }
 .your-review span{
 	display:block;
@@ -1097,7 +1097,7 @@ body {
 	padding:10px;
 }
 .panel{
-	background:#222;
+	background:rgba(37, 37, 37, 0.05);
 }
 .panel p{
 	color:#C0C0C0;
