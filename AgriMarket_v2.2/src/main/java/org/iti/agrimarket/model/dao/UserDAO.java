@@ -5,11 +5,14 @@
  */
 package org.iti.agrimarket.model.dao;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Hibernate;
 import org.iti.agrimarket.model.pojo.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.iti.agrimarket.model.pojo.UserRatesUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
@@ -38,12 +41,12 @@ public class UserDAO implements UserDAOInterface {
         this.transactionTemplate = tt;
     }
 
-    public  static HibernateTemplate getHibernateTemplate() {
+    public static HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
 
     @Autowired
-    public   void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         UserDAO.hibernateTemplate = hibernateTemplate;
     }
 
@@ -177,9 +180,31 @@ public class UserDAO implements UserDAOInterface {
 
     @Override
     public User findUserByEmail(String email) {
-        return (User) getHibernateTemplate().execute((Session sn) -> sn.createQuery("from User u where u.mail=:mail")
-                .setString("mail", email).uniqueResult());
-        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (User) getHibernateTemplate().execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session sn) throws HibernateException {
+                User user = (User) sn.createQuery("from User u where u.mail=:mail")
+                        .setString("mail", email).uniqueResult();
+                Hibernate.initialize(user.getUserOfferProductFixeds());
+                Set<UserOfferProductFixed> offers = user.getUserOfferProductFixeds();
+                for (Iterator iterator = offers.iterator(); iterator.hasNext();) {
+                    UserOfferProductFixed next = (UserOfferProductFixed) iterator.next();
+                    Hibernate.initialize(next.getProduct());
+                }
+                Hibernate.initialize(user.getUserRatesUsersForRatedId());
+                UserRatesUser u1;
+                for (Object u : user.getUserRatesUsersForRatedId()) {
+                    if (u instanceof UserRatesUser) {
+                        u1 = (UserRatesUser) u;
+                        Hibernate.initialize(u1.getUserByRaterId());
+                    }
+                }
+                Hibernate.initialize(user.getUserRatesUsersForRaterId());
+
+                return user;
+            }
+        });
     }
 
     @Override
@@ -198,6 +223,11 @@ public class UserDAO implements UserDAOInterface {
             public Object doInHibernate(Session sn) throws HibernateException {
                 User user = (User) sn.createQuery("from User u where u.id=:id").setInteger("id", id).uniqueResult();
                 Hibernate.initialize(user.getUserOfferProductFixeds());
+                Set<UserOfferProductFixed> offers = user.getUserOfferProductFixeds();
+                for (Iterator iterator = offers.iterator(); iterator.hasNext();) {
+                    UserOfferProductFixed next = (UserOfferProductFixed) iterator.next();
+                    Hibernate.initialize(next.getProduct());
+                }
                 Hibernate.initialize(user.getUserRatesUsersForRatedId());
                 UserRatesUser u1;
                 for (Object u : user.getUserRatesUsersForRatedId()) {

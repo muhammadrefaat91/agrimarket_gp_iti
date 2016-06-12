@@ -46,23 +46,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.iti.agrimarket.business.UserService;
 import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
 import org.iti.agrimarket.constant.Constants;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.request.param.LogOutParam;
 import org.iti.agrimarket.request.param.UserCheckParam;
 import org.iti.agrimarket.util.requestprocessor.param.extraction.ParamExtractor;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  *
  * @author Amr
  */
 @Controller
+@SessionAttributes("user")
+
 public class SignUpController extends HttpServlet {
 
     private Logger logger;
@@ -72,6 +81,10 @@ public class SignUpController extends HttpServlet {
 
     @Autowired
     OfferService offerService;
+
+    String userName = null;
+
+    String userEmail = null;
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signUp(@ModelAttribute("userForm") @Valid User user, BindingResult br, Model model) {
@@ -221,66 +234,164 @@ public class SignUpController extends HttpServlet {
 
         int res = userService.addUser(user);
 
-//          if (user.getId() == null) {
-//         //   logger.trace(Constants.DB_ERROR);
-//           return "signup";
-//        }
-//            if (name.contains("/")) {
-//                redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-//                return "redirect:/";
-//            }
-//            if (name.contains("/")) {
-//                redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-//                return "redirect:/";
-//            }
         if (!file.isEmpty()) {
-        
 
-//                    
-//                    BufferedOutputStream stream = new BufferedOutputStream(
-//                            new FileOutputStream(new File("C:\\AgriMarket\\images\\users\\" + name)));
-//                    FileCopyUtils.copy(file.getInputStream(), stream);
-//                    stream.close();
-//                    redirectAttributes.addFlashAttribute("message",
-//                            "You successfully uploaded " + name + "!");
-//                    
-//
-//                    System.out.println("succccccccccccc");
-                String fileName = user.getId() + String.valueOf(new Date().getTime());
+            String fileName = user.getId() + String.valueOf(new Date().getTime());
 
-             
-                    try {
-                        byte[] bytes = file.getBytes();
-                        MagicMatch match = Magic.getMagicMatch(bytes);
-                        final String ext = "." + match.getExtension();
+            try {
+                byte[] bytes = file.getBytes();
+                MagicMatch match = Magic.getMagicMatch(bytes);
+                final String ext = "." + match.getExtension();
 
-                        File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
-                        if (!parentDir.isDirectory()) {
-                            parentDir.mkdirs();
-                        }
-                        BufferedOutputStream stream
-                                = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName)));
-                        stream.write(bytes);
-                        stream.close();
-                        user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
-                        userService.updateUser(user);
-
-                    } catch (Exception e) {
-      //                  logger.error(e.getMessage());
-                        userService.deleteUser(user); // delete the category if something goes wrong
-                        
-                                 redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload " + name + " because the file was empty");
-                        return "signup";
-                    }
-
+                File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
+                if (!parentDir.isDirectory()) {
+                    parentDir.mkdirs();
                 }
-            else {
+                BufferedOutputStream stream
+                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName)));
+                stream.write(bytes);
+                stream.close();
+                user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
+                userService.updateUser(user);
+
+            } catch (Exception e) {
+                //                  logger.error(e.getMessage());
+                userService.deleteUser(user); // delete the category if something goes wrong
+
+                redirectAttributes.addFlashAttribute("message",
+                        "You failed to upload " + name + " because the file was empty");
+                return "signup";
+            }
+
+        } else {
             redirectAttributes.addFlashAttribute("message",
                     "You failed to upload " + name + " because the file was empty");
         }
 
-            return "redirect:index.htm";
-        }
-
+        return "redirect:index.htm";
     }
+
+    /**
+     * upload image and form data
+     *
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/signupgplus")
+    public @ResponseBody  String signupUserFb(Model model, @RequestParam("name") String name, @RequestParam("email") String email) {
+
+        System.out.println("save user func          google plus---------");
+        System.out.println("full Name : " + name);
+        System.out.println("email : " + email);
+
+        //   ModelAndView modelAndView = new ModelAndView();
+        User userObj = userService.getUserByEmail(email);
+        if (userObj != null) {
+
+            System.out.println("name : " + userObj.getFullName());
+
+            model.addAttribute("user", userObj);
+
+//            modelAndView.addObject("user",userObj);
+            System.out.println("i uploaded user on the session");
+//
+//            try {
+//                response.sendRedirect(request.getContextPath() + "/index.htm");
+//            } catch (IOException ex) {
+//                java.util.logging.Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+
+            return "index.htm";
+
+        } else { // store user 
+
+            userName = name;
+            userEmail = email;
+            System.out.println("amr abdo");
+            
+           
+//           
+//             try {                
+//                 System.out.println("amr abdo abdo abdo");
+//                response.sendRedirect(request.getContextPath() + "/signupl2.htm");
+//            } catch (IOException ex) {
+//                java.util.logging.Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+         return "signupl2.htm";
+          
+        }
+    }
+
+    /**
+     * Amr
+     *
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/signupgplusstep2")
+    public String signupUserFb(Model model, @RequestParam("mobile") String mobil, @RequestParam("governerate") String governerate,
+            @RequestParam("file") MultipartFile file,HttpServletRequest request, HttpServletResponse response) {
+
+        System.out.println("save user func   fb2       google plus---------");
+
+        User userStore = new User();
+        userStore.setGovernerate("Giza");
+
+        if (userEmail == null | userName == null) {
+
+            return "redirect:signup.htm";
+        }
+        userStore.setMail(userEmail);
+        userStore.setFullName(userName);
+        userStore.setMobile("12344");
+        userStore.setLat(0.0);
+        userStore.setLong_(0.0);
+        userStore.setLoggedIn(true);
+        userStore.setRatesAverage(0);
+        userStore.setRegistrationChannel(0);   // web
+        userStore.setImageUrl("images/amr.jpg");
+        userService.addUser(userStore);
+        User user = userService.getUserByEmail(userStore.getMail());
+
+        if (!file.isEmpty()) {
+
+            String fileName = user.getId() + String.valueOf(new Date().getTime());
+
+            try {
+                byte[] bytes = file.getBytes();
+                MagicMatch match = Magic.getMagicMatch(bytes);
+                final String ext = "." + match.getExtension();
+
+                File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
+                if (!parentDir.isDirectory()) {
+                    parentDir.mkdirs();
+                }
+                BufferedOutputStream stream
+                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName)));
+                stream.write(bytes);
+                stream.close();
+                user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
+                userService.updateUser(user);
+
+            } catch (Exception e) {
+                //                  logger.error(e.getMessage());
+                userService.deleteUser(user); // delete the category if something goes wrong
+
+                return "signup";
+            }
+
+        } else {
+           
+        }
+//        user=userService.getUserEager(user.getId());
+
+        model.addAttribute("user", user);
+        System.out.println("i Stored user in the DB");
+        
+//        
+//            try {
+//                response.sendRedirect(request.getContextPath()+"/index.htm");
+//            } catch (IOException ex) {
+//                java.util.logging.Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        
+        return "redirect:/index.htm";
+    }
+
+}

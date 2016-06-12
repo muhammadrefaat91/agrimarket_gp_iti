@@ -26,58 +26,14 @@
         <link rel="stylesheet" href="style.css" />
         <title>jQuery Example</title>
         <!DOCTYPE html>
-    <!--
-    <style>
-    input[type=text], select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-    
-    input[type=submit] {
-        width: 100%;
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
-    
-    div {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-    </style>
-    -->
-
-
-
-
-
-
-
-
+   
 </head>
 <!--style="background-image: url(resources/images/istock-000016896298xlarge-4200x2833-56.jpg);"-->
 <body  >
 
-
-
     <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 
     <!---include header description -->
-
 
     <jsp:include page="header/headertop_desc.jsp" />
 
@@ -86,9 +42,6 @@
 
     <!---include nav bar -->
     <jsp:include page="header/header_bottom_nav.jsp" />
-
-
-
     <div class="wrap">
         <div class="main">
             <div class="content">
@@ -116,24 +69,6 @@
                                 </div>
 
 
-
-
-
-                                <!--                                        <div >
-                                                                            <label>unit of Quantity: </label>
-                                                                            <input   id="quantity" type="number" class="textbox"  name="quantityunit" required />
-                                
-                                                                        </div>-->
-
-
-
-                                <!--
-                                                                        <div >
-                                                                            <label>unit of price: </label>
-                                                                            <input   id="quantity" type="number" class="textbox"  name="unitprice" required />
-                                
-                                                                        </div>-->
-
                                 <div >
 
                                     <span><label>Quantity: </label></span>
@@ -150,14 +85,9 @@
                                         </select>
                                     </span>
 
-
-
-
-
-
                                     <div>
                                         <span> <label>Price: </label></span>
-                                        <span> <input   id="quantity" type="number" class="textbox"  name="price" required /></span>
+                                        <span> <input   id="quantity" type="number" class="textbox"  name="price" value="${offer.quantity}" required /></span>
 
 
 
@@ -195,22 +125,9 @@
 
                                     </div>
 
-
-                                    <!--
-                                                                            <div >
-                                                                                <label>product id: </label>
-                                                                                <input   id="quantity" type="number" class="form-control"  name="product" required />
-                                    
-                                                                            </div>-->
-
-
-
                                     <div >
                                         <span><label> Image :</label></span><span><input type="file" name="file"  class="textbox" /></span>
                                     </div>
-
-
-
 
                                     <div >
 
@@ -220,17 +137,10 @@
 
                                     </div>
 
-
-
-
                                     <div >
 
                                         <input type="submit" value="Submit" id="add" /><br/>
                                     </div>
-
-
-
-
                                 </div>
 
                             </form>

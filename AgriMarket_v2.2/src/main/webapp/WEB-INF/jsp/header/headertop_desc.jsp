@@ -12,11 +12,25 @@
 
         <div class="account_desc">
             <ul>
-                <li><a href="${pageContext.request.contextPath}/signup.htm"><spring:message code="link.signup" /></a></li>
-                <li><a href="${pageContext.request.contextPath}/login.htm"><spring:message code="link.login" /></a></li>
-<!--                <li><a href="#">Delivery</a></li>
-                <li><a href="#">Checkout</a></li>
-                <li><a href="#">My Account</a></li>-->
+                <li><a href="${pageContext.request.contextPath}/signup.htm"><spring:message code="link.login" /></a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</c:if>
+
+<c:if test="${not empty user}" >
+    <div class="headertop_desc">
+
+        <div class="account_desc">
+            <ul>
+                <li><a href="${pageContext.request.contextPath}/web/profile.htm"><spring:message code="link.profile" /></a></li>
+                <li><a href="${pageContext.request.contextPath}/web/logout.htm"><spring:message code="link.logout" /></a></li>
+
+
+                <!--                <li><a href="#">Delivery</a></li>
+                                <li><a href="#">Checkout</a></li>
+                                <li><a href="#">My Account</a></li>-->
             </ul>
         </div>
         <div class="clear"></div>
