@@ -205,7 +205,7 @@
                     <div class="panel panel-default" style="margin-left: <spring:message code="view-user.css.review.margin-left" />; direction: <spring:message code="view_user.css.panel-default.dir"/>;    width: 79.333333%; margin-top: 2px;">
                         <div class="panel-heading">
                             <a style="cursor: pointer;     margin-left: -9px;" data-toggle="collapse" data-target="#demo2"><spring:message code="text.view_user.reviews" /></a></div>
-                        <div class="row" style="    margin-left: -14px;">
+                        <div class="row" style=" background-color: white;   margin-left: -14px;">
                             <div class="col-sm-7" style="width: 99.333333%; margin-top: 3px;">
                                 <!--<hr/>-->
                                 <c:forEach items="${userHasOffer.userRatesUsersForRatedId}"  var="rater">
