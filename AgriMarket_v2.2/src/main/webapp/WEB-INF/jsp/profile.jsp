@@ -56,7 +56,7 @@
             <jsp:include page="header/header_top.jsp" />
             <jsp:include page="header/header_bottom_nav.jsp" />
             <c:if test="${empty userHasOffer}" >
-                <c:redirect url="/web/getUser.htm?id=${param['id']}" />
+                <c:redirect url="/index.htm" />
             </c:if>
         </div>
         <!--profile-->
@@ -127,19 +127,22 @@
                             <div class="row">
                                 <c:forEach items="${userHasOffer.userOfferProductFixeds}" var="offer">
                                     <div class="col-md-4">
-                                        <div class="thumbnail">
+                                        <div class="thumbnail grid_1_of_4">
                                             <img alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" />
+                                            <h2 align="center">${offer.product.nameEn}</h2>
+
                                             <div style="margin-left: 14px;" class="caption">
-                                                <h3>
-                                                    ${offer.price}
-                                                </h3>
-                                                <div dir="ltr">
-                                                    <p>
-                                                        ${offer.product.nameEn}
-                                                    </p>
+                                                <div class="price-details">
+                                                    <div class="price-number">
+                                                        <h2 style="font-size: 14;  font-style: bold;">${offer.price} L.E</h2>
+                                                    </div>
+                                                    <div class="add-cart">								
+                                                        <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
+                                                    </div>
+                                                    <div class="clear"></div>
                                                 </div>
                                                 <p>
-                                                    <a>remove</a>
+                                                    <a href="${pageContext.request.contextPath}/removeoffer.htm?offerid=${offer.id}"><spring:message code="link.deleteoffer" /></a>
                                                 </p>
                                             </div>
                                         </div>

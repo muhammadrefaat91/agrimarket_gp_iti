@@ -48,9 +48,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.iti.agrimarket.business.UserService;
 import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
 import org.apache.logging.log4j.LogManager;
@@ -172,7 +175,7 @@ public class UpdateOfferController1 extends HttpServlet {
 
         UserOfferProductFixed userOfferProductFixed = offerService.findUserOfferProductFixed(1);
 
-       // offerIdVal=offerKey;
+        // offerIdVal=offerKey;
         List<Product> products = productService.getAllProducts();
         System.out.println(products.get(1).getNameEn());
 
@@ -341,23 +344,23 @@ public class UpdateOfferController1 extends HttpServlet {
      * @return json opject {"success":0} if deletion error
      *
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/removeoffer")
-    public String removeOffer(@RequestParam("offerid") Integer offerId) {
+    @RequestMapping(method = RequestMethod.GET, value = "/removeoffer.htm")
+    public String removeOffer(@RequestParam("offerid") Integer offerId, HttpServletRequest request, HttpServletResponse response) {
 
-        GsonBuilder builder = new GsonBuilder();
-
-        Gson gson = builder.create();
-        boolean b = false;
         System.out.println("in delete offer");
 
-        b = offerService.deleteOffer(offerId);
-        if (b) {
-            return "index";
-        } else {
-
-            return "updateoffer";
-
+        offerService.deleteOffer(offerId);
+        try {
+            response.sendRedirect(request.getContextPath() + "/web/profile.htm");
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        User oldUser = (User) request.getSession().getAttribute("user");
+        if (oldUser != null) {
+            User user = userService.getUserEager(oldUser.getId());
+            request.getSession().setAttribute("user", user);
+        }
+        return "profile";
 
     }
 
