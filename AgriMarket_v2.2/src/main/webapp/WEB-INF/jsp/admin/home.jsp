@@ -22,28 +22,21 @@
 
 </head>
 <body>
-    <c:if test="${empty allcategories}" >
-        <c:redirect url="/index.htm" />
-    </c:if>
-
-    <c:if test="${empty latestOffers}" >
-        <c:redirect url="/index.htm" />
-    </c:if>
+    
     <div class="wrap">
         <!-- header--->
         <!---include header description -->
 
-        <jsp:include page="header/headertop_desc.jsp" />
+        <jsp:include page="../header/headertop_desc.jsp" />
         <div class="call" style="    margin-top: -34px;">
             <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
         </div>
 
         <!---include header top -->
-        <jsp:include page="header/header_top.jsp" />
+        <jsp:include page="../header/header_top.jsp" />
 
         <!---include nav bar -->
-        <jsp:include page="header/header_bottom_nav.jsp" />
-        <jsp:include page="header/header.jsp" />
+        <jsp:include page="../header/header_bottom_nav.jsp" />
 
 
         <!-- content--->
@@ -60,26 +53,7 @@
                     <div class="clear"></div>
                 </div>
                 <div class="section group">
-                    <c:forEach items="${latestOffers}" var="offer">
-                        <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
-                            <a href="preview.html">
-                                <img  
-                                    style="border: 1.1px solid #2969b0;
-                                    border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
-                     
-                            <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
-
-                            <div class="price-details">
-                                <div class="price-number">
-                                    <p><span class="rupees">${offer.price} L.E</span></p>
-                                </div>
-                                <div class="add-cart">								
-                                    <h4><a href="web/preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </c:forEach>
+                    
                 </div>
 
             </div>
@@ -87,7 +61,7 @@
     </div>
 
     <!--Footer--->
-    <jsp:include  page="footer/footer.jsp" />
+    <jsp:include  page="../footer/footer.jsp" />
     <a href="#" id="toTop"><span id="toTopHover"> </span></a>
 </body>
 </html>

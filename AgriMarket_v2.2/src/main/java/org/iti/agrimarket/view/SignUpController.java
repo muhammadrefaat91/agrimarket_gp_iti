@@ -317,7 +317,7 @@ public class SignUpController extends HttpServlet {
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplusstep2")
     public String signupUserFb(Model model, @RequestParam("mobile") String mobil, @RequestParam("governerate") String governerate,
-            @RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
+             HttpServletRequest request, HttpServletResponse response) {
 
         System.out.println("save user func   fb2       google plus---------");
         //    System.out.println("image : "+img);
@@ -409,36 +409,36 @@ public class SignUpController extends HttpServlet {
 
         }
 
-        if (!file.isEmpty()) {
-
-            String fileName = user.getId() + String.valueOf(new Date().getTime());
-
-            try {
-                byte[] bytes = file.getBytes();
-                MagicMatch match = Magic.getMagicMatch(bytes);
-                final String ext = "." + match.getExtension();
-
-                File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
-                if (!parentDir.isDirectory()) {
-                    parentDir.mkdirs();
-                }
-                BufferedOutputStream stream
-                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName + ext)));
-                stream.write(bytes);
-                stream.close();
-                user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
-                userService.updateUser(user);
-
-            } catch (Exception e) {
-                //                  logger.error(e.getMessage());
-                userService.deleteUser(user); // delete the category if something goes wrong
-
-                return "signup";
-            }
-
-        } else {
-
-        }
+//        if (!file.isEmpty()) {
+//
+//            String fileName = user.getId() + String.valueOf(new Date().getTime());
+//
+//            try {
+//                byte[] bytes = file.getBytes();
+//                MagicMatch match = Magic.getMagicMatch(bytes);
+//                final String ext = "." + match.getExtension();
+//
+//                File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
+//                if (!parentDir.isDirectory()) {
+//                    parentDir.mkdirs();
+//                }
+//                BufferedOutputStream stream
+//                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName + ext)));
+//                stream.write(bytes);
+//                stream.close();
+//                user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
+//                userService.updateUser(user);
+//
+//            } catch (Exception e) {
+//                //                  logger.error(e.getMessage());
+//                userService.deleteUser(user); // delete the category if something goes wrong
+//
+//                return "signup";
+//            }
+//
+//        } else {
+//
+//        }
 //        user=userService.getUserEager(user.getId());
 
         model.addAttribute("user", user);

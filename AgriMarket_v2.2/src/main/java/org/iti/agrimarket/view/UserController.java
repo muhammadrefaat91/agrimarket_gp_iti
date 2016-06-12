@@ -6,6 +6,7 @@
 package org.iti.agrimarket.view;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
-
-
 
 /**
  *
@@ -43,8 +40,9 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/getUser.htm"})
-    public String getUser(@RequestParam(value = "id", required = true) int offerId, Model model) {
+    public String getUser(@RequestParam(value = "id", required = true) int offerId,Locale locale, Model model) {
         User user = null;
+        String language = locale.getLanguage();
         System.out.println("id@@@@@@@@@@@@@@@@@@" + offerId);
 
         user = userService.getUserEager(offerId);
@@ -54,11 +52,13 @@ public class UserController {
         }
 
         model.addAttribute("userHasOffer", user);
+        model.addAttribute("lang", locale);
         return "view_user";
     }
 
     @RequestMapping(value = {"/profile.htm"})
-    public String getUserProfile(HttpServletRequest request, Model model) {
+    public String getUserProfile(HttpServletRequest request, Locale locale, Model model) {
+        String language = locale.getLanguage();
 
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
@@ -69,19 +69,21 @@ public class UserController {
 
             model.addAttribute("userHasOffer", user);
         }
+        model.addAttribute("lang", locale);
 
         return "profile";
     }
 
     @RequestMapping(value = {"/logout.htm"})
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-
+    public String logout(HttpServletRequest request, Locale locale, HttpServletResponse response, Model model) {
+        model.addAttribute("lang", locale);
         request.getSession().removeAttribute("user");
         try {
             response.sendRedirect(request.getContextPath() + "/index.htm");
         } catch (IOException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        model.addAttribute("lang", locale);
         return "profile";
     }
 }

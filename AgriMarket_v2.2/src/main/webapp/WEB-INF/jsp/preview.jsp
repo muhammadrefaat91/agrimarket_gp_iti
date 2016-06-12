@@ -7,6 +7,8 @@
 <!DOCTYPE HTML>
 <head>
     <title>${offerProduct.product.nameEn}</title>
+    
+    <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -44,13 +46,13 @@
                         </div>
                     </div>
                     <div class="desc span_3_of_2" style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />">
-                        <h2 style="margin-right: 45px;">${offerProduct.product.nameEn}</h2>
+                        <h2 style="margin-right: 45px;">${requestScope.lang eq 'en'?offerProduct.product.nameEn:offerProduct.product.nameAr}</h2>
                         <p style="    margin-right: <spring:message code="offer_page.css.p.margin.right"  />;white-space: pre-line;">${offerProduct.description}</p>					
                         <div class="price" style="    margin-left: <spring:message code="preview.css.div.price.margin"/>;">
                             <spring:message code="text.preview.quantity"  />
-                            <p style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 56px;">${offerProduct.quantity} ${offerProduct.unitByUnitId.nameEn}</span></p>
+                            <p style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 56px;">${offerProduct.quantity}  ${requestScope.lang eq 'en'?offerProduct.unitByUnitId.nameEn:offerProduct.unitByUnitId.nameAr} </span></p>
                             <spring:message code="text.preview.price" />
-                            <p style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 26px;">${offerProduct.price} L.E/${offerProduct.unitByUnitId.nameEn}</span></p>
+                            <p style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 26px;">${offerProduct.price}  <spring:message code="preview.money"  />/ ${requestScope.lang eq 'en'?offerProduct.unitByUnitId.nameEn:offerProduct.unitByUnitId.nameAr}</span></p>
                         </div>
                         <div class="available">
                             <p><spring:message code="text.preview.name" /> <a href="${pageContext.request.contextPath}/web/user.htm?id=${offerProduct.user.id}"><span>${offerProduct.user.fullName}</span></a></p>

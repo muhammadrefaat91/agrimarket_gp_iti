@@ -1,32 +1,55 @@
-<%-- 
-    Document   : signupstep
-    Created on : Jun 11, 2016, 9:14:56 PM
-    Author     : Amr
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form"
+           uri="http://www.springframework.org/tags/form"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="spring"
+           uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        
-       <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+        <meta charset="UTF-8">
+
+        <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
+        <title><spring:message code="title.sign_in" /></title>
+        <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" >
+        <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" >
+        <link rel="stylesheet" href="resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="resources/css/style.css">
         <link rel="stylesheet" href="resources/css/mbr-additional.css" type="text/css">
 
-      
     </head>
-    <body>
-
+    <body  >
+        <!--<div class="header">-->
         <div class="wrap">
-            <div class="main">
-                <div class="content">
-                    <div class="section group">
-                        <div class="col span_2_of_3">
-                            <div class="contact-form">
-                                <h2>sign up Continue</h2>
+            <!---include header description -->
 
+            <jsp:include page="header/headertop_desc.jsp" />
+            <div class="call" style="    margin-top: -34px;">
+                <p> <spring:message code="text.lang" /> : <a href="?id=${param['id']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?id=${param['id']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+            </div>
+            <!---include header top -->
+            <jsp:include page="header/header_top.jsp" />
+            <!---include nav bar -->
+            <jsp:include page="header/header_bottom_nav.jsp" />
+        </div>
+
+
+        <section class="mbr-section mbr-section--relative mbr-section--fixed-size mbr-parallax-background mbr-after-navbar" id="form1-19">
+            <div class="mbr-section__container mbr-section__container--std-padding container">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2" >
+                            <c:if test="${not empty error}">
+                                <p style="margin-bottom: 5px; color: red;"><spring:message code="text.addoffer.error" /> ${error}</p>
+                            </c:if>
+                        </div>
+                        <div class="col-sm-12">
+
+                            <div class="col-sm-8 col-sm-offset-2">
+                                
 
 
                                 <div class="col-sm-8 col-sm-offset-2">
@@ -37,21 +60,15 @@
 
                                             <div class="form-group">
 
-                                                <label><spring:message code="text.addoffer.mobile" />  Mobile : </label><input type="tel"   name="mobile"  class="form-control" />
+                                                <label><spring:message code="text.addoffer.mobile" /></label><input type="tel"   name="mobile"  class="form-control" />
 
 
                                             </div>
                                             <div class="form-group">
 
-                                                <label><spring:message code="text.addoffer.governerate" /> Governorate : </label><input type="text"   name="governerate" class="form-control"/>
+                                                <label><spring:message code="text.addoffer.governerate" /></label><input type="text"   name="governerate" class="form-control"/>
 
                                             </div>
-
-                                            <div class="form-group">
-                                                <tr><td><spring:message code="text.addoffer.image" /></td><td><input type="file" name="file"  class="form-control" /></td></tr>
-                                            </div>
-
-
 
                                             <div class="form-group">
 
@@ -62,17 +79,14 @@
 
                                 </div>
 
-                                </form>
-
                             </div>
+
                         </div>
-
-                    </div>		
-                </div> 
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-
-    </div>-->
-</body>
+        <jsp:include  page="footer/footer.jsp"/>
+    </body>
 </html>

@@ -186,23 +186,25 @@ public class UserDAO implements UserDAOInterface {
             public Object doInHibernate(Session sn) throws HibernateException {
                 User user = (User) sn.createQuery("from User u where u.mail=:mail")
                         .setString("mail", email).uniqueResult();
-                Hibernate.initialize(user.getUserOfferProductFixeds());
-                Set<UserOfferProductFixed> offers = user.getUserOfferProductFixeds();
-                for (Iterator iterator = offers.iterator(); iterator.hasNext();) {
-                    UserOfferProductFixed next = (UserOfferProductFixed) iterator.next();
-                    Hibernate.initialize(next.getProduct());
-                }
-                Hibernate.initialize(user.getUserRatesUsersForRatedId());
-                UserRatesUser u1;
-                for (Object u : user.getUserRatesUsersForRatedId()) {
-                    if (u instanceof UserRatesUser) {
-                        u1 = (UserRatesUser) u;
-                        Hibernate.initialize(u1.getUserByRaterId());
+                if (user != null) {
+                    Hibernate.initialize(user.getUserOfferProductFixeds());
+                    Set<UserOfferProductFixed> offers = user.getUserOfferProductFixeds();
+                    for (Iterator iterator = offers.iterator(); iterator.hasNext();) {
+                        UserOfferProductFixed next = (UserOfferProductFixed) iterator.next();
+                        Hibernate.initialize(next.getProduct());
                     }
+                    Hibernate.initialize(user.getUserRatesUsersForRatedId());
+                    UserRatesUser u1;
+                    for (Object u : user.getUserRatesUsersForRatedId()) {
+                        if (u instanceof UserRatesUser) {
+                            u1 = (UserRatesUser) u;
+                            Hibernate.initialize(u1.getUserByRaterId());
+                        }
+                    }
+                    Hibernate.initialize(user.getUserRatesUsersForRaterId());
                 }
-                Hibernate.initialize(user.getUserRatesUsersForRaterId());
-
                 return user;
+
             }
         });
     }

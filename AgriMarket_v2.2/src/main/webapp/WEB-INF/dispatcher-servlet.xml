@@ -74,7 +74,6 @@
     <mvc:view-controller path="/addOffer.htm" view-name="addoffer" />
     <mvc:view-controller path="/login.htm" view-name="sign_in" />
     <mvc:view-controller path="/signupl2.htm" view-name="signupstep" />
-    <!--<mvc:view-controller path="/web/login.htm" view-name="sign_in" />-->
     <mvc:view-controller path="/offers.htm" view-name="offers_page" />
     <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />
     <mvc:view-controller path="/web/user.htm" view-name="view_user" />
@@ -82,30 +81,36 @@
     <mvc:view-controller path="/about.htm" view-name="about" />
     <mvc:view-controller path="/contact.htm" view-name="contact" />
     <mvc:view-controller path="/sign_up.htm" view-name="sign_up" />
-    <mvc:view-controller path="/sign_up1.htm" view-name="sign_up_1" />
+    <mvc:view-controller path="/sign_up1.htm" view-name="sign_up_1" /> 
+    <mvc:view-controller path="/admin/home.htm" view-name="admin/home" />
+    <mvc:view-controller path="/admin/products_page.htm" view-name="admin/products_page" />
+    <mvc:view-controller path="/admin/categories_page.htm" view-name="admin/categories_page" />
+    <mvc:view-controller path="/admin/addproduct.htm" view-name="admin/addproduct" />
+    <mvc:view-controller path="/admin/addcategory.htm" view-name="admin/addcategory" />
+
     
     
     <!--Resource bundle -->
-<!--    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <!--    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="localization"  />
     </bean>-->
     
     <bean id="localeResolver"
-		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-		<property name="defaultLocale" value="en" />
-		<property name="cookieName" value="myAppLocaleCookie"></property>
-		<property name="cookieMaxAge" value="3600"></property>
-	</bean>
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="en" />
+        <property name="cookieName" value="myAppLocaleCookie"></property>
+        <property name="cookieMaxAge" value="3600"></property>
+    </bean>
 
-	<mvc:interceptors>
-		<bean
-			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-			<property name="paramName" value="lang" />
-		</bean>
-	</mvc:interceptors>
+    <mvc:interceptors>
+        <bean
+            class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang" />
+        </bean>
+    </mvc:interceptors>
     <bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="classpath:localization" />
-		<property name="defaultEncoding" value="UTF-8" />
-	</bean>
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:localization" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
 </beans>

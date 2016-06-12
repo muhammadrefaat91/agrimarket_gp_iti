@@ -21,12 +21,12 @@
         <div class="wrap">
             <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
             <!---include header description -->
-            <jsp:include page="header/headertop_desc.jsp" />
+            <jsp:include page="../header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
                 <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
             <!---include nav bar -->
-            <jsp:include page="header/header_bottom_nav.jsp" />
+            <jsp:include page="../header/header_bottom_nav.jsp" />
             <div class="wrap">
                 <div class="main">
                     <div class="content">
@@ -42,7 +42,7 @@
                                                 <span>
                                                     <select name="product">
                                                         <c:forEach var="item" items="${products}">
-                                                            <option value="${item.id}" class="textbox">${requestScope.lang eq 'en'?item.nameEn:item.nameAr}</option>
+                                                            <option value="${item.id}" class="textbox">${item.nameEn}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </span>
@@ -102,5 +102,5 @@
     </body>
 </html>
 
-<jsp:include  page="footer/footer.jsp"/>
+<jsp:include  page="../footer/footer.jsp"/>
 </body>
