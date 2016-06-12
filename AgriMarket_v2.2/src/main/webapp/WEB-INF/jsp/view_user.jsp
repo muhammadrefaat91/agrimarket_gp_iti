@@ -14,7 +14,8 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 
-
+    <script type="text/javascript" src="<spring:url value="/resources/js/jquery-1.7.2.min.js" />"></script>
+    <script type="text/javascript" src="<spring:url value="/resources/js/jquery.cookie.js" />"></script>
     <link href="<spring:url value="/resources/css/jquery.rating.css" />" rel="stylesheet" />
 
     <script type="text/javascript" src="<spring:url value="/resources/js/jquery.js" />" ></script>
@@ -23,7 +24,16 @@
 
     <script type="text/javascript" >
         $(document).ready(function () {
+            var lang = $.cookie("myAppLocaleCookie");
+            console.log("language: " + '${ lang  eq 'ar_EG'?'en':'arabic'}');
+
+
+//            if (lang === 'ar_EG') 
             $('#submit-review').click(function () {
+                //if user doesn't login 
+                var user = <% out.print(session.getAttribute("user"));%>;
+                if (user == null)
+                    location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/login.htm";
                 var selectedVal = "";
                 var selected = $("input[type='radio'][name='rating']:checked");
                 selectedVal = selected.val();
@@ -155,7 +165,7 @@
                                         <img  
                                             style="border: 1.1px solid #2969b0;
                                             border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
-
+                                            <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
                                     <div class="price-details">
                                         <div class="price-number">
                                             <p><span class="rupees">$${offer.price}</span></p>

@@ -5,7 +5,7 @@
  */
 package org.iti.agrimarket.view;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +59,8 @@ public class OfferProductsController {
         }
 
         model.addAttribute("getAllOfferProducts", offerproducts);
-
+        model.addAttribute("lang",locale);
         return "offers_page";
     }
+
 }

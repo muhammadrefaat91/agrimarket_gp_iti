@@ -66,7 +66,8 @@
                                 <img  
                                     style="border: 1.1px solid #2969b0;
                                     border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
-                            <h2>${offer.product.nameEn}</h2>
+                     
+                            <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
 
                             <div class="price-details">
                                 <div class="price-number">

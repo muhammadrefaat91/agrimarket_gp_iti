@@ -42,7 +42,7 @@
                                                 <span>
                                                     <select name="product">
                                                         <c:forEach var="item" items="${products}">
-                                                            <option value="${item.id}" class="textbox">${item.nameEn}</option>
+                                                            <option value="${item.id}" class="textbox">${requestScope.lang eq 'en'?item.nameEn:item.nameAr}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </span>
