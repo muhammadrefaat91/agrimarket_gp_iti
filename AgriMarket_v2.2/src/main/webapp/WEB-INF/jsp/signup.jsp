@@ -7,8 +7,6 @@
 <%@ taglib prefix="spring"
            uri="http://www.springframework.org/tags"%>
 
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -97,8 +95,6 @@
     </head>
     <!--style="background-image: url(resources/images/istock-000016896298xlarge-4200x2833-56.jpg);"-->
     <body  >
-
-
 
         <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 

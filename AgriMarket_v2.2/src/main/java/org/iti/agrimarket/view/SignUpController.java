@@ -293,28 +293,32 @@ public class SignUpController extends HttpServlet {
      *
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplus")
-    public String signupUserFb(@RequestParam("name") String name, @RequestParam("email") String email) {
+    public String signupUserFb(Model model,@RequestParam("name") String name, @RequestParam("email") String email) {
 
         System.out.println("save user func          google plus---------");
         System.out.println("full Name : " + name);
         System.out.println("email : " + email);
 
-        ModelAndView modelAndView = new ModelAndView();
+     //   ModelAndView modelAndView = new ModelAndView();
         User userObj = userService.getUserByEmail(email);
         if (userObj != null) {
+            
+            System.out.println("name : "+userObj.getFullName());
 
-            modelAndView.addObject("user", userObj);
+            model.addAttribute("user",userObj);
+            
+//            modelAndView.addObject("user",userObj);
 
             System.out.println("i uploaded user on the session");
 
-            return "redirect:index.htm";
+            return "index";
 
         } else { // store user 
 
             userName = name;
             userEmail = email;
 
-            return "redirect:signupstep.htm";
+            return "signupl2.htm";
 
         }
 
@@ -346,7 +350,7 @@ public class SignUpController extends HttpServlet {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user", uForSession);
         System.out.println("i Stored user in the DB");
-        return "redirect:index.htm";
+        return "index";
     }
 
 }
