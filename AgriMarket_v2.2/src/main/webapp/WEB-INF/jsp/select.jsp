@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
+    <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <script type="text/javascript">
 
 onunload = function()

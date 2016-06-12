@@ -51,6 +51,7 @@ public class Constants {
     public static final String ADD_USER_URL = "/adduser";
     public static final String UPDATE_USER_URL = "/updateuser";
     public static final String GET_USER_URL = "/getuser";
+    
     public static final String GET_UNIT_URL = "/getunit";
     public static final String GET_UNITS_OF_URL = "/getunitsof";
     public static final String GET_MAIN_CATEGORIES_URL = "/getmaincategories";
@@ -66,6 +67,8 @@ public class Constants {
     public static final String USER_CHECK_URL = "/usercheck";
     public static final String LOGOUT_URL = "/logout";
     public static final String TYPE_NAME_URL = "{type}/{name}";
+    
+    
 
     public static final String PRODUCT_NAME_URL = "/productname";
     public static final String PARENT_CATEGORY_URL = "/parentcategory";

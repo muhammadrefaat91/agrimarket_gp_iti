@@ -60,7 +60,7 @@ body {
 	font-weight:bold;
 }
 .call p span.number{
-	color:#E4292F;
+	color:#4CAF50;
 	font-size:1em;
 	letter-spacing:1px;
 }
@@ -81,7 +81,7 @@ body {
 	font-family: 'ambleregular';
 }
 .account_desc li a:hover{
-	color:#E4292F;
+	color:#4CAF50;
 }
 .header_top {
 	padding: 20px 0;
@@ -104,7 +104,7 @@ body {
 }
 .cart p span{
 	font-size:1.5em;
-	color:#E4292F;
+	color:#4CAF50;
 }
 .wrapper-dropdown-2 {
     display:inline-block;
@@ -195,7 +195,7 @@ body {
    transition: all .9s;
 }
 .menu li a:hover,.menu li.active a{
-	background:#B81D22;
+	background:#4CAF50;
 }
 .menu li:first-child  a{
 	border-radius:6px 0 0 6px;
@@ -241,6 +241,8 @@ body {
 	float:left;
 	width:25%;
 }
+
+
 .advertisements{
 	border:1px solid #EEE;
 }
@@ -248,7 +250,7 @@ body {
 	font-size:1.2em;
 	color:#FFF;
 	padding:10px;
-	background:#B81D22;
+	background:#4CAF50;
 	text-transform:uppercase;
 	font-family: 'ambleregular';	
 }
@@ -267,7 +269,7 @@ body {
 	border:none;
 }
 .advertisements li a:hover{
-	color:#B81D22;
+	color:#4CAF50;
 }
 .header_bottom_right{
 	float:left;
@@ -312,7 +314,6 @@ body {
 .see {
 	float: right;
 	padding-top:8px;
-        padding-right: 6px;
 }
 .see p a{
 	display: inline;
@@ -322,7 +323,7 @@ body {
     padding:0px 12px 0px 0px;
 }
 .see p a:hover{
-	color: #E4292F;
+	color: #4CAF50;
 }
 /**** Grid 1_0f_4 ****/
 .grid_1_of_4 {
@@ -358,13 +359,13 @@ body {
 	color: #333;
 }
 .images_1_of_4  p span.price {
-	font-size: 13px;
+	font-size: 18px;
 	font-family: 'ambleregular';
 	color:#CC3636;
 }
 .price-details{
 	margin-top:10px;
-	border-top:1px solid #CD1F25;
+	border-top:1px solid #4CAF50;
 }
 .price-number{
 	float: left;
@@ -384,7 +385,7 @@ body {
 	display: block;
 	padding:10px 15px;
 	font-family: 'ambleregular';
-	background:#CD1F25;
+	background:#4CAF50;
 	color: #FFF;
 	text-decoration: none;
 	outline: 0;
@@ -542,7 +543,7 @@ body {
 	font-family: 'ambleregular';
 }
 .back-links p a:hover, .back-links p a:active {
-	color:#B81D22;
+	color:#4CAF50;
 }
 .image {
 	clear: both;
@@ -603,7 +604,7 @@ body {
 .span_3_of_2  h2 {
 	font-family: 'ambleregular';
 	font-size: 1.1em;
-	color:#CD1F25;
+	color:#4CAF50;
 	font-weight: normal;
 	margin-top: 0px;
 	text-transform: uppercase;
@@ -616,19 +617,19 @@ body {
 	font-family: verdana, arial, helvetica, helve, sans-serif;
 }
 .price p {
-        font-size: 1.0em;
+	font-size: 0.8125em;
 	padding:20px 0;
 	color: #666;
 	vertical-align: top;
 }
 .price p span {
-	font-size:24px;
+	font-size:3em;
 	font-family: 'ambleregular';
-	color:#CD1F25;;
+	color:#4CAF50;;
 }
 .available {
 	padding:20px 0;
-	border-top: 1px solid #CD1F25;
+	border-top: 1px solid #4CAF50;
 }
 .available p {
 	font-size: 0.9em;
@@ -686,7 +687,7 @@ body {
 	text-decoration: underline;
 }
 .wish-list li a:hover {
-	color: #E4292F;
+	color: #4CAF50;
 }
 .wish-list li.wish{
 	background:url(../images/wishlist.png) no-repeat 0;
@@ -747,7 +748,7 @@ body {
 	font-size:1em;
 	padding:10px 15px;
 	font-family: 'ambleregular';
-	background:#CD1F25;
+	background:#4CAF50;
 	color: #FFF;
 	text-decoration: none;
 	outline: 0;
@@ -777,7 +778,7 @@ body {
 }
 .review h4 a:hover{
 	text-decoration:none;
-	color:#E4292F;
+	color:#4CAF50;
 }
 .review ul{
 	margin-top:10px;
@@ -805,10 +806,7 @@ body {
     font-family: 'ambleregular';
 }
 .your-review div{
-/*	padding:5px 0;*/
-padding: 0px 2px;
-    margin-top: 6px;
-    margin-bottom: 3px;
+	padding:5px 0;
 }
 .your-review span{
 	display:block;
@@ -818,7 +816,7 @@ padding: 0px 2px;
 	font-family :verdana, arial, helvetica, helve, sans-serif;
 }
 .your-review label span.red{
-	color:#CD1F25;
+	color:#4CAF50;
 	display:inline;
 }
 .your-review input[type="text"],.your-review textarea{
@@ -841,7 +839,7 @@ padding: 0px 2px;
     font-size:1em;
 	padding:10px 15px;
 	font-family: 'ambleregular';
-	background:#CD1F25;
+	background:#4CAF50;
 	color: #FFF;
 	text-decoration: none;
 	border:none;
@@ -867,7 +865,7 @@ padding: 0px 2px;
 }
 .span_3_of_1 li a:hover {
 	background: url(../images/drop_arrow-hover.png) no-repeat 0;
-	color:#B81D22;
+	color:#4CAF50;
 }
 .span_3_of_2 .button {
 	float: right;
@@ -950,7 +948,7 @@ padding: 0px 2px;
 	-webkit-box-shadow: 1px 1px 0 0 #414141 inset, -1px -1px 0 0 #414141 inset, 0 1px 2px -1px rgba(0,0,0,0.15);
 }
 .community-poll p {
-	color: #CD1F25;
+	color: #4CAF50;
 	font-size: 0.85em;
 	padding:5px  0;
 }
@@ -1012,7 +1010,7 @@ padding: 0px 2px;
 	width:50px;
 }
 .year p {
-	color: #E4292F;
+	color: #4CAF50;
 	font-size: 0.95em;
 }
 .span_1_of_3  p.history {
@@ -1025,7 +1023,7 @@ padding: 0px 2px;
 .span_1_of_3 .list li a {
 	font-size: 0.82em;
 	padding:7px 15px;
-	color: #E4292F;
+	color: #4CAF50;
 	background: url(../images/drop_arrow.png) no-repeat 0px 10px;
 	display: block;
 	font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
@@ -1085,7 +1083,7 @@ padding: 0px 2px;
       margin:15px 0;
  }
 #posts .tab .post-title{
-	color:#B81D22;
+	color:#4CAF50;
 	font-size:1em;
 	font-family: 'ambleregular';
 	overflow:hidden;
@@ -1099,13 +1097,13 @@ padding: 0px 2px;
 	padding:10px;
 }
 .panel{
-	background :antiquewhite;
+	background:#222;
 }
 .panel p{
 	color:#C0C0C0;
 	font-size:0.95em;
 	line-height: 1.8em;
-	/*padding:5px 20px;*/
+	padding:5px 20px;
 }
 /****** News **************************/
 .image {
@@ -1144,7 +1142,7 @@ padding: 0px 2px;
 	border:1px solid #E0E0E0;
 }
 .news_desc  h3{
-	color:#B81D22;
+	color:#4CAF50;
 	margin-bottom:0.3em;
 	font-size:1.2em;
 	text-transform:uppercase;
@@ -1154,7 +1152,7 @@ padding: 0px 2px;
 	text-decoration:underline;
 }
 .news_desc h4 span a:hover{
-	color:#B81D22;
+	color:#4CAF50;
 	text-decoration:none;
 }
 .news_desc h4 ,.news_desc h4 a{
@@ -1170,7 +1168,7 @@ padding: 0px 2px;
 }
 .news_desc p a{
 	font-size:1em;
-	color:#B81D22;
+	color:#4CAF50;
 }
 /*** Page numbers ***/
 .content-pagenation{
@@ -1279,7 +1277,7 @@ padding: 0px 2px;
 	font-size:1em;
 	padding:10px 15px;
 	font-family: 'ambleregular';
-	background:#CD1F25;
+	background:#4CAF50;
 	color: #FFF;
 	border:none;
 	text-decoration: none;

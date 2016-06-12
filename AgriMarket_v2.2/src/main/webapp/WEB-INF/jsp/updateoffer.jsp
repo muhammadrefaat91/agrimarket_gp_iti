@@ -10,6 +10,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
+    <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <!-- Site made with Mobirise Website Builder v2.9, https://mobirise.com -->
         <meta charset="UTF-8">
 
