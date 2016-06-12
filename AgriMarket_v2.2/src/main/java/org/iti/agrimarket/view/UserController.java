@@ -54,25 +54,27 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/profile.htm"})
-    public String getUserProfile(HttpServletRequest request,  Model model) {
-        
+    public String getUserProfile(HttpServletRequest request, Model model) {
+
         User user = (User) request.getSession().getAttribute("user");
-        for (Object col : user.getUserOfferProductFixeds()) {
-            UserOfferProductFixed fixed = (UserOfferProductFixed) col;
-            System.out.println("user offer product fixed" + fixed.getId());
+        if (user != null) {
+            for (Object col : user.getUserOfferProductFixeds()) {
+                UserOfferProductFixed fixed = (UserOfferProductFixed) col;
+                System.out.println("user offer product fixed" + fixed.getId());
+            }
+
+            model.addAttribute("userHasOffer", user);
         }
 
-        model.addAttribute("userHasOffer", user);
-       
         return "profile";
     }
-    
+
     @RequestMapping(value = {"/logout.htm"})
-    public String logout( HttpServletRequest request, HttpServletResponse response) {
-        
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+
         request.getSession().removeAttribute("user");
         try {
-            response.sendRedirect(request.getContextPath()+"/index.htm");
+            response.sendRedirect(request.getContextPath() + "/index.htm");
         } catch (IOException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
