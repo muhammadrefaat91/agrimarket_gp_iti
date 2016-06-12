@@ -33,6 +33,8 @@ import org.iti.agrimarket.business.UserService;
 import java.io.BufferedOutputStream;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
@@ -121,14 +123,26 @@ public class AddOfferController extends HttpServlet {
 
         if (!file.isEmpty()) {
             try {
+                File parentDir = new File(Constants.IMAGE_PATH + Constants.OFFER_PATH);
+                if (!parentDir.isDirectory()) {
+                    parentDir.mkdirs();
+                }
+
                 BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(new File("C:\\AgriMarket\\images\\users\\" + name + ".jpg")));
+                        new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.OFFER_PATH + name)));
+
+                final String ext = "." + "jpg";
                 FileCopyUtils.copy(file.getInputStream(), stream);
                 stream.close();
                 redirectAttributes.addFlashAttribute("message",
                         "You successfully uploaded " + name + "!");
 
                 System.out.println("succccccccccccc");
+
+                stream.close();
+//                offerProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + name + ext);
+//                offerService.updateOffer(offerProductFixed);
+
             } catch (Exception e) {
                 redirectAttributes.addFlashAttribute("message",
                         "You failed to upload " + name + " => " + e.getMessage());
@@ -156,7 +170,7 @@ public class AddOfferController extends HttpServlet {
             @RequestParam("product") int product,
             @ModelAttribute("user") User userFromSession,
             @RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,HttpServletRequest request, HttpServletResponse response) {
 
         if (userFromSession == null) {
             return "login";
@@ -227,8 +241,6 @@ public class AddOfferController extends HttpServlet {
 
                 System.out.println("fileName   :" + fileName);
                 byte[] bytes = file.getBytes();
-
-                System.out.println(new String(bytes));
                 MagicMatch match = Magic.getMagicMatch(bytes);
                 final String ext = "." + match.getExtension();
 
@@ -236,22 +248,21 @@ public class AddOfferController extends HttpServlet {
                 if (!parentDir.isDirectory()) {
                     parentDir.mkdirs();
                 }
+
                 BufferedOutputStream stream
-                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName + ext)));
+                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.OFFER_PATH + fileName)));
                 stream.write(bytes);
+
                 stream.close();
-                userOfferProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
-                System.out.println("image url" + userOfferProductFixed.getImageUrl());
-
+                userOfferProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + fileName + ext);
                 offerService.updateOffer(userOfferProductFixed);
-
             } catch (Exception e) {
                 //                  logger.error(e.getMessage());
                 offerService.deleteOffer(userOfferProductFixed.getId()); // delete the category if something goes wrong
 
                 redirectAttributes.addFlashAttribute("message",
                         "You failed to upload  because the file was empty");
-                return "signup";
+                return "redirect:index.htm";
             }
 
         } else {
@@ -261,7 +272,12 @@ public class AddOfferController extends HttpServlet {
             offerService.updateOffer(userOfferProductFixed);
 
         }
-
+        
+        User oldUser = (User) request.getSession().getAttribute("user");
+        if (oldUser != null) {
+            User user = userService.getUserEager(oldUser.getId());
+            request.getSession().setAttribute("user", user);
+        }
         return "redirect:index.htm";
     }
 
