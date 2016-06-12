@@ -26,4 +26,6 @@ public interface CategoryService {
     public void deleteCategory(Integer id);
     
     public List<Category> searchCategory(String name);
+    
+    public List<Category> getAllCategories();
 }

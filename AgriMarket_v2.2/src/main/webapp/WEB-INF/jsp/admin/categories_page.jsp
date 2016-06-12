@@ -1,7 +1,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ taglib prefix="form"
            uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring"
@@ -11,24 +11,27 @@
 <html lang="ar_EG">
     <head>
         <title><spring:message code="title.offer_page" /></title>
-
-        <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
+        
+    <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
         <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet">
         <link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">
-        <script src="<spring:url value="/resources/js/jquery.min.js" />"></script>
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 
+        <script type="text/javascript" src="resources/js/jquery-1.7.2.min.js"></script> 
+        <script type="text/javascript" src="resources/js/move-top.js"></script>
+        <script type="text/javascript" src="resources/js/easing.js"></script>
+        <script type="text/javascript" src="resources/js/startstop-slider.js"></script>
 
         <script type="text/javascript">
             onunload = function ()
             {
                 var foo = document.getElementById('sort');
                 self.name = 'sortidx' + foo.selectedIndex;
-
             }
             onload = function ()
             {
@@ -36,23 +39,18 @@
                 foo.selectedIndex = (idx = self.name.split('sortidx')) ? idx[1] : 0;
             }
         </script>
-        <script type="text/javascript" src="<spring:url value="/resources/js/jquery-1.7.2.min.js" />"></script>
-        <script type="text/javascript" src="<spring:url value="/resources/js/jquery.cookie.js" />"></script>
-
     </head>
     <body>
-
-
-
         <div class="wrap">
             <!-- header--->
-            <jsp:include page="header/headertop_desc.jsp" />
+            <jsp:include page="../header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
-                <p> <spring:message code="text.lang" /> : <a class="lang" href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a class="lang" href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+                <p> <spring:message code="text.lang" /> : <a href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
             <!---include header top -->
-            <jsp:include page="header/header_top.jsp" />
-            <jsp:include page="header/header_bottom_nav.jsp" />
+            <jsp:include page="../header/header_top.jsp" />
+            <jsp:include page="../header/header_bottom_nav.jsp" />
+
 
             <!-- content--->
             <div class="main" style="height: 400px;">
@@ -79,14 +77,14 @@
                                 <!--end drop down for search!-->
                             </div>
                         </div>
+                                    
+                            <div >
 
-                        <div >
-
-                            <div class="add-cart">								
-                                <h4><a href="<spring:url value="/addoffer"/>"><spring:message code="link.addoffer" /></a></h4>
+                                <div class="add-cart">								
+                                    <h4><a href="<spring:url value="/addoffer"/>"><spring:message code="link.addoffer" /></a></h4>
+                                </div>
+                                <div class="clear"></div>
                             </div>
-                            <div class="clear"></div>
-                        </div>  
                         <%-- end list--%>
                         <div class="see">
 
@@ -101,8 +99,7 @@
                                     <img  
                                         style="border: 1.1px solid #2969b0;
                                         border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
-
-                                <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
+                                <h2>${offer.product.nameEn}</h2>
 
                                 <div class="price-details">
                                     <div class="price-number">
@@ -121,7 +118,7 @@
         </div>
 
         <!--Footer--->
-        <jsp:include  page="footer/footer.jsp" />
+        <jsp:include  page="../footer/footer.jsp" />
         <script  src="<spring:url value="/resources/js/jquery.min.js" />" ></script>
         <script  src="<spring:url value="/resources/js/bootstrap.min.js" />" ></script>
 

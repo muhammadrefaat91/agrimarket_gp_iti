@@ -59,4 +59,9 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.searchCategory(name);
     }
 
+    @Override
+    public List<Category> getAllCategories() {
+        return categoryDao.findCategoryEntities();
+    }
+
 }
