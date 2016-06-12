@@ -163,16 +163,8 @@ public class UpdateOfferController1 extends HttpServlet {
 
     @RequestMapping(value = "/updateoffer", method = RequestMethod.GET)
     public ModelAndView drawAddOfferPage(Model model) {
-//
-//        int[] productsArr = {1, 2, 3, 4, 5};
-//
-//        int[] unitsArr = {1, 2, 3, 4, 5};
-
-        //  List<Product>
         List<Unit> units;
-
         units = unitService.getAllUnits();
-
         System.out.println(units.get(1).getNameEn());
 
         model.addAttribute("units", units);

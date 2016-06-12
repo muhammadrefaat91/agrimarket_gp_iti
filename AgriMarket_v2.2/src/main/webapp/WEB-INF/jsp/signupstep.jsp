@@ -10,6 +10,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        
+       <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+        <link rel="stylesheet" href="resources/css/style.css">
+        <link rel="stylesheet" href="resources/css/mbr-additional.css" type="text/css">
+
+      
     </head>
     <body>
 
@@ -31,15 +37,13 @@
 
                                             <div class="form-group">
 
-                                                <label><spring:message code="text.addoffer.mobile" /> </label><input type="tel"   name="mobile"  class="form-control" />
+                                                <label><spring:message code="text.addoffer.mobile" />  Mobile : </label><input type="tel"   name="mobile"  class="form-control" />
 
 
                                             </div>
                                             <div class="form-group">
 
-                                                <label><spring:message code="text.addoffer.governerate" /> </label><input type="text"   name="governerate" class="form-control"/>
-
-
+                                                <label><spring:message code="text.addoffer.governerate" /> Governorate : </label><input type="text"   name="governerate" class="form-control"/>
 
                                             </div>
 
@@ -51,14 +55,9 @@
 
                                             <div class="form-group">
 
-                                                <input type="submit" value="<spring:message code="button.addoffer.add" /><br/>
+                                                <input type="submit"  /><br/>
                                             </div>
 
-                                        </div>
-
-                                       <div>
-
-                                            <input type="submit" value="Submit" id="add" /><br/>
                                         </div>
 
                                 </div>

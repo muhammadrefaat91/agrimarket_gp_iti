@@ -46,7 +46,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.iti.agrimarket.business.UserService;
 import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import javax.servlet.http.HttpServletResponse;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
 import org.apache.logging.log4j.LogManager;
@@ -293,7 +296,7 @@ public class SignUpController extends HttpServlet {
      *
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplus")
-    public String signupUserFb(Model model,@RequestParam("name") String name, @RequestParam("email") String email) {
+    public String signupUserFb(Model model,@RequestParam("name") String name, @RequestParam("email") String email, HttpServletResponse response, RedirectAttributes redirectAttributes) {
 
         System.out.println("save user func          google plus---------");
         System.out.println("full Name : " + name);
@@ -310,15 +313,18 @@ public class SignUpController extends HttpServlet {
 //            modelAndView.addObject("user",userObj);
 
             System.out.println("i uploaded user on the session");
+ 
 
-            return "index";
-
+            return "redirect:index.htm";
+           
         } else { // store user 
 
             userName = name;
             userEmail = email;
-
-            return "signupl2.htm";
+            System.out.println("amr abdo");
+             return "redirect:signupl2.htm";
+             
+             
 
         }
 
@@ -329,28 +335,84 @@ public class SignUpController extends HttpServlet {
      *
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplusstep2")
-    public String signupUserFb() {
+    public String signupUserFb(Model model, @RequestParam("mobile") String mobil, @RequestParam("governerate") String governerate,
+            @RequestParam("file") MultipartFile file,
+            RedirectAttributes redirectAttributes) {
 
         System.out.println("save user func   fb2       google plus---------");
 
-        User user = new User();
-        user.setGovernerate("Giza");
+        User userStore = new User();
+        userStore.setGovernerate("Giza");
 
-        user.setMail(userEmail);
-        user.setFullName(userName);
-        user.setMobile("12344");
-        user.setLat(0.0);
-        user.setLong_(0.0);
-        user.setLoggedIn(true);
-        user.setRatesAverage(0);
-        user.setRegistrationChannel(0);   // web
-        user.setImageUrl("images/amr.jpg");
-        userService.addUser(user);
-        User uForSession = userService.getUserByEmail(user.getMail());
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user", uForSession);
-        System.out.println("i Stored user in the DB");
-        return "index";
+        if(userEmail==null |userName==null){
+        
+         return "redirect:signup.htm";
+        }
+        userStore.setMail(userEmail);
+        userStore.setFullName(userName);
+        userStore.setMobile("12344");
+        userStore.setLat(0.0);
+        userStore.setLong_(0.0);
+        userStore.setLoggedIn(true);
+        userStore.setRatesAverage(0);
+        userStore.setRegistrationChannel(0);   // web
+        userStore.setImageUrl("images/amr.jpg");
+        userService.addUser(userStore);
+        User user = userService.getUserByEmail(userStore.getMail());
+     
+        
+        
+              if (!file.isEmpty()) {
+
+//                    
+//                    BufferedOutputStream stream = new BufferedOutputStream(
+//                            new FileOutputStream(new File("C:\\AgriMarket\\images\\users\\" + name)));
+//                    FileCopyUtils.copy(file.getInputStream(), stream);
+//                    stream.close();
+//                    redirectAttributes.addFlashAttribute("message",
+//                            "You successfully uploaded " + name + "!");
+//                    
+//
+//                    System.out.println("succccccccccccc");
+            String fileName = user.getId() + String.valueOf(new Date().getTime());
+
+            try {
+                byte[] bytes = file.getBytes();
+                MagicMatch match = Magic.getMagicMatch(bytes);
+                final String ext = "." + match.getExtension();
+
+                File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
+                if (!parentDir.isDirectory()) {
+                    parentDir.mkdirs();
+                }
+                BufferedOutputStream stream
+                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName)));
+                stream.write(bytes);
+                stream.close();
+                user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
+                userService.updateUser(user);
+
+            } catch (Exception e) {
+                //                  logger.error(e.getMessage());
+                userService.deleteUser(user); // delete the category if something goes wrong
+
+                redirectAttributes.addFlashAttribute("message",
+                        "You failed to upload because the file was empty");
+                return "signup";
+            }
+
+        } else {
+            redirectAttributes.addFlashAttribute("message",
+                    "You failed to upload  because the file was empty");
+        }
+
+              
+             
+               model.addAttribute("user",user);
+                System.out.println("i Stored user in the DB");
+        return "redirect:index.htm";
+                     
+       
     }
 
 }
