@@ -49,6 +49,7 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.logging.Level;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
@@ -61,6 +62,7 @@ import org.iti.agrimarket.request.param.LogOutParam;
 import org.iti.agrimarket.request.param.UserCheckParam;
 import org.iti.agrimarket.util.requestprocessor.param.extraction.ParamExtractor;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
@@ -232,30 +234,8 @@ public class SignUpController extends HttpServlet {
 
         int res = userService.addUser(user);
 
-//          if (user.getId() == null) {
-//         //   logger.trace(Constants.DB_ERROR);
-//           return "signup";
-//        }
-//            if (name.contains("/")) {
-//                redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-//                return "redirect:/";
-//            }
-//            if (name.contains("/")) {
-//                redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-//                return "redirect:/";
-//            }
         if (!file.isEmpty()) {
 
-//                    
-//                    BufferedOutputStream stream = new BufferedOutputStream(
-//                            new FileOutputStream(new File("C:\\AgriMarket\\images\\users\\" + name)));
-//                    FileCopyUtils.copy(file.getInputStream(), stream);
-//                    stream.close();
-//                    redirectAttributes.addFlashAttribute("message",
-//                            "You successfully uploaded " + name + "!");
-//                    
-//
-//                    System.out.println("succccccccccccc");
             String fileName = user.getId() + String.valueOf(new Date().getTime());
 
             try {
@@ -296,38 +276,48 @@ public class SignUpController extends HttpServlet {
      *
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplus")
-    public String signupUserFb(Model model,@RequestParam("name") String name, @RequestParam("email") String email, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+    public @ResponseBody  String signupUserFb(Model model, @RequestParam("name") String name, @RequestParam("email") String email) {
 
         System.out.println("save user func          google plus---------");
         System.out.println("full Name : " + name);
         System.out.println("email : " + email);
 
-     //   ModelAndView modelAndView = new ModelAndView();
+        //   ModelAndView modelAndView = new ModelAndView();
         User userObj = userService.getUserByEmail(email);
         if (userObj != null) {
-            
-            System.out.println("name : "+userObj.getFullName());
 
-            model.addAttribute("user",userObj);
-            
+            System.out.println("name : " + userObj.getFullName());
+
+            model.addAttribute("user", userObj);
+
 //            modelAndView.addObject("user",userObj);
-
             System.out.println("i uploaded user on the session");
- 
+//
+//            try {
+//                response.sendRedirect(request.getContextPath() + "/index.htm");
+//            } catch (IOException ex) {
+//                java.util.logging.Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
 
-            return "redirect:index.htm";
-           
+            return "index.htm";
+
         } else { // store user 
 
             userName = name;
             userEmail = email;
             System.out.println("amr abdo");
-             return "redirect:signupl2.htm";
-             
-             
-
+            
+           
+//           
+//             try {                
+//                 System.out.println("amr abdo abdo abdo");
+//                response.sendRedirect(request.getContextPath() + "/signupl2.htm");
+//            } catch (IOException ex) {
+//                java.util.logging.Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+         return "signupl2.htm";
+          
         }
-
     }
 
     /**
@@ -336,17 +326,16 @@ public class SignUpController extends HttpServlet {
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplusstep2")
     public String signupUserFb(Model model, @RequestParam("mobile") String mobil, @RequestParam("governerate") String governerate,
-            @RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
+            @RequestParam("file") MultipartFile file,HttpServletRequest request, HttpServletResponse response) {
 
         System.out.println("save user func   fb2       google plus---------");
 
         User userStore = new User();
         userStore.setGovernerate("Giza");
 
-        if(userEmail==null |userName==null){
-        
-         return "redirect:signup.htm";
+        if (userEmail == null | userName == null) {
+
+            return "redirect:signup.htm";
         }
         userStore.setMail(userEmail);
         userStore.setFullName(userName);
@@ -359,21 +348,9 @@ public class SignUpController extends HttpServlet {
         userStore.setImageUrl("images/amr.jpg");
         userService.addUser(userStore);
         User user = userService.getUserByEmail(userStore.getMail());
-     
-        
-        
-              if (!file.isEmpty()) {
 
-//                    
-//                    BufferedOutputStream stream = new BufferedOutputStream(
-//                            new FileOutputStream(new File("C:\\AgriMarket\\images\\users\\" + name)));
-//                    FileCopyUtils.copy(file.getInputStream(), stream);
-//                    stream.close();
-//                    redirectAttributes.addFlashAttribute("message",
-//                            "You successfully uploaded " + name + "!");
-//                    
-//
-//                    System.out.println("succccccccccccc");
+        if (!file.isEmpty()) {
+
             String fileName = user.getId() + String.valueOf(new Date().getTime());
 
             try {
@@ -396,23 +373,24 @@ public class SignUpController extends HttpServlet {
                 //                  logger.error(e.getMessage());
                 userService.deleteUser(user); // delete the category if something goes wrong
 
-                redirectAttributes.addFlashAttribute("message",
-                        "You failed to upload because the file was empty");
                 return "signup";
             }
 
         } else {
-            redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload  because the file was empty");
+           
         }
 
-              
-             
-               model.addAttribute("user",user);
-                System.out.println("i Stored user in the DB");
-        return "redirect:index.htm";
-                     
-       
+        model.addAttribute("user", user);
+        System.out.println("i Stored user in the DB");
+        
+//        
+//            try {
+//                response.sendRedirect(request.getContextPath()+"/index.htm");
+//            } catch (IOException ex) {
+//                java.util.logging.Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        
+        return "redirect:/index.htm";
     }
 
 }

@@ -41,8 +41,8 @@
                     data: {name: googleUser.getBasicProfile().getName(), email:googleUser.getBasicProfile().getEmail()},
                     success: function (data) {
                         console.log('success' + data);
-                        if (data === 'no_errors')
-                            location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/getUser?id=${param['id']}";
+//                        if (data === 'no_errors')
+                            location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/"+data+"";
                     },
                     error: function (e) {
                         console.log('error:' + e.data);
