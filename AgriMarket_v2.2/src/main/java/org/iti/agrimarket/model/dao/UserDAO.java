@@ -5,11 +5,14 @@
  */
 package org.iti.agrimarket.model.dao;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Hibernate;
 import org.iti.agrimarket.model.pojo.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.iti.agrimarket.model.pojo.UserRatesUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
@@ -198,6 +201,11 @@ public class UserDAO implements UserDAOInterface {
             public Object doInHibernate(Session sn) throws HibernateException {
                 User user = (User) sn.createQuery("from User u where u.id=:id").setInteger("id", id).uniqueResult();
                 Hibernate.initialize(user.getUserOfferProductFixeds());
+                Set<UserOfferProductFixed> offers=user.getUserOfferProductFixeds();
+                for (Iterator iterator = offers.iterator(); iterator.hasNext();) {
+                    UserOfferProductFixed next = (UserOfferProductFixed)iterator.next();
+                    Hibernate.initialize(next.getProduct());
+                }
                 Hibernate.initialize(user.getUserRatesUsersForRatedId());
                 UserRatesUser u1;
                 for (Object u : user.getUserRatesUsersForRatedId()) {
