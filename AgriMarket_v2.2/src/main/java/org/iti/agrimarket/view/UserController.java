@@ -37,7 +37,7 @@ public class UserController {
    
 
     @RequestMapping(value = {"/getUser.htm"})
-    public String OfferProducts(@RequestParam(value = "id", required = true) int offerId, Model model) {
+    public String getUser(@RequestParam(value = "id", required = true) int offerId, Model model) {
         User user = null;
         System.out.println("id@@@@@@@@@@@@@@@@@@" + offerId);
 
@@ -49,5 +49,19 @@ public class UserController {
 
         model.addAttribute("userHasOffer", user);
         return "view_user";
+    }
+        @RequestMapping(value = {"/profile.htm"})
+    public String getUserProfile(@RequestParam(value = "id", required = true) int offerId, Model model) {
+        User user = null;
+        System.out.println("id@@@@@@@@@@@@@@@@@@" + offerId);
+
+        user =  userService.getUserEager(offerId);
+        for (Object col : user.getUserOfferProductFixeds()) {
+            UserOfferProductFixed fixed = (UserOfferProductFixed) col;
+            System.out.println("user offer product fixed"+fixed.getId());
+        }
+
+        model.addAttribute("userHasOffer", user);
+        return "user-profile";
     }
 }

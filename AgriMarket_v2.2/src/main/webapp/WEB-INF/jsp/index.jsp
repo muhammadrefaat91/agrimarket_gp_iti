@@ -17,25 +17,7 @@
 
     <script type="text/javascript" src="<spring:url value="/resources/js/jquery-1.7.2.min.js" />"></script>
     <script type="text/javascript" src="<spring:url value="/resources/js/jquery.cookie.js" />"></script>
-    <script type="text/javascript">
-        console.log($.cookie("myAppLocaleCookie"));
-        var lang = $.cookie("myAppLocaleCookie");
-        if (lang === 'ar_EG') {
-            $('li:first').appendTo('ul');
 
-            $(document).ready(function () {
-                $.fn.exchangePositionWith = function (selector) {
-                    var other = $(selector);
-                    this.after(other.clone());
-                    other.after(this).remove();
-                };
-                $(".menu ul li:eq(0)").exchangePositionWith(".menu ul li:eq(3)");
-                $(".menu ul li:eq(1)").exchangePositionWith(".menu ul li:eq(2)");
-
-            });
-
-        }
-    </script>
 </head>
 <body>
     <c:if test="${empty allcategories}" >

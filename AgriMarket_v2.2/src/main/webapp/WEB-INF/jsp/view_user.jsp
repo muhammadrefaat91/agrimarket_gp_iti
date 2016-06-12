@@ -55,6 +55,9 @@
             <!---include header top -->
         <jsp:include page="header/header_top.jsp" />
             <jsp:include page="header/header_bottom_nav.jsp" />
+            
+            
+            
             <c:if test="${empty userHasOffer}" >
                 <c:redirect url="/web/getUser.htm?id=${param['id']}" />
             </c:if>
@@ -74,7 +77,6 @@
                     <!--left col-->
                     <ul class="list-group">
                         <li class="list-group-item text-muted" contenteditable="false">${userHasOffer.fullName}</li>
-                        <!--<li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined</strong></span> 2.13.2014</li>-->
                         <li style="text-align: <spring:message code="view-user.rate.text-align"/>;
                             direction:<spring:message code="view_user.css.rate.panel.dir"/>;"class="list-group-item text-right"><span style="    margin-left: <spring:message code="view-user.rate.span.margin-left"/>px;" class="pull-left"><strong class=""><spring:message code="text.user.mobile" /></strong></span>${userHasOffer.mobile}</li>
                         <li style="    text-align: <spring:message code="view-user.rate.text-align"/>;" class="list-group-item text-right"><span style="margin-left: <spring:message code="view-user.rate.margin-left"/>px;
@@ -124,9 +126,9 @@
                         <div class="panel-body" style="max-height: 345px;
                              border: 1px solid gray;
                              overflow: auto;">
-                            <div class="row">
-                                <c:forEach items="${userHasOffer.userOfferProductFixeds}" var="offer">
-                                    <div class="col-md-4">
+                            <!--<div class="row">-->
+                                <%--<c:forEach items="${userHasOffer.userOfferProductFixeds}" var="offer">--%>
+<!--                                    <div class="col-md-4">
                                         <div class="thumbnail">
                                             <img alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" />
                                             <div style="margin-left: 14px;" class="caption">
@@ -137,13 +139,33 @@
                                                     ${offer.description}
                                                 </p>
                                                 <p>
-
                                                 </p>
                                             </div>
                                         </div>
-                                    </div>
-                                </c:forEach>
+                                                <div class="add-cart">								
+                                    <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
+                                </div>
+                                    </div>-->
+                                <%--</c:forEach>--%>
+                                <c:forEach items="${userHasOffer.userOfferProductFixeds}" var="offer">
+                            <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
+                            <a href="preview.htm?id=${offer.id}">
+                                <img  
+                                    style="border: 1.1px solid #2969b0;
+                                    border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+                       
+                            <div class="price-details">
+                                <div class="price-number">
+                                    <p><span class="rupees">$${offer.price}</span></p>
+                                </div>
+                                <div class="add-cart">								
+                                    <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
+                                </div>
+                                <div class="clear"></div>
                             </div>
+                        </div>
+                    </c:forEach>
+                            <!--</div>-->
                         </div>
                     </div>
                     <div class="panel panel-default" style="    width: 79%;margin-left: <spring:message code="view-user.css.review.margin-left" />;">
@@ -158,7 +180,6 @@
                                     <input type="radio" name="rating" value="5" class="star">
                                 </div>
                                 <p><spring:message code="text.user.review" /></p>
-
                                 <div>
                                     <span><textarea id="review-text" placeholder="<spring:message code="placeholder.user.review" />"
                                                     style="width: <spring:message code="view-user.css.textarea" />px;"> </textarea></span>
@@ -209,10 +230,8 @@
                     </div> 
                 </div>	
             </div>
-            <!--    </div>-->
         </div>
     </div>
     <jsp:include page="footer/footer.jsp" />
 </body>
 </html>
-
