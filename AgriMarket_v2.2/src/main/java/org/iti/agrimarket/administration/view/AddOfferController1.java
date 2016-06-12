@@ -57,7 +57,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @SessionAttributes("user")
 
-public class AddOfferController extends HttpServlet {
+public class AddOfferController1 extends HttpServlet {
 
     private Logger logger;
 
