@@ -5,9 +5,7 @@
  */
 package org.iti.agrimarket.view;
 
-import java.util.List;
 import java.util.Locale;
-import javax.servlet.http.HttpServletRequest;
 import org.iti.agrimarket.business.OfferService;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  *

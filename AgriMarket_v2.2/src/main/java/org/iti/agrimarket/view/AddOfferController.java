@@ -33,6 +33,7 @@ import org.iti.agrimarket.business.UserService;
 import java.io.BufferedOutputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,7 +55,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 
-@SessionAttributes("user")
+//@SessionAttributes("user")
 
 public class AddOfferController extends HttpServlet {
 
@@ -75,7 +76,9 @@ public class AddOfferController extends HttpServlet {
     User user;
 
     @RequestMapping(value = "/addoffer", method = RequestMethod.GET)
-    public ModelAndView drawAddOfferPage(Model model) {
+    public ModelAndView drawAddOfferPage(Locale locale,Model model) {
+        String language = locale.getLanguage();
+
 
         List<Unit> units;
         units = unitService.getAllUnits();
@@ -97,7 +100,7 @@ public class AddOfferController extends HttpServlet {
         System.out.println(products.get(1).getNameEn());
 
         model.addAttribute("products", products);
-
+        model.addAttribute("lang",locale);
         System.out.println("hello################  new offer");
         return new ModelAndView("addoffer");
     }
