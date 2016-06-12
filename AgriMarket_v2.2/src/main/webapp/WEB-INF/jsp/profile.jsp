@@ -9,7 +9,7 @@
     <title>${userHasOffer.fullName}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-      
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 
 
@@ -53,7 +53,7 @@
                 <p> <spring:message code="text.lang" /> : <a href="?id=${param['id']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?id=${param['id']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
             <!---include header top -->
-        <jsp:include page="header/header_top.jsp" />
+            <jsp:include page="header/header_top.jsp" />
             <jsp:include page="header/header_bottom_nav.jsp" />
             <c:if test="${empty userHasOffer}" >
                 <c:redirect url="/web/getUser.htm?id=${param['id']}" />
@@ -78,18 +78,18 @@
                         <li style="text-align: <spring:message code="view-user.rate.text-align"/>;
                             direction:<spring:message code="view_user.css.rate.panel.dir"/>;"class="list-group-item text-right"><span style="    margin-left: <spring:message code="view-user.rate.span.margin-left"/>px;" class="pull-left"><strong class=""><spring:message code="text.user.mobile" /></strong></span>${userHasOffer.mobile}</li>
                         <li style="    text-align: <spring:message code="view-user.rate.text-align"/>;" class="list-group-item text-right"><span style="margin-left: <spring:message code="view-user.rate.margin-left"/>px;
-    direction: <spring:message code="view_user.css.rate.panel.dir"/>;" class="pull-left"><strong class=""><spring:message code="text.user.email" /></strong></span> ${userHasOffer.mail}</li>
-                     
+                                                                                                                                                 direction: <spring:message code="view_user.css.rate.panel.dir"/>;" class="pull-left"><strong class=""><spring:message code="text.user.email" /></strong></span> ${userHasOffer.mail}</li>
+
                     </ul>
                     <div class="panel panel-default" style="height: 2px;">
                         <div class="panel-heading" style="text-align: <spring:message code="view-user.panel-heading.text-align"/>"><spring:message code="text.view_user.rate" />
 
                         </div>
                         <div class="panel-body" style="margin-left: <spring:message code="view_user.css.rate.panel.margin-left"/>px;
-                             
+
                              width:112%;
-                               
-                              direction: <spring:message code="view_user.css.rate.panel.dir"/>;
+
+                             direction: <spring:message code="view_user.css.rate.panel.dir"/>;
                              margin-top:-15px;">
                             <div class="rating-block">
                                 <!--<h4>Average user rating</h4>-->
@@ -117,9 +117,9 @@
 
                     <div class="panel panel-default target" style="background: antiquewhite;">
                         <div class="see">
-                            <p><a style="margin-left: <spring:message code="view_user.css.all-products.m-left" />px;" href="${pageContext.request.contextPath}/offers.htm"><spring:message code="link.all.Products" /></a></p>
+                            <p><a style="margin-left: <spring:message code="view_user.css.all-products.m-left" />px;" href="${pageContext.request.contextPath}/web/getoffers.htm"><spring:message code="link.all.Products" /></a></p>
                         </div>
-                            <div style="direction: <spring:message code="view_user.css.user-products.dir" />" class="panel-heading" contenteditable="false"><spring:message code="text.user.products" /></div>
+                        <div style="direction: <spring:message code="view_user.css.user-products.dir" />" class="panel-heading" contenteditable="false"><spring:message code="text.user.products" /></div>
 
                         <div class="panel-body" style="max-height: 345px;
                              border: 1px solid gray;
@@ -133,11 +133,13 @@
                                                 <h3>
                                                     ${offer.price}
                                                 </h3>
+                                                <div dir="ltr">
+                                                    <p>
+                                                        ${offer.product.nameEn}
+                                                    </p>
+                                                </div>
                                                 <p>
-                                                    ${offer.description}
-                                                </p>
-                                                <p>
-
+                                                    <a>remove</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -146,30 +148,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default" style="    width: 79%;margin-left: <spring:message code="view-user.css.review.margin-left" />;">
-                        <div class="panel-heading"><a style="cursor: pointer;margin-left: <spring:message code="view_user.css.panel-heading.margin-left" />px;" data-toggle="collapse" data-target="#demo"><spring:message code="text.user.ratetext" /></a></div>
-                        <div class="review collapse" id="demo"  >
-                            <div class="your-review" style="    margin-left: 20px; direction: <spring:message code="view_user.css.panel-heading.panel-body.dir" />;   margin-right: <spring:message code="view_user.css.panel-heading.panel-body.margin-right" />px;">
-                                <div class="panel-body" style="margin-left: <spring:message code="view_user.css.panel-heading.panel-body.margin-left" />px;">
-                                    <input type="radio" name="rating" value="1" class="star">
-                                    <input type="radio" name="rating" value="2" class="star">
-                                    <input type="radio" name="rating" value="3" class="star">
-                                    <input type="radio" name="rating" value="4" class="star">
-                                    <input type="radio" name="rating" value="5" class="star">
-                                </div>
-                                <p><spring:message code="text.user.review" /></p>
 
-                                <div>
-                                    <span><textarea id="review-text" placeholder="<spring:message code="placeholder.user.review" />"
-                                                    style="width: <spring:message code="view-user.css.textarea" />px;"> </textarea></span>
-                                </div>
-                                <div>
-                                    <span><input type="submit" id="submit-review" value="<spring:message code="button.submit.review" />"></span>
-                                </div>
-                            </div>	
-                        </div>
-                    </div>
-                                    <div class="panel panel-default" style="margin-left: <spring:message code="view-user.css.review.margin-left" />; direction: <spring:message code="view_user.css.panel-default.dir"/>;    width: 79.333333%; margin-top: 2px;">
+                    <div class="panel panel-default" style="margin-left: <spring:message code="view-user.css.review.margin-left" />; direction: <spring:message code="view_user.css.panel-default.dir"/>;    width: 79.333333%; margin-top: 2px;">
                         <div class="panel-heading">
                             <a style="cursor: pointer;     margin-left: -9px;" data-toggle="collapse" data-target="#demo2"><spring:message code="text.view_user.reviews" /></a></div>
                         <div class="row" style="    margin-left: -14px;">

@@ -5,7 +5,11 @@
  */
 package org.iti.agrimarket.view;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.iti.agrimarket.business.UserService;
 import org.iti.agrimarket.model.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +50,23 @@ public class LoginController {
         }
         request.getSession().setAttribute("user", result);
         return "index";
+
+    }
+    
+    @RequestMapping(value = "/dummylogin.htm", method = RequestMethod.GET)
+    public String loginDummy(HttpServletRequest request, HttpServletResponse response,Model model) {
+       User result = userService.getUserEager(1);
+        if (result == null) {
+            model.addAttribute("error", "Invalid Email or password!");
+            return "sign_in";
+        }
+        request.getSession().setAttribute("user", result);
+        try {
+            response.sendRedirect(request.getContextPath()+"/index.htm");
+        } catch (IOException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "profile";
 
     }
 

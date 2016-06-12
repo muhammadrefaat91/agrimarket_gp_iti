@@ -5,7 +5,11 @@
  */
 package org.iti.agrimarket.view;
 
-
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.iti.agrimarket.business.UserService;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
@@ -34,34 +38,44 @@ public class UserController {
         this.userService = userService;
     }
 
-   
-
     @RequestMapping(value = {"/getUser.htm"})
     public String getUser(@RequestParam(value = "id", required = true) int offerId, Model model) {
         User user = null;
         System.out.println("id@@@@@@@@@@@@@@@@@@" + offerId);
 
-        user =  userService.getUserEager(offerId);
+        user = userService.getUserEager(offerId);
         for (Object col : user.getUserOfferProductFixeds()) {
             UserOfferProductFixed fixed = (UserOfferProductFixed) col;
-            System.out.println("user offer product fixed"+fixed.getId());
+            System.out.println("user offer product fixed" + fixed.getId());
         }
 
         model.addAttribute("userHasOffer", user);
         return "view_user";
     }
-        @RequestMapping(value = {"/profile.htm"})
-    public String getUserProfile(@RequestParam(value = "id", required = true) int offerId, Model model) {
-        User user = null;
-        System.out.println("id@@@@@@@@@@@@@@@@@@" + offerId);
 
-        user =  userService.getUserEager(offerId);
+    @RequestMapping(value = {"/profile.htm"})
+    public String getUserProfile(HttpServletRequest request,  Model model) {
+        
+        User user = (User) request.getSession().getAttribute("user");
         for (Object col : user.getUserOfferProductFixeds()) {
             UserOfferProductFixed fixed = (UserOfferProductFixed) col;
-            System.out.println("user offer product fixed"+fixed.getId());
+            System.out.println("user offer product fixed" + fixed.getId());
         }
 
         model.addAttribute("userHasOffer", user);
-        return "user-profile";
+       
+        return "profile";
+    }
+    
+    @RequestMapping(value = {"/logout.htm"})
+    public String logout( HttpServletRequest request, HttpServletResponse response) {
+        
+        request.getSession().removeAttribute("user");
+        try {
+            response.sendRedirect(request.getContextPath()+"/index.htm");
+        } catch (IOException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "profile";
     }
 }
