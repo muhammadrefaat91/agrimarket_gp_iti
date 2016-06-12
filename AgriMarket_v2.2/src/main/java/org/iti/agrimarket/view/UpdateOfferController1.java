@@ -92,7 +92,7 @@ public class UpdateOfferController1 extends HttpServlet {
     @Autowired
     OfferService offerService;
 
-int offerIdVal;
+    int offerIdVal;
 
     //  @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signUp2(@ModelAttribute("userForm") @Valid User user, BindingResult br, Model model) {
@@ -160,39 +160,26 @@ int offerIdVal;
 
     @RequestMapping(value = "/updateoffer", method = RequestMethod.GET)
     public ModelAndView drawAddOfferPage(Model model) {
-//
-//        int[] productsArr = {1, 2, 3, 4, 5};
-//
-//        int[] unitsArr = {1, 2, 3, 4, 5};
-
-        //  List<Product>
         List<Unit> units;
-
         units = unitService.getAllUnits();
-
         System.out.println(units.get(1).getNameEn());
 
         model.addAttribute("units", units);
-      
 
         if (!model.containsAttribute("offerId")) {
             model.addAttribute("offerId", 1);
         }
 
-        
         UserOfferProductFixed userOfferProductFixed = offerService.findUserOfferProductFixed(1);
-        
-        
+
        // offerIdVal=offerKey;
-        
-        
         List<Product> products = productService.getAllProducts();
         System.out.println(products.get(1).getNameEn());
 
         model.addAttribute("products", products);
 
         System.out.println("hello################  new offer");
-        return new ModelAndView("updateoffer","offer",userOfferProductFixed);
+        return new ModelAndView("updateoffer", "offer", userOfferProductFixed);
     }
 
     @InitBinder
