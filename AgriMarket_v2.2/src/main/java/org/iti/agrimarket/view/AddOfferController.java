@@ -72,7 +72,6 @@ public class AddOfferController extends HttpServlet {
 
     User user;
 
-
     @RequestMapping(value = "/addoffer", method = RequestMethod.GET)
     public ModelAndView drawAddOfferPage(Model model) {
 
@@ -89,7 +88,7 @@ public class AddOfferController extends HttpServlet {
             System.out.println("------------------------");
             System.out.println("-----!model view ----------");
             return new ModelAndView("signup");
-           
+
         }
         // model.addAttribute("user",user);
         List<Product> products = productService.getAllProducts();
@@ -256,9 +255,13 @@ public class AddOfferController extends HttpServlet {
             }
 
         } else {
-            redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload  because the file was empty");
+
+            userOfferProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + "default_offer.jpg");
+
+            offerService.updateOffer(userOfferProductFixed);
+
         }
+
         return "redirect:index.htm";
     }
 

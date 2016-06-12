@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
         <script src="https://apis.google.com/js/api:client.js"></script>
         <script>
@@ -34,20 +34,30 @@
                         function (googleUser) {
                             document.getElementById('name').innerText = "Signed in: " +
                                     googleUser.getBasicProfile().getName();
+                            
+                            var profile = googleUser.getBasicProfile();
+                            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                            console.log('Full Name: ' + profile.getName());
+                            console.log('Given Name: ' + profile.getGivenName());
+                            console.log('Family Name: ' + profile.getFamilyName());
+                            console.log("Image URL: " + profile.getImageUrl());
+                            console.log("Email: " + profile.getEmail());
 
-              $.ajax({
-                    url: "${pageContext.request.contextPath}/signupgplus",
-                    type: "POST",
-                    data: {name: googleUser.getBasicProfile().getName(), email:googleUser.getBasicProfile().getEmail()},
-                    success: function (data) {
-                        console.log('success' + data);
+
+
+                            $.ajax({
+                                url: "${pageContext.request.contextPath}/signupgplus",
+                                type: "POST",
+                                data: {name: googleUser.getBasicProfile().getName(), email: googleUser.getBasicProfile().getEmail(),img:profile.getImageUrl()},
+                                success: function (data) {
+                                    console.log('success' + data);
 //                        if (data === 'no_errors')
-                            location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/"+data+"";
-                    },
-                    error: function (e) {
-                        console.log('error:' + e.data);
-                    }
-                });
+                                    location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/" + data + "";
+                                },
+                                error: function (e) {
+                                    console.log('error:' + e.data);
+                                }
+                            });
 
 
 
@@ -106,7 +116,9 @@
         <jsp:include page="header/header_bottom_nav.jsp" />
         <div align="center">
 
-            <div id="gSignInWrapper">
+            
+            
+            <div id="gSignInWrapper"  >
                 <span class="label">Sign in with:</span>
                 <div id="customBtn" class="customGPlusSignIn">
                     <span class="icon"></span>
@@ -114,10 +126,10 @@
                 </div>
             </div>
             <div id="name"></div>
-            
+
             <script>startApp();</script>
 
         </div>
-          <jsp:include  page="footer/footer.jsp"/>
+        <jsp:include  page="footer/footer.jsp"/>
     </body>
 </html>

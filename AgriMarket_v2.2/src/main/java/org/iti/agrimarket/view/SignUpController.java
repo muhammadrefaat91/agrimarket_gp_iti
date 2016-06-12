@@ -5,6 +5,7 @@ package org.iti.agrimarket.view;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -46,13 +47,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.iti.agrimarket.business.UserService;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jmimemagic.Magic;
+import net.sf.jmimemagic.MagicException;
 import net.sf.jmimemagic.MagicMatch;
+import net.sf.jmimemagic.MagicMatchNotFoundException;
+import net.sf.jmimemagic.MagicParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -86,21 +94,14 @@ public class SignUpController extends HttpServlet {
 
     String userEmail = null;
 
+    String imgUrl = null;
+
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signUp(@ModelAttribute("userForm") @Valid User user, BindingResult br, Model model) {
 
         if (br.hasErrors()) {
             return "signup";
         }
-
-//        System.out.println("iam in User");
-//        System.out.println("-------------------------------------------------");
-//
-//        System.out.println("user name : " + user.getFullName());
-//        System.out.println("user Govern : " + user.getGovernerate());
-//        System.out.println("user mobile : " + user.getMobile());
-//        System.out.println("-------------------------------------------------");
-        // JOptionPane.showMessageDialog(null,"iam in user");
         user.setLat(0.0);
         user.setLong_(0.0);
         user.setLoggedIn(true);
@@ -276,11 +277,13 @@ public class SignUpController extends HttpServlet {
      *
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplus")
-    public @ResponseBody  String signupUserFb(Model model, @RequestParam("name") String name, @RequestParam("email") String email) {
+    public @ResponseBody
+    String signupUserFb(Model model, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("img") String img) {
 
         System.out.println("save user func          google plus---------");
         System.out.println("full Name : " + name);
         System.out.println("email : " + email);
+        System.out.println("img : " + img);
 
         //   ModelAndView modelAndView = new ModelAndView();
         User userObj = userService.getUserByEmail(email);
@@ -293,11 +296,6 @@ public class SignUpController extends HttpServlet {
 //            modelAndView.addObject("user",userObj);
             System.out.println("i uploaded user on the session");
 //
-//            try {
-//                response.sendRedirect(request.getContextPath() + "/index.htm");
-//            } catch (IOException ex) {
-//                java.util.logging.Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
 
             return "index.htm";
 
@@ -305,18 +303,11 @@ public class SignUpController extends HttpServlet {
 
             userName = name;
             userEmail = email;
-            System.out.println("amr abdo");
-            
-           
-//           
-//             try {                
-//                 System.out.println("amr abdo abdo abdo");
-//                response.sendRedirect(request.getContextPath() + "/signupl2.htm");
-//            } catch (IOException ex) {
-//                java.util.logging.Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-         return "signupl2.htm";
-          
+            imgUrl = img;
+            System.out.println("amr");
+
+            return "signupl2.htm";
+
         }
     }
 
@@ -326,10 +317,10 @@ public class SignUpController extends HttpServlet {
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplusstep2")
     public String signupUserFb(Model model, @RequestParam("mobile") String mobil, @RequestParam("governerate") String governerate,
-            @RequestParam("file") MultipartFile file,HttpServletRequest request, HttpServletResponse response) {
+            @RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
 
         System.out.println("save user func   fb2       google plus---------");
-
+        //    System.out.println("image : "+img);
         User userStore = new User();
         userStore.setGovernerate("Giza");
 
@@ -339,7 +330,8 @@ public class SignUpController extends HttpServlet {
         }
         userStore.setMail(userEmail);
         userStore.setFullName(userName);
-        userStore.setMobile("12344");
+        userStore.setMobile(mobil);
+        userStore.setGovernerate(governerate);
         userStore.setLat(0.0);
         userStore.setLong_(0.0);
         userStore.setLoggedIn(true);
@@ -348,6 +340,74 @@ public class SignUpController extends HttpServlet {
         userStore.setImageUrl("images/amr.jpg");
         userService.addUser(userStore);
         User user = userService.getUserByEmail(userStore.getMail());
+
+        if (imgUrl != null) {
+            String fileName = user.getId() + String.valueOf(new Date().getTime());
+
+            URL url;
+            try {
+                url = new URL(imgUrl);
+
+                InputStream in = new BufferedInputStream(url.openStream());
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                byte[] buf = new byte[1024];
+                int n = 0;
+                while (-1 != (n = in.read(buf))) {
+                    out.write(buf, 0, n);
+                }
+                out.close();
+                in.close();
+                byte[] bytes = out.toByteArray();
+
+                MagicMatch match = Magic.getMagicMatch(bytes);
+                final String ext = "." + match.getExtension();
+
+                File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
+                if (!parentDir.isDirectory()) {
+                    parentDir.mkdirs();
+                }
+                BufferedOutputStream stream
+                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName)));
+                stream.write(bytes);
+                stream.close();
+                user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
+                userService.updateUser(user);
+
+            } catch (MalformedURLException ex) {
+                java.util.logging.Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+                userService.deleteUser(user); // delete the category if something goes wrong
+
+                return "signup";
+
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+
+                userService.deleteUser(user); // delete the category if something goes wrong
+
+                return "signup";
+            } catch (MagicParseException ex) {
+                java.util.logging.Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+                userService.deleteUser(user); // delete the category if something goes wrong
+
+                return "signup";
+
+            } catch (MagicMatchNotFoundException ex) {
+                java.util.logging.Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+
+                userService.deleteUser(user); // delete the category if something goes wrong
+                return "signup";
+            } catch (MagicException ex) {
+                java.util.logging.Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+                userService.deleteUser(user); // delete the category if something goes wrong
+                return "signup";
+            }
+
+        } else {
+
+            user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + "default_user.jpg");
+            userService.updateUser(user);
+
+        }
 
         if (!file.isEmpty()) {
 
@@ -363,7 +423,7 @@ public class SignUpController extends HttpServlet {
                     parentDir.mkdirs();
                 }
                 BufferedOutputStream stream
-                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName)));
+                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName + ext)));
                 stream.write(bytes);
                 stream.close();
                 user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
@@ -377,19 +437,12 @@ public class SignUpController extends HttpServlet {
             }
 
         } else {
-           
+
         }
 
         model.addAttribute("user", user);
         System.out.println("i Stored user in the DB");
-        
-//        
-//            try {
-//                response.sendRedirect(request.getContextPath()+"/index.htm");
-//            } catch (IOException ex) {
-//                java.util.logging.Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        
+ 
         return "redirect:/index.htm";
     }
 
