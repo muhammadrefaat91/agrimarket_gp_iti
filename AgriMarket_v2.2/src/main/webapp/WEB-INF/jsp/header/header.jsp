@@ -4,7 +4,7 @@
 
 <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" />
 <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />	
-
+<link rel="icon" href="<spring:url value="/resources/images/agri_logo_vs.png" />">
 
 <div class="header">
 
@@ -32,7 +32,7 @@
             <div class="slider">					     
                 <div id="slider"><!-- view special  offers ads-->
                     <div id="mover">
-                        <div id="slide-1" class="slide">			                    
+                        <div id="slide" class="slide">			                    
                             <div class="slider-img">
                                 <a href="#"><img src="resources/images/slider.jpg" alt="AgriMarket" /></a>									    
                             </div>

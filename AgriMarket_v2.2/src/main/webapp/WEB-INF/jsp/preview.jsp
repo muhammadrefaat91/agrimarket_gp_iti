@@ -7,6 +7,8 @@
 <!DOCTYPE HTML>
 <head>
     <title>${offerProduct.product.nameEn}</title>
+    
+    <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

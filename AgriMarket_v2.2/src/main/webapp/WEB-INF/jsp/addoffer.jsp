@@ -11,6 +11,8 @@
 <html>
     <head>
         <meta charset="UTF-8" >
+
+        <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <title><spring:message code="title.addoffer.addproduct" /></title>
         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
@@ -20,9 +22,9 @@
             <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
             <!---include header description -->
             <jsp:include page="header/headertop_desc.jsp" />
-      <div class="call" style="    margin-top: -34px;">
-            <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
-        </div>
+            <div class="call" style="    margin-top: -34px;">
+                <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+            </div>
             <!---include nav bar -->
             <jsp:include page="header/header_bottom_nav.jsp" />
             <div class="wrap">

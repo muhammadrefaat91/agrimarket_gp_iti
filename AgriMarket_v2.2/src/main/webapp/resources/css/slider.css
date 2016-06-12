@@ -32,19 +32,20 @@
 .slide h1{ 
 	   font-size:2.5em; 
 	   font-weight:bold;
-	   color:#CD1F25; 
+	   color:#3d9c3e; 
 	   text-transform:uppercase;
  }
+
  .slide h1 span{
  	font-size:3em;
  }
  .slide h2{ 
  	font-size:2em;
- 	color:#999;
+ 	color:#fac516;
  	font-family: 'ambleregular';
  }
   .slide h2 span{ 
-  	color:#CD1F25;
+  	color:#3d9c3e;
   	font-size:2em; 
  }
  .slide p {
@@ -88,7 +89,7 @@
 .button {
 	margin-top:20px;
 	display: inline-block;
-	background:#CD1F25;
+	background:#3d9c3e;
 	color: #FFF;
 	text-decoration: none;
 	border-radius:5px;
@@ -100,7 +101,7 @@
 }
 .button:hover {
 	text-shadow: 0px 1px 1px #000;
-	background:#CD1F25;
+	background:#3d9c3e;
 	 -webkit-transform:scale(1.05);
     -moz-transform:scale(1.05);
     -ms-transform:scale(1.05);
