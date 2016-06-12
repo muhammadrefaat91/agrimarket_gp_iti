@@ -6,10 +6,12 @@
 package org.iti.agrimarket.view;
 
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import org.iti.agrimarket.business.OfferService;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,11 +38,13 @@ public class OfferProductController {
     }
 
     @RequestMapping(value = {"/getOffer.htm"})
-    public String OfferProducts(@RequestParam(value = "id", required = true) int offerId, Model model) {
+    public String OfferProducts(@RequestParam(value = "id", required = true) int offerId,Locale locale, Model model) {
         UserOfferProductFixed offerProductFixed = null;
+        locale = LocaleContextHolder.getLocale();
         System.out.println("id" + offerId);
         offerProductFixed = offerService.getOfferProductEager(offerId);
         model.addAttribute("offerProduct", offerProductFixed);
+        model.addAttribute("lang",locale);
         return "preview";
     }
 }

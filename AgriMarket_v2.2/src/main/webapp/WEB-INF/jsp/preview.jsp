@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="desc span_3_of_2" style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />">
-                        <h2 style="margin-right: 45px;">${offerProduct.product.nameEn}</h2>
+                        <h2 style="margin-right: 45px;">${requestScope.lang eq 'en'?offerProduct.product.nameEn:offerProduct.product.nameAr}</h2>
                         <p style="    margin-right: <spring:message code="offer_page.css.p.margin.right"  />;white-space: pre-line;">${offerProduct.description}</p>					
                         <div class="price" style="    margin-left: <spring:message code="preview.css.div.price.margin"/>;">
                             <spring:message code="text.preview.quantity"  />

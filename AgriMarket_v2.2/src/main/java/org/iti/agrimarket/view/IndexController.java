@@ -6,12 +6,15 @@
 package org.iti.agrimarket.view;
 
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.ServletContext;
 import org.iti.agrimarket.business.CategoryService;
 import org.iti.agrimarket.business.OfferService;
 import org.iti.agrimarket.model.pojo.Category;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,7 +59,8 @@ public class IndexController {
     }
 
     @RequestMapping(value = {"index.htm"}, method = RequestMethod.GET)
-    public String allCategories(Model model) {
+    public String allCategories(Locale locale,Model model) {
+        locale = LocaleContextHolder.getLocale();
         List<Category> categorys = null;
         System.out.println("index controller");
         if (servletContext.getAttribute("allcategories") == null) {
@@ -69,6 +73,7 @@ public class IndexController {
 
         System.out.println("latest offers : "+latestOffers);
         model.addAttribute("latestOffers", latestOffers);
+        model.addAttribute("lang",locale);
         System.out.println(model.containsAttribute("latestOffers"));
         return "index";
     }

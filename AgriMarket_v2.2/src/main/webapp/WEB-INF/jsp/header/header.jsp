@@ -16,15 +16,9 @@
                     <!-- view advertisements images-->
                     <c:forEach items="${allcategories}" var="module"> 
 
-                        <li><a href="${pageContext.request.contextPath}/web/getoffers.htm?category=${module.id}">${module.nameEn}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/web/getoffers.htm?category=${module.id}">${requestScope.lang eq 'en'?module.nameEn:module.nameAr}</a></li>
                         </c:forEach>
-                    <!--                                    <li><a href="#">Sports &amp; Fitness</a></li>
-                                        <li><a href="#">Footwear</a></li>
-                                        <li><a href="#">Jewellery</a></li>
-                                        <li><a href="#">Clothing</a></li>
-                                        <li><a href="#">Home Decor &amp; Kitchen</a></li>
-                                        <li><a href="#">Beauty &amp; Healthcare</a></li>
-                                        <li><a href="#">Toys, Kids &amp; Babies</a></li>-->
+
                 </ul>
             </div>					
         </div>

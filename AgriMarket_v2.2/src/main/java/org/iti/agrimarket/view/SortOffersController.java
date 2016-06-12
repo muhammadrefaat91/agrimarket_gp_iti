@@ -51,7 +51,6 @@ public class SortOffersController {
         System.out.println("List<UserOfferProductFixed> fixeds"+offers);
        
         System.out.println("Sort....."+sortType);
-//    List<UserOfferProductFixed> offerproducts = null;
         
         if (sortType != null &&  (sortType.equals("Price") || sortType.equals("السعر"))){
             sortOffers = new SortOffersByPrice();
@@ -59,7 +58,7 @@ public class SortOffersController {
         }else if(sortType != null &&  (sortType.equals("Quantity") || sortType.equals("الكميه"))){
             sortOffers = new SortOffersByQuantity();
             sortOffers.sort(offers, 0, offers.size()-1);
-        }else if(sortType != null &&  (sortType.equals("Newest") || sortType.equals("الأحداث"))){
+        }else if(sortType != null &&  (sortType.equals("Newest") || sortType.equals("الجديد"))){
             sortOffers = new SortOffersByDate();
             sortOffers.sort(offers, 0, offers.size()-1);
         }else{

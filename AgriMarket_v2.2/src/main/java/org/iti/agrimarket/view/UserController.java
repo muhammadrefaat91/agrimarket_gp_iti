@@ -6,10 +6,12 @@
 package org.iti.agrimarket.view;
 
 
+import java.util.Locale;
 import org.iti.agrimarket.business.UserService;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,8 +39,9 @@ public class UserController {
    
 
     @RequestMapping(value = {"/getUser"})
-    public String getUser(@RequestParam(value = "id", required = true) int offerId, Model model) {
+    public String getUser(@RequestParam(value = "id", required = true) int offerId,Locale locale, Model model) {
         User user = null;
+        locale = LocaleContextHolder.getLocale();
         System.out.println("id@@@@@@@@@@@@@@@@@@" + offerId);
 
         user =  userService.getUserEager(offerId);
@@ -48,11 +51,13 @@ public class UserController {
         }
 
         model.addAttribute("userHasOffer", user);
+         model.addAttribute("lang",locale);
         return "view_user";
     }
         @RequestMapping(value = {"/profile.htm"})
-    public String getUserProfile(@RequestParam(value = "id", required = true) int offerId, Model model) {
+    public String getUserProfile(@RequestParam(value = "id", required = true) int offerId,Locale locale, Model model) {
         User user = null;
+        locale = LocaleContextHolder.getLocale();
         System.out.println("id@@@@@@@@@@@@@@@@@@" + offerId);
 
         user =  userService.getUserEager(offerId);
@@ -62,6 +67,7 @@ public class UserController {
         }
 
         model.addAttribute("userHasOffer", user);
+        model.addAttribute("lang",locale);
         return "user-profile";
     }
 }
