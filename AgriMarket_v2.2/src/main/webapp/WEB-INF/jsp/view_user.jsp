@@ -76,7 +76,7 @@
                 <div class="col-sm-3" style="float: <spring:message code="view_user.css.row.col-sm-3.float" />;">
                     <!--left col-->
                     <ul class="list-group">
-                        <li class="list-group-item text-muted" contenteditable="false">${userHasOffer.fullName}</li>
+<!--                        <li class="list-group-item text-muted" contenteditable="false">${userHasOffer.fullName}</li>
                         <li style="text-align: <spring:message code="view-user.rate.text-align"/>;
                             direction:<spring:message code="view_user.css.rate.panel.dir"/>;"class="list-group-item text-right"><span style="    margin-left: <spring:message code="view-user.rate.span.margin-left"/>px;" class="pull-left"><strong class=""><spring:message code="text.user.mobile" /></strong></span>${userHasOffer.mobile}</li>
                         <li style="    text-align: <spring:message code="view-user.rate.text-align"/>;" class="list-group-item text-right"><span style="margin-left: <spring:message code="view-user.rate.margin-left"/>px;
@@ -94,7 +94,7 @@
                               direction: <spring:message code="view_user.css.rate.panel.dir"/>;
                              margin-top:-15px;">
                             <div class="rating-block">
-                                <!--<h4>Average user rating</h4>-->
+                                <h4>Average user rating</h4>
                                 <h2 class="bold padding-bottom-7">${userHasOffer.ratesAverage} <small>/ 5</small></h2>
                                 <c:forEach begin="1" end="${userHasOffer.ratesAverage}">
                                     <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <!--/col-3-->
+                /col-3
                 <div class="col-sm-9" contenteditable="false" style="margin-top: -109px;">
 
                     <div class="panel panel-default target" style="background: antiquewhite;">
@@ -126,9 +126,9 @@
                         <div class="panel-body" style="max-height: 345px;
                              border: 1px solid gray;
                              overflow: auto;">
-                            <!--<div class="row">-->
+                            <div class="row">
                                 <%--<c:forEach items="${userHasOffer.userOfferProductFixeds}" var="offer">--%>
-<!--                                    <div class="col-md-4">
+                                    <div class="col-md-4">
                                         <div class="thumbnail">
                                             <img alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" />
                                             <div style="margin-left: 14px;" class="caption">
@@ -145,7 +145,7 @@
                                                 <div class="add-cart">								
                                     <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
                                 </div>
-                                    </div>-->
+                                    </div>
                                 <%--</c:forEach>--%>
                                 <c:forEach items="${userHasOffer.userOfferProductFixeds}" var="offer">
                             <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
@@ -162,11 +162,11 @@
                                     <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
                                 </div>
                                 <div class="clear"></div>
-                            </div>
+                            </div>-->
                         </div>
                     </c:forEach>
                             <!--</div>-->
-                        </div>
+<!--                        </div>
                     </div>
                     <div class="panel panel-default" style="    width: 79%;margin-left: <spring:message code="view-user.css.review.margin-left" />;">
                         <div class="panel-heading"><a style="cursor: pointer;margin-left: <spring:message code="view_user.css.panel-heading.margin-left" />px;" data-toggle="collapse" data-target="#demo"><spring:message code="text.user.ratetext" /></a></div>
@@ -195,7 +195,7 @@
                             <a style="cursor: pointer;     margin-left: -9px;" data-toggle="collapse" data-target="#demo2"><spring:message code="text.view_user.reviews" /></a></div>
                         <div class="row" style="    margin-left: -14px;">
                             <div class="col-sm-7" style="width: 99.333333%; margin-top: 3px;">
-                                <!--<hr/>-->
+                                <hr/>
                                 <c:forEach items="${userHasOffer.userRatesUsersForRatedId}"  var="rater">
                                     <div class="review-block">
                                         <div class="row">
@@ -230,7 +230,7 @@
                     </div> 
                 </div>	
             </div>
-        </div>
+        </div>-->
     </div>
     <jsp:include page="footer/footer.jsp" />
 </body>
