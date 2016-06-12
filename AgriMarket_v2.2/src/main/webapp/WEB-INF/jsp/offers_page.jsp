@@ -11,8 +11,8 @@
 <html lang="ar_EG">
     <head>
         <title><spring:message code="title.offer_page" /></title>
-        
-    <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
+
+        <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -28,7 +28,7 @@
             {
                 var foo = document.getElementById('sort');
                 self.name = 'sortidx' + foo.selectedIndex;
-                            
+
             }
             onload = function ()
             {
@@ -42,85 +42,93 @@
     </head>
     <body>
 
-      
-    
-    <div class="wrap">
-        <!-- header--->
-        <jsp:include page="header/headertop_desc.jsp" />
-        <div class="call" style="    margin-top: -34px;">
-            <p> <spring:message code="text.lang" /> : <a class="lang" href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a class="lang" href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
-        </div>
-        <!---include header top -->
-        <jsp:include page="header/header_top.jsp" />
-        <jsp:include page="header/header_bottom_nav.jsp" />
 
-        <!-- content--->
-        <div class="main" style="height: 400px;">
-            <div class="content">
-                <div class="content_top" dir="<spring:message code="offer_page.css.content_top.dir" />">
-                    <!-- search!-->
 
-                    <div class="heading" style="float: <spring:message code="offer_page.css.heading.float" />;">
+        <div class="wrap">
+            <!-- header--->
+            <jsp:include page="header/headertop_desc.jsp" />
+            <div class="call" style="    margin-top: -34px;">
+                <p> <spring:message code="text.lang" /> : <a class="lang" href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a class="lang" href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+            </div>
+            <!---include header top -->
+            <jsp:include page="header/header_top.jsp" />
+            <jsp:include page="header/header_bottom_nav.jsp" />
 
-                        <div class="bs-example">
+            <!-- content--->
+            <div class="main" style="height: 400px;">
+                <div class="content">
+                    <div class="content_top" dir="<spring:message code="offer_page.css.content_top.dir" />">
+                        <!-- search!-->
 
-                            <div>
-                                <form action="${pageContext.request.contextPath}/web/sort.htm" method="get">
-                                    <label><spring:message code="text.offer_page.sortby" /></label>
-                                    <select value="${param.sortType}"  class="pcategory"   id="sort" name="sortType"  onchange="this.form.submit()" >
-                                        <option ><spring:message code="dropdown.offer_page.relevance" /></option>
-                                        <option  ><spring:message code="dropdown.offer_page.newest" /></option>
-                                        <option ><spring:message code="dropdown.offer_page.price" /></option>
-                                        <option  ><spring:message code="dropdown.offer_page.quantity" /></option>
-                                    </select>
-                                    <input type="hidden" value="${param.name}"  name="name"/>
-                                </form>
-                            </div>
-                            <!--end drop down for search!-->
-                        </div>
-                    </div>
-                    <%-- end list--%>
-                    <div class="see">
+                        <div class="heading" style="float: <spring:message code="offer_page.css.heading.float" />;">
 
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <!--view all offers -->
-                <div class="section group">
-                    <c:forEach items="${getAllOfferProducts}" var="offer">
-                        <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
-                            <a href="preview.htm?id=${offer.id}">
-                                <img  
-                                    style="border: 1.1px solid #2969b0;
-                                    border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+                            <div class="bs-example">
 
-                                    <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
-                        
-                            <div class="price-details">
-                                <div class="price-number">
-                                    <p><span class="rupees">$${offer.price}</span></p>
+                                <div>
+                                    <form action="${pageContext.request.contextPath}/web/sort.htm" method="get">
+                                        <label><spring:message code="text.offer_page.sortby" /></label>
+                                        <select value="${param.sortType}"  class="pcategory"   id="sort" name="sortType"  onchange="this.form.submit()" >
+                                            <option ><spring:message code="dropdown.offer_page.relevance" /></option>
+                                            <option  ><spring:message code="dropdown.offer_page.newest" /></option>
+                                            <option ><spring:message code="dropdown.offer_page.price" /></option>
+                                            <option  ><spring:message code="dropdown.offer_page.quantity" /></option>
+                                        </select>
+                                        <input type="hidden" value="${param.name}"  name="name"/>
+                                    </form>
                                 </div>
-                                <div class="add-cart">								
-                                    <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
-                                </div>
-                                <div class="clear"></div>
+                                <!--end drop down for search!-->
                             </div>
                         </div>
-                    </c:forEach>
+
+                        <div >
+
+                            <div class="add-cart">								
+                                <h4><a href="<spring:url value="/addoffer"/>"><spring:message code="link.addoffer" /></a></h4>
+                            </div>
+                            <div class="clear"></div>
+                        </div>  
+                        <%-- end list--%>
+                        <div class="see">
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <!--view all offers -->
+                    <div class="section group">
+                        <c:forEach items="${getAllOfferProducts}" var="offer">
+                            <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
+                                <a href="preview.htm?id=${offer.id}">
+                                    <img  
+                                        style="border: 1.1px solid #2969b0;
+                                        border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+
+                                <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
+
+                                <div class="price-details">
+                                    <div class="price-number">
+                                        <p><span class="rupees">$${offer.price}</span></p>
+                                    </div>
+                                    <div class="add-cart">								
+                                        <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--Footer--->
-    <jsp:include  page="footer/footer.jsp" />
-    <script  src="<spring:url value="/resources/js/jquery.min.js" />" ></script>
-    <script  src="<spring:url value="/resources/js/bootstrap.min.js" />" ></script>
+        <!--Footer--->
+        <jsp:include  page="footer/footer.jsp" />
+        <script  src="<spring:url value="/resources/js/jquery.min.js" />" ></script>
+        <script  src="<spring:url value="/resources/js/bootstrap.min.js" />" ></script>
 
 
-    <a href="#" id="toTop"><span id="toTopHover"> </span></a>
+        <a href="#" id="toTop"><span id="toTopHover"> </span></a>
 
-</body>
+    </body>
 </html>
 
 
