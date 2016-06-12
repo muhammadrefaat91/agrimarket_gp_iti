@@ -57,7 +57,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @SessionAttributes("user")
 
-public class AddOfferController extends HttpServlet {
+public class AddProductController extends HttpServlet {
 
     private Logger logger;
 
@@ -75,7 +75,7 @@ public class AddOfferController extends HttpServlet {
 
     User user;
 
-    @RequestMapping(value = "/addoffer", method = RequestMethod.GET)
+//    @RequestMapping(value = "/addoffer", method = RequestMethod.GET)
     public ModelAndView drawAddOfferPage(Model model) {
 
         List<Unit> units;
@@ -160,7 +160,7 @@ public class AddOfferController extends HttpServlet {
      * Amr upload image and form data
      *
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/addoffer")
+//    @RequestMapping(method = RequestMethod.POST, value = "/addoffer")
     public String addOffer(@RequestParam("description") String description,
             @RequestParam("quantity") float quantity,
             @RequestParam("quantityunit") int quantityunit,

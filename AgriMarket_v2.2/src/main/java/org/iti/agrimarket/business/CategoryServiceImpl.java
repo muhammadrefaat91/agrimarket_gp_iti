@@ -64,4 +64,9 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.findCategoryEntities();
     }
 
+    @Override
+    public Category getCategoryEager(Integer categoryId) {
+        return categoryDao.findCategoryEager(categoryId);
+    }
+
 }

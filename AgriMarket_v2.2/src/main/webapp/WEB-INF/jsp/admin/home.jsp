@@ -22,23 +22,17 @@
 
 </head>
 <body>
-    
+
     <div class="wrap">
+
         <!-- header--->
-        <!---include header description -->
-
-        <jsp:include page="../header/headertop_desc.jsp" />
+        <jsp:include page="header/headertop_desc.jsp" />
         <div class="call" style="    margin-top: -34px;">
-            <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+            <p> <spring:message code="text.lang" /> : <a href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
         </div>
-
         <!---include header top -->
-        <jsp:include page="../header/header_top.jsp" />
-
-        <!---include nav bar -->
-        <jsp:include page="../header/header_bottom_nav.jsp" />
-
-
+        <jsp:include page="header/header_top.jsp" />
+        <jsp:include page="header/header_bottom_nav.jsp" />
         <!-- content--->
         <div class="main">
             <div class="content">
@@ -53,15 +47,13 @@
                     <div class="clear"></div>
                 </div>
                 <div class="section group">
-                    
+
                 </div>
 
             </div>
         </div>
     </div>
 
-    <!--Footer--->
-    <jsp:include  page="../footer/footer.jsp" />
     <a href="#" id="toTop"><span id="toTopHover"> </span></a>
 </body>
 </html>

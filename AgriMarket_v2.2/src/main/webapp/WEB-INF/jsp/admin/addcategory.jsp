@@ -20,13 +20,15 @@
     <body>
         <div class="wrap">
             <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-            <!---include header description -->
-            <jsp:include page="../header/headertop_desc.jsp" />
+            
+            <!-- header--->
+            <jsp:include page="header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
-                <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+                <p> <spring:message code="text.lang" /> : <a href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
-            <!---include nav bar -->
-            <jsp:include page="../header/header_bottom_nav.jsp" />
+            <!---include header top -->
+            <jsp:include page="header/header_top.jsp" />
+            <jsp:include page="header/header_bottom_nav.jsp" />
             <div class="wrap">
                 <div class="main">
                     <div class="content">
@@ -102,5 +104,4 @@
     </body>
 </html>
 
-<jsp:include  page="../footer/footer.jsp"/>
 </body>

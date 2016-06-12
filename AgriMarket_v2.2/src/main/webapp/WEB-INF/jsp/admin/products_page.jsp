@@ -11,8 +11,8 @@
 <html lang="ar_EG">
     <head>
         <title><spring:message code="title.offer_page" /></title>
-        
-    <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
+
+        <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -42,15 +42,15 @@
     </head>
     <body>
         <div class="wrap">
+
             <!-- header--->
-            <jsp:include page="../header/headertop_desc.jsp" />
+            <jsp:include page="header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
                 <p> <spring:message code="text.lang" /> : <a href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
             <!---include header top -->
-            <jsp:include page="../header/header_top.jsp" />
-            <jsp:include page="../header/header_bottom_nav.jsp" />
-
+            <jsp:include page="header/header_top.jsp" />
+            <jsp:include page="header/header_bottom_nav.jsp" />
 
             <!-- content--->
             <div class="main" style="height: 400px;">
@@ -77,14 +77,14 @@
                                 <!--end drop down for search!-->
                             </div>
                         </div>
-                                    
-                            <div >
 
-                                <div class="add-cart">								
-                                    <h4><a href="<spring:url value="/addoffer"/>"><spring:message code="link.addoffer" /></a></h4>
-                                </div>
-                                <div class="clear"></div>
+                        <div >
+
+                            <div class="add-cart">								
+                                <h4><a href="<spring:url value="/addoffer"/>"><spring:message code="link.addoffer" /></a></h4>
                             </div>
+                            <div class="clear"></div>
+                        </div>
                         <%-- end list--%>
                         <div class="see">
 
@@ -117,8 +117,6 @@
             </div>
         </div>
 
-        <!--Footer--->
-        <jsp:include  page="../footer/footer.jsp" />
         <script  src="<spring:url value="/resources/js/jquery.min.js" />" ></script>
         <script  src="<spring:url value="/resources/js/bootstrap.min.js" />" ></script>
 
