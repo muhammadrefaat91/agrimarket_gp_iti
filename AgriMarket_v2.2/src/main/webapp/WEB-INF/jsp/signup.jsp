@@ -44,11 +44,21 @@
                         function (googleUser) {
                             document.getElementById('name').innerText = "Signed in: " +
                                     googleUser.getBasicProfile().getName();
+                            
+                            var profile = googleUser.getBasicProfile();
+                            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                            console.log('Full Name: ' + profile.getName());
+                            console.log('Given Name: ' + profile.getGivenName());
+                            console.log('Family Name: ' + profile.getFamilyName());
+                            console.log("Image URL: " + profile.getImageUrl());
+                            console.log("Email: " + profile.getEmail());
+
+
 
                             $.ajax({
                                 url: "${pageContext.request.contextPath}/signupgplus",
                                 type: "POST",
-                                data: {name: googleUser.getBasicProfile().getName(), email: googleUser.getBasicProfile().getEmail()},
+                                data: {name: googleUser.getBasicProfile().getName(), email: googleUser.getBasicProfile().getEmail(),img:profile.getImageUrl()},
                                 success: function (data) {
                                     console.log('success' + data);
 //                        if (data === 'no_errors')
@@ -128,6 +138,8 @@
                     <div class="row">
                         <div align="center">
 
+            
+            
                             <div id="gSignInWrapper">
                                 <span class="label">Sign in with:</span>
                                 <div id="customBtn" class="customGPlusSignIn">

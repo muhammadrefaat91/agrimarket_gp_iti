@@ -266,8 +266,11 @@ public class AddOfferController extends HttpServlet {
             }
 
         } else {
-            redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload  because the file was empty");
+
+            userOfferProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + "default_offer.jpg");
+
+            offerService.updateOffer(userOfferProductFixed);
+
         }
         
         User oldUser = (User) request.getSession().getAttribute("user");
