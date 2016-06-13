@@ -48,8 +48,9 @@
             <!-- header--->
             <jsp:include page="header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
-                <p> <spring:message code="text.lang" /> : <a class="lang" href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a class="lang" href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+                <p style="direction: <spring:message code="addoffer.css.contactform.dir" />;"> <spring:message code="text.lang" /> : <a class="lang" href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a class="lang" href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
+           
             <!---include header top -->
             <jsp:include page="header/header_top.jsp" />
             <jsp:include page="header/header_bottom_nav.jsp" />
@@ -94,9 +95,8 @@
                         <div class="clear"></div>
                     </div>
                     <!--view all offers -->
-                    <div class="section group" style="    width: 110%;
-    margin-left: 11px;">
-                        <c:forEach items="${getAllOfferProducts}" var="offer">
+                    <div class="section group">
+                        <c:forEach items="${sessionScope.getAllOfferProducts}" var="offer">
                             <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
                                 <a href="preview.htm?id=${offer.id}">
                                     <img  

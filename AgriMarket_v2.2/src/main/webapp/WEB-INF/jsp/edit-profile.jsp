@@ -25,13 +25,16 @@
 
     </head>
     <body>
+        <c:if test="${empty sessionScope.user}">
+            <c:redirect url="/web/signup.htm"/>
+        </c:if>
         
         <div class="wrap">
             <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
             <!---include header description -->
             <jsp:include page="header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
-                <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+                <p style="direction: <spring:message code="addoffer.css.contactform.dir" />;"> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
             <jsp:include page="header/header_top.jsp" />
             <!---include nav bar -->
@@ -67,25 +70,25 @@
                         <div class="form-group" style="padding-bottom: 13px;">
                                 <label class="col-lg-3 control-label"><spring:message code="edit-profile.fullname" /></label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" value="${sessionScope.user.fullName}" name="fullName" type="text">
+                                    <input class="form-control" value="${sessionScope.user.fullName}" maxlength="55" required="" name="fullName" min="11" type="text">
                                 </div>
                             </div>
                             <div class="form-group" style="padding-bottom: 13px;">
                                 <label class="col-lg-3 control-label"><spring:message code="text.user.mobile" /> </label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" value="${sessionScope.user.mobile}" name="mobile" type="mobile">
+                                    <input class="form-control" value="${sessionScope.user.mobile}" name="mobile" required="" title="at least 11 number" maxlength="11" min="11" type="tel">
                                 </div>
                             </div>
                             <div class="form-group" style="padding-bottom: 13px;">
-                                <label class="col-lg-3 control-label"><spring:message code="text.user.email" /></label>
+                                <label class="col-lg-3 control-label"><spring:message code="text.user.email"  /></label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" value="${sessionScope.user.mail}" name="mail" type="text">
+                                    <input class="form-control" value="${sessionScope.user.mail}" name="mail" maxlength="55" required="" min="10" type="email">
                                 </div>
                             </div>
                             <div class="form-group" style="padding-bottom: 13px;">
                                 <label class="col-lg-3 control-label"><spring:message code="text.addoffer.governerate" /></label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" value="${sessionScope.user.governerate}" name="governerate" type="text">
+                                    <input class="form-control" value="${sessionScope.user.governerate}"    maxlength="55" min="22" required="" name="governerate" type="text">
                                 </div>
                             </div>
                             

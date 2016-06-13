@@ -14,12 +14,17 @@
 
         <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <title><spring:message code="title.sign_in" /></title>
-        <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" >
-        <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" >
-        <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-        <link rel="stylesheet" href="resources/css/style.css">
-        <link rel="stylesheet" href="resources/css/mbr-additional.css" type="text/css">
-
+        <!--<link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" >-->
+        <!--<link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" >-->
+        <link rel="stylesheet" href="<spring:url value="/resources/css/bootstrap.min.css" />">
+        <!--<link rel="stylesheet" href="<spring:url value="/resources/css/style.css"/>">-->
+        <!--<link rel="stylesheet" href="resources/css/mbr-additional.css" type="text/css">-->
+         <!--<link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">-->
+        <style type="text/css">
+            div label{
+                float:<spring:message code="index.css.heading.float" /> ;
+            }
+        </style>
     </head>
     <body  >
         <!--<div class="header">-->
@@ -28,7 +33,7 @@
 
             <jsp:include page="header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
-                <p> <spring:message code="text.lang" /> : <a href="?id=${param['id']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?id=${param['id']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+                <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
             <!---include header top -->
             <jsp:include page="header/header_top.jsp" />
@@ -60,22 +65,23 @@
 
                                             <div class="form-group">
 
-                                                <label><spring:message code="text.addoffer.mobile" /></label><input type="tel"   name="mobile"  class="form-control" />
+                                                <label style="direction: <spring:message code="addoffer.css.contactform.dir" />"><spring:message code="text.addoffer.mobile" /></label><input type="tel" maxlength="11" min="11"  name="mobile" required class="form-control" />
 
 
                                             </div>
                                             <div class="form-group">
 
-                                                <label><spring:message code="text.addoffer.governerate" /></label><input type="text"   name="governerate" class="form-control"/>
+                                                <label style="direction: <spring:message code="addoffer.css.contactform.dir" />"><spring:message code="text.addoffer.governerate" /></label><input type="text" required  name="governerate" maxlength="20" accept="" class="form-control"/>
 
                                             </div>
 
                                             <div class="form-group">
 
-                                                <input type="submit"  /><br/>
+                                                <input type="submit" value="<spring:message code="signupstep.button.signup" />" id="add" class="form-control" /><br/>
                                             </div>
 
                                         </div>
+                                    </form>
 
                                 </div>
 

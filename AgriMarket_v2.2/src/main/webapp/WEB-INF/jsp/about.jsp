@@ -27,7 +27,7 @@
     <div class="wrap">
         <jsp:include page="header/headertop_desc.jsp" />
         <div class="call" style="    margin-top: -34px;">
-            <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+            <p style="direction: <spring:message code="addoffer.css.contactform.dir" />;"> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
         </div>
         <!---include header top -->
         <jsp:include page="header/header_top.jsp" />
