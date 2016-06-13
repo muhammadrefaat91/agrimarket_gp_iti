@@ -12,6 +12,11 @@
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script> 
     <script type="text/javascript" src="js/move-top.js"></script>
     <script type="text/javascript" src="js/easing.js"></script>
+    <style type="text/css">
+        .search_box form input[type="submit"]{
+                margin-top: <spring:message code="search.icon.margin-top" />px;
+        }
+    </style>
 </head>
 <body>
     <div class="wrap">

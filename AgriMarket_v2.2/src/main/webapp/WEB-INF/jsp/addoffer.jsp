@@ -10,12 +10,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" >
+        <meta charset="UTF-8" http-equiv="Content-Type" content="text/html;">
 
         <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <title><spring:message code="title.addoffer.addproduct" /></title>
         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
+                <link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">
+
     </head>
     <body>
         <div class="wrap">
@@ -25,16 +27,17 @@
             <div class="call" style="    margin-top: -34px;">
                 <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
+             <jsp:include page="header/header_top.jsp" />
             <!---include nav bar -->
             <jsp:include page="header/header_bottom_nav.jsp" />
             <div class="wrap">
                 <div class="main">
                     <div class="content">
                         <div class="section group">
-                            <div class="col span_2_of_3">
+                            <div class="col span_2_of_3" style="width: 87%;">
                                 <div class="contact-form">
-                                    <div class="col-sm-8 col-sm-offset-2">
-                                        <h2><spring:message code="title.addoffer.addproduct" /> </h2>
+                                    <div class="col-sm-8 col-sm-offset-2" style="direction: <spring:message code="addoffer.css.contactform.dir" />">
+                                        <h2 style="font-size: xx-large;"><spring:message code="title.addoffer.addproduct" /> </h2>
                                         <form   method="post" enctype="multipart/form-data" action="addoffer" >
                                             <div >
 
@@ -54,7 +57,7 @@
                                                 <span>
                                                     <select name="quantityunit">
                                                         <c:forEach var="item" items="${units}">
-                                                            <option value="${item.id}">${item.nameAr}</option>
+                                                            <option value="${item.id}">${requestScope.lang eq 'en'?item.nameEn:item.nameAr}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </span>
@@ -65,7 +68,7 @@
                                                     <span>
                                                         <select name="unitprice">
                                                             <c:forEach var="item" items="${units}">
-                                                                <option class="textbox" value="${item.id}">${item.nameEn}</option>
+                                                                <option class="textbox" value="${item.id}">${requestScope.lang eq 'en'?item.nameEn:item.nameAr}</option>
                                                             </c:forEach>
                                                         </select>
                                                     </span>

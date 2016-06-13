@@ -21,20 +21,15 @@
     <script type="text/javascript" src="<spring:url value="/resources/js/jquery.js" />" ></script>
     <script src="<spring:url value="/resources/js/jquery.rating.js" />"></script>
     <script src="<spring:url value="/resources/js/bootstrap.min.js" />"></script>
-    <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" />
-    <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />
+
     <script type="text/javascript" >
-        $(document).ready(function () {
-            var lang = $.cookie("myAppLocaleCookie");
-            console.log("language: " + '${ lang  eq 'ar_EG'?'en':'arabic'}');
-
-
-//            if (lang === 'ar_EG') 
+        $(document).ready(function () { 
             $('#submit-review').click(function () {
                 //if user doesn't login 
-                var user = <% out.print(session.getAttribute("user"));%>;
-                if (user == null)
-                    location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/sign_up.htm";
+                var user = ${sessionScope.user.id}0|| null ;
+                if (user == 0 || user===null)
+                    location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/signup.htm";
+                
                 var selectedVal = "";
                 var selected = $("input[type='radio'][name='rating']:checked");
                 selectedVal = selected.val();
@@ -47,7 +42,7 @@
                     success: function (data) {
                         console.log('success' + data);
                         if (data === 'no_errors')
-                            location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/getUser?id=${param['id']}";
+                            location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/getUser.htm?id=${param['id']}";
                     },
                     error: function (e) {
                         console.log('error:' + e.data);
@@ -130,14 +125,14 @@
                 <!--/col-3-->
                 <div class="col-sm-9" contenteditable="false" style="">
 
-                    <div class="panel panel-default target" style="background: rgba(37, 37, 37, 0.05);">
+                    <div class="panel panel-default target" style="background: white;">
                         <div class="see">
                             <p><a style="margin-left: <spring:message code="view_user.css.all-products.m-left" />px;" href="${pageContext.request.contextPath}/offers.htm"><spring:message code="link.all.Products" /></a></p>
                         </div>
                         <div style="direction: <spring:message code="view_user.css.user-products.dir" />" class="panel-heading" contenteditable="false"><spring:message code="text.user.products" /></div>
 
                         <div class="panel-body" style="max-height: 345px;
-                             border: 1px solid gray;
+                             border: 1px solid rgba(128, 128, 128, 0.13);
                              overflow: auto;">
                             <!--<div class="row">-->
                             <%--<c:forEach items="${userHasOffer.userOfferProductFixeds}" var="offer">--%>
@@ -207,7 +202,8 @@
                         <div class="panel-heading">
                             <a style="cursor: pointer;     margin-left: -9px;" data-toggle="collapse" data-target="#demo2"><spring:message code="text.view_user.reviews" /></a></div>
                         <div class="row" style=" background-color: white;   margin-left: -14px;">
-                            <div class="col-sm-7" style="width: 99.333333%; margin-top: 3px;">
+                            <div class="col-sm-7" style="    width: 100.333333%;
+    margin-top: 0px;">
                                 <!--<hr/>-->
                                 <c:forEach items="${userHasOffer.userRatesUsersForRatedId}"  var="rater">
                                     <div class="review-block">

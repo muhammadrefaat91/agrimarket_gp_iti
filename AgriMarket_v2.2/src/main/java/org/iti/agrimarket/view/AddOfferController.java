@@ -33,6 +33,7 @@ import org.iti.agrimarket.business.UserService;
 import java.io.BufferedOutputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,6 +47,7 @@ import org.iti.agrimarket.model.pojo.Product;
 import org.iti.agrimarket.model.pojo.Unit;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
@@ -53,9 +55,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  * @author Amr
  */
 @Controller
-
-@SessionAttributes("user")
-
+@RequestMapping("web")
 public class AddOfferController extends HttpServlet {
 
     private Logger logger;
@@ -74,9 +74,9 @@ public class AddOfferController extends HttpServlet {
 
     User user;
 
-    @RequestMapping(value = "/addoffer", method = RequestMethod.GET)
-    public ModelAndView drawAddOfferPage(Model model) {
-
+    @RequestMapping(value = {"/addoffer.htm"}, method = RequestMethod.GET)
+    public ModelAndView drawAddOfferPage(Locale locale,Model model) {
+locale = LocaleContextHolder.getLocale();
         List<Unit> units;
         units = unitService.getAllUnits();
         System.out.println(units.get(1).getNameEn());
@@ -97,7 +97,7 @@ public class AddOfferController extends HttpServlet {
         System.out.println(products.get(1).getNameEn());
 
         model.addAttribute("products", products);
-
+        model.addAttribute("lang", locale);
         System.out.println("hello################  new offer");
         return new ModelAndView("addoffer");
     }
@@ -106,53 +106,6 @@ public class AddOfferController extends HttpServlet {
     protected void initBinder(WebDataBinder binder) {
         // Convert multipart object to byte[]
         binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
-    }
-
-    //  @RequestMapping(method = RequestMethod.POST, value = "/uploadimage")
-    public String handleFileUpload(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
-        if (name.contains("/")) {
-            redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-            return "redirect:/";
-        }
-        if (name.contains("/")) {
-            redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-            return "redirect:/";
-        }
-
-        if (!file.isEmpty()) {
-            try {
-                File parentDir = new File(Constants.IMAGE_PATH + Constants.OFFER_PATH);
-                if (!parentDir.isDirectory()) {
-                    parentDir.mkdirs();
-                }
-
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.OFFER_PATH + name)));
-
-                final String ext = "." + "jpg";
-                FileCopyUtils.copy(file.getInputStream(), stream);
-                stream.close();
-                redirectAttributes.addFlashAttribute("message",
-                        "You successfully uploaded " + name + "!");
-
-                System.out.println("succccccccccccc");
-
-                stream.close();
-//                offerProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + name + ext);
-//                offerService.updateOffer(offerProductFixed);
-
-            } catch (Exception e) {
-                redirectAttributes.addFlashAttribute("message",
-                        "You failed to upload " + name + " => " + e.getMessage());
-            }
-        } else {
-            redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload " + name + " because the file was empty");
-        }
-
-        return "redirect:signup.htm";
     }
 
     /**

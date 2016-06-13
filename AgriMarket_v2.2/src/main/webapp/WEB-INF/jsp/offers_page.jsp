@@ -55,7 +55,7 @@
             <jsp:include page="header/header_bottom_nav.jsp" />
 
             <!-- content--->
-            <div class="main" style="height: 400px;">
+            <div class="main" style="height: 550px;">
                 <div class="content">
                     <div class="content_top" dir="<spring:message code="offer_page.css.content_top.dir" />">
                         <!-- search!-->
@@ -82,7 +82,7 @@
 
                         <div >
 
-                            <div class="add-cart">								
+                            <div class="add-cart" style="float: <spring:message code="offer_page.css.add-cart.float" />;">								
                                 <h4><a href="<spring:url value="/addoffer"/>"><spring:message code="link.addoffer" /></a></h4>
                             </div>
                             <div class="clear"></div>

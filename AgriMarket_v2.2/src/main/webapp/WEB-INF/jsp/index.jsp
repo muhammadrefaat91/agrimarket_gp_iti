@@ -19,7 +19,11 @@
 
     <script type="text/javascript" src="<spring:url value="/resources/js/jquery-1.7.2.min.js" />"></script>
     <script type="text/javascript" src="<spring:url value="/resources/js/jquery.cookie.js" />"></script>
-
+    <style type="text/css">
+        .search_box form input[type="submit"]{
+                margin-top: <spring:message code="search.icon.margin-top" />px;
+        }
+    </style>
 </head>
 <body>
     <c:if test="${empty allcategories}" >

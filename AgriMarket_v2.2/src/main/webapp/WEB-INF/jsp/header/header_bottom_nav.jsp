@@ -52,7 +52,8 @@
          margin-left: <spring:message code="header-nav.css.div.search-box.margin-left" />px;">
         <form action="${pageContext.request.contextPath}/web/getoffers.htm" method="get">
             <input style="margin-left:<spring:message code="header-nav.css.div.search-box.input-text,margin-left" />px;" type="text" value="${param.name}" name="name" placeholder="<spring:message code="input.header_bottom.searchtext" />">
-            <input type="submit" value=""  style= margin-top:<spring:message code="header-nav.css.div.search-box.input-text,margin-top" />px;">
+            <input type="submit" value=""  >
+            <!--style= margin-top:<spring:message code="header-nav.css.div.search-box.input-text,margin-top" />px;-->
         </form>
     </div>
     <div class="clear"></div>
