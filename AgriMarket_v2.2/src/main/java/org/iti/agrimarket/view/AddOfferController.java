@@ -153,40 +153,9 @@ locale = LocaleContextHolder.getLocale();
 
         int res = offerService.addOffer(userOfferProductFixed);
 
-//
-//        if (!Validation.validateUser(user)) {
-//
-//            return "signup";
-//
-//        }
-//
-//        int res = userService.addUser(user);
-//
-////          if (user.getId() == null) {
-////         //   logger.trace(Constants.DB_ERROR);
-////           return "signup";
-////        }
-////            if (name.contains("/")) {
-////                redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-////                return "redirect:/";
-////            }
-////            if (name.contains("/")) {
-////                redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-////                return "redirect:/";
-////            }
+
         if (!file.isEmpty()) {
-//        
-//
-////                    
-////                    BufferedOutputStream stream = new BufferedOutputStream(
-////                            new FileOutputStream(new File("C:\\AgriMarket\\images\\users\\" + name)));
-////                    FileCopyUtils.copy(file.getInputStream(), stream);
-////                    stream.close();
-////                    redirectAttributes.addFlashAttribute("message",
-////                            "You successfully uploaded " + name + "!");
-////                    
-////
-////                    System.out.println("succccccccccccc");
+
             String fileName = userOfferProductFixed.getId() + String.valueOf(new Date().getTime());
 //
 //             
