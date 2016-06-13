@@ -27,6 +27,7 @@
     <context:component-scan base-package="org.iti.agrimarket.model"/>
     <context:component-scan base-package="org.iti.agrimarket.business"/>
      <context:component-scan base-package="org.iti.agrimarket.view"/>
+     <context:component-scan base-package="org.iti.agrimarket.administration.view"/>
     <context:component-scan base-package="org.iti.agrimarket.service"/>
      <context:component-scan base-package="org.iti.agrimarket.administration.view"/>
     <context:component-scan base-package="org.iti.agrimarket.util.requestprocessor"/>
@@ -84,7 +85,7 @@
     <mvc:view-controller path="/sign_up1.htm" view-name="sign_up_1" /> 
     <mvc:view-controller path="/admin/home.htm" view-name="admin/home" />
     <mvc:view-controller path="/admin/products_page.htm" view-name="admin/products_page" />
-    <mvc:view-controller path="/admin/categories_page.htm" view-name="admin/categories_page" />
+    <!--<mvc:view-controller path="/admin/categories_page.htm" view-name="admin/categories_page" />-->
     <mvc:view-controller path="/admin/addproduct.htm" view-name="admin/addproduct" />
     <mvc:view-controller path="/admin/addcategory.htm" view-name="admin/addcategory" />
    

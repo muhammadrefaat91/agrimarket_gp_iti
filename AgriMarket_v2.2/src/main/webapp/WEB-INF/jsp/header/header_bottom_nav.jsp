@@ -3,8 +3,8 @@
 <%@ taglib prefix="spring"
            uri="http://www.springframework.org/tags"%>
 
-<link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" />
-<link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />
+<!--<link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" />-->
+<!--<link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />-->
 
 <script src="<spring:url value="/resources/js/jquery.min.js" />"></script>
 <script>

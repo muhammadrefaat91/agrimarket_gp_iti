@@ -29,5 +29,7 @@ public interface CategoryDAOInterface {
     public List<Category> getChildrenOf(Integer categoryId);
     
     public List<Category> searchCategory(String categoryName);
+
+    public Category findCategoryEager(Integer categoryId);
     
 }

@@ -18,6 +18,7 @@ public interface CategoryService {
     public int addCategory(Category category);
     
     public Category getCategory(Integer categoryId);
+    public Category getCategoryEager(Integer categoryId);
     
     public List<Category> getChildrenOf(Integer categoryId);
 
