@@ -69,4 +69,11 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.findCategoryEager(categoryId);
     }
 
+    @Override
+    public int createCategory(Category category) {
+      return categoryDao.create(category);
+  
+    
+    }
+
 }

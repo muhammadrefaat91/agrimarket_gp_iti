@@ -96,60 +96,6 @@ public class SignUpController extends HttpServlet {
 
     String imgUrl = null;
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signUp(@ModelAttribute("userForm") @Valid User user, BindingResult br, Model model) {
-
-        if (br.hasErrors()) {
-            return "signup";
-        }
-        user.setLat(0.0);
-        user.setLong_(0.0);
-        user.setLoggedIn(true);
-        user.setRatesAverage(0);
-        user.setRegistrationChannel(0);   // web
-        user.setImageUrl("images/amr.jpg");
-
-        System.out.println("user image -----------------" + user.getImage());
-
-//        if (user.getId() == null || (userService.getUser(user.getId())) == null) {
-//            // return missing parameter error 
-//
-//     //       logger.trace(Constants.INVALID_PARAM);
-//
-//        }
-        int res = userService.addUser(user);
-
-        //Use the generated id to form the image name
-        String name = user.getId() + String.valueOf(new Date().getTime());
-
-        if (user.getImage() != null) {
-            try {
-                byte[] bytes = user.getImage();
-                // MagicMatch match = Magic.getMagicMatch(bytes);
-                //      final String ext = "." + match.getExtension();
-                final String ext = "." + "jpg";
-
-                File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
-                if (!parentDir.isDirectory()) {
-                    parentDir.mkdirs();
-                }
-                BufferedOutputStream stream
-                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + name)));
-                stream.write(bytes);
-                stream.close();
-                user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + name + ext);
-                userService.updateUser(user);
-            } catch (Exception e) {
-                //           logger.error(e.getMessage());
-
-            }
-        } else {
-
-            userService.updateUser(user);
-
-        }
-        return "index";
-    }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public ModelAndView drawSignUpForm() {
@@ -158,46 +104,7 @@ public class SignUpController extends HttpServlet {
         return new ModelAndView("signup", "userForm", user);
     }
 
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        // Convert multipart object to byte[]
-        binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
-    }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/uploadimage")
-    public String handleFileUpload(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
-        if (name.contains("/")) {
-            redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-            return "redirect:/";
-        }
-        if (name.contains("/")) {
-            redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-            return "redirect:/";
-        }
-
-        if (!file.isEmpty()) {
-            try {
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(new File("C:\\AgriMarket\\images\\users\\" + name + ".jpg")));
-                FileCopyUtils.copy(file.getInputStream(), stream);
-                stream.close();
-                redirectAttributes.addFlashAttribute("message",
-                        "You successfully uploaded " + name + "!");
-
-                System.out.println("succccccccccccc");
-            } catch (Exception e) {
-                redirectAttributes.addFlashAttribute("message",
-                        "You failed to upload " + name + " => " + e.getMessage());
-            }
-        } else {
-            redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload " + name + " because the file was empty");
-        }
-
-        return "redirect:signup.htm";
-    }
 
     /**
      * upload image and form data
@@ -408,38 +315,6 @@ public class SignUpController extends HttpServlet {
             userService.updateUser(user);
 
         }
-
-//        if (!file.isEmpty()) {
-//
-//            String fileName = user.getId() + String.valueOf(new Date().getTime());
-//
-//            try {
-//                byte[] bytes = file.getBytes();
-//                MagicMatch match = Magic.getMagicMatch(bytes);
-//                final String ext = "." + match.getExtension();
-//
-//                File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
-//                if (!parentDir.isDirectory()) {
-//                    parentDir.mkdirs();
-//                }
-//                BufferedOutputStream stream
-//                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName + ext)));
-//                stream.write(bytes);
-//                stream.close();
-//                user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
-//                userService.updateUser(user);
-//
-//            } catch (Exception e) {
-//                //                  logger.error(e.getMessage());
-//                userService.deleteUser(user); // delete the category if something goes wrong
-//
-//                return "signup";
-//            }
-//
-//        } else {
-//
-//        }
-//        user=userService.getUserEager(user.getId());
 
         model.addAttribute("user", user);
         System.out.println("i Stored user in the DB");

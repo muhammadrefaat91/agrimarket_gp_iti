@@ -78,4 +78,8 @@ public class ProductServiceImpl implements ProductService {
         return  productDao.findProductEager(productId);
     }
     
-}
+    @Override
+      public int create(Product product){
+       return productDao.create(product);
+       }
+    }

@@ -95,7 +95,7 @@
                 font-weight: normal;
             }
             span.icon {
-                background: url('/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
+                background: url('resources/images/google.png') transparent 5px 50% no-repeat;
                 display: inline-block;
                 vertical-align: middle;
                 width: 42px;
