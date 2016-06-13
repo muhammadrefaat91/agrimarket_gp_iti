@@ -36,7 +36,7 @@
                             <div class="col span_2_of_3">
                                 <div class="contact-form">
                                     <div class="col-sm-8 col-sm-offset-2">
-                                        <h2><spring:message code="title.addoffer.addproduct" /> </h2>
+                                        <h2>Add New Category</h2>
                                         <form   method="post" enctype="multipart/form-data" action="addcategory" >
                                                    
                                                     <span><label>Parent Category </label></span>

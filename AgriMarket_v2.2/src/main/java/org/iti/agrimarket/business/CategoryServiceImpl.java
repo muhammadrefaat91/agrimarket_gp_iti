@@ -71,9 +71,20 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public int createCategory(Category category) {
-      return categoryDao.create(category);
-  
-    
+        return categoryDao.create(category);
+
+    }
+
+    @Override
+    public List<Category> getCategoriesWithNoProducts() {
+
+        return categoryDao.findCategoryWithNoProducts();
+    }
+
+    @Override
+    public List<Category> getCategoriesWithNoChildCategories() {
+
+        return categoryDao.findCategoryWithNoChildCategories();
     }
 
 }

@@ -10,6 +10,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
     <import resource="hibernate_config.xml"/>
-        <bean name="securityFilterBean" class="org.iti.agrimarket.util.SecurityFilter" />
+    <import resource="spring-security.xml"/>
+    <!--<bean name="securityFilterBean" class="org.iti.agrimarket.util.SecurityFilter" />-->
 
 </beans>
