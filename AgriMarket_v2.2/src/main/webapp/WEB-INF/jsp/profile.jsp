@@ -64,7 +64,7 @@
         <!--profile-->
 
         <hr class="">
-        <div class="container target">
+        <div class="container target" style="    width: 105%;">
             <div class="row">
                 <div class="col-sm-2" style="float: <spring:message code="view_user.css.row.col-sm-3.float" />;">
                     <a href="/users" class="pull-right">
@@ -132,40 +132,48 @@
                 <!--/col-3-->
                 <div class="col-sm-9" contenteditable="false" style="margin-top: -109px;">
 
-                    <div class="panel panel-default target" style="background: antiquewhite;">
+                    <div class="panel panel-default target" style="background: white;">
                         <div class="see">
                             <p><a style="margin-left: <spring:message code="view_user.css.all-products.m-left" />px;" href="${pageContext.request.contextPath}/web/getoffers.htm"><spring:message code="link.all.Products" /></a></p>
                         </div>
                         <div style="direction: <spring:message code="view_user.css.user-products.dir" />" class="panel-heading" contenteditable="false"><spring:message code="text.user.products" /></div>
 
                         <div class="panel-body" style="max-height: 345px;
-                             border: 1px solid gray;
+                             border: 1px solid rgba(128, 128, 128, 0.13);
                              overflow: auto;">
-                            <div class="row">
-                                <c:forEach items="${user.userOfferProductFixeds}" var="offer">
-                                    <div class="col-md-4">
-                                        <div class="thumbnail grid_1_of_4">
-                                            <img alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" />
-                                            <h2 align="center">${offer.product.nameEn}</h2>
+                            <!--<div class="row">-->
+                            <c:forEach items="${user.userOfferProductFixeds}" var="offer">
+                                
+                                <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;
+                                     float: <spring:message code="offer_page.css.heading.float" />;">
+                                    <div class="add-cart">
+                                             <h4> <a s href="${pageContext.request.contextPath}/removeoffer.htm?offerid=${offer.id}" style="position: absolute;
+    margin-left: -31px;background-image: url('${pageContext.request.contextPath}/resources/images/ic_delete_black_24dp_1x.png')"></a></h4>
+                                         </div>
+                                    <!--<div class="thumbnail grid_1_of_4">-->
+                                    <a href="preview.htm?id=${offer.id}">
+                                        <img style="border: 1.1px solid #2969b0;
+                                             border-bottom: none;" alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+                                    <h2 align="center">${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr}</h2>
 
-                                            <div style="margin-left: 14px;" class="caption">
-                                                <div class="price-details">
-                                                    <div class="price-number">
-                                                        <h2 style="font-size: 14;  font-style: bold;">${offer.price} L.E</h2>
-                                                    </div>
-                                                    <div class="add-cart">								
-                                                        <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
-                                                    </div>
-                                                    <div class="clear"></div>
-                                                </div>
-                                                <p>
-                                                    <a href="${pageContext.request.contextPath}/removeoffer.htm?offerid=${offer.id}"><spring:message code="link.deleteoffer" /></a>
-                                                </p>
+                                    <div  class="caption">
+                                        <div class="price-details">
+                                            <div class="price-number">
+                                                <p><span class="rupees">$${offer.price}L.E</span></p> 
                                             </div>
+                                            <div class="add-cart">								
+                                                <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
+                                            </div>
+                                            <div class="clear"></div>
                                         </div>
+                                        <!--<p>-->
+                                         
+                                            <!--</p>-->
                                     </div>
-                                </c:forEach>
-                            </div>
+                                    <!--</div>-->
+                                </div>
+                            </c:forEach>
+                            <!--</div>-->
                         </div>
                     </div>
 

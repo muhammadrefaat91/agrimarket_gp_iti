@@ -134,27 +134,6 @@
                         <div class="panel-body" style="max-height: 345px;
                              border: 1px solid rgba(128, 128, 128, 0.13);
                              overflow: auto;">
-                            <!--<div class="row">-->
-                            <%--<c:forEach items="${userHasOffer.userOfferProductFixeds}" var="offer">--%>
-                            <!--                                    <div class="col-md-4">
-                                                                    <div class="thumbnail">
-                                                                        <img alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" />
-                                                                        <div style="margin-left: 14px;" class="caption">
-                                                                            <h3>
-                            ${offer.price}
-                        </h3>
-                        <p>
-                            ${offer.description}
-                        </p>
-                        <p>
-                        </p>
-                    </div>
-                </div>
-                        <div class="add-cart">								
-            <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
-        </div>
-            </div>-->
-                            <%--</c:forEach>--%>
                             <c:forEach items="${userHasOffer.userOfferProductFixeds}" var="offer">
                                 <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
                                     <a href="preview.htm?id=${offer.id}">
@@ -167,7 +146,7 @@
                                             <p><span class="rupees">$${offer.price}</span></p>
                                         </div>
                                         <div class="add-cart">								
-                                            <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
+                                            <h4><a  href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
                                         </div>
                                         <div class="clear"></div>
                                     </div>

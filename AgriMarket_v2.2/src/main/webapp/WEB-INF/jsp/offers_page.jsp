@@ -94,7 +94,8 @@
                         <div class="clear"></div>
                     </div>
                     <!--view all offers -->
-                    <div class="section group">
+                    <div class="section group" style="    width: 110%;
+    margin-left: 11px;">
                         <c:forEach items="${getAllOfferProducts}" var="offer">
                             <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
                                 <a href="preview.htm?id=${offer.id}">
