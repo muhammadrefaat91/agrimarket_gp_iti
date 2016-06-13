@@ -26,28 +26,28 @@ import org.springframework.transaction.support.TransactionTemplate;
  */
 @Repository
 public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInterface {
-    
+
     private TransactionTemplate transactionTemplate;
     private HibernateTemplate hibernateTemplate;
-    
+
     public TransactionTemplate getTransactionTemplate() {
         return transactionTemplate;
     }
-    
+
     @Autowired
     public void setTransactionTemplate(TransactionTemplate tt) {
         this.transactionTemplate = tt;
     }
-    
+
     public HibernateTemplate getHibernateTemplate() {
         return this.hibernateTemplate;
     }
-    
+
     @Autowired
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
     }
-    
+
     @Override
     public int create(Category category) {
         return (int) transactionTemplate.execute(new TransactionCallback() {
@@ -55,7 +55,7 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
             public Object doInTransaction(TransactionStatus ts) {
                 try {
                     Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-                    
+
                     session.persist(category);
                     return category.getId();
                 } catch (Exception e) {
@@ -66,7 +66,7 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
             }
         });
     }
-    
+
     @Override
     public void edit(Category category) {
         transactionTemplate.execute(new TransactionCallback() {
@@ -74,7 +74,7 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
             public Object doInTransaction(TransactionStatus ts) {
                 try {
                     Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-                    
+
                     session.update(category);
                     return true;
                 } catch (Exception e) {
@@ -85,7 +85,7 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
             }
         });
     }
-    
+
     @Override
     public void destroy(Integer id) {
         Category category = findCategory(id);
@@ -94,7 +94,7 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
             public Object doInTransaction(TransactionStatus ts) {
                 try {
                     Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-                    
+
                     session.delete(category);
                     return true;
                 } catch (Exception e) {
@@ -105,7 +105,7 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
             }
         });
     }
-    
+
     @Override
     public List<Category> findCategoryEntities() {
         return (List<Category>) getHibernateTemplate().execute(new HibernateCallback() {
@@ -120,13 +120,13 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
                     return result;
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    
+
                     return null;
                 }
             }
         });
     }
-    
+
     @Override
     public Category findCategory(Integer id) {
         return (Category) getHibernateTemplate().execute(new HibernateCallback() {
@@ -137,7 +137,7 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
                     return result;
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    
+
                     return null;
                 }
             }
@@ -156,13 +156,13 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
                     return result;
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    
+
                     return null;
                 }
             }
         });
     }
-    
+
     @Override
     public List<Category> searchCategory(String categoryName) {
         return (List<Category>) getHibernateTemplate().execute(new HibernateCallback() {
@@ -173,7 +173,7 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
                     return results;
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    
+
                     return null;
                 }
             }
@@ -182,22 +182,64 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
 
     @Override
     public Category findCategoryEager(Integer categoryId) {
-       return (Category) getHibernateTemplate().execute(new HibernateCallback() {
+        return (Category) getHibernateTemplate().execute(new HibernateCallback() {
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
                 try {
                     Category result = (Category) session.get(Category.class, categoryId);
                     Hibernate.initialize(result.getCategories());
                     Hibernate.initialize(result.getCategory());
-                    
+
                     return result;
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    
+
                     return null;
                 }
             }
         });
     }
-    
+
+    @Override
+    public List<Category> findCategoryWithNoProducts() {
+        return (List<Category>) getHibernateTemplate().execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                try {
+                    List<Category> result = session.createQuery("from Category c where c.id != 1  AND c.products IS EMPTY").list();
+                    for (int i = 0; i < result.size(); i++) {
+                        Category get = result.get(i);
+                        Hibernate.initialize(get.getCategory());
+                    }
+                    return result;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+
+                    return null;
+                }
+            }
+        });
+    }
+
+    @Override
+    public List<Category> findCategoryWithNoChildCategories() {
+        return (List<Category>) getHibernateTemplate().execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                try {
+                    List<Category> result = session.createQuery("from Category c where c.id != 1 AND c.categories IS EMPTY").list();
+                    for (int i = 0; i < result.size(); i++) {
+                        Category get = result.get(i);
+                        Hibernate.initialize(get.getCategory());
+                    }
+                    return result;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+
+                    return null;
+                }
+            }
+        });
+    }
+
 }

@@ -70,7 +70,7 @@ public class AddCategoryController extends HttpServlet {
     public ModelAndView drawAddCategoryPage(Model model) {
 
         List<Category> categories;
-        categories = categoryService.getAllCategories();
+        categories = categoryService.getCategoriesWithNoProducts();
         System.out.println(categories.get(0).getNameEn());
         model.addAttribute("categories", categories);
         System.out.println("hello################  new product");
@@ -121,22 +121,22 @@ public class AddCategoryController extends HttpServlet {
                 stream.write(bytes);
 
                 stream.close();
-                category.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + fileName + ext);
+                category.setImageUrl(Constants.IMAGE_PRE_URL + Constants.CATEGORY_PATH + fileName + ext);
                 categoryService.updateCategory(category);
             } catch (Exception e) {
                 //                  logger.error(e.getMessage());
                 categoryService.deleteCategory(category.getId()); // delete the category if something goes wrong
-                return "redirect:index.htm";
+                return "redirect:/admin/categories_page.htm";
             }
 
         } else {
 
-            category.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + "default_category.jpg");
+            category.setImageUrl(Constants.IMAGE_PRE_URL + Constants.CATEGORY_PATH + "default_category.jpg");
             categoryService.updateCategory(category);
 
         }
 
-        return "redirect:/index.htm";
+        return "redirect:/admin/categories_page.htm";
     }
 
 }

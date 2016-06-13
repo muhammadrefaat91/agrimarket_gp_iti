@@ -35,46 +35,29 @@
     <!-- link css, javascript-->
     <mvc:resources mapping="/resources/**" location="/resources/" />
  
-    
-    <bean  id="imagesPath"  class="java.lang.String">
-        <!--<constructor-arg value="C:/AgriMarket/"/>-->         
-        <constructor-arg value="/home/muhammad/offer/"/>         
-    </bean>
-    
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- one of the properties available; the maximum file size in bytes -->
         <property name="maxUploadSize" value="2000000"/>
     </bean>
 
-<!--    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="jsonMessageConverter"/>
-            </list>
-        </property>
-    </bean>
-     
-     Configure bean to convert JSON to POJO and vice versa 
-    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-    </bean>-->
-
-    <!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>-->
 
    
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp" />
-    <!--
-    The index controller.
-    -->
+     
+    <bean  id="imagesPath"  class="java.lang.String">
+        <!--<constructor-arg value="C:/AgriMarket/"/>-->         
+        <constructor-arg value="/home/muhammad/offer/"/>         
+    </bean>
         
     <!--static pages-->
     <mvc:view-controller path="/about.htm" view-name="about" />
     <mvc:view-controller path="/contact.htm" view-name="contact" />
-    <mvc:view-controller path="/web/updateoffer.htm" view-name="updateoffer" />
-    <!--<mvc:view-controller path="/web/addOffer.htm" view-name="addoffer" />-->
-    <mvc:view-controller path="/login.htm" view-name="sign_in" />
+    <mvc:view-controller path="/updateoffer.htm" view-name="updateoffer" />
+    <mvc:view-controller path="/web/addoffer.htm" view-name="addoffer" />
+    <mvc:view-controller path="/sign_in.htm" view-name="sign_in" />
     <mvc:view-controller path="/signup.htm" view-name="signup" />
     <mvc:view-controller path="/offers.htm" view-name="offers_page" />
     <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />
@@ -93,10 +76,6 @@
     <mvc:view-controller path="/admin/addcategory.htm" view-name="admin/addcategory" />
    
     
-    <!--Resource bundle -->
-    <!--    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="localization"  />
-    </bean>-->
     
     <bean id="localeResolver"
           class="org.springframework.web.servlet.i18n.CookieLocaleResolver">

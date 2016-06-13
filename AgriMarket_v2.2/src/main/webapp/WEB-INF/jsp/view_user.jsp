@@ -209,7 +209,7 @@
                                     <div class="review-block">
                                         <div class="row">
                                             <div class="col-sm-3" style="float: <spring:message code="offer_page.css.heading.float"/>;">
-                                                <img style="width: 50px;" src="${pageContext.request.contextPath}/image/${rater.userByRaterId.imageUrl}" class="img-rounded">
+                                                <img style="width: 50px;" src="${pageContext.request.contextPath}${rater.userByRaterId.imageUrl}" class="img-rounded">
                                                 <div class="review-block-name"><a href="#">${rater.userByRaterId.fullName}</a></div>
                                             </div>
                                             <div class="col-sm-9">

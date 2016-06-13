@@ -76,7 +76,7 @@ public class AddProductController extends HttpServlet {
     public ModelAndView drawAddProductPage(Model model) {
 
         List<Category> categories;       
-        categories = categoryService.getAllCategories();
+        categories = categoryService.getCategoriesWithNoChildCategories();
         System.out.println(categories.get(0).getNameEn());
         model.addAttribute("categories", categories);
         System.out.println("hello################  new product");
@@ -119,7 +119,7 @@ public class AddProductController extends HttpServlet {
                 MagicMatch match = Magic.getMagicMatch(bytes);
                 final String ext = "." + match.getExtension();
 
-                File parentDir = new File(Constants.IMAGE_PATH + Constants.CATEGORY_PATH);
+                File parentDir = new File(Constants.IMAGE_PATH + Constants.PRODUCT_PATH);
                 if (!parentDir.isDirectory()) {
                     parentDir.mkdirs();
                 }
@@ -129,22 +129,22 @@ public class AddProductController extends HttpServlet {
                 stream.write(bytes);
 
                 stream.close();
-                product.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + fileName + ext);
+                product.setImageUrl(Constants.IMAGE_PRE_URL + Constants.PRODUCT_PATH + fileName + ext);
                 productService.updateProduct(product);
             } catch (Exception e) {
                 //                  logger.error(e.getMessage());
                 productService.deleteProduct(product.getId()); // delete the category if something goes wrong
-                return "redirect:index.htm";
+                return "redirect:/admin/products_page.htm";
             }
 
         } else {
 
-            product.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + "default_category.jpg");
+            product.setImageUrl(Constants.IMAGE_PRE_URL + Constants.PRODUCT_PATH + "default_category.jpg");
             productService.updateProduct(product);
 
         }
 
-        return "redirect:/index.htm";
+        return "redirect:/admin/products_page.htm";
     }
 
 }

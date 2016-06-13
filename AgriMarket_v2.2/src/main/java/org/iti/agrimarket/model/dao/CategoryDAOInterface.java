@@ -31,5 +31,9 @@ public interface CategoryDAOInterface {
     public List<Category> searchCategory(String categoryName);
 
     public Category findCategoryEager(Integer categoryId);
+
+    public List<Category> findCategoryWithNoProducts();
+
+    public List<Category> findCategoryWithNoChildCategories();
     
 }

@@ -16,7 +16,7 @@
         <title><spring:message code="title.addoffer.addproduct" /></title>
         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
-                <link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">
+        <link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">
 
     </head>
     <body>
@@ -27,7 +27,7 @@
             <div class="call" style="    margin-top: -34px;">
                 <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
-             <jsp:include page="header/header_top.jsp" />
+            <jsp:include page="header/header_top.jsp" />
             <!---include nav bar -->
             <jsp:include page="header/header_bottom_nav.jsp" />
             <div class="wrap">
