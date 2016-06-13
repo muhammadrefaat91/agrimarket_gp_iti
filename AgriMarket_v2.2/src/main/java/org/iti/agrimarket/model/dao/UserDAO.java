@@ -105,36 +105,42 @@ public class UserDAO implements UserDAOInterface {
                     Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
                     System.out.println("user data are : " + user.toString());
 
-                    if (!session.contains(user)) {
-
-                        session.load(User.class, user.getId());
+                    User dbUser = (User) session.load(User.class, user.getId());
+                    if (dbUser != null) {
+                        session.update(user);
+                         return user.getId();
                     }
-                    session.update(user);
-                    return user.getId();
+                   return -2;
                 } catch (HibernateException e) {
                     e.printStackTrace();
-                    ts.setRollbackOnly();
+                ts.setRollbackOnly();
 
-                    return -2;  //means DB error 
+                return -2;  //means DB error 
 
-                } catch (Exception e) {
+            }
+            catch (Exception e
+
+            
+                ) {
 
                     e.printStackTrace();
-                    ts.setRollbackOnly();
+                ts.setRollbackOnly();
 
-                    return -1;  //means Server error 
-                }
+                return -1;  //means Server error 
             }
-        });
+        }
+    }
+
+);
 
     }
 
     @Override
-    public void destroy(Integer id) {
+        public void destroy(Integer id) {
         User user = findUser(id);
         transactionTemplate.execute(new TransactionCallback() {
             @Override
-            public Object doInTransaction(TransactionStatus ts) {
+        public Object doInTransaction(TransactionStatus ts) {
                 try {
                     Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 
@@ -150,22 +156,22 @@ public class UserDAO implements UserDAOInterface {
     }
 
     @Override
-    public List<User> findUserEntities() {
+        public List<User> findUserEntities() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public User findUser(Integer id) {
+        public User findUser(Integer id) {
 
         return (User) getHibernateTemplate().execute((Session sn) -> sn.createQuery("from User u where u.id=:id")
                 .setInteger("id", id).uniqueResult());
     }
 
     @Override
-    public List<User> searchUser(String userName) {
+        public List<User> searchUser(String userName) {
         return (List<User>) getHibernateTemplate().execute(new HibernateCallback() {
             @Override
-            public Object doInHibernate(Session session) throws HibernateException {
+        public Object doInHibernate(Session session) throws HibernateException {
                 try {
                     List<User> results = session.createQuery("from User user where user.fullName = :name").setString("name", userName).list();
                     return results;
@@ -179,11 +185,11 @@ public class UserDAO implements UserDAOInterface {
     }
 
     @Override
-    public User findUserByEmail(String email) {
+        public User findUserByEmail(String email) {
         return (User) getHibernateTemplate().execute(new HibernateCallback() {
 
             @Override
-            public Object doInHibernate(Session sn) throws HibernateException {
+        public Object doInHibernate(Session sn) throws HibernateException {
                 User user = (User) sn.createQuery("from User u where u.mail=:mail")
                         .setString("mail", email).uniqueResult();
                 if (user != null) {
@@ -210,19 +216,19 @@ public class UserDAO implements UserDAOInterface {
     }
 
     @Override
-    public User userLogin(String email, String password) {
+        public User userLogin(String email, String password) {
         return (User) hibernateTemplate.execute((Session sn) -> sn.createQuery("from User u where u.password = :password and u.mail=:mail")
                 .setString("mail", email).setString("password", password).uniqueResult());
 
     }
 
     @Override
-    public User findUserEager(Integer id) {
+        public User findUserEager(Integer id) {
 
         return (User) getHibernateTemplate().execute(new HibernateCallback() {
 
             @Override
-            public Object doInHibernate(Session sn) throws HibernateException {
+        public Object doInHibernate(Session sn) throws HibernateException {
                 User user = (User) sn.createQuery("from User u where u.id=:id").setInteger("id", id).uniqueResult();
                 Hibernate.initialize(user.getUserOfferProductFixeds());
                 Set<UserOfferProductFixed> offers = user.getUserOfferProductFixeds();
