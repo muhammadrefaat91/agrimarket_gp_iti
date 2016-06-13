@@ -27,10 +27,7 @@ public interface CategoryService {
     
     public List<Category> searchCategory(String name);
     
-
     public int createCategory(Category category);
     
-
     public List<Category> getAllCategories();
-
 }
