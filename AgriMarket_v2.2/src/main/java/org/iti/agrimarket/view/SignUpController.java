@@ -6,44 +6,22 @@ package org.iti.agrimarket.view;
  * and open the template in the editor.
  */
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Date;
 import javax.servlet.http.HttpServlet;
-import org.apache.logging.log4j.Logger;
-
-import javax.validation.Valid;
 import org.iti.agrimarket.business.OfferService;
-import org.iti.agrimarket.business.UserService;
-import org.iti.agrimarket.constant.Constants;
-import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.util.Validation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import org.iti.agrimarket.business.UserService;
 import java.io.BufferedOutputStream;
@@ -61,15 +39,9 @@ import net.sf.jmimemagic.MagicException;
 import net.sf.jmimemagic.MagicMatch;
 import net.sf.jmimemagic.MagicMatchNotFoundException;
 import net.sf.jmimemagic.MagicParseException;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.Session;
 import org.iti.agrimarket.constant.Constants;
 import org.iti.agrimarket.model.pojo.User;
-import org.iti.agrimarket.request.param.LogOutParam;
-import org.iti.agrimarket.request.param.UserCheckParam;
-import org.iti.agrimarket.util.requestprocessor.param.extraction.ParamExtractor;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 

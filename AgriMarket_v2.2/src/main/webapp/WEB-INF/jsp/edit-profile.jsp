@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>${user.fullName}</title>
         <meta charset="UTF-8" http-equiv="Content-Type" content="text/html;">
 
         <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
@@ -24,9 +25,7 @@
 
     </head>
     <body>
-        <%--<c:if test="${empty sessionScope.user}">--%>
-            <%--<c:redirect url=""  />--%>
-        <%--</c:if>--%>
+        
         <div class="wrap">
             <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
             <!---include header description -->
@@ -38,17 +37,19 @@
             <!---include nav bar -->
             <jsp:include page="header/header_bottom_nav.jsp" />
             <form class="form-horizontal" method="post" enctype="multipart/form-data" action="uprofile.htm" role="form" >
-            <div class="container" style="padding-top: 60px;">
-                <h1 class="page-header">Edit Profile</h1>
+            <div class="container" style="padding-top: 60px;    margin-top: -72px;
+    margin-left: -25px;
+    margin-bottom: 215px;    width: 104%;">
+                <h1 class="page-header"><spring:message code="edit-profile.text.editprofile" /></h1>
                 
-                <div class="row">
+                <div class="row" style="direction:  <spring:message code="edit-profile.css.dir" />;">
                     <!-- left column -->
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-xs-12" style="direction:  <spring:message code="edit-profile.css.dir" />;"></h1>
+
                         <div class="text-center">
                             <img style="height: 117px;margin-right: 85px;" alt="avatar" title="<spring:message code="img.title.text.view_user.profileimage" />"
                                  class="avatar img-circle img-thumbnail" src="${pageContext.request.contextPath}${sessionScope.user.imageUrl}">
-                            <!--<img src="http://lorempixel.com/200/200/people/9/" class="avatar img-circle img-thumbnail" alt="avatar">-->
-                            <h6>Upload a different photo...</h6>
+                            <h6><spring:message code="edit-profile.text.uploadimage" /></h6>
                            
                             <!--<input type="file" class="text-center center-block well well-sm" />-->
                             <input type="file" name="file"  class="form-control" />
@@ -59,82 +60,39 @@
                         <div class="alert alert-info alert-dismissable">
                             <a class="panel-close close" data-dismiss="alert">×</a> 
                             <i class="fa fa-coffee"></i>
-                            يرجي التأكد من كتابه البيانات بشكل صحيح
+                            <spring:message code="edit-profile.text.note" />
                         </div>
-                        <h3>Personal info</h3>
+                            <h3 style="padding-bottom: 10px;"><spring:message code="edit-profile.text.userinfo" /></h3>
                         
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Full name:</label>
+                        <div class="form-group" style="padding-bottom: 13px;">
+                                <label class="col-lg-3 control-label"><spring:message code="edit-profile.fullname" /></label>
                                 <div class="col-lg-8">
                                     <input class="form-control" value="${sessionScope.user.fullName}" name="fullName" type="text">
                                 </div>
                             </div>
-                            <!--                                                        <div class="form-group">
-                                                                                        <label class="col-lg-3 control-label">Last name:</label>
-                                                                                        <div class="col-lg-8">
-                                                                                            <input class="form-control" value="Bishop" type="text">
-                                                                                        </div>
-                                                                                    </div>-->
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Mobile: </label>
+                            <div class="form-group" style="padding-bottom: 13px;">
+                                <label class="col-lg-3 control-label"><spring:message code="text.user.mobile" /> </label>
                                 <div class="col-lg-8">
                                     <input class="form-control" value="${sessionScope.user.mobile}" name="mobile" type="mobile">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Email:</label>
+                            <div class="form-group" style="padding-bottom: 13px;">
+                                <label class="col-lg-3 control-label"><spring:message code="text.user.email" /></label>
                                 <div class="col-lg-8">
                                     <input class="form-control" value="${sessionScope.user.mail}" name="mail" type="text">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Governerate:</label>
+                            <div class="form-group" style="padding-bottom: 13px;">
+                                <label class="col-lg-3 control-label"><spring:message code="text.addoffer.governerate" /></label>
                                 <div class="col-lg-8">
                                     <input class="form-control" value="${sessionScope.user.governerate}" name="governerate" type="text">
                                 </div>
                             </div>
                             
-                            <!--                                                        <div class="form-group">
-                                                                                        <label class="col-lg-3 control-label">Time Zone:</label>
-                                                                                        <div class="col-lg-8">
-                                                                                            <div class="ui-select">
-                                                                                                <select id="user_time_zone" class="form-control">
-                                                                                                    <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                                                                                    <option value="Alaska">(GMT-09:00) Alaska</option>
-                                                                                                    <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                                                                                    <option value="Arizona">(GMT-07:00) Arizona</option>
-                                                                                                    <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                                                                                    <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                                                                                    <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                                                                                    <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                                                                                                </select>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>-->
-                            <!--                                                        <div class="form-group">
-                                                                                        <label class="col-md-3 control-label">Governerate</label>
-                                                                                        <div class="col-md-8">
-                                                                                            <input class="form-control" value="${userHasOffer.governerate}" type="text">
-                                                                                        </div>
-                                                                                    </div>-->
-                            <!--                                                        <div class="form-group">
-                                                                                        <label class="col-md-3 control-label">Password:</label>
-                                                                                        <div class="col-md-8">
-                                                                                            <input class="form-control" value="11111122333" type="password">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-md-3 control-label">Confirm password:</label>
-                                                                                        <div class="col-md-8">
-                                                                                            <input class="form-control" value="11111122333" type="password">
-                                                                                        </div>
-                                                                                    </div>-->
                             <div class="form-group">
                                 <label class="col-md-3 control-label"></label>
                                 <div class="col-md-8">
-                                    <input class="btn btn-primary" value="Save Changes" type="submit">
-                             
-<!--                                    <input class="btn btn-default" value="Cancel" type="reset">-->
+                                    <input class="btn btn-primary" value="<spring:message code="edit-profile.button.savechange" />" type="submit">
                                 </div>
                             </div>
                         <!--</form>-->

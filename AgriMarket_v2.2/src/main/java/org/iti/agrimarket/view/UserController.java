@@ -5,13 +5,22 @@
  */
 package org.iti.agrimarket.view;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.jmimemagic.Magic;
+import net.sf.jmimemagic.MagicException;
+import net.sf.jmimemagic.MagicMatch;
+import net.sf.jmimemagic.MagicMatchNotFoundException;
+import net.sf.jmimemagic.MagicParseException;
 import org.iti.agrimarket.business.UserService;
+import org.iti.agrimarket.constant.Constants;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +102,31 @@ public class UserController {
             user.setFullName(fullName);
                 user.setGovernerate(governerate);
                 try {
-                    user.setImage(file.getBytes());
+                   user.setImage(file.getBytes());
+                   byte [] image = user.getImage();
+
+                MagicMatch match = null;
+                try {
+                    match = Magic.getMagicMatch(image);
+                } catch (MagicParseException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (MagicMatchNotFoundException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (MagicException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                final String ext = "." + match.getExtension();
+
+                File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
+                if (!parentDir.isDirectory()) {
+                    parentDir.mkdirs();
+                }
+                BufferedOutputStream stream
+                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + file.getOriginalFilename())));
+                stream.write(image);
+                stream.close();
+                user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + file.getOriginalFilename() + ext);
+                
                 } catch (IOException ex) {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
                 }
