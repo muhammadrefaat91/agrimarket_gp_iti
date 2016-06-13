@@ -37,7 +37,7 @@
                                     <div class="features_list">
                                         <h4><spring:message code="title.index.bestselling"/></h4>							               
                                     </div>
-                                    <a href="addoffer" class="button"><spring:message code="button.index.sellnow"/></a>
+                                    <a href="<spring:url value="/web/addoffer.htm"/>" class="button"><spring:message code="button.index.sellnow"/></a>
                             </div>			               
                             <div class="clear"></div>				
                         </div>	
