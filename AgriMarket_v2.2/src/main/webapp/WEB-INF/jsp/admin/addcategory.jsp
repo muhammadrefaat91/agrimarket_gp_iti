@@ -39,7 +39,7 @@
                                         <h2><spring:message code="title.addoffer.addproduct" /> </h2>
                                         <form   method="post" enctype="multipart/form-data" action="addcategory" >
                                                    
-                                                    <span><label><spring:message code="text.add_category.name_parent" /> </label></span>
+                                                    <span><label>Parent Category </label></span>
                                                     <span>
                                                         <select name="parentCategoryId">
                                                             <c:forEach var="item" items="${categories}">
@@ -49,16 +49,16 @@
                                                     </span>
                                                 </div>
                                                 <div >
-                                                    <span><label><spring:message code="text.add_category.name_ar" />  </label></span><span><input type="tel"   name="nameAr"  class="form-control" /></span>
+                                                    <span><label>Name Arabic : </label></span><span><input type="tel"   name="nameAr"  class="form-control" /></span>
                                                 </div>
                                                 <div >
-                                                    <span> <label><spring:message code="text.add_category.name_en" />  </label></span><span><input    name="nameEn" class="form-control" /></span>
+                                                    <span> <label>Name English :  </label></span><span><input    name="nameEn" class="form-control" /></span>
                                                 </div>
                                                 <div >
-                                                    <span><label><spring:message code="text.add_category.image" />  </label></span><span><input type="file" name="file"  class="form-control" /></span>
+                                                    <span><label> Image :  </label></span><span><input type="file" name="file"  class="form-control" /></span>
                                                 </div>
    
-                                                    <input type="submit" class="form-control" value="<spring:message code="button.addoffer.add" />" id="add" /><br/>
+                                                    <input type="submit" class="form-control" value="submit" id="add" /><br/>
                                                 </div>
                                             </div>
                                         </form>
@@ -75,5 +75,3 @@
         </div>
     </body>
 </html>
-
-</body>

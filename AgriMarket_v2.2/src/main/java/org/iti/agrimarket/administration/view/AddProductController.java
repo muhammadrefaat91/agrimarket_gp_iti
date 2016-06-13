@@ -40,9 +40,11 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
 import org.apache.logging.log4j.Logger;
+import org.iti.agrimarket.business.CategoryService;
 import org.iti.agrimarket.business.ProductService;
 import org.iti.agrimarket.business.UnitService;
 import org.iti.agrimarket.constant.Constants;
+import org.iti.agrimarket.model.pojo.Category;
 import org.iti.agrimarket.model.pojo.Product;
 import org.iti.agrimarket.model.pojo.Unit;
 import org.iti.agrimarket.model.pojo.User;
@@ -55,189 +57,61 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 
-@SessionAttributes("user")
+@SessionAttributes("categories")
 
 public class AddProductController extends HttpServlet {
 
+  
     private Logger logger;
 
     @Autowired
-    UserService userService;
-
+    CategoryService categoryService;
+    
     @Autowired
     ProductService productService;
+    
+    
 
-    @Autowired
-    UnitService unitService;
+    @RequestMapping(value = "/admin/addproduct.htm", method = RequestMethod.GET)
+    public ModelAndView drawAddProductPage(Model model) {
 
-    @Autowired
-    OfferService offerService;
-
-    User user;
-
-//    @RequestMapping(value = "/addoffer", method = RequestMethod.GET)
-    public ModelAndView drawAddOfferPage(Model model) {
-
-        List<Unit> units;
-        units = unitService.getAllUnits();
-        System.out.println(units.get(1).getNameEn());
-        model.addAttribute("units", units);
-
-        User user = new User();
-        user.setId(1);
-
-        if (!model.containsAttribute("user")) {
-            //model.addAttribute("user", user);
-            System.out.println("------------------------");
-            System.out.println("-----!model view ----------");
-            return new ModelAndView("signup");
-
-        }
-        // model.addAttribute("user",user);
-        List<Product> products = productService.getAllProducts();
-        System.out.println(products.get(1).getNameEn());
-
-        model.addAttribute("products", products);
-
-        System.out.println("hello################  new offer");
-        return new ModelAndView("addoffer");
-    }
-
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        // Convert multipart object to byte[]
-        binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
-    }
-
-    //  @RequestMapping(method = RequestMethod.POST, value = "/uploadimage")
-    public String handleFileUpload(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
-        if (name.contains("/")) {
-            redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-            return "redirect:/";
-        }
-        if (name.contains("/")) {
-            redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-            return "redirect:/";
-        }
-
-        if (!file.isEmpty()) {
-            try {
-                File parentDir = new File(Constants.IMAGE_PATH + Constants.OFFER_PATH);
-                if (!parentDir.isDirectory()) {
-                    parentDir.mkdirs();
-                }
-
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.OFFER_PATH + name)));
-
-                final String ext = "." + "jpg";
-                FileCopyUtils.copy(file.getInputStream(), stream);
-                stream.close();
-                redirectAttributes.addFlashAttribute("message",
-                        "You successfully uploaded " + name + "!");
-
-                System.out.println("succccccccccccc");
-
-                stream.close();
-//                offerProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + name + ext);
-//                offerService.updateOffer(offerProductFixed);
-
-            } catch (Exception e) {
-                redirectAttributes.addFlashAttribute("message",
-                        "You failed to upload " + name + " => " + e.getMessage());
-            }
-        } else {
-            redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload " + name + " because the file was empty");
-        }
-
-        return "redirect:signup.htm";
+        List<Category> categories;       
+        categories = categoryService.getAllCategories();
+        System.out.println(categories.get(0).getNameEn());
+        model.addAttribute("categories", categories);
+        System.out.println("hello################  new product");
+        return new ModelAndView("admin/addproduct");
+        
     }
 
     /**
      * Amr upload image and form data
      *
      */
-//    @RequestMapping(method = RequestMethod.POST, value = "/addoffer")
-    public String addOffer(@RequestParam("description") String description,
-            @RequestParam("quantity") float quantity,
-            @RequestParam("quantityunit") int quantityunit,
-            @RequestParam("unitprice") int unitprice,
-            @RequestParam("price") float price,
-            @RequestParam("mobile") String mobile,
-            @RequestParam("governerate") String governerate,
-            @RequestParam("product") int product,
-            @ModelAttribute("user") User userFromSession,
-            @RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes,HttpServletRequest request, HttpServletResponse response) {
-
-        if (userFromSession == null) {
-            return "login";
-        } else {
-
-            user = userFromSession;
-        }
+    @RequestMapping(method = RequestMethod.POST, value = "/admin/addproduct")
+    public String addproduct(@RequestParam("nameAr") String nameAr,
+            @RequestParam("nameEn") String nameEn,
+            @RequestParam("parentCategoryId") int parentCategoryId,
+            @RequestParam("file") MultipartFile file
+    ) {
 
         System.out.println("save user func ---------");
-        System.out.println("full Name :" + description);
-        System.out.println("mobile:" + description);
+        System.out.println("full Name :" + nameAr);
 
-        UserOfferProductFixed userOfferProductFixed = new UserOfferProductFixed();
+        Product product = new Product();
+        product.setNameAr(nameAr);
+        product.setNameEn(nameEn);
+        Category parentCategory = categoryService.getCategory(parentCategoryId);
 
-        userOfferProductFixed.setDescription(description);
-        userOfferProductFixed.setPrice(price);
-        userOfferProductFixed.setRecommended(Boolean.FALSE);
+        product.setCategory(parentCategory);
 
-        userOfferProductFixed.setQuantity(quantity);
-        userOfferProductFixed.setProduct(productService.getProduct(product));
-        userOfferProductFixed.setUnitByUnitId(unitService.getUnit(quantityunit));
-        userOfferProductFixed.setUnitByPricePerUnitId(unitService.getUnit(unitprice));
-        userOfferProductFixed.setUser(userService.getUser(user.getId()));
-        userOfferProductFixed.setUserLocation(governerate);
-        userOfferProductFixed.setUserPhone(mobile);
-        userOfferProductFixed.setStartDate(new Date());
+        product.setSoundUrl("/to be continue");
+        
+        int res = productService.addProduct(product);
 
-        int res = offerService.addOffer(userOfferProductFixed);
-
-//
-//        if (!Validation.validateUser(user)) {
-//
-//            return "signup";
-//
-//        }
-//
-//        int res = userService.addUser(user);
-//
-////          if (user.getId() == null) {
-////         //   logger.trace(Constants.DB_ERROR);
-////           return "signup";
-////        }
-////            if (name.contains("/")) {
-////                redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-////                return "redirect:/";
-////            }
-////            if (name.contains("/")) {
-////                redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-////                return "redirect:/";
-////            }
         if (!file.isEmpty()) {
-//        
-//
-////                    
-////                    BufferedOutputStream stream = new BufferedOutputStream(
-////                            new FileOutputStream(new File("C:\\AgriMarket\\images\\users\\" + name)));
-////                    FileCopyUtils.copy(file.getInputStream(), stream);
-////                    stream.close();
-////                    redirectAttributes.addFlashAttribute("message",
-////                            "You successfully uploaded " + name + "!");
-////                    
-////
-////                    System.out.println("succccccccccccc");
-            String fileName = userOfferProductFixed.getId() + String.valueOf(new Date().getTime());
-//
-//             
+            String fileName = product.getId() + String.valueOf(new Date().getTime());
+
             try {
 
                 System.out.println("fileName   :" + fileName);
@@ -245,41 +119,32 @@ public class AddProductController extends HttpServlet {
                 MagicMatch match = Magic.getMagicMatch(bytes);
                 final String ext = "." + match.getExtension();
 
-                File parentDir = new File(Constants.IMAGE_PATH + Constants.OFFER_PATH);
+                File parentDir = new File(Constants.IMAGE_PATH + Constants.CATEGORY_PATH);
                 if (!parentDir.isDirectory()) {
                     parentDir.mkdirs();
                 }
 
                 BufferedOutputStream stream
-                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.OFFER_PATH + fileName)));
+                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.PRODUCT_PATH + fileName)));
                 stream.write(bytes);
 
                 stream.close();
-                userOfferProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + fileName + ext);
-                offerService.updateOffer(userOfferProductFixed);
+                product.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + fileName + ext);
+                productService.updateProduct(product);
             } catch (Exception e) {
                 //                  logger.error(e.getMessage());
-                offerService.deleteOffer(userOfferProductFixed.getId()); // delete the category if something goes wrong
-
-                redirectAttributes.addFlashAttribute("message",
-                        "You failed to upload  because the file was empty");
+                productService.deleteProduct(product.getId()); // delete the category if something goes wrong
                 return "redirect:index.htm";
             }
 
         } else {
 
-            userOfferProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + "default_offer.jpg");
-
-            offerService.updateOffer(userOfferProductFixed);
+            product.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + "default_category.jpg");
+            productService.updateProduct(product);
 
         }
-        
-        User oldUser = (User) request.getSession().getAttribute("user");
-        if (oldUser != null) {
-            User user = userService.getUserEager(oldUser.getId());
-            request.getSession().setAttribute("user", user);
-        }
-        return "redirect:index.htm";
+
+        return "redirect:/index.htm";
     }
 
 }

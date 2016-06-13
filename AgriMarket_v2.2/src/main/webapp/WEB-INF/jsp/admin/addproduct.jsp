@@ -36,57 +36,29 @@
                             <div class="col span_2_of_3">
                                 <div class="contact-form">
                                     <div class="col-sm-8 col-sm-offset-2">
-                                        <h2><spring:message code="title.addoffer.addproduct" /> </h2>
-                                        <form   method="post" enctype="multipart/form-data" action="addoffer" >
-                                            <div >
-
-                                                <span><label><spring:message code="text.addoffer.product" />  </label></span>
-                                                <span>
-                                                    <select name="product">
-                                                        <c:forEach var="item" items="${products}">
-                                                            <option value="${item.id}" class="textbox">${item.nameEn}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </span>
-                                            </div>                                       
-                                            <div >
-                                                <span><label><spring:message code="text.preview.quantity" /></label></span>
-                                                <span> <input   id="quantity" type="number" class="form-control"  name="quantity" required /></span>
-                                                <span><label><spring:message code="text.addoffer.quantityunit" /></label></span> 
-                                                <span>
-                                                    <select name="quantityunit">
-                                                        <c:forEach var="item" items="${units}">
-                                                            <option value="${item.id}">${item.nameAr}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </span>
-                                                <div>
-                                                    <span> <label><spring:message code="dropdown.offer_page.price" /> </label></span>
-                                                    <span> <input   id="quantity" type="number" class="form-control"  name="price" required /></span>
-                                                    <span><label><spring:message code="text.addoffer.css.per" /> </label></span>
+                                        <h2>Add Product </h2>
+                                        <form   method="post" enctype="multipart/form-data" action="addproduct" >
+                                                   
+                                                    <span><label> Parent Category : </label></span>
                                                     <span>
-                                                        <select name="unitprice">
-                                                            <c:forEach var="item" items="${units}">
+                                                        <select name="parentCategoryId">
+                                                            <c:forEach var="item" items="${categories}">
                                                                 <option class="textbox" value="${item.id}">${item.nameEn}</option>
                                                             </c:forEach>
                                                         </select>
                                                     </span>
                                                 </div>
                                                 <div >
-                                                    <span><label><spring:message code="text.addoffer.mobile" />  </label></span><span><input type="tel"   name="mobile"  class="form-control" /></span>
+                                                    <span><label> Name Arabic :</label></span><span><input type="tel"   name="nameAr"  class="form-control" /></span>
                                                 </div>
                                                 <div >
-                                                    <span> <label><spring:message code="text.addoffer.governerate" />  </label></span><span><input    name="governerate" class="form-control" /></span>
+                                                    <span> <label> Name English : </label></span><span><input    name="nameEn" class="form-control" /></span>
                                                 </div>
                                                 <div >
-                                                    <span><label><spring:message code="text.addoffer.image" />  </label></span><span><input type="file" name="file"  class="form-control" /></span>
+                                                    <span><label> Image  : </label></span><span><input type="file" name="file"  class="form-control" /></span>
                                                 </div>
-                                                <div >
-                                                    <span><label><spring:message code="text.addoffer.description" /> </label></span> <span><textarea    name="description" class="form-control" ></textarea></span>
-                                                </div>
-                                                <div class="form-group">
-
-                                                    <input type="submit" class="form-control" value="<spring:message code="button.addoffer.add" />" id="add" /><br/>
+   
+                                                    <input type="submit" class="form-control" value="submit" id="add" /><br/>
                                                 </div>
                                             </div>
                                         </form>
@@ -103,5 +75,3 @@
         </div>
     </body>
 </html>
-
-</body>

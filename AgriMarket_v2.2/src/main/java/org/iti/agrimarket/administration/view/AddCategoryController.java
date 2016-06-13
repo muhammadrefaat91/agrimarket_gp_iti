@@ -117,7 +117,7 @@ public class AddCategoryController extends HttpServlet {
                 }
 
                 BufferedOutputStream stream
-                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.OFFER_PATH + fileName)));
+                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.CATEGORY_PATH + fileName)));
                 stream.write(bytes);
 
                 stream.close();
