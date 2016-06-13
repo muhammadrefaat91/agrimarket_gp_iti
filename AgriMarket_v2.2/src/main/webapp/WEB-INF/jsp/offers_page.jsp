@@ -55,7 +55,7 @@
             <jsp:include page="header/header_bottom_nav.jsp" />
 
             <!-- content--->
-            <div class="main" style="height: 550px;">
+            <div class="main">
                 <div class="content">
                     <div class="content_top" dir="<spring:message code="offer_page.css.content_top.dir" />">
                         <!-- search!-->
@@ -95,13 +95,13 @@
                     </div>
                     <!--view all offers -->
                     <div class="section group" style="    width: 110%;
-    margin-left: 11px;">
+                         margin-left: 11px;">
                         <c:forEach items="${getAllOfferProducts}" var="offer">
                             <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
                                 <a href="preview.htm?id=${offer.id}">
                                     <img  
                                         style="border: 1.1px solid #2969b0;
-                                        border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+                                        border-bottom: none; width: 220px; height: 150px;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
 
                                 <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
 
@@ -123,13 +123,14 @@
 
         <!--Footer--->
         <jsp:include  page="footer/footer.jsp" />
+
+        <a href="#" id="toTop"><span id="toTopHover"> </span></a>
         <script  src="<spring:url value="/resources/js/jquery.min.js" />" ></script>
         <script  src="<spring:url value="/resources/js/bootstrap.min.js" />" ></script>
 
 
-        <a href="#" id="toTop"><span id="toTopHover"> </span></a>
-
     </body>
+
 </html>
 
 
