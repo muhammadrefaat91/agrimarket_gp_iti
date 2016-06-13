@@ -34,4 +34,9 @@ public interface ProductService {
       public List<Product> getAllProducts();
       public int create(Product product);
       
+      
+      public List<Product> getAllProductsEager();
+
+    public Product getProductEager(Integer productId);
+    
 }

@@ -33,22 +33,16 @@
         <!---include header top -->
         <jsp:include page="header/header_top.jsp" />
         <jsp:include page="header/header_bottom_nav.jsp" />
+        <jsp:include page="header/header.jsp" />
         <!-- content--->
         <div class="main">
             <div class="content">
-                <div class="content_top">
-                    <div class="heading" style="float: <spring:message code="index.css.heading.float" />;">
-                        <h3><spring:message code="text.index.newproduct" /></h3>
-                    </div>
-                    <div class="see" style="float: <spring:message code="index.css.see.float" />;">
-
-                        <p><a href="web/getoffers.htm"><spring:message code="link.all.Products" /></a></p>
-                    </div>
-                    <div class="clear"></div>
+<!--                <div class="content_top">
+                    
                 </div>
                 <div class="section group">
 
-                </div>
+                </div>-->
 
             </div>
         </div>

@@ -79,6 +79,7 @@
     <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />
     <mvc:view-controller path="/web/user.htm" view-name="view_user" />
     <mvc:view-controller path="/web/preview.htm" view-name="preview" />
+    <mvc:view-controller path="/admin/preview.htm" view-name="admin/preview" />
     <mvc:view-controller path="/about.htm" view-name="about" />
     <mvc:view-controller path="/contact.htm" view-name="contact" />
     <mvc:view-controller path="/sign_up.htm" view-name="sign_up" />

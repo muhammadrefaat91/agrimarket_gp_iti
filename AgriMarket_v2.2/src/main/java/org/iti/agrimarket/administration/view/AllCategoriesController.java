@@ -62,7 +62,6 @@ public class AllCategoriesController {
     public String allCategories(Locale locale, Model model) {
         locale = LocaleContextHolder.getLocale();
         List<Category> categorys = null;
-        System.out.println("index controller");
         categorys = categoryService.getAllCategories();
 
         model.addAttribute("categories", categorys);

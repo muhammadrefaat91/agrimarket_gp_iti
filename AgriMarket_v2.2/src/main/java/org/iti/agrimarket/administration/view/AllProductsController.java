@@ -11,7 +11,9 @@ import java.util.Locale;
 import javax.servlet.ServletContext;
 import org.iti.agrimarket.business.CategoryService;
 import org.iti.agrimarket.business.OfferService;
+import org.iti.agrimarket.business.ProductService;
 import org.iti.agrimarket.model.pojo.Category;
+import org.iti.agrimarket.model.pojo.Product;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -29,9 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AllProductsController {
 
     @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private OfferService offerService;
+    private ProductService productService;
     @Autowired
     private ServletContext servletContext;
 
@@ -43,40 +44,31 @@ public class AllProductsController {
         this.servletContext = servletContext;
     }
 
-    public CategoryService getCategoryService() {
-        return categoryService;
+    public ProductService getProductService() {
+        return productService;
     }
 
-    public void setCategoryService(CategoryService categoryService) {
-        this.categoryService = categoryService;
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
     }
 
-    public OfferService getOfferService() {
-        return offerService;
-    }
 
-    public void setOfferService(OfferService offerService) {
-        this.offerService = offerService;
-    }
-
-//    @RequestMapping(value = {"index.htm"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"admin/products_page.htm"}, method = RequestMethod.GET)
     public String allCategories(Locale locale,Model model) {
         locale = LocaleContextHolder.getLocale();
-        List<Category> categorys = null;
-        System.out.println("index controller");
-        if (servletContext.getAttribute("allcategories") == null) {
-            categorys = categoryService.getChildrenOf(1);
-        }
-        System.out.println("categories = " + categorys);
-        servletContext.setAttribute("allcategories", categorys);
-
-        List<UserOfferProductFixed> latestOffers = offerService.getLatestOffers();
-
-        System.out.println("latest offers : "+latestOffers);
-        model.addAttribute("latestOffers", latestOffers);
+        List<Product> products=productService.getAllProductsEager();
+        model.addAttribute("products", products);
         model.addAttribute("lang",locale);
-        System.out.println(model.containsAttribute("latestOffers"));
-        return "index";
+        return "admin/products_page";
     }
 
+    @RequestMapping(value = {"/admin/preview_product.htm"}, method = RequestMethod.GET)
+    public String getCategory(@RequestParam(value = "id")Integer productId , Locale locale, Model model) {
+        locale = LocaleContextHolder.getLocale();
+       
+        Product product=productService.getProductEager(productId);
+        model.addAttribute("product", product);
+        model.addAttribute("lang", locale);
+        return "admin/preview_product";
+    }
 }
