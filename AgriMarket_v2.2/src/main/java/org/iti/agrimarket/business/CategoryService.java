@@ -18,6 +18,7 @@ public interface CategoryService {
     public int addCategory(Category category);
     
     public Category getCategory(Integer categoryId);
+    public Category getCategoryEager(Integer categoryId);
     
     public List<Category> getChildrenOf(Integer categoryId);
 
@@ -26,6 +27,8 @@ public interface CategoryService {
     public void deleteCategory(Integer id);
     
     public List<Category> searchCategory(String name);
+    
+    public int createCategory(Category category);
     
     public List<Category> getAllCategories();
 }

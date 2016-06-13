@@ -23,12 +23,13 @@
     
     <mvc:annotation-driven/>
     
-  
     
     <context:component-scan base-package="org.iti.agrimarket.model"/>
     <context:component-scan base-package="org.iti.agrimarket.business"/>
      <context:component-scan base-package="org.iti.agrimarket.view"/>
+     <context:component-scan base-package="org.iti.agrimarket.administration.view"/>
     <context:component-scan base-package="org.iti.agrimarket.service"/>
+     <context:component-scan base-package="org.iti.agrimarket.administration.view"/>
     <context:component-scan base-package="org.iti.agrimarket.util.requestprocessor"/>
     
     <!-- link css, javascript-->
@@ -80,17 +81,17 @@
     <mvc:view-controller path="/web/user.htm" view-name="view_user" />
     <mvc:view-controller path="/web/edit-profile.htm" view-name="edit-profile" />
     <mvc:view-controller path="/web/preview.htm" view-name="preview" />
+    <mvc:view-controller path="/admin/preview.htm" view-name="admin/preview" />
     <mvc:view-controller path="/about.htm" view-name="about" />
     <mvc:view-controller path="/contact.htm" view-name="contact" />
     <!--<mvc:view-controller path="/sign_up.htm" view-name="sign_up" />-->
 <!--    <mvc:view-controller path="/sign_up1.htm" view-name="sign_up_1" /> -->
     <mvc:view-controller path="/admin/home.htm" view-name="admin/home" />
     <mvc:view-controller path="/admin/products_page.htm" view-name="admin/products_page" />
-    <mvc:view-controller path="/admin/categories_page.htm" view-name="admin/categories_page" />
+    <!--<mvc:view-controller path="/admin/categories_page.htm" view-name="admin/categories_page" />-->
     <mvc:view-controller path="/admin/addproduct.htm" view-name="admin/addproduct" />
     <mvc:view-controller path="/admin/addcategory.htm" view-name="admin/addcategory" />
-
-    
+   
     
     <!--Resource bundle -->
     <!--    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

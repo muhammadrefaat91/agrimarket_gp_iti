@@ -1,15 +1,26 @@
-package org.iti.agrimarket.administration.view;
+package org.iti.agrimarket.view;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import org.iti.agrimarket.view.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Date;
 import javax.servlet.http.HttpServlet;
+import org.apache.logging.log4j.Logger;
 
 import javax.validation.Valid;
 import org.iti.agrimarket.business.OfferService;
+import org.iti.agrimarket.business.UserService;
+import org.iti.agrimarket.constant.Constants;
+import org.iti.agrimarket.model.pojo.User;
+import org.iti.agrimarket.util.Validation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -17,6 +28,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
@@ -25,20 +38,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import org.iti.agrimarket.business.UserService;
 import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.iti.agrimarket.business.ProductService;
 import org.iti.agrimarket.business.UnitService;
@@ -47,6 +65,10 @@ import org.iti.agrimarket.model.pojo.Product;
 import org.iti.agrimarket.model.pojo.Unit;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
+import org.iti.agrimarket.request.param.LogOutParam;
+import org.iti.agrimarket.request.param.UserCheckParam;
+import org.iti.agrimarket.util.requestprocessor.param.extraction.ParamExtractor;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
@@ -55,9 +77,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 
-@SessionAttributes("user")
+@SessionAttributes("offerId")
 
-public class AddOfferController extends HttpServlet {
+public class UpdateOfferController extends HttpServlet {
 
     private Logger logger;
 
@@ -73,94 +95,39 @@ public class AddOfferController extends HttpServlet {
     @Autowired
     OfferService offerService;
 
-    User user;
+    int offerIdVal;
 
-    @RequestMapping(value = "/addoffer", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/updateoffer", method = RequestMethod.GET)
     public ModelAndView drawAddOfferPage(Model model) {
-
         List<Unit> units;
         units = unitService.getAllUnits();
         System.out.println(units.get(1).getNameEn());
+
         model.addAttribute("units", units);
 
-        User user = new User();
-        user.setId(1);
-
-        if (!model.containsAttribute("user")) {
-            //model.addAttribute("user", user);
-            System.out.println("------------------------");
-            System.out.println("-----!model view ----------");
-            return new ModelAndView("signup");
-
+        if (!model.containsAttribute("offerId")) {
+            model.addAttribute("offerId", 1);
         }
-        // model.addAttribute("user",user);
+
+        UserOfferProductFixed userOfferProductFixed = offerService.findUserOfferProductFixed(1);
+
+        // offerIdVal=offerKey;
         List<Product> products = productService.getAllProducts();
         System.out.println(products.get(1).getNameEn());
 
         model.addAttribute("products", products);
 
         System.out.println("hello################  new offer");
-        return new ModelAndView("addoffer");
+        return new ModelAndView("updateoffer", "offer", userOfferProductFixed);
     }
 
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        // Convert multipart object to byte[]
-        binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
-    }
-
-    //  @RequestMapping(method = RequestMethod.POST, value = "/uploadimage")
-    public String handleFileUpload(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
-        if (name.contains("/")) {
-            redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-            return "redirect:/";
-        }
-        if (name.contains("/")) {
-            redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-            return "redirect:/";
-        }
-
-        if (!file.isEmpty()) {
-            try {
-                File parentDir = new File(Constants.IMAGE_PATH + Constants.OFFER_PATH);
-                if (!parentDir.isDirectory()) {
-                    parentDir.mkdirs();
-                }
-
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.OFFER_PATH + name)));
-
-                final String ext = "." + "jpg";
-                FileCopyUtils.copy(file.getInputStream(), stream);
-                stream.close();
-                redirectAttributes.addFlashAttribute("message",
-                        "You successfully uploaded " + name + "!");
-
-                System.out.println("succccccccccccc");
-
-                stream.close();
-//                offerProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + name + ext);
-//                offerService.updateOffer(offerProductFixed);
-
-            } catch (Exception e) {
-                redirectAttributes.addFlashAttribute("message",
-                        "You failed to upload " + name + " => " + e.getMessage());
-            }
-        } else {
-            redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload " + name + " because the file was empty");
-        }
-
-        return "redirect:signup.htm";
-    }
 
     /**
-     * Amr upload image and form data
+     * upload image and form data
      *
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/addoffer")
+    @RequestMapping(method = RequestMethod.POST, value = "/updateoffer")
     public String addOffer(@RequestParam("description") String description,
             @RequestParam("quantity") float quantity,
             @RequestParam("quantityunit") int quantityunit,
@@ -169,16 +136,8 @@ public class AddOfferController extends HttpServlet {
             @RequestParam("mobile") String mobile,
             @RequestParam("governerate") String governerate,
             @RequestParam("product") int product,
-            @ModelAttribute("user") User userFromSession,
             @RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes,HttpServletRequest request, HttpServletResponse response) {
-
-        if (userFromSession == null) {
-            return "login";
-        } else {
-
-            user = userFromSession;
-        }
+            RedirectAttributes redirectAttributes) {
 
         System.out.println("save user func ---------");
         System.out.println("full Name :" + description);
@@ -189,17 +148,16 @@ public class AddOfferController extends HttpServlet {
         userOfferProductFixed.setDescription(description);
         userOfferProductFixed.setPrice(price);
         userOfferProductFixed.setRecommended(Boolean.FALSE);
-
         userOfferProductFixed.setQuantity(quantity);
         userOfferProductFixed.setProduct(productService.getProduct(product));
         userOfferProductFixed.setUnitByUnitId(unitService.getUnit(quantityunit));
         userOfferProductFixed.setUnitByPricePerUnitId(unitService.getUnit(unitprice));
-        userOfferProductFixed.setUser(userService.getUser(user.getId()));
+        userOfferProductFixed.setUser(userService.getUser(1));
         userOfferProductFixed.setUserLocation(governerate);
         userOfferProductFixed.setUserPhone(mobile);
         userOfferProductFixed.setStartDate(new Date());
 
-        int res = offerService.addOffer(userOfferProductFixed);
+        offerService.updateOffer(userOfferProductFixed);
 
 //
 //        if (!Validation.validateUser(user)) {
@@ -242,6 +200,8 @@ public class AddOfferController extends HttpServlet {
 
                 System.out.println("fileName   :" + fileName);
                 byte[] bytes = file.getBytes();
+
+                System.out.println(new String(bytes));
                 MagicMatch match = Magic.getMagicMatch(bytes);
                 final String ext = "." + match.getExtension();
 
@@ -249,37 +209,56 @@ public class AddOfferController extends HttpServlet {
                 if (!parentDir.isDirectory()) {
                     parentDir.mkdirs();
                 }
-
                 BufferedOutputStream stream
-                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.OFFER_PATH + fileName)));
+                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName + ext)));
                 stream.write(bytes);
-
                 stream.close();
-                userOfferProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + fileName + ext);
+                userOfferProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
+                System.out.println("image url" + userOfferProductFixed.getImageUrl());
+
                 offerService.updateOffer(userOfferProductFixed);
+
             } catch (Exception e) {
                 //                  logger.error(e.getMessage());
                 offerService.deleteOffer(userOfferProductFixed.getId()); // delete the category if something goes wrong
 
                 redirectAttributes.addFlashAttribute("message",
                         "You failed to upload  because the file was empty");
-                return "redirect:index.htm";
+                return "signup";
             }
 
         } else {
-
-            userOfferProductFixed.setImageUrl(Constants.IMAGE_PRE_URL + Constants.OFFER_PATH + "default_offer.jpg");
-
-            offerService.updateOffer(userOfferProductFixed);
-
+            redirectAttributes.addFlashAttribute("message",
+                    "You failed to upload  because the file was empty");
         }
-        
+        return "redirect:index.htm";
+    }
+
+    /**
+     * @Author Amr delete one offer from the Fixed offers table
+     * @param offerid its the id of the offer
+     * @return json opject {"success":1} if success
+     * @return json opject {"success":0} if deletion error
+     *
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/removeoffer.htm")
+    public String removeOffer(@RequestParam("offerid") Integer offerId, HttpServletRequest request, HttpServletResponse response) {
+
+        System.out.println("in delete offer");
+
+        offerService.deleteOffer(offerId);
+        try {
+            response.sendRedirect(request.getContextPath() + "/web/profile.htm");
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         User oldUser = (User) request.getSession().getAttribute("user");
         if (oldUser != null) {
             User user = userService.getUserEager(oldUser.getId());
             request.getSession().setAttribute("user", user);
         }
-        return "redirect:index.htm";
+        return "profile";
+
     }
 
 }

@@ -6,7 +6,7 @@
 package org.iti.agrimarket.model.dao;
 
 import java.util.List;
-import org.iti.agrimarket.model.pojo.Category;
+import org.hibernate.Hibernate;
 import org.iti.agrimarket.model.pojo.Product;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -113,7 +113,6 @@ public class ProductDAO implements ProductDAOInterface {
     }
 
     //Refaat
-
     @Override
     public Product findProduct(Integer id) {
         return (Product) getHibernateTemplate().execute((Session sn) -> sn.createQuery("from Product p where p.id=:id")
@@ -145,7 +144,7 @@ public class ProductDAO implements ProductDAOInterface {
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
                 try {
-                    List<Category> result = session.createQuery("from Product p").list();
+                    List<Product> result = session.createQuery("from Product p").list();
                     return result;
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -173,5 +172,48 @@ public class ProductDAO implements ProductDAOInterface {
         });
     }
 
+    @Override
+    public List<Product> getAllProductsEager() {
+        return (List<Product>) getHibernateTemplate().execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                try {
+                    List<Product> result = session.createQuery("from Product p").list();
+                    for (int i = 0; i < result.size(); i++) {
+                        Product get = result.get(i);
+                        Hibernate.initialize(get.getCategory());
+
+//                        Hibernate.initialize(get.getUserOfferProductFixeds());
+                    }
+                    return result;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+
+                    return null;
+                }
+            }
+        });
+    }
+
+    @Override
+    public Product findProductEager(Integer productId) {
+        return (Product) getHibernateTemplate().execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                try {
+                    Product result = (Product) session.createQuery("from Product p where p.id=:id")
+                            .setInteger("id", productId).uniqueResult();
+                    Hibernate.initialize(result.getCategory());
+
+                    Hibernate.initialize(result.getUserOfferProductFixeds());
+                    return result;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+
+                    return null;
+                }
+            }
+        });
+    }
 
 }

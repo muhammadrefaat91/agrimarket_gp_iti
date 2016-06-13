@@ -22,46 +22,32 @@
 
 </head>
 <body>
-    
+
     <div class="wrap">
+
         <!-- header--->
-        <!---include header description -->
-
-        <jsp:include page="../header/headertop_desc.jsp" />
+        <jsp:include page="header/headertop_desc.jsp" />
         <div class="call" style="    margin-top: -34px;">
-            <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+            <p> <spring:message code="text.lang" /> : <a href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
         </div>
-
         <!---include header top -->
-        <jsp:include page="../header/header_top.jsp" />
-
-        <!---include nav bar -->
-        <jsp:include page="../header/header_bottom_nav.jsp" />
-
-
+        <jsp:include page="header/header_top.jsp" />
+        <jsp:include page="header/header_bottom_nav.jsp" />
+        <jsp:include page="header/header.jsp" />
         <!-- content--->
         <div class="main">
             <div class="content">
-                <div class="content_top">
-                    <div class="heading" style="float: <spring:message code="index.css.heading.float" />;">
-                        <h3><spring:message code="text.index.newproduct" /></h3>
-                    </div>
-                    <div class="see" style="float: <spring:message code="index.css.see.float" />;">
-
-                        <p><a href="web/getoffers.htm"><spring:message code="link.all.Products" /></a></p>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="section group">
+<!--                <div class="content_top">
                     
                 </div>
+                <div class="section group">
+
+                </div>-->
 
             </div>
         </div>
     </div>
 
-    <!--Footer--->
-    <jsp:include  page="../footer/footer.jsp" />
     <a href="#" id="toTop"><span id="toTopHover"> </span></a>
 </body>
 </html>

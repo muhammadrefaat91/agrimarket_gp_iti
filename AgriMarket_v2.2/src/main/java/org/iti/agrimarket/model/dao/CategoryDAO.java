@@ -5,7 +5,9 @@
  */
 package org.iti.agrimarket.model.dao;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Hibernate;
 import org.iti.agrimarket.model.pojo.Category;
 import org.hibernate.HibernateException;
@@ -110,7 +112,7 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
                 try {
-                    List<Category> result = session.createQuery("from Category").list();
+                    List<Category> result = session.createQuery("from Category c where c.id != 1").list();
                     for (int i = 0; i < result.size(); i++) {
                         Category get = result.get(i);
                         Hibernate.initialize(get.getCategory());
@@ -169,6 +171,26 @@ public class CategoryDAO implements org.iti.agrimarket.model.dao.CategoryDAOInte
                 try {
                     List<Category> results = session.createQuery("from Category category where category.nameAr = :name or category.nameEn = :name").setString("name", categoryName).list();
                     return results;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    
+                    return null;
+                }
+            }
+        });
+    }
+
+    @Override
+    public Category findCategoryEager(Integer categoryId) {
+       return (Category) getHibernateTemplate().execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                try {
+                    Category result = (Category) session.get(Category.class, categoryId);
+                    Hibernate.initialize(result.getCategories());
+                    Hibernate.initialize(result.getCategory());
+                    
+                    return result;
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     
