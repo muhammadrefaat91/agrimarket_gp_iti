@@ -83,7 +83,7 @@
                         <div >
 
                             <div class="add-cart" style="float: <spring:message code="offer_page.css.add-cart.float" />;">								
-                                <h4><a href="<spring:url value="/addoffer"/>"><spring:message code="link.addoffer" /></a></h4>
+                                <h4><a href="<spring:url value="/web/addoffer.htm"/>"><spring:message code="link.addoffer" /></a></h4>
                             </div>
                             <div class="clear"></div>
                         </div>  
