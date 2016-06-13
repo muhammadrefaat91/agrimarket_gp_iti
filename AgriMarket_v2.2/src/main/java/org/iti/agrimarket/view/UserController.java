@@ -90,9 +90,7 @@ public class UserController {
         locale = LocaleContextHolder.getLocale();
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
-            int res = userService.updateUser(user);
-            if (res != 0) {
-                user.setFullName(fullName);
+            user.setFullName(fullName);
                 user.setGovernerate(governerate);
                 try {
                     user.setImage(file.getBytes());
@@ -101,6 +99,9 @@ public class UserController {
                 }
                 user.setMail(mail);
                 user.setMobile(mobil);
+            int res = userService.updateUser(user);
+            if (res != 0) {
+                
                 request.getSession().setAttribute("user", user);
             }
             model.addAttribute("user", user);

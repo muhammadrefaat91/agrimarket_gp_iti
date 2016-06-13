@@ -55,6 +55,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  * @author Amr
  */
 @Controller
+@SessionAttributes("user")
 @RequestMapping("web")
 public class AddOfferController extends HttpServlet {
 
@@ -199,7 +200,7 @@ public class AddOfferController extends HttpServlet {
             User user = userService.getUserEager(oldUser.getId());
             request.getSession().setAttribute("user", user);
         }
-        return "redirect:index.htm";
+        return "redirect:/index.htm";
     }
 
 }
