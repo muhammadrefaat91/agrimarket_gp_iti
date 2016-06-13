@@ -7,7 +7,7 @@
  
 <div class="header_top">
         <div class="logo">
-            <a href="index.html"><img src="${pageContext.request.contextPath}/resources/images/agri_logo_vs.png" alt="" /></a>
+            <a href="${pageContext.request.contextPath}/admin/home.htm"><img src="${pageContext.request.contextPath}/resources/images/agri_logo_vs.png" alt="" /></a>
         </div>
 
         <script type="text/javascript">

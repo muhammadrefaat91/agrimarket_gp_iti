@@ -66,5 +66,16 @@ public class ProductServiceImpl implements ProductService {
     
     return productDao.getAllProducts();
     }
+
+    @Override
+    public List<Product> getAllProductsEager() {
+        
+    return productDao.getAllProductsEager();
+    }
+
+    @Override
+    public Product getProductEager(Integer productId) {
+        return  productDao.findProductEager(productId);
+    }
     
 }

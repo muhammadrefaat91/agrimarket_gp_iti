@@ -36,4 +36,8 @@ public interface ProductDAOInterface {
 //amr
   public List<Product> getAllProducts();
 
+    public List<Product> getAllProductsEager();
+
+    public Product findProductEager(Integer productId);
+
 }

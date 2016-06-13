@@ -32,5 +32,10 @@ public interface ProductService {
     
     //amr
       public List<Product> getAllProducts();
+      
+      
+      public List<Product> getAllProductsEager();
+
+    public Product getProductEager(Integer productId);
     
 }
