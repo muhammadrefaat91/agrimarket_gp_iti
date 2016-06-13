@@ -7,6 +7,8 @@
 <%@ taglib prefix="spring"
            uri="http://www.springframework.org/tags"%>
 
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,18 +24,18 @@
 
     </head>
     <body  >
+        <c:if test="${not empty error}">
+            <div class="error">${error}</div>
+        </c:if>
+        <c:if test="${not empty msg}">
+            <div class="msg">${msg}</div>
+        </c:if>
         <!--<div class="header">-->
         <div class="wrap">
-            <!---include header description -->
-
-            <jsp:include page="header/headertop_desc.jsp" />
-            <div class="call" style="    margin-top: -34px;">
-                <p> <spring:message code="text.lang" /> : <a href="?id=${param['id']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?id=${param['id']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
-            </div>
             <!---include header top -->
             <jsp:include page="header/header_top.jsp" />
             <!---include nav bar -->
-            <jsp:include page="header/header_bottom_nav.jsp" />
+            <jsp:include page="admin/header/header_bottom_nav.jsp" />
         </div>
 
 
@@ -42,41 +44,44 @@
                 <div class="row">
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2" >
-                            <c:if test="${not empty error}">
-                                <p style="margin-bottom: 5px; color: red;"><spring:message code="text.addoffer.error" /> ${error}</p>
-                            </c:if>
+
                         </div>
                         <div class="col-sm-12">
 
                             <div class="col-sm-8 col-sm-offset-2">
-                                <c:if test="${not empty user}">
-                                    <c:redirect url="index.htm" />
-                                </c:if>
-                                <spring:message code="offer_page.css.content_top.dir"  var="margin"/>
-                                <form:form action="userlogin" method="post" dir="${margin}" >
+
+                                <form name='loginForm'
+                                      action="<c:url value='j_spring_security_check'/>" method='POST'>
 
                                     <div class="form-group">
-                                        <label style="margin-bottom: 8px;"><spring:message code="text.user.email" />  </label>
-                                        <input type="email"  id="mail"  class="form-control"  name="mail"  required />
+                                        <td>User:</td>
+                                        <td><input class="form-control"   type='text' name='username' value=''></td>
                                     </div>
                                     <div class="form-group">
-                                        <label style="margin-bottom: 8px;"><spring:message code="text.signin.password" /> </label>
-                                        <input   id="fullName" type="password" class="form-control"  name="password" required />
-                                        <form:errors path="fullName"/>
-                                    </div>
-                                    <div class="mbr-article mbr-article--auto-align mbr-article--wysiwyg"><h4 id="error"></h4></div>
 
-                                    <div class="mbr-buttons mbr-buttons--right">
-                                        <input  type="submit"   Class="mbr-buttons__btn btn btn-lg btn-danger" value="<spring:message code="button.signin.signin" />" /></div>
-                                    </form:form>
+                                        <td>Password:</td>
+                                        <td><input class="form-control"   type='password' name='password' /></td>
+                                    </div>
+                                    <td colspan='2'>
+                                        <div class="mbr-buttons mbr-buttons--right">
+                                            <input  Class="mbr-buttons__btn btn btn-lg btn-danger"  name="submit" type="submit"
+                                                    value="submit" /></td>
                             </div>
 
+                            </form>
+
                         </div>
+
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <jsp:include  page="footer/footer.jsp"/>
-    </body>
+    <jsp:include  page="footer/footer.jsp"/>
+</body>
 </html>
+
+
+
+

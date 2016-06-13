@@ -76,8 +76,8 @@ public class AddOfferController extends HttpServlet {
     User user;
 
     @RequestMapping(value = {"/addoffer.htm"}, method = RequestMethod.GET)
-    public ModelAndView drawAddOfferPage(Locale locale,Model model) {
-locale = LocaleContextHolder.getLocale();
+    public ModelAndView drawAddOfferPage(Locale locale, Model model) {
+        locale = LocaleContextHolder.getLocale();
         List<Unit> units;
         units = unitService.getAllUnits();
         System.out.println(units.get(1).getNameEn());
@@ -124,7 +124,7 @@ locale = LocaleContextHolder.getLocale();
             @RequestParam("product") int product,
             @ModelAttribute("user") User userFromSession,
             @RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes,HttpServletRequest request, HttpServletResponse response) {
+            RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
 
         if (userFromSession == null) {
             return "login";
@@ -153,7 +153,6 @@ locale = LocaleContextHolder.getLocale();
         userOfferProductFixed.setStartDate(new Date());
 
         int res = offerService.addOffer(userOfferProductFixed);
-
 
         if (!file.isEmpty()) {
 
@@ -195,7 +194,7 @@ locale = LocaleContextHolder.getLocale();
             offerService.updateOffer(userOfferProductFixed);
 
         }
-        
+
         User oldUser = (User) request.getSession().getAttribute("user");
         if (oldUser != null) {
             User user = userService.getUserEager(oldUser.getId());

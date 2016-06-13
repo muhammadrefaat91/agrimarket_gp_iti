@@ -31,4 +31,8 @@ public interface CategoryService {
     public int createCategory(Category category);
     
     public List<Category> getAllCategories();
+
+    public List<Category> getCategoriesWithNoProducts();
+
+    public List<Category> getCategoriesWithNoChildCategories();
 }
