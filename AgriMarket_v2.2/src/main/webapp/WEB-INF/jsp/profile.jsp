@@ -6,8 +6,8 @@
            uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE HTML>
 <head>
-    <title>${userHasOffer.fullName}</title>
-    
+    <title>${user.fullName}</title>
+
     <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -32,7 +32,7 @@
                 $.ajax({
                     url: "${pageContext.request.contextPath}/web/addRate.htm",
                     type: "GET",
-                    data: {rating: selectedVal, uID:${userHasOffer.id}, reviewText: reviewText},
+                    data: {rating: selectedVal, uID:${user.id}, reviewText: reviewText},
                     success: function (data) {
                         console.log('success' + data);
                         if (data === 'no_errors')
@@ -57,7 +57,7 @@
             <!---include header top -->
             <jsp:include page="header/header_top.jsp" />
             <jsp:include page="header/header_bottom_nav.jsp" />
-            <c:if test="${empty userHasOffer}" >
+            <c:if test="${empty user}" >
                 <c:redirect url="/index.htm" />
             </c:if>
         </div>
@@ -66,7 +66,10 @@
         <hr class="">
         <div class="container target">
             <div class="row">
-                <div class="col-sm-2" style="float: <spring:message code="view_user.css.row.col-sm-3.float" />;"><a href="/users" class="pull-right"><img style="height: 117px;margin-right: 85px;" title="<spring:message code="img.title.text.view_user.profileimage" />" class="img-circle img-responsive" src="${pageContext.request.contextPath}${userHasOffer.imageUrl}"></a>
+                <div class="col-sm-2" style="float: <spring:message code="view_user.css.row.col-sm-3.float" />;">
+                    <a href="/users" class="pull-right">
+                        <img style="height: 117px;margin-right: 85px;" title="<spring:message code="img.title.text.view_user.profileimage" />" class="img-circle img-responsive" src="${pageContext.request.contextPath}${user.imageUrl}">
+                    </a>
 
                 </div>
             </div>
@@ -75,33 +78,45 @@
                 <div class="col-sm-3" style="float: <spring:message code="view_user.css.row.col-sm-3.float" />;">
                     <!--left col-->
                     <ul class="list-group">
-                        <li class="list-group-item text-muted" contenteditable="false">${userHasOffer.fullName}</li>
+                        <li class="list-group-item text-muted" contenteditable="false">${user.fullName}</li>
                         <!--<li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined</strong></span> 2.13.2014</li>-->
                         <li style="text-align: <spring:message code="view-user.rate.text-align"/>;
-                            direction:<spring:message code="view_user.css.rate.panel.dir"/>;"class="list-group-item text-right"><span style="    margin-left: <spring:message code="view-user.rate.span.margin-left"/>px;" class="pull-left"><strong class=""><spring:message code="text.user.mobile" /></strong></span>${userHasOffer.mobile}</li>
-                        <li style="    text-align: <spring:message code="view-user.rate.text-align"/>;" class="list-group-item text-right"><span style="margin-left: <spring:message code="view-user.rate.margin-left"/>px;
-                                                                                                                                                 direction: <spring:message code="view_user.css.rate.panel.dir"/>;" class="pull-left"><strong class=""><spring:message code="text.user.email" /></strong></span> ${userHasOffer.mail}</li>
-
+                            direction:<spring:message code="view_user.css.rate.panel.dir"/>;"
+                            class="list-group-item text-right">
+                            <span style="    margin-left: <spring:message code="view-user.rate.span.margin-left"/>px;"
+                                  class="pull-left"><strong class="">
+                                    <spring:message code="text.user.mobile" /></strong>
+                            </span>${user.mobile}</li>
+                        <li style="    text-align: <spring:message code="view-user.rate.text-align"/>;" 
+                            class="list-group-item text-right">
+                            <span style="margin-left: <spring:message code="view-user.rate.margin-left"/>px; direction: <spring:message code="view_user.css.rate.panel.dir"/>;" class="pull-left">
+                                <strong class="">
+                                    <spring:message code="text.user.email" /></strong>
+                            </span> ${user.mail}</li>
+                        <li style="    text-align: <spring:message code="view-user.rate.text-align"/>;" 
+                            class="list-group-item text-right">
+                            <span style="margin-left: <spring:message code="view-user.rate.margin-left"/>px; direction: <spring:message code="view_user.css.rate.panel.dir"/>;" class="pull-left">
+                                <strong class="">
+                                    <spring:message code="text.addoffer.governerate" /></strong>
+                            </span> ${user.governerate}</li>
                     </ul>
                     <div class="panel panel-default" style="height: 2px;">
-                        <div class="panel-heading" style="text-align: <spring:message code="view-user.panel-heading.text-align"/>"><spring:message code="text.view_user.rate" />
-
+                        <div class="panel-heading" style="text-align: <spring:message code="view-user.panel-heading.text-align"/>">
+                            <spring:message code="text.view_user.rate" />
                         </div>
                         <div class="panel-body" style="margin-left: <spring:message code="view_user.css.rate.panel.margin-left"/>px;
-
                              width:112%;
-
                              direction: <spring:message code="view_user.css.rate.panel.dir"/>;
                              margin-top:-15px;">
                             <div class="rating-block">
                                 <!--<h4>Average user rating</h4>-->
-                                <h2 class="bold padding-bottom-7">${userHasOffer.ratesAverage} <small>/ 5</small></h2>
-                                <c:forEach begin="1" end="${userHasOffer.ratesAverage}">
+                                <h2 class="bold padding-bottom-7">${user.ratesAverage} <small>/ 5</small></h2>
+                                <c:forEach begin="1" end="${user.ratesAverage}">
                                     <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
                                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                     </button>
                                 </c:forEach>
-                                <c:forEach begin="1" end="${5-userHasOffer.ratesAverage}">
+                                <c:forEach begin="1" end="${5-user.ratesAverage}">
 
                                     <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
                                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -127,7 +142,7 @@
                              border: 1px solid gray;
                              overflow: auto;">
                             <div class="row">
-                                <c:forEach items="${userHasOffer.userOfferProductFixeds}" var="offer">
+                                <c:forEach items="${user.userOfferProductFixeds}" var="offer">
                                     <div class="col-md-4">
                                         <div class="thumbnail grid_1_of_4">
                                             <img alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" />
@@ -160,7 +175,7 @@
                         <div class="row" style="    margin-left: -14px;">
                             <div class="col-sm-7" style="width: 99.333333%; margin-top: 3px;">
                                 <!--<hr/>-->
-                                <c:forEach items="${userHasOffer.userRatesUsersForRatedId}"  var="rater">
+                                <c:forEach items="${user.userRatesUsersForRatedId}"  var="rater">
                                     <div class="review-block">
                                         <div class="row">
                                             <div class="col-sm-3" style="float: <spring:message code="offer_page.css.heading.float"/>;">

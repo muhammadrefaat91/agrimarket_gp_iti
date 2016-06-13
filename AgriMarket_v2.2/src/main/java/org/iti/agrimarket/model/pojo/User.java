@@ -236,6 +236,11 @@ public class User implements java.io.Serializable {
     public void setImage(byte[] image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", mail=" + mail + ", fullName=" + fullName + ", mobile=" + mobile + ", registrationChannel=" + registrationChannel + ", lat=" + lat + ", long_=" + long_ + ", governerate=" + governerate + ", imageUrl=" + imageUrl + ", ratesAverage=" + ratesAverage + ", loggedIn=" + loggedIn + ", image=" + image + '}';
+    }
     
     
 

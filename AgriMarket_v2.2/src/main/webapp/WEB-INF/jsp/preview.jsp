@@ -13,7 +13,11 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-
+<style type="text/css">
+        .search_box form input[type="submit"]{
+                margin-top: <spring:message code="search.icon.margin-top" />px;
+        }
+    </style>
 </head>
 <body>
      <div class="wrap">
@@ -30,7 +34,7 @@
     <c:if test="${empty offerProduct}" >
         <c:redirect url="/web/getOffer.htm?id=${param['id']}" />
     </c:if>
-        <div class="main" style="height: 400px;" >
+        <div class="main" style="height: 534px;" >
     <div class="content">
         <div class="section group" style="direction: <spring:message code="preview.css.dir"  />;">
             <div class="cont-desc span_1_of_2" style="direction: <spring:message code="preview.css.dir"  />;">
@@ -48,7 +52,7 @@
                     <div class="desc span_3_of_2" style="direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />">
                         <h2 style="margin-right: 45px;">${requestScope.lang eq 'en'?offerProduct.product.nameEn:offerProduct.product.nameAr}</h2>
                         <p style="    margin-right: <spring:message code="offer_page.css.p.margin.right"  />;white-space: pre-line;">${offerProduct.description}</p>					
-                        <div class="price" style="    margin-left: <spring:message code="preview.css.div.price.margin"/>;">
+                        <div class="price" style="  margin-top: 20px;  margin-left: <spring:message code="preview.css.div.price.margin"/>;">
                             <spring:message code="text.preview.quantity"  />
                             <p style="font-size: 0.6125em; direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 56px;">${offerProduct.quantity}  ${requestScope.lang eq 'en'?offerProduct.unitByUnitId.nameEn:offerProduct.unitByUnitId.nameAr} </span></p>
                             <spring:message code="text.preview.price" />

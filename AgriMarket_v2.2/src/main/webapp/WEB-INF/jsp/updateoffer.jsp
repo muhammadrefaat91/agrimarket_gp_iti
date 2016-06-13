@@ -13,7 +13,7 @@
         
     <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <!-- Site made with Mobirise Website Builder v2.9, https://mobirise.com -->
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" http-equiv="Content-Type" content="text/html;>
 
         <title>Sign In</title>
         <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" >
@@ -23,8 +23,9 @@
         <link rel="stylesheet" href="resources/css/mbr-additional.css" type="text/css">
 
 
+         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+                         <link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <link rel="stylesheet" href="style.css" />
         <title>jQuery Example</title>
         <!DOCTYPE html>
@@ -36,35 +37,33 @@
     <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 
     <!---include header description -->
-
+<div class="wrap">
     <jsp:include page="header/headertop_desc.jsp" />
-
+    <div class="call" style="    margin-top: -34px;">
+                <p> <spring:message code="text.lang" /> : <a class="lang" href="?lang=en"><spring:message code="text.lang.english" /></a>|<a class="lang" href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+            </div>
     <!---include header top -->
     <%--<jsp:include page="header/header_top.jsp" />--%>
 
     <!---include nav bar -->
     <jsp:include page="header/header_bottom_nav.jsp" />
-    <div class="wrap">
+    <!--<div class="wrap">-->
         <div class="main">
             <div class="content">
                 <div class="section group">
-                    <div class="col span_2_of_3">
-                        <div class="contact-form">
-                            <h2>update offer</h2>
+                    <div class="col span_2_of_3" style="margin-left: 243px;">
+                        <div class="contact-form" style="direction:<spring:message code="addoffer.css.contactform.dir" /> ">
+                            <h2><spring:message code="updateoffer.text.updateyourProduc" /></h2>
 
 
                             <form   method="post" enctype="multipart/form-data" action="updateoffer" >
-
-                                <%--<spring:message code="name" />--%>
-
-
                                 <div >
 
-                                    <span><label>Product : </label></span>
+                                    <span><label><spring:message code="text.addoffer.product" />  </label></span>
                                     <span>
                                         <select name="product">
                                             <c:forEach var="item" items="${products}">
-                                                <option value="${item.id}" class="textbox">${item.nameEn}</option>
+                                                <option value="${item.id}" class="form-control">${requestScope.lang eq 'en'?item.nameEn:item.nameAr}</option>
                                             </c:forEach>
                                         </select>
                                     </span>
@@ -73,33 +72,33 @@
 
                                 <div >
 
-                                    <span><label>Quantity: </label></span>
-                                    <span> <input   id="quantity" type="number" class="textbox"  name="quantity" required /></span>
+                                    <span><label><spring:message code="text.preview.quantity" /> </label></span>
+                                    <span> <input   id="quantity" type="number" value="${offer.quantity}" class="form-control"  name="quantity" required /></span>
 
 
 
-                                    <span><label>Quantity Unit :</label></span> 
+                                    <span><label><spring:message code="text.addoffer.quantityunit" /></label></span> 
                                     <span>
                                         <select name="quantityunit">
                                             <c:forEach var="item" items="${units}">
-                                                <option value="${item.id}">${item.nameEn}</option>
+                                                <option value="${item.id}">${requestScope.lang eq 'en'?item.nameEn:item.nameAr}</option>
                                             </c:forEach>
                                         </select>
                                     </span>
 
                                     <div>
-                                        <span> <label>Price: </label></span>
-                                        <span> <input   id="quantity" type="number" class="textbox"  name="price" value="${offer.quantity}" required /></span>
+                                        <span> <label><spring:message code="dropdown.offer_page.price" /> </label></span>
+                                        <span> <input   id="quantity" type="number" class="form-control"  name="price" value="${offer.quantity}" required /></span>
 
 
 
 
-                                        <span><label>per </label></span>
+                                        <span><label><spring:message code="text.addoffer.css.per" /> </label></span>
                                         <span>
                                             <select name="unitprice">
                                                 
                                                 <c:forEach var="item" items="${units}" >
-                                                <option class="textbox" value="${item.id}" >${item.nameEn}</option>
+                                                <option class="form-control" value="${item.id}" >${requestScope.lang eq 'en'?item.nameEn:item.nameAr}</option>
                                                 </c:forEach>
                                                 
                                             </select>
@@ -111,7 +110,7 @@
 
                                     <div >
 
-                                        <span><label>Telephone: </label></span><span><input type="tel"   name="mobile"  class="textbox" value="${offer.userPhone}"  /></span>
+                                        <span><label><spring:message code="text.addoffer.mobile" /> </label></span><span><input type="tel"   name="mobile"  class="form-control" value="${offer.userPhone}"  /></span>
 
 
                                     </div>
@@ -121,27 +120,27 @@
 
                                     <div >
 
-                                        <span> <label>Governerate: </label></span><span><input    name="governerate" class="textbox" value="${offer.userLocation}" /></span>
+                                        <span> <label><spring:message code="text.addoffer.governerate" /></label></span><span><input    name="governerate" class="form-control" value="${offer.userLocation}" /></span>
 
 
 
                                     </div>
 
                                     <div >
-                                        <span><label> Image :</label></span><span><input type="file" name="file"  class="textbox" /></span>
+                                        <span><label> <spring:message code="text.addoffer.image" /></label></span><span><input type="file" name="file"  class="form-control" /></span>
                                     </div>
 
                                     <div >
 
 
-                                        <span><label>Description :</label></span> <span><textarea    name="description" class="textbox"  >${offer.description}</textarea></span>
+                                        <span><label><spring:message code="text.addoffer.description" /></label></span> <span><textarea    name="description" class="form-control"  >${offer.description}</textarea></span>
 
 
                                     </div>
 
                                     <div >
 
-                                        <input type="submit" value="Submit" id="add" /><br/>
+                                        <input type="submit" class="form-control" value="<spring:message code="update.text.update" />" id="add" /><br/>
                                     </div>
                                 </div>
 
