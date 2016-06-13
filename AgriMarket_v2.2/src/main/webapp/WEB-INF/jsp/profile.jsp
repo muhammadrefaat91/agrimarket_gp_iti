@@ -147,7 +147,7 @@
                                 <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;
                                      float: <spring:message code="offer_page.css.heading.float" />;">
                                     <div class="add-cart">
-                                             <h4> <a s href="${pageContext.request.contextPath}/removeoffer.htm?offerid=${offer.id}" style="position: absolute;
+                                             <h4> <a s href="${pageContext.request.contextPath}/web/removeoffer.htm?offerid=${offer.id}" style="position: absolute;
     margin-left: -31px;background-image: url('${pageContext.request.contextPath}/resources/images/ic_delete_black_24dp_1x.png')"></a></h4>
                                          </div>
                                     <!--<div class="thumbnail grid_1_of_4">-->
@@ -159,7 +159,7 @@
                                     <div  class="caption">
                                         <div class="price-details">
                                             <div class="price-number">
-                                                <p><span class="rupees">$${offer.price}L.E</span></p> 
+                                                <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p> 
                                             </div>
                                             <div class="add-cart">								
                                                 <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>

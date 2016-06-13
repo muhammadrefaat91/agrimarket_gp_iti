@@ -67,15 +67,14 @@
                     <c:forEach items="${latestOffers}" var="offer">
                         <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
                             <a href="preview.html">
-                                <img  
-                                    style="border: 1.1px solid #2969b0;
-                                    border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+                                <img   style="border: 1.1px solid #2969b0;
+                                        border-bottom: none; width: 220px; height: 150px;" src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
                      
                             <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
 
                             <div class="price-details">
                                 <div class="price-number">
-                                    <p><span class="rupees">${offer.price} L.E</span></p>
+                                    <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p>
                                 </div>
                                 <div class="add-cart">								
                                     <h4><a href="web/preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
