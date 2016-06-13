@@ -185,7 +185,7 @@ locale = LocaleContextHolder.getLocale();
 
                 redirectAttributes.addFlashAttribute("message",
                         "You failed to upload  because the file was empty");
-                return "redirect:index.htm";
+                return "redirect:/web/addoffer.htm";
             }
 
         } else {
@@ -201,7 +201,7 @@ locale = LocaleContextHolder.getLocale();
             User user = userService.getUserEager(oldUser.getId());
             request.getSession().setAttribute("user", user);
         }
-        return "redirect:/index.htm";
+        return "redirect:/web/offers.htm";
     }
 
 }

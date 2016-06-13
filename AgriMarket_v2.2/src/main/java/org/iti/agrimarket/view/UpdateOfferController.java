@@ -77,8 +77,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 
-@SessionAttributes("offerId")
+@SessionAttributes("user")
 
+@RequestMapping("web")
 public class UpdateOfferController extends HttpServlet {
 
     private Logger logger;
@@ -106,8 +107,18 @@ public class UpdateOfferController extends HttpServlet {
 
         model.addAttribute("units", units);
 
+        if (!model.containsAttribute("user")) {
+            //model.addAttribute("user", user);
+            System.out.println("------------------------");
+            System.out.println("-----!model view ----------");
+            return new ModelAndView("signup");
+
+        }
+        
+        
         if (!model.containsAttribute("offerId")) {
-            model.addAttribute("offerId", 1);
+            
+            return new ModelAndView("offers_page");
         }
 
         UserOfferProductFixed userOfferProductFixed = offerService.findUserOfferProductFixed(1);
@@ -159,43 +170,10 @@ public class UpdateOfferController extends HttpServlet {
 
         offerService.updateOffer(userOfferProductFixed);
 
-//
-//        if (!Validation.validateUser(user)) {
-//
-//            return "signup";
-//
-//        }
-//
-//        int res = userService.addUser(user);
-//
-////          if (user.getId() == null) {
-////         //   logger.trace(Constants.DB_ERROR);
-////           return "signup";
-////        }
-////            if (name.contains("/")) {
-////                redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-////                return "redirect:/";
-////            }
-////            if (name.contains("/")) {
-////                redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-////                return "redirect:/";
-////            }
         if (!file.isEmpty()) {
-//        
-//
-////                    
-////                    BufferedOutputStream stream = new BufferedOutputStream(
-////                            new FileOutputStream(new File("C:\\AgriMarket\\images\\users\\" + name)));
-////                    FileCopyUtils.copy(file.getInputStream(), stream);
-////                    stream.close();
-////                    redirectAttributes.addFlashAttribute("message",
-////                            "You successfully uploaded " + name + "!");
-////                    
-////
-////                    System.out.println("succccccccccccc");
+
             String fileName = userOfferProductFixed.getId() + String.valueOf(new Date().getTime());
-//
-//             
+       
             try {
 
                 System.out.println("fileName   :" + fileName);
@@ -224,14 +202,14 @@ public class UpdateOfferController extends HttpServlet {
 
                 redirectAttributes.addFlashAttribute("message",
                         "You failed to upload  because the file was empty");
-                return "signup";
+                return "redirect:/web/updateoffer.htm";
             }
 
         } else {
             redirectAttributes.addFlashAttribute("message",
                     "You failed to upload  because the file was empty");
         }
-        return "redirect:index.htm";
+        return "redirect:/web/offers.htm";
     }
 
     /**

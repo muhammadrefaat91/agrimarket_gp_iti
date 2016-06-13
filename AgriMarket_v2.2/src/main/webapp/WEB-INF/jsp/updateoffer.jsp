@@ -10,26 +10,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
-    <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
+
+        <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <!-- Site made with Mobirise Website Builder v2.9, https://mobirise.com -->
         <meta charset="UTF-8" http-equiv="Content-Type" content="text/html;>
 
-        <title>Sign In</title>
-        <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" >
+              <title>Sign In</title>
+              <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" >
         <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" >
         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="resources/css/style.css">
         <link rel="stylesheet" href="resources/css/mbr-additional.css" type="text/css">
 
 
-         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-                         <link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">
+        <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+        <link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">
 
         <link rel="stylesheet" href="style.css" />
         <title>jQuery Example</title>
         <!DOCTYPE html>
-   
+
 </head>
 <!--style="background-image: url(resources/images/istock-000016896298xlarge-4200x2833-56.jpg);"-->
 <body  >
@@ -37,17 +37,17 @@
     <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 
     <!---include header description -->
-<div class="wrap">
-    <jsp:include page="header/headertop_desc.jsp" />
-    <div class="call" style="    margin-top: -34px;">
-                <p> <spring:message code="text.lang" /> : <a class="lang" href="?lang=en"><spring:message code="text.lang.english" /></a>|<a class="lang" href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
-            </div>
-    <!---include header top -->
-    <%--<jsp:include page="header/header_top.jsp" />--%>
+    <div class="wrap">
+        <jsp:include page="header/headertop_desc.jsp" />
+        <div class="call" style="    margin-top: -34px;">
+            <p> <spring:message code="text.lang" /> : <a class="lang" href="?lang=en"><spring:message code="text.lang.english" /></a>|<a class="lang" href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+        </div>
+        <!---include header top -->
+        <%--<jsp:include page="header/header_top.jsp" />--%>
 
-    <!---include nav bar -->
-    <jsp:include page="header/header_bottom_nav.jsp" />
-    <!--<div class="wrap">-->
+        <!---include nav bar -->
+        <jsp:include page="header/header_bottom_nav.jsp" />
+        <!--<div class="wrap">-->
         <div class="main">
             <div class="content">
                 <div class="section group">
@@ -73,7 +73,7 @@
                                 <div >
 
                                     <span><label><spring:message code="text.preview.quantity" /> </label></span>
-                                    <span> <input   id="quantity" type="number" value="${offer.quantity}" class="form-control"  name="quantity" required /></span>
+                                    <span> <input   id="quantity" type="number" value="${offer.quantity}" class="form-control"  name="quantity" required   /></span>
 
 
 
@@ -96,11 +96,11 @@
                                         <span><label><spring:message code="text.addoffer.css.per" /> </label></span>
                                         <span>
                                             <select name="unitprice">
-                                                
+
                                                 <c:forEach var="item" items="${units}" >
-                                                <option class="form-control" value="${item.id}" >${requestScope.lang eq 'en'?item.nameEn:item.nameAr}</option>
+                                                    <option class="form-control" value="${item.id}" >${requestScope.lang eq 'en'?item.nameEn:item.nameAr}</option>
                                                 </c:forEach>
-                                                
+
                                             </select>
                                         </span>
 
@@ -110,7 +110,7 @@
 
                                     <div >
 
-                                        <span><label><spring:message code="text.addoffer.mobile" /> </label></span><span><input type="tel"   name="mobile"  class="form-control" value="${offer.userPhone}"  /></span>
+                                        <span><label><spring:message code="text.addoffer.mobile" /> </label></span><span><input type="tel"   name="mobile"  class="form-control" value="${offer.userPhone}"  pattern="(01)\d{9}" title="11 numbers max, start with 01" required  /></span>
 
 
                                     </div>
@@ -120,7 +120,7 @@
 
                                     <div >
 
-                                        <span> <label><spring:message code="text.addoffer.governerate" /></label></span><span><input    name="governerate" class="form-control" value="${offer.userLocation}" /></span>
+                                        <span> <label><spring:message code="text.addoffer.governerate" /></label></span><span><input    name="governerate" class="form-control" value="${offer.userLocation}"  pattern="[A-Za-z]{3,20}" title="three min ,Therty letter Max" required /></span>
 
 
 
