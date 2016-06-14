@@ -51,7 +51,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 @SessionAttributes("user")
-
+@RequestMapping("web")
 public class SignUpController extends HttpServlet {
 
     private Logger logger;
@@ -68,15 +68,12 @@ public class SignUpController extends HttpServlet {
 
     String imgUrl = null;
 
-
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public ModelAndView drawSignUpForm() {
         User user = new User();
         System.out.println("hello################");
         return new ModelAndView("signup", "userForm", user);
     }
-
-
 
     /**
      * upload image and form data
@@ -156,8 +153,7 @@ public class SignUpController extends HttpServlet {
      *
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplus")
-    public @ResponseBody
-    String signupUserFb(Model model, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("img") String img) {
+    public @ResponseBody String signupUserFb(Model model, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("img") String img) {
 
         System.out.println("save user func          google plus---------");
         System.out.println("full Name : " + name);
@@ -176,7 +172,7 @@ public class SignUpController extends HttpServlet {
             System.out.println("i uploaded user on the session");
 //
 
-            return "index.htm";
+            return "redirect:/index.htm";
 
         } else { // store user 
 
@@ -185,7 +181,13 @@ public class SignUpController extends HttpServlet {
             imgUrl = img;
             System.out.println("amr");
 
-            return "signupl2.htm";
+            String[] countryArr = {"Ad Daqahliyah", "Al Bahr al Ahmar", "Al Buhayrah", "Al Fayyum", "Al Gharbiyah", "Al Iskandariyah", "Al Isma'iliyah", "Al Jizah", "Al Minufiyah", "Al Minya", "Al Qahirah", "Al Qalyubiyah", "Al Wadi al Jadid", "As Suways", "Ash Sharqiyah", "Aswan", "Asyut", "Bani Suwayf", "Bur Sa'id", "Dumyat", "Janub Sina", "Kafr ash Shaykh", "Matruh", "Qina", "Shamal Sina", "Suhaj"};
+            String[] countryArrAr = {"القاهره", "الاسكندريه", "البحيره", "الفيوم", "الغربيه", "الاسكندريه", "الإسماعيلية", "الجيزة", "المنوفية", "المنيا", "القليوبية", "الوادي الجديد", "السويس", "الشرقية", "أسوان", "أسيوط", "بني سويف", "بورسعيد", "دمياط", "جنوب سيناء", "كفر الشيخ", "مطروح", "قنا", "شمال سيناء", "سوهاج"};
+
+            model.addAttribute("states_ar", countryArrAr);
+            model.addAttribute("states_us", countryArr);
+
+            return "redirect:/web/signupl2.htm";
 
         }
     }
@@ -196,7 +198,7 @@ public class SignUpController extends HttpServlet {
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplusstep2")
     public String signupUserFb(Model model, @RequestParam("mobile") String mobil, @RequestParam("governerate") String governerate,
-             HttpServletRequest request, HttpServletResponse response) {
+            HttpServletRequest request, HttpServletResponse response) {
 
         System.out.println("save user func   fb2       google plus---------");
         //    System.out.println("image : "+img);
@@ -290,7 +292,7 @@ public class SignUpController extends HttpServlet {
 
         model.addAttribute("user", user);
         System.out.println("i Stored user in the DB");
- 
+
         return "redirect:/index.htm";
     }
 
