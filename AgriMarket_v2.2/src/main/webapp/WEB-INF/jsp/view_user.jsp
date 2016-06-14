@@ -22,35 +22,7 @@
     <script src="<spring:url value="/resources/js/jquery.rating.js" />"></script>
     <script src="<spring:url value="/resources/js/bootstrap.min.js" />"></script>
 
-    <script type="text/javascript" >
-        $(document).ready(function () { 
-            $('#submit-review').click(function () {
-                //if user doesn't login 
-                var user = ${sessionScope.user.id}0|| null ;
-                if (user == 0 || user===null)
-                    location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/signup.htm";
-                
-                var selectedVal = "";
-                var selected = $("input[type='radio'][name='rating']:checked");
-                selectedVal = selected.val();
-                var reviewText = jQuery("textarea#review-text").val();
-//                console.log(reviewText);
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/web/addRate.htm",
-                    type: "GET",
-                    data: {rating: selectedVal, uID:${userHasOffer.id}, reviewText: reviewText},
-                    success: function (data) {
-                        console.log('success' + data);
-                        if (data === 'no_errors')
-                            location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/getUser.htm?id=${param['id']}";
-                    },
-                    error: function (e) {
-                        console.log('error:' + e.data);
-                    }
-                });
-            });
-        });
-    </script>
+
 
 </head>
 <body>
@@ -222,6 +194,38 @@
             </div>
         </div>
     </div>
+                            <script type="text/javascript" >
+        $(document).ready(function () { 
+            $('#submit-review').click(function () {
+                
+                //if user doesn't login 
+                var user = ${sessionScope.user.id}0|| null ;
+                alert(alert(a.substring(0,4));
+                
+                if (user == 0 || user==null)
+                    location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/signup.htm";
+                
+                var selectedVal = "";
+                var selected = $("input[type='radio'][name='rating']:checked");
+                selectedVal = selected.val();
+                var reviewText = jQuery("textarea#review-text").val();
+//                console.log(reviewText);
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/web/addRate.htm",
+                    type: "GET",
+                    data: {rating: selectedVal, raterID:user.id,ratedID:${userHasOffer.id}, reviewText: reviewText},
+                    success: function (data) {
+                        console.log('success' + data);
+                        if (data === 'no_errors')
+                            location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/getUser.htm?id=${param['id']}";
+                    },
+                    error: function (e) {
+                        console.log('error:' + e.data);
+                    }
+                });
+            });
+        });
+    </script>
     <jsp:include page="footer/footer.jsp" />
 </body>
 </html>

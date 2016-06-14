@@ -21,7 +21,7 @@
     <script type="text/javascript" src="<spring:url value="/resources/js/jquery.cookie.js" />"></script>
     <style type="text/css">
         .search_box form input[type="submit"]{
-                margin-top: <spring:message code="search.icon.margin-top" />px;
+            margin-top: <spring:message code="search.icon.margin-top" />px;
         }
     </style>
 </head>
@@ -60,14 +60,18 @@
                     </div>
                     <div class="clear"></div>
                 </div>
-                <div class="section group">
+                <div class="section group" >
                     <c:forEach items="${latestOffers}" var="offer">
-                        <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
-                            <a href="web/preview.htm?id=${offer.id}">
+                        <div class="grid_1_of_4 images_1_of_4" style="margin-left: 2px;margin-right: 9px;   ">
+                            <c:if test="${offer.recommended eq '1'}" >
+                                <img style="    margin-left: -1px;
+    margin-top: -24px; position: absolute;" src="${pageContext.request.contextPath}/resources/images/images.png"  />
+                            </c:if>
+                            <a href="preview.htm?id=${offer.id}">
                                 <img  
                                     style="border: 1.1px solid #2969b0;
-                                    border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
-                     
+                                    border-bottom: none; width: 220px; height: 150px;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+
                             <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
 
                             <div class="price-details">
@@ -75,7 +79,7 @@
                                     <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p>
                                 </div>
                                 <div class="add-cart">								
-                                    <h4><a href="web/preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
+                                    <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
                                 </div>
                                 <div class="clear"></div>
                             </div>

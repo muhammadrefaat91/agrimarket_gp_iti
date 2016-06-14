@@ -16,7 +16,7 @@
                     <!-- view advertisements images-->
                     <c:forEach items="${allcategories}" var="module"> 
 
-                        <li><a href="${pageContext.request.contextPath}/web/getoffers.htm?category=${module.id}">${requestScope.lang eq 'en'?module.nameEn:module.nameAr}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/web/offers.htm?category=${module.id}">${requestScope.lang eq 'en'?module.nameEn:module.nameAr}</a></li>
                         </c:forEach>
 
                 </ul>

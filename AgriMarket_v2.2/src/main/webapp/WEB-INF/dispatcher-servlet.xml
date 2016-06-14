@@ -59,8 +59,8 @@
     <mvc:view-controller path="/web/addoffer.htm" view-name="addoffer" />
     <mvc:view-controller path="/sign_in.htm" view-name="sign_in" />
     <mvc:view-controller path="/web/signup.htm" view-name="signup" />
-    <mvc:view-controller path="/offers.htm" view-name="offers_page" />
-    <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />
+<!--    <mvc:view-controller path="/offers.htm" view-name="offers_page" />
+    <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />-->
     <mvc:view-controller path="/web/user.htm" view-name="view_user" />
     <mvc:view-controller path="/web/edit-profile.htm" view-name="edit-profile" />
     <mvc:view-controller path="/web/preview.htm" view-name="preview" />

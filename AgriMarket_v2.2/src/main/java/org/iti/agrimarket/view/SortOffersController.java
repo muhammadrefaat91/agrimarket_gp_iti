@@ -8,6 +8,7 @@ package org.iti.agrimarket.view;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import org.iti.agrimarket.business.OfferService;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
@@ -16,6 +17,7 @@ import org.iti.agrimarket.util.SortOffersByDate;
 import org.iti.agrimarket.util.SortOffersByPrice;
 import org.iti.agrimarket.util.SortOffersByQuantity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,8 +47,9 @@ public class SortOffersController {
     
     @RequestMapping(value = "/sort.htm",method = RequestMethod.GET)
     public String addRate(HttpServletRequest request ,@RequestParam(value = "sortType", required = false) String sortType,
-            @RequestParam(value = "searchText", required = false) String productName, Model model) {
+            @RequestParam(value = "searchText", required = false) String productName,Locale locale, Model model) {
         SortOffers sortOffers;
+        locale = LocaleContextHolder.getLocale();
         List<UserOfferProductFixed> offers = (List<UserOfferProductFixed>) request.getSession().getAttribute("getAllOfferProducts");
         System.out.println("List<UserOfferProductFixed> fixeds"+offers);
        
@@ -66,6 +69,7 @@ public class SortOffersController {
         }
         model.addAttribute("getAllOfferProducts", offers);
         System.out.println("sorted"+offers);
+        model.addAttribute("lang", locale);
 
         return "offers_page";
     }

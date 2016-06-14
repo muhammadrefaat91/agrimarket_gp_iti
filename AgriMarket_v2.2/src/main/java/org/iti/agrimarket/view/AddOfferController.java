@@ -195,7 +195,7 @@ public class AddOfferController extends HttpServlet {
             User user = userService.getUserEager(oldUser.getId());
             request.getSession().setAttribute("user", user);
         }
-        return "offers_page";
+        return "redirect:/web/offers.htm";
     }
 
 }
