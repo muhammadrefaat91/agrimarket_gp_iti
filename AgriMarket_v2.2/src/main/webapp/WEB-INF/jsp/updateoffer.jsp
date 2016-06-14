@@ -118,13 +118,20 @@
 
 
 
-                                    <div >
-
-                                        <span> <label><spring:message code="text.addoffer.governerate" /></label></span><span><input    name="governerate" class="form-control" value="${offer.userLocation}"  pattern="[A-Za-z]{3,20}" title="three min ,Therty letter Max" required /></span>
-
-
-
-                                    </div>
+                                   <div >
+                                                  <span> <label><spring:message code="text.addoffer.governerate" />  </label></span>
+               
+                                                     <span>
+                                                        <select name="governerate" >
+                                                            <c:forEach var="item" items="${requestScope.lang eq 'en'?states_us:states_ar}">
+                                                                <option class="textbox" value="${item}">${item}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </span>
+               
+                                                
+                                                
+                                                </div>
 
                                     <div >
                                         <span><label> <spring:message code="text.addoffer.image" /></label></span><span><input type="file" name="file"  class="form-control" /></span>

@@ -12,6 +12,8 @@
     <head>
         <meta charset="UTF-8">
 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        
         <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <title><spring:message code="title.sign_in" /></title>
         <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" >
@@ -64,11 +66,18 @@
 
 
                                             </div>
-                                            <div class="form-group">
-
-                                                <label><spring:message code="text.addoffer.governerate" /></label><input type="text"   name="governerate" class="form-control"/>
-
-                                            </div>
+                                   <div >
+                                                  <span> <label><spring:message code="text.addoffer.governerate" />  </label></span>
+               
+                                                     <span>
+                                                        <select name="governerate" >
+                                                            <c:forEach var="item" items="${requestScope.lang eq 'en'?states_us:states_ar}">
+                                                                <option class="textbox" value="${item}">${item}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </span>
+          
+                                                </div>
 
                                             <div class="form-group">
 
