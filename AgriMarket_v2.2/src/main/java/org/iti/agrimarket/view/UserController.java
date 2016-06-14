@@ -27,8 +27,10 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -85,6 +87,25 @@ public class UserController {
 
         return "profile";
     }
+    
+    
+    
+    @RequestMapping(value = {"/uprofile.htm"}, method = RequestMethod.GET)
+    public ModelAndView drawUpdateProfilePage(Locale locale, Model model) {
+        locale = LocaleContextHolder.getLocale();
+  
+        model.addAttribute("lang", locale);
+
+        String[] countryArr = {"Ad Daqahliyah", "Al Bahr al Ahmar", "Al Buhayrah", "Al Fayyum", "Al Gharbiyah", "Al Iskandariyah", "Al Isma'iliyah", "Al Jizah", "Al Minufiyah", "Al Minya", "Al Qahirah", "Al Qalyubiyah", "Al Wadi al Jadid", "As Suways", "Ash Sharqiyah", "Aswan", "Asyut", "Bani Suwayf", "Bur Sa'id", "Dumyat", "Janub Sina", "Kafr ash Shaykh", "Matruh", "Qina", "Shamal Sina", "Suhaj"};
+        String[] countryArrAr = {"القاهره", "الاسكندريه", "البحيره", "الفيوم", "الغربيه", "الاسكندريه", "الإسماعيلية", "الجيزة", "المنوفية", "المنيا", "القليوبية", "الوادي الجديد", "السويس", "الشرقية", "أسوان", "أسيوط", "بني سويف", "بورسعيد", "دمياط", "جنوب سيناء", "كفر الشيخ", "مطروح", "قنا", "شمال سيناء", "سوهاج"};
+
+        model.addAttribute("states_ar", countryArrAr);
+        model.addAttribute("states_us", countryArr);
+
+        System.out.println("hello################  new profile");
+        return new ModelAndView("edit-profile");
+    }
+
 
     @RequestMapping(value = {"/uprofile.htm"})
     public String updateUserProfile(@RequestParam(value = "fullName", required = true) String fullName,
