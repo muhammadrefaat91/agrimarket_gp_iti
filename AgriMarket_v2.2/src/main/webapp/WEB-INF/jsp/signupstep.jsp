@@ -13,7 +13,7 @@
         <meta charset="UTF-8">
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-        
+
         <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <title><spring:message code="title.sign_in" /></title>
         <!--<link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" >-->
@@ -56,33 +56,33 @@
                         <div class="col-sm-12">
 
                             <div class="col-sm-8 col-sm-offset-2">
-                                
+
 
 
                                 <div class="col-sm-8 col-sm-offset-2">
                                     <form   method="post" enctype="multipart/form-data" action="signupgplusstep2" >
                                         <div align="center">
                                             <%--<spring:message code="name" />--%>
+                                            <div class="form-group">
+                                                <span> <label><spring:message code="text.addoffer.governerate" />  </label></span>
+
+                                                <span>
+                                                    <select name="governerate" >
+                                                        <c:forEach var="item" items="${requestScope.lang eq 'en'?states_us:states_ar}">
+                                                            <option class="textbox" value="${item}">${item}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </span>
+
+                                            </div>
 
 
                                             <div class="form-group">
 
-                                                <label style="direction: <spring:message code="addoffer.css.contactform.dir" />"><spring:message code="text.addoffer.mobile" /></label><input type="tel" maxlength="11" min="11"  name="mobile" required class="form-control" />
+                                                <label style="direction: <spring:message code="addoffer.css.contactform.dir" />"><spring:message code="text.addoffer.mobile" /></label><input type="tel" maxlength="11" min="11"  name="mobile" pattern="(01)\d{9}" title="11 numbers max, start with 01" required class="form-control" />
 
 
                                             </div>
-                                   <div >
-                                                  <span> <label><spring:message code="text.addoffer.governerate" />  </label></span>
-               
-                                                     <span>
-                                                        <select name="governerate" >
-                                                            <c:forEach var="item" items="${requestScope.lang eq 'en'?states_us:states_ar}">
-                                                                <option class="textbox" value="${item}">${item}</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </span>
-          
-                                                </div>
 
                                             <div class="form-group">
 

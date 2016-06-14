@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +43,7 @@ import net.sf.jmimemagic.MagicParseException;
 import org.apache.logging.log4j.Logger;
 import org.iti.agrimarket.constant.Constants;
 import org.iti.agrimarket.model.pojo.User;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -79,81 +81,9 @@ public class SignUpController extends HttpServlet {
      * upload image and form data
      *
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/saveuser")
-    public String saveUser(@RequestParam("fullName") String fullName, @RequestParam("password") String password, @RequestParam("mail") String mail, @RequestParam("mobile") String mobil, @RequestParam("governerate") String governerate, @RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
-
-        System.out.println("save user func ---------");
-        System.out.println("full Name :" + fullName);
-        System.out.println("mobile:" + mobil);
-
-        User user = new User();
-        user.setFullName(fullName);
-//        user.setPassword(password);
-        user.setGovernerate(governerate);
-
-        user.setMail(mail);
-        user.setMobile(mobil);
-
-        user.setLat(0.0);
-        user.setLong_(0.0);
-        user.setLoggedIn(true);
-        user.setRatesAverage(0);
-        user.setRegistrationChannel(0);   // web
-        user.setImageUrl("images/amr.jpg");
-
-        if (!Validation.validateUser(user)) {
-
-            return "signup";
-
-        }
-
-        int res = userService.addUser(user);
-
-        if (!file.isEmpty()) {
-
-            String fileName = user.getId() + String.valueOf(new Date().getTime());
-
-            try {
-                byte[] bytes = file.getBytes();
-                MagicMatch match = Magic.getMagicMatch(bytes);
-                final String ext = "." + match.getExtension();
-
-                File parentDir = new File(Constants.IMAGE_PATH + Constants.USER_PATH);
-                if (!parentDir.isDirectory()) {
-                    parentDir.mkdirs();
-                }
-                BufferedOutputStream stream
-                        = new BufferedOutputStream(new FileOutputStream(new File(Constants.IMAGE_PATH + Constants.USER_PATH + fileName)));
-                stream.write(bytes);
-                stream.close();
-                user.setImageUrl(Constants.IMAGE_PRE_URL + Constants.USER_PATH + fileName + ext);
-                userService.updateUser(user);
-
-            } catch (Exception e) {
-                //                  logger.error(e.getMessage());
-                userService.deleteUser(user); // delete the category if something goes wrong
-
-                redirectAttributes.addFlashAttribute("message",
-                        "You failed to upload " + name + " because the file was empty");
-                return "signup";
-            }
-
-        } else {
-            redirectAttributes.addFlashAttribute("message",
-                    "You failed to upload " + name + " because the file was empty");
-        }
-
-        return "redirect:index.htm";
-    }
-
-    /**
-     * upload image and form data
-     *
-     */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplus")
-    public @ResponseBody String signupUserFb(Model model, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("img") String img) {
+    public @ResponseBody
+    String signupUserFb(Model model, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("img") String img) {
 
         System.out.println("save user func          google plus---------");
         System.out.println("full Name : " + name);
@@ -181,15 +111,25 @@ public class SignUpController extends HttpServlet {
             imgUrl = img;
             System.out.println("amr");
 
-            String[] countryArr = {"Ad Daqahliyah", "Al Bahr al Ahmar", "Al Buhayrah", "Al Fayyum", "Al Gharbiyah", "Al Iskandariyah", "Al Isma'iliyah", "Al Jizah", "Al Minufiyah", "Al Minya", "Al Qahirah", "Al Qalyubiyah", "Al Wadi al Jadid", "As Suways", "Ash Sharqiyah", "Aswan", "Asyut", "Bani Suwayf", "Bur Sa'id", "Dumyat", "Janub Sina", "Kafr ash Shaykh", "Matruh", "Qina", "Shamal Sina", "Suhaj"};
-            String[] countryArrAr = {"القاهره", "الاسكندريه", "البحيره", "الفيوم", "الغربيه", "الاسكندريه", "الإسماعيلية", "الجيزة", "المنوفية", "المنيا", "القليوبية", "الوادي الجديد", "السويس", "الشرقية", "أسوان", "أسيوط", "بني سويف", "بورسعيد", "دمياط", "جنوب سيناء", "كفر الشيخ", "مطروح", "قنا", "شمال سيناء", "سوهاج"};
-
-            model.addAttribute("states_ar", countryArrAr);
-            model.addAttribute("states_us", countryArr);
-
-            return "redirect:/web/signupl2.htm";
+            return "signupstep.htm";
 
         }
+    }
+
+    /**
+     * draw signupstep 2
+     *
+     */
+    @RequestMapping(value = "/signupstep", method = RequestMethod.GET)
+    public ModelAndView drawSignUpForm(Model model, Locale locale) {
+        String[] countryArr = {"Ad Daqahliyah", "Al Bahr al Ahmar", "Al Buhayrah", "Al Fayyum", "Al Gharbiyah", "Al Iskandariyah", "Al Isma'iliyah", "Al Jizah", "Al Minufiyah", "Al Minya", "Al Qahirah", "Al Qalyubiyah", "Al Wadi al Jadid", "As Suways", "Ash Sharqiyah", "Aswan", "Asyut", "Bani Suwayf", "Bur Sa'id", "Dumyat", "Janub Sina", "Kafr ash Shaykh", "Matruh", "Qina", "Shamal Sina", "Suhaj"};
+        String[] countryArrAr = {"القاهره", "الاسكندريه", "البحيره", "الفيوم", "الغربيه", "الاسكندريه", "الإسماعيلية", "الجيزة", "المنوفية", "المنيا", "القليوبية", "الوادي الجديد", "السويس", "الشرقية", "أسوان", "أسيوط", "بني سويف", "بورسعيد", "دمياط", "جنوب سيناء", "كفر الشيخ", "مطروح", "قنا", "شمال سيناء", "سوهاج"};
+
+        locale = LocaleContextHolder.getLocale();
+        model.addAttribute("lang", locale);
+        model.addAttribute("states_ar", countryArrAr);
+        model.addAttribute("states_us", countryArr);
+        return new ModelAndView("signupstep");
     }
 
     /**
