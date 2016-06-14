@@ -16,6 +16,9 @@
         <title><spring:message code="title.addoffer.addproduct" /></title>
         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
+        
+
+
         <link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">
 
     </head>
@@ -77,7 +80,18 @@
                                                     <span><label><spring:message code="text.addoffer.mobile" />  </label></span><span><input type="tel"   name="mobile"  class="form-control"  pattern="(01)\d{9}" title="11 numbers max, start with 01" required /></span>
                                                 </div>
                                                 <div >
-                                                    <span> <label><spring:message code="text.addoffer.governerate" />  </label></span><span><input type="text"    name="governerate" class="form-control"  pattern="[A-Za-z]{3,20}" title="three min ,Therty letter Max" required /></span>
+                                                  <span> <label><spring:message code="text.addoffer.governerate" />  </label></span>
+               
+                                                     <span>
+                                                        <select name="governerate" >
+                                                            <c:forEach var="item" items="${requestScope.lang eq 'en'?states_us:states_ar}">
+                                                                <option class="textbox" value="${item}">${item}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </span>
+               
+                                                
+                                                
                                                 </div>
                                                 <div >
                                                     <span><label><spring:message code="text.addoffer.image" />  </label></span><span><input type="file" name="file"  class="form-control"  required /></span>
