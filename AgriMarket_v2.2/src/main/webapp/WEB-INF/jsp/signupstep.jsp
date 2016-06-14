@@ -79,7 +79,7 @@
 
                                             <div class="form-group">
 
-                                                <label style="direction: <spring:message code="addoffer.css.contactform.dir" />"><spring:message code="text.addoffer.mobile" /></label><input type="tel" maxlength="11" min="11"  name="mobile" pattern="(01)\d{9}" title="11 numbers max, start with 01" required class="form-control" />
+                                                <label style="direction: <spring:message code="addoffer.css.contactform.dir" />"><spring:message code="text.addoffer.mobile" /></label><input type="tel" maxlength="11" min="11"  name="mobile" pattern="(01)\d{9}" title="<spring:message code="validate.mobile" />" required class="form-control" />
 
 
                                             </div>

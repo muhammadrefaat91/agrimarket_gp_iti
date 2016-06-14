@@ -102,7 +102,7 @@ public class SignUpController extends HttpServlet {
             System.out.println("i uploaded user on the session");
 //
 
-            return "redirect:/index.htm";
+            return "index.htm";
 
         } else { // store user 
 
@@ -111,7 +111,7 @@ public class SignUpController extends HttpServlet {
             imgUrl = img;
             System.out.println("amr");
 
-            return "signupstep.htm";
+            return "web/signupstep.htm";
 
         }
     }
