@@ -87,8 +87,8 @@
                                 <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
                                     <a href="${pageContext.request.contextPath}/admin/preview.htm?id=${offer.id}">
                                         <img  
-                                            style="border: 1.1px solid #2969b0;
-                                            border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+                                        style="border: 1.1px solid #2969b0;
+                                        border-bottom: none; width: 220px; height: 150px;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
                                             <h2>${offer.startDate}</h2>
                                     <div class="price-details">
                                         

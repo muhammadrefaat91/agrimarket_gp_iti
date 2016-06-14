@@ -160,8 +160,9 @@
                                          </div>
                                     <!--<div class="thumbnail grid_1_of_4">-->
                                     <a href="preview.htm?id=${offer.id}">
-                                        <img style="border: 1.1px solid #2969b0;
-                                             border-bottom: none;" alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+                                        <img 
+                                        style="border: 1.1px solid #2969b0;
+                                        border-bottom: none; width: 220px; height: 150px;" alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
                                     <h2 align="center">${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr}</h2>
 
                                     <div  class="caption">

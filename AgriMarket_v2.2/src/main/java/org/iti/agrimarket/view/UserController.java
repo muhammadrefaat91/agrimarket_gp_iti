@@ -78,6 +78,7 @@ public class UserController {
 //                System.out.println("user offer product fixed" + fixed.getId());
 //            }
 
+//            user=userService.getUserEager(user.getId());
             model.addAttribute("user", user);
         }
         model.addAttribute("lang", locale);

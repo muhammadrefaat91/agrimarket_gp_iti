@@ -110,7 +110,7 @@ public class SignUpController extends HttpServlet {
             imgUrl = img;
             System.out.println("amr");
 
-            return "signupstep.htm";
+            return "web/signupstep.htm";
 
         }
     }

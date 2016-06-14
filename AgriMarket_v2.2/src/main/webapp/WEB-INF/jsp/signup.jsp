@@ -10,6 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <c:if test="${not empty user}" >
+            <c:redirect url="/index.htm" />
+        </c:if>
         <meta charset="UTF-8">
 
         <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
@@ -44,7 +47,7 @@
                         function (googleUser) {
                             document.getElementById('name').innerText = "Signed in: " +
                                     googleUser.getBasicProfile().getName();
-                            
+
                             var profile = googleUser.getBasicProfile();
                             console.log("ID: " + profile.getId()); // Don't send this directly to your server!
                             console.log('Full Name: ' + profile.getName());
@@ -58,7 +61,7 @@
                             $.ajax({
                                 url: "${pageContext.request.contextPath}/web/signupgplus",
                                 type: "POST",
-                                data: {name: googleUser.getBasicProfile().getName(), email: googleUser.getBasicProfile().getEmail(),img:profile.getImageUrl()},
+                                data: {name: googleUser.getBasicProfile().getName(), email: googleUser.getBasicProfile().getEmail(), img: profile.getImageUrl()},
                                 success: function (data) {
                                     console.log('success' + data);
 //                        if (data === 'no_errors')
@@ -114,11 +117,11 @@
         </style>
 
 
-    <style type="text/css">
-        .search_box form input[type="submit"]{
+        <style type="text/css">
+            .search_box form input[type="submit"]{
                 margin-top: <spring:message code="search.icon.margin-top" />px;
-        }
-    </style>
+            }
+        </style>
     </head>
     <body  >
         <!--<div class="header">-->
@@ -142,8 +145,8 @@
                     <div class="row">
                         <div align="center">
 
-            
-            
+
+
                             <div id="gSignInWrapper">
                                 <span class="label">Sign in with:</span>
                                 <div id="customBtn" class="customGPlusSignIn">
