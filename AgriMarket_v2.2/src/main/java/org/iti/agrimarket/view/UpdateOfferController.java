@@ -226,7 +226,7 @@ public class UpdateOfferController extends HttpServlet {
      *
      */
     @RequestMapping(method = RequestMethod.GET, value = "/removeoffer.htm")
-    public String removeOffer(@RequestParam("offerid") Integer offerId, HttpServletRequest request, HttpServletResponse response) {
+    public String removeOffer(@RequestParam("offerid") Integer offerId, HttpServletRequest request, HttpServletResponse response, Model model) {
 
         System.out.println("in delete offer");
 
@@ -240,7 +240,9 @@ public class UpdateOfferController extends HttpServlet {
         if (oldUser != null) {
             User user = userService.getUserEager(oldUser.getId());
             request.getSession().setAttribute("user", user);
+            model.addAttribute("user", user);
         }
+        
         return "profile";
 
     }

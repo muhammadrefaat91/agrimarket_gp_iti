@@ -7,12 +7,9 @@ package org.iti.agrimarket.view;
  */
 import javax.servlet.http.HttpServlet;
 
-import javax.validation.Valid;
 import org.iti.agrimarket.business.OfferService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -82,15 +79,13 @@ public class AddOfferController extends HttpServlet {
         units = unitService.getAllUnits();
         System.out.println(units.get(1).getNameEn());
         model.addAttribute("units", units);
-
-        User user = new User();
-        user.setId(1);
+ 
 
         if (!model.containsAttribute("user")) {
             //model.addAttribute("user", user);
             System.out.println("------------------------");
             System.out.println("-----!model view ----------");
-            return new ModelAndView("signup");
+            return new ModelAndView("/signup");
 
         }
         // model.addAttribute("user",user);
@@ -207,7 +202,7 @@ public class AddOfferController extends HttpServlet {
             User user = userService.getUserEager(oldUser.getId());
             request.getSession().setAttribute("user", user);
         }
-        return "redirect:/web/offers.htm";
+        return "offers_page";
     }
 
 }

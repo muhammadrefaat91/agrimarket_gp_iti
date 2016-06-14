@@ -19,9 +19,11 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-      
+    
+    
     <mvc:annotation-driven/>
-        
+    
+    
     <context:component-scan base-package="org.iti.agrimarket.model"/>
     <context:component-scan base-package="org.iti.agrimarket.business"/>
      <context:component-scan base-package="org.iti.agrimarket.view"/>
@@ -35,9 +37,11 @@
  
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- one of the properties available; the maximum file size in bytes -->
-        <property name="maxUploadSize" value="200000"/>
+        <property name="maxUploadSize" value="2000000"/>
     </bean>
-  
+
+
+   
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
@@ -49,12 +53,11 @@
     </bean>
         
     <!--static pages-->
-   <mvc:view-controller path="/about.htm" view-name="about" />
+    <mvc:view-controller path="/about.htm" view-name="about" />
     <mvc:view-controller path="/contact.htm" view-name="contact" />
-    <mvc:view-controller path="/web/updateoffer.htm" view-name="updateoffer" />
-    <mvc:view-controller path="/web/signupl2.htm" view-name="signupstep" />
-    <!--<mvc:view-controller path="/web/addOffer.htm" view-name="addoffer" />-->
-    <mvc:view-controller path="/login.htm" view-name="sign_in" />
+    <mvc:view-controller path="/updateoffer.htm" view-name="updateoffer" />
+    <mvc:view-controller path="/web/addoffer.htm" view-name="addoffer" />
+    <mvc:view-controller path="/sign_in.htm" view-name="sign_in" />
     <mvc:view-controller path="/web/signup.htm" view-name="signup" />
     <mvc:view-controller path="/offers.htm" view-name="offers_page" />
     <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />
@@ -64,7 +67,7 @@
     <mvc:view-controller path="/admin/preview.htm" view-name="admin/preview" />
     <mvc:view-controller path="/about.htm" view-name="about" />
     <mvc:view-controller path="/contact.htm" view-name="contact" />
-    <!--<mvc:view-controller path="/sign_up.htm" view-name="sign_up" />-->
+    <mvc:view-controller path="/web/signupstep.htm" view-name="signupstep" />
 <!--    <mvc:view-controller path="/sign_up1.htm" view-name="sign_up_1" /> -->
     <mvc:view-controller path="/admin/home.htm" view-name="admin/home" />
     <mvc:view-controller path="/admin/products_page.htm" view-name="admin/products_page" />

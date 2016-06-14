@@ -30,16 +30,13 @@
         <c:redirect url="/index.htm" />
     </c:if>
 
-    <c:if test="${empty latestOffers}" >
-        <c:redirect url="/index.htm" />
-    </c:if>
     <div class="wrap">
         <!-- header--->
         <!---include header description -->
 
         <jsp:include page="header/headertop_desc.jsp" />
         <div class="call" style="    margin-top: -34px;">
-            <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+            <p style="direction: <spring:message code="addoffer.css.contactform.dir" />;"> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
         </div>
 
         <!---include header top -->
@@ -66,7 +63,7 @@
                 <div class="section group">
                     <c:forEach items="${latestOffers}" var="offer">
                         <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
-                            <a href="preview.html">
+                            <a href="web/preview.htm?id=${offer.id}">
                                 <img  
                                     style="border: 1.1px solid #2969b0;
                                     border-bottom: none;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
@@ -75,7 +72,7 @@
 
                             <div class="price-details">
                                 <div class="price-number">
-                                    <p><span class="rupees">${offer.price} L.E</span></p>
+                                    <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p>
                                 </div>
                                 <div class="add-cart">								
                                     <h4><a href="web/preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>

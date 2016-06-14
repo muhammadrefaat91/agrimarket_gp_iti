@@ -8,6 +8,10 @@
 <div class="header_top">
         <div class="logo">
             <a href="${pageContext.request.contextPath}/index.htm"><img src="${pageContext.request.contextPath}/resources/images/agri_logo_vs.png" alt="" /></a>
+            <a  href="${pageContext.request.contextPath}/index.htm" style="font-size:3.0em; 
+                font-weight:bold;
+                color:#3d9c3e; 
+                text-transform:uppercase;" ><span><spring:message code="title.index.agrimarket" /> </span></a>
         </div>
 
         <script type="text/javascript">

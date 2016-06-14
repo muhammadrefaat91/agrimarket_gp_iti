@@ -28,7 +28,7 @@
             <!---include header description -->
             <jsp:include page="header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
-                <p> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+                <p style="direction: <spring:message code="addoffer.css.contactform.dir" />;"> <spring:message code="text.lang" /> : <a href="?lang=en"><spring:message code="text.lang.english" /></a>|<a href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
             <jsp:include page="header/header_top.jsp" />
             <!---include nav bar -->
@@ -41,7 +41,7 @@
                                 <div class="contact-form">
                                     <div class="col-sm-8 col-sm-offset-2" style="direction: <spring:message code="addoffer.css.contactform.dir" />">
                                         <h2 style="font-size: xx-large;"><spring:message code="title.addoffer.addproduct" /> </h2>
-                                        <form   method="post" enctype="multipart/form-data" action="addoffer" >
+                                        <form   method="post" enctype="multipart/form-data" action="addoffer.htm" >
                                             <div >
 
                                                 <span><label><spring:message code="text.addoffer.product" />  </label></span>

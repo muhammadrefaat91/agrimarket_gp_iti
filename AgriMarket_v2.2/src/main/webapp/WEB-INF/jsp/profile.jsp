@@ -52,7 +52,7 @@
         <div class="header">
             <jsp:include page="header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
-                <p> <spring:message code="text.lang" /> : <a href="?id=${param['id']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?id=${param['id']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+                <p style="direction: <spring:message code="addoffer.css.contactform.dir" />;"> <spring:message code="text.lang" /> : <a href="?id=${param['id']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?id=${param['id']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
             <!---include header top -->
             <jsp:include page="header/header_top.jsp" />
@@ -64,13 +64,21 @@
         <!--profile-->
 
         <hr class="">
-        <div class="container target" style="    width: 105%;">
+        <div class="container target" style=" 
+    margin-bottom: 248px;  width: 105%;">
             <div class="row">
                 <div class="col-sm-2" style="float: <spring:message code="view_user.css.row.col-sm-3.float" />;">
                     <a href="/users" class="pull-right">
                         <img style="height: 117px;margin-right: 85px;" title="<spring:message code="img.title.text.view_user.profileimage" />" class="img-circle img-responsive" src="${pageContext.request.contextPath}${user.imageUrl}">
-                    </a>
 
+                    </a>
+                    <div class="add-cart">
+                        <h4>
+                            <a s href="${pageContext.request.contextPath}/web/edit-profile.htm" style="position: absolute;
+                               margin-left: -31px;background-color: white;background-repeat: no-repeat;padding-bottom: 97px;background-image: url('${pageContext.request.contextPath}/resources/images/ic_mode_edit_black_24dp_1x.png')">
+                            </a>
+                        </h4>
+                    </div>
                 </div>
             </div>
             <br>
@@ -143,11 +151,11 @@
                              overflow: auto;">
                             <!--<div class="row">-->
                             <c:forEach items="${user.userOfferProductFixeds}" var="offer">
-                                
+
                                 <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;
                                      float: <spring:message code="offer_page.css.heading.float" />;">
                                     <div class="add-cart">
-                                             <h4> <a s href="${pageContext.request.contextPath}/removeoffer.htm?offerid=${offer.id}" style="position: absolute;
+                                             <h4> <a s href="${pageContext.request.contextPath}/web/removeoffer.htm?offerid=${offer.id}" style="position: absolute;
     margin-left: -31px;background-image: url('${pageContext.request.contextPath}/resources/images/ic_delete_black_24dp_1x.png')"></a></h4>
                                          </div>
                                     <!--<div class="thumbnail grid_1_of_4">-->
@@ -159,7 +167,7 @@
                                     <div  class="caption">
                                         <div class="price-details">
                                             <div class="price-number">
-                                                <p><span class="rupees">$${offer.price}L.E</span></p> 
+                                                <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p> 
                                             </div>
                                             <div class="add-cart">								
                                                 <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
@@ -167,8 +175,8 @@
                                             <div class="clear"></div>
                                         </div>
                                         <!--<p>-->
-                                         
-                                            <!--</p>-->
+
+                                        <!--</p>-->
                                     </div>
                                     <!--</div>-->
                                 </div>
