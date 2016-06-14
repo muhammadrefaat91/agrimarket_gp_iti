@@ -113,11 +113,7 @@
         </style>
 
 
-    <style type="text/css">
-        .search_box form input[type="submit"]{
-                margin-top: <spring:message code="search.icon.margin-top" />px;
-        }
-    </style>
+
     </head>
     <body  >
         <!--<div class="header">-->
@@ -126,13 +122,60 @@
 
             <jsp:include page="header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
-                <p style="direction: <spring:message code="addoffer.css.contactform.dir" />;"> <spring:message code="text.lang" /> : <a href="?id=${param['id']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?id=${param['id']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+                <p> <spring:message code="text.lang" /> : <a href="?id=${param['id']}&lang=en"><spring:message code="text.lang.english" /></a>|<a href="?id=${param['id']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
             <!---include header top -->
             <jsp:include page="header/header_top.jsp" />
             <!---include nav bar -->
             <jsp:include page="header/header_bottom_nav.jsp" />
         
+
+<!--        <section class="mbr-section mbr-section--relative mbr-section--fixed-size mbr-parallax-background mbr-after-navbar" id="form1-19">
+            <div class="mbr-section__container mbr-section__container--std-padding container">
+                <div class="row">
+                    <div class="row">
+                        <div align="center">
+
+
+
+                            <div id="gSignInWrapper">
+                                <span class="label">Sign in with:</span>
+                                <div id="customBtn" class="customGPlusSignIn">
+                                    <span class="icon"></span>
+                                    <span class="buttonText">Google</span>
+
+
+                                </div>
+
+                                <div class="g-person" data-href="//plus.google.com/b/116305644917036746344" data-rel="author"></div>
+
+
+                                <div class="g-plusone" data-annotation="inline" data-width="300"></div>
+
+                                <div class="g-follow" data-annotation="bubble" data-height="20" data-href="//plus.google.com/u/0/114611953418832109500" data-rel="author"></div>
+
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="g-post" data-href="https://plus.google.com/116305644917036746344/posts/TWnChPfcmuV"></div>
+                                        </td>
+                                        <td>
+                                    <g:page href="https://plus.google.com/116305644917036746344"></g:page>
+
+                                    </td>
+                                    </tr>  
+                                </table>
+
+                            </div>
+                            <div id="name"></div>
+
+                            <script>startApp();</script>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>-->
 
         <div class="main">
             <div class="content">
