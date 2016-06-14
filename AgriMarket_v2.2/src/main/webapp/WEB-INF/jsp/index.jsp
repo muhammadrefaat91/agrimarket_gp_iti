@@ -30,9 +30,6 @@
         <c:redirect url="/index.htm" />
     </c:if>
 
-    <c:if test="${empty latestOffers}" >
-        <c:redirect url="/index.htm" />
-    </c:if>
     <div class="wrap">
         <!-- header--->
         <!---include header description -->
