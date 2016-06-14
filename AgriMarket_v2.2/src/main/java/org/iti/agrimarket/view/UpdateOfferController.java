@@ -98,28 +98,35 @@ public class UpdateOfferController extends HttpServlet {
 
     int offerIdVal;
 
+    @RequestMapping(value = {"/updateoffer"}, method = RequestMethod.GET)
+    public String drawAddOfferPage(Model model) {
 
-    @RequestMapping(value = "/updateoffer", method = RequestMethod.GET)
-    public ModelAndView drawAddOfferPage(Model model) {
+        if (!model.containsAttribute("user")) {
+            //model.addAttribute("user", user);
+            System.out.println("------------------------");
+            System.out.println("-----!model view ----------");
+            // return new ModelAndView("signup");
+            return "redirect:/signup.htm";
+        }
+
+//        if (!model.containsAttribute("offerId")) {
+//
+//            //return new ModelAndView("offers_page");
+//            return "redirect:/offers.htm";
+//
+//        }
+
         List<Unit> units;
         units = unitService.getAllUnits();
         System.out.println(units.get(1).getNameEn());
 
         model.addAttribute("units", units);
 
-        if (!model.containsAttribute("user")) {
-            //model.addAttribute("user", user);
-            System.out.println("------------------------");
-            System.out.println("-----!model view ----------");
-            return new ModelAndView("signup");
+        String[] countryArr = {"Ad Daqahliyah", "Al Bahr al Ahmar", "Al Buhayrah", "Al Fayyum", "Al Gharbiyah", "Al Iskandariyah", "Al Isma'iliyah", "Al Jizah", "Al Minufiyah", "Al Minya", "Al Qahirah", "Al Qalyubiyah", "Al Wadi al Jadid", "As Suways", "Ash Sharqiyah", "Aswan", "Asyut", "Bani Suwayf", "Bur Sa'id", "Dumyat", "Janub Sina", "Kafr ash Shaykh", "Matruh", "Qina", "Shamal Sina", "Suhaj"};
+        String[] countryArrAr = {"القاهره", "الاسكندريه", "البحيره", "الفيوم", "الغربيه", "الاسكندريه", "الإسماعيلية", "الجيزة", "المنوفية", "المنيا", "القليوبية", "الوادي الجديد", "السويس", "الشرقية", "أسوان", "أسيوط", "بني سويف", "بورسعيد", "دمياط", "جنوب سيناء", "كفر الشيخ", "مطروح", "قنا", "شمال سيناء", "سوهاج"};
 
-        }
-        
-        
-        if (!model.containsAttribute("offerId")) {
-            
-            return new ModelAndView("offers_page");
-        }
+        model.addAttribute("states_ar", countryArrAr);
+        model.addAttribute("states_us", countryArr);
 
         UserOfferProductFixed userOfferProductFixed = offerService.findUserOfferProductFixed(1);
 
@@ -128,11 +135,10 @@ public class UpdateOfferController extends HttpServlet {
         System.out.println(products.get(1).getNameEn());
 
         model.addAttribute("products", products);
-
+        model.addAttribute("offer", userOfferProductFixed);
         System.out.println("hello################  new offer");
-        return new ModelAndView("updateoffer", "offer", userOfferProductFixed);
+        return "updateoffer";
     }
-
 
     /**
      * upload image and form data
@@ -173,7 +179,7 @@ public class UpdateOfferController extends HttpServlet {
         if (!file.isEmpty()) {
 
             String fileName = userOfferProductFixed.getId() + String.valueOf(new Date().getTime());
-       
+
             try {
 
                 System.out.println("fileName   :" + fileName);
