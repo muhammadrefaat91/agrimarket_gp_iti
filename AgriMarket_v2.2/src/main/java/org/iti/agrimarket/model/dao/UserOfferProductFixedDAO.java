@@ -444,7 +444,7 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
     public List<UserOfferProductFixed> findLatestOffers() {
         return (List<UserOfferProductFixed>) getHibernateTemplate().execute((Session session) -> {
             try {
-                List<UserOfferProductFixed> results = session.createQuery("from UserOfferProductFixed userOffer ORDER BY userOffer.startDate").setMaxResults(Constants.PAGE_SIZE).setFirstResult(0).list();
+                List<UserOfferProductFixed> results = session.createQuery("from UserOfferProductFixed userOffer ORDER BY userOffer.startDate desc ,userOffer.id desc").setMaxResults(Constants.PAGE_SIZE).setFirstResult(0).list();
                 for (int i = 0; i < results.size(); i++) {
                     UserOfferProductFixed get = results.get(i);
                     Hibernate.initialize(get.getProduct());

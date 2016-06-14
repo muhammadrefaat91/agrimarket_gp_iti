@@ -63,7 +63,7 @@
                 <div class="section group" >
                     <c:forEach items="${latestOffers}" var="offer">
                         <div class="grid_1_of_4 images_1_of_4" style="margin-left: 2px;margin-right: 9px;   ">
-                            <c:if test="${offer.recommended eq '1'}" >
+                            <c:if test="${offer.recommended eq true}" >
                                 <img style="    margin-left: -1px;
     margin-top: -24px; position: absolute;" src="${pageContext.request.contextPath}/resources/images/images.png"  />
                             </c:if>
