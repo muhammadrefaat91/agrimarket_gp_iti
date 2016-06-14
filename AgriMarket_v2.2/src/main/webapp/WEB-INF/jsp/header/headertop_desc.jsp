@@ -3,6 +3,11 @@
 <%@ taglib prefix="spring"
            uri="http://www.springframework.org/tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<style type="text/css">
+a{
+    text-decoration: none !important;
+}
+</style>
 
 <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" />
 <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />	

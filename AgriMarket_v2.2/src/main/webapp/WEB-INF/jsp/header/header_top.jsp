@@ -6,7 +6,8 @@
     <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" />	
  
 <div class="header_top">
-        <div class="logo">
+    <div class="logo" style="float: <spring:message code="logo.css.float" />;
+    direction: <spring:message code="logo.css.dir" />;">
             <a href="${pageContext.request.contextPath}/index.htm"><img src="${pageContext.request.contextPath}/resources/images/agri_logo_vs.png" alt="" /></a>
             <a  href="${pageContext.request.contextPath}/index.htm" style="font-size:3.0em; 
                 font-weight:bold;

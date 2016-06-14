@@ -69,7 +69,7 @@ public class UserRateServiceImpl implements UserRateService {
         if (rater != null && rated != null) {
 
             int hasRate = rateDAO.userHasRate(ratedID);
-            if (hasRate == 1) {//check if user has rates
+            if (hasRate == 1) { //check if user has rates
                 UserRatesUser result = rateDAO.findUserRateUser(raterId, ratedID);//if raterId rate to ratedID
                 userRates = rateDAO.calUserWeights(ratedID);//get sum and count
 //                if (result == 1) {

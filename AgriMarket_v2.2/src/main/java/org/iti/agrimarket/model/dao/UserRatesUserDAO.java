@@ -167,7 +167,7 @@ public class UserRatesUserDAO implements UserRatesUserDAOInterface {
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
                 try {
-                    UserRatesUser result = (UserRatesUser) session.createQuery("FROM UserRatesUser userRatesUser where userRatesUser.id.ratedId = :ratedId ").setInteger("ratedId", ratedId).uniqueResult();
+                    List<UserRatesUser> result = (List<UserRatesUser>) session.createQuery("FROM UserRatesUser userRatesUser where userRatesUser.id.ratedId = :ratedId ").setInteger("ratedId", ratedId).list();
                     if (result != null) {
                         return 1;
                     }

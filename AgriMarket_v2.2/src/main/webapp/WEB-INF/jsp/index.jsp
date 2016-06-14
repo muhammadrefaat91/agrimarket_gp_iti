@@ -63,11 +63,11 @@
                 <div class="section group" >
                     <c:forEach items="${latestOffers}" var="offer">
                         <div class="grid_1_of_4 images_1_of_4" style="margin-left: 2px;margin-right: 9px;   ">
-                            <c:if test="${offer.recommended eq '1'}" >
+                            <c:if test="${offer.recommended eq true}" >
                                 <img style="    margin-left: -1px;
     margin-top: -24px; position: absolute;" src="${pageContext.request.contextPath}/resources/images/images.png"  />
                             </c:if>
-                            <a href="preview.htm?id=${offer.id}">
+                            <a href="${pageContext.request.contextPath}/web/preview.htm?id=${offer.id}">
                                 <img  
                                     style="border: 1.1px solid #2969b0;
                                     border-bottom: none; width: 220px; height: 150px;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
