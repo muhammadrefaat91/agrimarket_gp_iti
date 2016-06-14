@@ -79,7 +79,6 @@ public class AddOfferController extends HttpServlet {
         units = unitService.getAllUnits();
         System.out.println(units.get(1).getNameEn());
         model.addAttribute("units", units);
- 
 
         if (!model.containsAttribute("user")) {
             //model.addAttribute("user", user);
@@ -197,7 +196,7 @@ public class AddOfferController extends HttpServlet {
 
         }
 
-        User oldUser = (User) request.getSession().getAttribute("user");
+         User oldUser = (User) request.getSession().getAttribute("user");
         if (oldUser != null) {
             User user = userService.getUserEager(oldUser.getId());
             request.getSession().setAttribute("user", user);

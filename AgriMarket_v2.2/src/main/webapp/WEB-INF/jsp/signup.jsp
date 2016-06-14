@@ -10,6 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <c:if test="${not empty user}" >
+            <c:redirect url="/index.htm" />
+        </c:if>
         <meta charset="UTF-8">
         <script src="https://apis.google.com/js/platform.js" async defer>
             {
