@@ -199,10 +199,12 @@
             $('#submit-review').click(function () {
                 
                 //if user doesn't login 
-                var user = ${sessionScope.user.id}0|| null ;
-                alert(alert(a.substring(0,4));
+        <c:if test="${empty sessionScope.user}">        
+        var user =null ;
+            </c:if>
+                var user = (${sessionScope.user.id}0 !=null)?${sessionScope.user.id}0 || null:${sessionScope.user.id}0 ;
                 
-                if (user == 0 || user==null)
+                if (user == null)
                     location.href = "http://${pageContext.request.getServerName()}:${pageContext.request.getServerPort()}${pageContext.request.contextPath}/web/signup.htm";
                 
                 var selectedVal = "";
@@ -213,7 +215,7 @@
                 $.ajax({
                     url: "${pageContext.request.contextPath}/web/addRate.htm",
                     type: "GET",
-                    data: {rating: selectedVal, raterID:user.id,ratedID:${userHasOffer.id}, reviewText: reviewText},
+                    data: {rating: selectedVal, raterID:${sessionScope.user.id},ratedID:${userHasOffer.id}, reviewText: reviewText},
                     success: function (data) {
                         console.log('success' + data);
                         if (data === 'no_errors')
