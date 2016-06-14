@@ -55,7 +55,7 @@
                             <h6><spring:message code="edit-profile.text.uploadimage" /></h6>
                            
                             <!--<input type="file" class="text-center center-block well well-sm" />-->
-                            <input type="file" name="file"  class="form-control" />
+                            <input type="file" name="file"  class="form-control"   />
                         </div>
                     </div>
                     <!-- edit form column -->
@@ -70,25 +70,37 @@
                         <div class="form-group" style="padding-bottom: 13px;">
                                 <label class="col-lg-3 control-label"><spring:message code="edit-profile.fullname" /></label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" value="${sessionScope.user.fullName}" maxlength="55" required="" name="fullName" min="11" type="text">
+                                    <input class="form-control" value="${sessionScope.user.fullName}" maxlength="55" required name="fullName" min="11" title="<spring:message code="validate.fullname" />" type="text">
                                 </div>
                             </div>
                             <div class="form-group" style="padding-bottom: 13px;">
                                 <label class="col-lg-3 control-label"><spring:message code="text.user.mobile" /> </label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" value="${sessionScope.user.mobile}" name="mobile" required="" title="at least 11 number" maxlength="11" min="11" type="tel">
+                                    <input class="form-control" value="${sessionScope.user.mobile}" name="mobile"   pattern="(01)\d{9}" title="<spring:message code="validate.mobile" />" required   type="tel">
                                 </div>
                             </div>
                             <div class="form-group" style="padding-bottom: 13px;">
                                 <label class="col-lg-3 control-label"><spring:message code="text.user.email"  /></label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" value="${sessionScope.user.mail}" name="mail" maxlength="55" required="" min="10" type="email">
+                                    <input class="form-control" value="${sessionScope.user.mail}" name="mail" maxlength="55" required min="10"  pattern="^[a-z0-9_\-\.]{2,}@[a-z0-9_\-\.]{2,}\.[a-z]{2,}$" title="<spring:message code="validate.email" />" >
                                 </div>
                             </div>
                             <div class="form-group" style="padding-bottom: 13px;">
                                 <label class="col-lg-3 control-label"><spring:message code="text.addoffer.governerate" /></label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" value="${sessionScope.user.governerate}"    maxlength="55" min="22" required="" name="governerate" type="text">
+                                           
+                                             
+               
+                                                     <span>
+                                                        <select name="governerate" >
+                                                            <c:forEach var="item" items="${requestScope.lang eq 'en'?states_us:states_ar}">
+                                                                <option class="textbox" value="${item}">${item}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </span>
+                                                      
+                                                
+                                        
                                 </div>
                             </div>
                             

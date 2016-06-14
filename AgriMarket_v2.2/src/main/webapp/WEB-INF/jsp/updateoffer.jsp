@@ -88,7 +88,7 @@
 
                                     <div>
                                         <span> <label><spring:message code="dropdown.offer_page.price" /> </label></span>
-                                        <span> <input   id="quantity" type="number" class="form-control"  name="price" value="${offer.quantity}" required /></span>
+                                        <span> <input   id="quantity" type="number" class="form-control"  name="price" value="${offer.quantity}" title = "<spring:message code="validate.quantity" />" required /></span>
 
 
 
@@ -110,7 +110,7 @@
 
                                     <div >
 
-                                        <span><label><spring:message code="text.addoffer.mobile" /> </label></span><span><input type="tel"   name="mobile"  class="form-control" value="${offer.userPhone}"  pattern="(01)\d{9}" title="11 numbers max, start with 01" required  /></span>
+                                        <span><label><spring:message code="text.addoffer.mobile" /> </label></span><span><input type="tel"   name="mobile"  class="form-control" value="${offer.userPhone}"  pattern="(01)\d{9}" title="<spring:message code="validate.mobile" />" required  /></span>
 
 
                                     </div>
@@ -134,13 +134,13 @@
                                                 </div>
 
                                     <div >
-                                        <span><label> <spring:message code="text.addoffer.image" /></label></span><span><input type="file" name="file"  class="form-control" /></span>
+                                        <span><label> <spring:message code="text.addoffer.image" /></label></span><span><input type="file" name="file"  class="form-control"  required /></span>
                                     </div>
 
                                     <div >
 
 
-                                        <span><label><spring:message code="text.addoffer.description" /></label></span> <span><textarea    name="description" class="form-control"  >${offer.description}</textarea></span>
+                                        <span><label><spring:message code="text.addoffer.description" /></label></span> <span><textarea    name="description" class="form-control"  pattern="[A-Za-z]{10,100}" title="<spring:message code="validate.description" />" required >${offer.description}</textarea></span>
 
 
                                     </div>
