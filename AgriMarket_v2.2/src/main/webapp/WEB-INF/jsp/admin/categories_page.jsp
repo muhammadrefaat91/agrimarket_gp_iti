@@ -81,7 +81,7 @@
                                 <a href="preview_category.htm?id=${category.id}">
                                     <img  
                                         style="border: 1.1px solid #2969b0;
-                                        border-bottom: none;"  src="${pageContext.request.contextPath}${category.imageUrl}" />
+                                        border-bottom: none; width: 220px; height: 150px;"  src="${pageContext.request.contextPath}${category.imageUrl}" />
                                 </a>
                                 <h2>${category.nameEn}</h2>
 

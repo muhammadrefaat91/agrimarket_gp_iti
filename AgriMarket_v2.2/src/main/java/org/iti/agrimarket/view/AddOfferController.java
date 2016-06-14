@@ -179,7 +179,7 @@ public class AddOfferController extends HttpServlet {
 
                 redirectAttributes.addFlashAttribute("message",
                         "You failed to upload  because the file was empty");
-                return "redirect:index.htm";
+                return "redirect:/web/addoffer.htm";
             }
 
         } else {

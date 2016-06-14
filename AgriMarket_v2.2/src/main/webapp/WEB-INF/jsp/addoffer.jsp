@@ -52,7 +52,7 @@
                                             </div>                                       
                                             <div >
                                                 <span><label><spring:message code="text.preview.quantity" /></label></span>
-                                                <span> <input   id="quantity" type="number" class="form-control"  name="quantity" required /></span>
+                                                <span> <input   id="quantity" type="number" class="form-control"  name="quantity"  name="quantity" required  pattern="d{1,10}" title="ten digits max" /></span>
                                                 <span><label><spring:message code="text.addoffer.quantityunit" /></label></span> 
                                                 <span>
                                                     <select name="quantityunit">
@@ -63,7 +63,7 @@
                                                 </span>
                                                 <div>
                                                     <span> <label><spring:message code="dropdown.offer_page.price" /> </label></span>
-                                                    <span> <input   id="quantity" type="number" class="form-control"  name="price" required /></span>
+                                                    <span> <input   id="quantity" type="number" class="form-control"  name="price" required     /></span>
                                                     <span><label><spring:message code="text.addoffer.css.per" /> </label></span>
                                                     <span>
                                                         <select name="unitprice">
@@ -74,16 +74,16 @@
                                                     </span>
                                                 </div>
                                                 <div >
-                                                    <span><label><spring:message code="text.addoffer.mobile" />  </label></span><span><input type="tel"   name="mobile"  class="form-control" /></span>
+                                                    <span><label><spring:message code="text.addoffer.mobile" />  </label></span><span><input type="tel"   name="mobile"  class="form-control"  pattern="(01)\d{9}" title="11 numbers max, start with 01" required /></span>
                                                 </div>
                                                 <div >
-                                                    <span> <label><spring:message code="text.addoffer.governerate" />  </label></span><span><input    name="governerate" class="form-control" /></span>
+                                                    <span> <label><spring:message code="text.addoffer.governerate" />  </label></span><span><input type="text"    name="governerate" class="form-control"  pattern="[A-Za-z]{3,20}" title="three min ,Therty letter Max" required /></span>
                                                 </div>
                                                 <div >
-                                                    <span><label><spring:message code="text.addoffer.image" />  </label></span><span><input type="file" name="file"  class="form-control" /></span>
+                                                    <span><label><spring:message code="text.addoffer.image" />  </label></span><span><input type="file" name="file"  class="form-control"  required /></span>
                                                 </div>
                                                 <div >
-                                                    <span><label><spring:message code="text.addoffer.description" /> </label></span> <span><textarea    name="description" class="form-control" ></textarea></span>
+                                                    <span><label><spring:message code="text.addoffer.description" /> </label></span> <span><textarea    name="description" class="form-control"  pattern="[A-Za-z]{10,100}" title="100 letter Max" required /></textarea></span>
                                                 </div>
                                                 <div class="form-group">
 

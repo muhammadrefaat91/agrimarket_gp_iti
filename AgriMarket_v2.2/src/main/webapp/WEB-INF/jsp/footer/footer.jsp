@@ -32,7 +32,7 @@
             <div class="col_1_of_4 span_1_of_4">
                 <h4><spring:message code="text.footer.myaccount" /></h4>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/login.htm"><spring:message code="link.footer.signin" /></a></li>
+                    <li><a href="${pageContext.request.contextPath}/signup.htm"><spring:message code="link.footer.signin" /></a></li>
                     <!--							<li><a href="#">Track My Order</a></li>-->
                     <li><a href="${pageContext.request.contextPath}/contact.htm"><spring:message code="link.footer.help" /></a></li>
                 </ul>

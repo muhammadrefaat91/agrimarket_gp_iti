@@ -81,7 +81,7 @@
                                 <a href="preview_product.htm?id=${product.id}">
                                     <img  
                                         style="border: 1.1px solid #2969b0;
-                                        border-bottom: none;"  src="${pageContext.request.contextPath}${product.imageUrl}" />
+                                        border-bottom: none; width: 220px; height: 150px;"  src="${pageContext.request.contextPath}${product.imageUrl}" />
                                 </a>
                                 <h2>${product.nameEn}</h2>
 

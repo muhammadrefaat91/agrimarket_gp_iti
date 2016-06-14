@@ -167,7 +167,7 @@
                                     <div  class="caption">
                                         <div class="price-details">
                                             <div class="price-number">
-                                                <p><span class="rupees">$${offer.price}L.E</span></p> 
+                                                <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p> 
                                             </div>
                                             <div class="add-cart">								
                                                 <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>

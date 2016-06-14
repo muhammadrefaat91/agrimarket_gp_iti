@@ -75,7 +75,9 @@
         <hr class="">
         <div class="container target">
             <div class="row">
-                <div class="col-sm-2" style="float: <spring:message code="view_user.css.row.col-sm-3.float" />;"><a href="/users" class="pull-right"><img style="height: 117px;margin-right: 85px;" title="<spring:message code="img.title.text.view_user.profileimage" />" class="img-circle img-responsive" src="${pageContext.request.contextPath}${userHasOffer.imageUrl}"></a>
+                <div class="col-sm-2" style="float: <spring:message code="view_user.css.row.col-sm-3.float" />;"><a href="/users" class="pull-right"><img 
+                                        style="border: 1.1px solid #2969b0;
+                                        border-bottom: none; width: 220px; height: 150px;" title="<spring:message code="img.title.text.view_user.profileimage" />" class="img-circle img-responsive" src="${pageContext.request.contextPath}${userHasOffer.imageUrl}"></a>
 
                 </div>
             </div>
@@ -143,7 +145,7 @@
                                     <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
                                     <div class="price-details">
                                         <div class="price-number">
-                                            <p><span class="rupees">$${offer.price}</span></p>
+                                            <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p>
                                         </div>
                                         <div class="add-cart">								
                                             <h4><a  href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
