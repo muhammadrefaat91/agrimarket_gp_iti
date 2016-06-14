@@ -86,6 +86,7 @@ public class OfferProductRestController {
                 && offerProductFixed.getUnitByUnitId() != null && offerProductFixed.getUnitByUnitId().getId() != null
                 && offerProductFixed.getUnitByPricePerUnitId() != null && offerProductFixed.getUnitByPricePerUnitId().getId() != null
                 && offerProductFixed.getStartDate() != null) {
+            offerProductFixed.setRecommended(false);
             //check if product & user & unit are already exists! 
             User userObject = userService.getUser(offerProductFixed.getUser().getId());
             Product product = productServiceInterface.getProduct(offerProductFixed.getProduct().getId());

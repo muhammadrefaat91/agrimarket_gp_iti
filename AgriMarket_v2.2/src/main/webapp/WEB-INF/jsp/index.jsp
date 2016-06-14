@@ -62,6 +62,11 @@
                 </div>
                 <div class="section group" >
                     <c:forEach items="${latestOffers}" var="offer">
+                        <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
+                            <a href="web/preview.htm?id=${offer.id}">
+                                <img  style="border: 1.1px solid #2969b0;
+                                        border-bottom: none; width: 220px; height: 150px;"  src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+                     
                         <div class="grid_1_of_4 images_1_of_4" style="margin-left: 2px;margin-right: 9px;   ">
                             <c:if test="${offer.recommended eq '1'}" >
                                 <img style="    margin-left: -1px;

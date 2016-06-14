@@ -100,6 +100,8 @@ public class AddProductController extends HttpServlet {
 
         Product product = new Product();
         product.setNameAr(nameAr);
+        
+        
         product.setNameEn(nameEn);
         Category parentCategory = categoryService.getCategory(parentCategoryId);
 

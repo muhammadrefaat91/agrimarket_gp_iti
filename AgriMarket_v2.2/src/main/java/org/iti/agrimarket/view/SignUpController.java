@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +43,7 @@ import net.sf.jmimemagic.MagicParseException;
 import org.apache.logging.log4j.Logger;
 import org.iti.agrimarket.constant.Constants;
 import org.iti.agrimarket.model.pojo.User;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -67,7 +69,6 @@ public class SignUpController extends HttpServlet {
     String userEmail = null;
 
     String imgUrl = null;
-
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public ModelAndView drawSignUpForm() {
@@ -110,9 +111,25 @@ public class SignUpController extends HttpServlet {
             imgUrl = img;
             System.out.println("amr");
 
-            return "signupstep.htm";
+            return "web/signupstep.htm";
 
         }
+    }
+
+    /**
+     * draw signupstep 2
+     *
+     */
+    @RequestMapping(value = "/signupstep", method = RequestMethod.GET)
+    public ModelAndView drawSignUpForm(Model model, Locale locale) {
+        String[] countryArr = {"Ad Daqahliyah", "Al Bahr al Ahmar", "Al Buhayrah", "Al Fayyum", "Al Gharbiyah", "Al Iskandariyah", "Al Isma'iliyah", "Al Jizah", "Al Minufiyah", "Al Minya", "Al Qahirah", "Al Qalyubiyah", "Al Wadi al Jadid", "As Suways", "Ash Sharqiyah", "Aswan", "Asyut", "Bani Suwayf", "Bur Sa'id", "Dumyat", "Janub Sina", "Kafr ash Shaykh", "Matruh", "Qina", "Shamal Sina", "Suhaj"};
+        String[] countryArrAr = {"القاهره", "الاسكندريه", "البحيره", "الفيوم", "الغربيه", "الاسكندريه", "الإسماعيلية", "الجيزة", "المنوفية", "المنيا", "القليوبية", "الوادي الجديد", "السويس", "الشرقية", "أسوان", "أسيوط", "بني سويف", "بورسعيد", "دمياط", "جنوب سيناء", "كفر الشيخ", "مطروح", "قنا", "شمال سيناء", "سوهاج"};
+
+        locale = LocaleContextHolder.getLocale();
+        model.addAttribute("lang", locale);
+        model.addAttribute("states_ar", countryArrAr);
+        model.addAttribute("states_us", countryArr);
+        return new ModelAndView("signupstep");
     }
 
     /**
@@ -121,7 +138,7 @@ public class SignUpController extends HttpServlet {
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signupgplusstep2")
     public String signupUserFb(Model model, @RequestParam("mobile") String mobil, @RequestParam("governerate") String governerate,
-             HttpServletRequest request, HttpServletResponse response) {
+            HttpServletRequest request, HttpServletResponse response) {
 
         System.out.println("save user func   fb2       google plus---------");
         //    System.out.println("image : "+img);
@@ -215,7 +232,7 @@ public class SignUpController extends HttpServlet {
 
         model.addAttribute("user", user);
         System.out.println("i Stored user in the DB");
- 
+
         return "redirect:/index.htm";
     }
 
