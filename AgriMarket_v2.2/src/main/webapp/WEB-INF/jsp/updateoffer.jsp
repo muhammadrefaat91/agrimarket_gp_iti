@@ -27,9 +27,12 @@
         <link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">
 
         <link rel="stylesheet" href="style.css" />
-        <title>jQuery Example</title>
-        <!DOCTYPE html>
-
+        <title>Update Product</title>
+    <style type="text/css">
+        .search_box form input[type="submit"]{
+                margin-top: <spring:message code="search.icon.margin-top" />px;
+        }
+    </style>
 </head>
 <!--style="background-image: url(resources/images/istock-000016896298xlarge-4200x2833-56.jpg);"-->
 <body  >

@@ -5,58 +5,27 @@ package org.iti.agrimarket.view;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Date;
-import javax.servlet.http.HttpServlet;
-import org.apache.logging.log4j.Logger;
-
-import javax.validation.Valid;
-import org.iti.agrimarket.business.OfferService;
-import org.iti.agrimarket.business.UserService;
-import org.iti.agrimarket.constant.Constants;
-import org.iti.agrimarket.model.pojo.User;
-import org.iti.agrimarket.util.Validation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import org.iti.agrimarket.business.UserService;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.util.Date;
+import javax.servlet.http.HttpServlet;
+import org.iti.agrimarket.business.OfferService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.iti.agrimarket.business.UserService;
 import java.util.List;
 import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.iti.agrimarket.business.ProductService;
 import org.iti.agrimarket.business.UnitService;
@@ -65,11 +34,10 @@ import org.iti.agrimarket.model.pojo.Product;
 import org.iti.agrimarket.model.pojo.Unit;
 import org.iti.agrimarket.model.pojo.User;
 import org.iti.agrimarket.model.pojo.UserOfferProductFixed;
-import org.iti.agrimarket.request.param.LogOutParam;
-import org.iti.agrimarket.request.param.UserCheckParam;
-import org.iti.agrimarket.util.requestprocessor.param.extraction.ParamExtractor;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -98,8 +66,8 @@ public class UpdateOfferController extends HttpServlet {
 
     int offerIdVal;
 
-    @RequestMapping(value = {"/updateoffer"}, method = RequestMethod.GET)
-    public String drawAddOfferPage(Model model) {
+    @RequestMapping(value = {"/updateoffer.htm"}, method = RequestMethod.GET)
+    public String drawAddOfferPage(@RequestParam("offerId") String offerId,Model model){
 
         if (!model.containsAttribute("user")) {
             //model.addAttribute("user", user);
@@ -125,6 +93,13 @@ public class UpdateOfferController extends HttpServlet {
         String[] countryArr = {"Ad Daqahliyah", "Al Bahr al Ahmar", "Al Buhayrah", "Al Fayyum", "Al Gharbiyah", "Al Iskandariyah", "Al Isma'iliyah", "Al Jizah", "Al Minufiyah", "Al Minya", "Al Qahirah", "Al Qalyubiyah", "Al Wadi al Jadid", "As Suways", "Ash Sharqiyah", "Aswan", "Asyut", "Bani Suwayf", "Bur Sa'id", "Dumyat", "Janub Sina", "Kafr ash Shaykh", "Matruh", "Qina", "Shamal Sina", "Suhaj"};
         String[] countryArrAr = {"القاهره", "الاسكندريه", "البحيره", "الفيوم", "الغربيه", "الاسكندريه", "الإسماعيلية", "الجيزة", "المنوفية", "المنيا", "القليوبية", "الوادي الجديد", "السويس", "الشرقية", "أسوان", "أسيوط", "بني سويف", "بورسعيد", "دمياط", "جنوب سيناء", "كفر الشيخ", "مطروح", "قنا", "شمال سيناء", "سوهاج"};
 
+        
+        
+        
+        if (offerId ==null ||offerId.equals("")) {
+            
+            return "offers_page";
+        }
         model.addAttribute("states_ar", countryArrAr);
         model.addAttribute("states_us", countryArr);
 
@@ -144,8 +119,8 @@ public class UpdateOfferController extends HttpServlet {
      * upload image and form data
      *
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/updateoffer")
-    public String addOffer(@RequestParam("description") String description,
+    @RequestMapping(method = RequestMethod.POST, value = {"/updateoffer.htm"})
+    public String updateOffer(@RequestParam("description") String description,
             @RequestParam("quantity") float quantity,
             @RequestParam("quantityunit") int quantityunit,
             @RequestParam("unitprice") int unitprice,

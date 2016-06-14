@@ -95,10 +95,10 @@
                         <div class="clear"></div>
                     </div>
                     <!--view all offers -->
-                    <div class="section group" style="    width: 110%;
-                         margin-left: 11px;">
+                    <div class="section group" style="  width: 106%;margin-left: -38px;
+                         margin-left: <spring:message code="offer-page.css.margin" />px;  ">
                         <c:forEach items="${getAllOfferProducts}" var="offer">
-                            <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;float: <spring:message code="offer_page.css.heading.float" />;">
+                            <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />px;margin-right: 29px;float: <spring:message code="offer_page.css.heading.float" />;">
                                 <a href="preview.htm?id=${offer.id}">
                                     <img  
                                         style="border: 1.1px solid #2969b0;

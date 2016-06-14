@@ -42,7 +42,7 @@
     <div class="menu" style="float:<spring:message code="header-nav.css.div.menu.float" /> ;">
         <ul>
             <li id="home" name="home"><a href="${pageContext.request.contextPath}/index.htm"><spring:message code="link.home" /></a></li>
-            <li id="products" name="products" ><a id="product" href="${pageContext.request.contextPath}/web/getoffers.htm"><spring:message code="link.nav.products" /></a></li>
+            <li id="products" name="products" ><a id="product" href="${pageContext.request.contextPath}/web/offers.htm"><spring:message code="link.nav.products" /></a></li>
             <li id="about" name="about" ><a href="${pageContext.request.contextPath}/about.htm"><spring:message code="link.nav.about" /></a></li>
             <li id="contact" name="contact" ><a href="${pageContext.request.contextPath}/contact.htm"><spring:message code="link.nav.contact" /></a></li>
             <!--<div class="clear"></div>-->
@@ -50,7 +50,7 @@
     </div>
     <div class="search_box" style="float: <spring:message code="header-nav.css.div.search-box.float" />;
          margin-left: <spring:message code="header-nav.css.div.search-box.margin-left" />px;">
-        <form action="${pageContext.request.contextPath}/web/getoffers.htm" method="get">
+        <form action="${pageContext.request.contextPath}/web/offers.htm" method="get">
             <input style="margin-left:<spring:message code="header-nav.css.div.search-box.input-text,margin-left" />px;" type="text" value="${param.name}" name="name" placeholder="<spring:message code="input.header_bottom.searchtext" />">
             <input type="submit" value=""  >
             <!--style= margin-top:<spring:message code="header-nav.css.div.search-box.input-text,margin-top" />px;-->

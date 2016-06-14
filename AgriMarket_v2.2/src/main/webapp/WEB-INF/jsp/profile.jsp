@@ -147,16 +147,20 @@
                         <div style="direction: <spring:message code="view_user.css.user-products.dir" />" class="panel-heading" contenteditable="false"><spring:message code="text.user.products" /></div>
 
                         <div class="panel-body" style="max-height: 345px;
-                             border: 1px solid rgba(128, 128, 128, 0.13);
+                             /*border: 1px solid rgba(128, 128, 128, 0.13);*/
                              overflow: auto;">
                             <!--<div class="row">-->
                             <c:forEach items="${user.userOfferProductFixeds}" var="offer">
 
-                                <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />;
+                                <div class="grid_1_of_4 images_1_of_4" style="
                                      float: <spring:message code="offer_page.css.heading.float" />;">
                                     <div class="add-cart">
                                              <h4> <a s href="${pageContext.request.contextPath}/web/removeoffer.htm?offerid=${offer.id}" style="position: absolute;
     margin-left: -31px;background-image: url('${pageContext.request.contextPath}/resources/images/ic_delete_black_24dp_1x.png')"></a></h4>
+                                         </div>
+                                         <div class="add-cart" style="    margin-top: 21px;">
+                                             <h4> <a s href="${pageContext.request.contextPath}/web/updateoffer.htm?offerId=${offer.id}" style="position: absolute;
+    margin-left: -31px;background-image: url('${pageContext.request.contextPath}/resources/images/ic_mode_edit_black_24dp_1x.png')"></a></h4>
                                          </div>
                                     <!--<div class="thumbnail grid_1_of_4">-->
                                     <a href="preview.htm?id=${offer.id}">

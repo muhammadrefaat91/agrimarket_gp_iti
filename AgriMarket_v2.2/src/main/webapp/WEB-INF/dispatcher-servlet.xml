@@ -20,16 +20,29 @@
        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     
+<!--    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name = "messageConverters">
+            <list>
+                <bean class = "org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name = "supportedMediaTypes">
+                        <list>
+                            <value>text/plain;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>-->
     
     <mvc:annotation-driven/>
     
     
     <context:component-scan base-package="org.iti.agrimarket.model"/>
     <context:component-scan base-package="org.iti.agrimarket.business"/>
-     <context:component-scan base-package="org.iti.agrimarket.view"/>
-     <context:component-scan base-package="org.iti.agrimarket.administration.view"/>
+    <context:component-scan base-package="org.iti.agrimarket.view"/>
+    <context:component-scan base-package="org.iti.agrimarket.administration.view"/>
     <context:component-scan base-package="org.iti.agrimarket.service"/>
-     <context:component-scan base-package="org.iti.agrimarket.administration.view"/>
+    <context:component-scan base-package="org.iti.agrimarket.administration.view"/>
     <context:component-scan base-package="org.iti.agrimarket.util.requestprocessor"/>
     
     <!-- link css, javascript-->
@@ -59,8 +72,8 @@
     <mvc:view-controller path="/web/addoffer.htm" view-name="addoffer" />
     <mvc:view-controller path="/sign_in.htm" view-name="sign_in" />
     <mvc:view-controller path="/web/signup.htm" view-name="signup" />
-    <mvc:view-controller path="/offers.htm" view-name="offers_page" />
-    <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />
+    <!--    <mvc:view-controller path="/offers.htm" view-name="offers_page" />
+    <mvc:view-controller path="/web/offers.htm" view-name="offers_page" />-->
     <mvc:view-controller path="/web/user.htm" view-name="view_user" />
     <mvc:view-controller path="/web/edit-profile.htm" view-name="edit-profile" />
     <mvc:view-controller path="/web/preview.htm" view-name="preview" />
@@ -68,7 +81,7 @@
     <mvc:view-controller path="/about.htm" view-name="about" />
     <mvc:view-controller path="/contact.htm" view-name="contact" />
     <mvc:view-controller path="/web/signupstep.htm" view-name="signupstep" />
-<!--    <mvc:view-controller path="/sign_up1.htm" view-name="sign_up_1" /> -->
+    <!--    <mvc:view-controller path="/sign_up1.htm" view-name="sign_up_1" /> -->
     <mvc:view-controller path="/admin/home.htm" view-name="admin/home" />
     <mvc:view-controller path="/admin/products_page.htm" view-name="admin/products_page" />
     <!--<mvc:view-controller path="/admin/categories_page.htm" view-name="admin/categories_page" />-->
