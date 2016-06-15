@@ -13,10 +13,9 @@
 
         <link rel="icon" href="<spring:url value="/resources/images/agri_logo.png" />">
         <!-- Site made with Mobirise Website Builder v2.9, https://mobirise.com -->
-        <meta charset="UTF-8" http-equiv="Content-Type" content="text/html;>
+        <meta charset="UTF-8" http-equiv="Content-Type" content="text/html">
 
-              <title>Sign In</title>
-              <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" >
+        <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet" >
         <link href="<spring:url value="/resources/css/slider.css" />" rel="stylesheet" >
         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="resources/css/style.css">
@@ -29,9 +28,9 @@
         <link rel="stylesheet" href="style.css" />
         <title>Update Product</title>
         <style type="text/css">
-            .search_box form input[type="submit"]{
+/*            .search_box form input[type="submit"]{
                 margin-top: <spring:message code="search.icon.margin-top" />px;
-            }
+            }*/
         </style>
     </head>
     <!--style="background-image: url(resources/images/istock-000016896298xlarge-4200x2833-56.jpg);"-->
@@ -43,7 +42,7 @@
         <div class="wrap">
             <jsp:include page="header/headertop_desc.jsp" />
             <div class="call" style="    margin-top: -34px;">
-                <p> <spring:message code="text.lang" /> : <a class="lang" href="?lang=en"><spring:message code="text.lang.english" /></a>|<a class="lang" href="?lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
+                <p> <spring:message code="text.lang" /> : <a class="lang" href="?offerId=${param['offerId']}&lang=en"><spring:message code="text.lang.english" /></a>|<a class="lang" href="?offerId=${param['offerId']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
             <!---include header top -->
             <%--<jsp:include page="header/header_top.jsp" />--%>
@@ -65,9 +64,9 @@
 
                                         <span><label><spring:message code="text.addoffer.product" />  </label></span>
                                         <span>
-                                            <span>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr}</span>
+                                            <span style="    font-size: 23px;">${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr}</span>
                                             <select name="product">
-                                                
+
                                                 <c:forEach var="item" items="${products}" >
                                                     <option value="${item.id}" class="form-control">${requestScope.lang eq 'en'?item.nameEn:item.nameAr}</option>
                                                 </c:forEach>
@@ -142,23 +141,23 @@
                                         <div >
                                             <span><label> <spring:message code="text.addoffer.image" /></label></span>
                                             <!--<div class="grid images_3_of_2" style="direction: <spring:message code="preview.css.dir"  />">-->
-                                                <!--<div id="container">-->
-                                                <!--<div id="products_example">-->
-                                                <!--<div id="products">-->
-                                                <img style="border: 1.1px solid #2969b0;
-                                                     border-bottom: none;
-                                                     width: 274px;
-                                                     height: 164px;" src="${pageContext.request.contextPath}${offer.imageUrl}" alt=" " />                                                        
-                                                <!--</div>-->
-                                                <!--</div>-->
-                                                <!--</div>-->
+                                            <!--<div id="container">-->
+                                            <!--<div id="products_example">-->
+                                            <!--<div id="products">-->
+                                            <img style="border: 1.1px solid #2969b0;
+                                                 border-bottom: none;
+                                                 width: 274px;
+                                                 height: 164px;" src="${pageContext.request.contextPath}${offer.imageUrl}" alt=" " />                                                        
+                                            <!--</div>-->
+                                            <!--</div>-->
+                                            <!--</div>-->
                                             <!--</div>-->
                                             <span><input type="file" name="file"  class="form-control"   /></span>
                                         </div>
-                                               
+
                                         <div>
 
-                                            
+
                                             <span><label><spring:message code="text.addoffer.description" /></label></span> <span><textarea    name="description" class="form-control"  pattern="[A-Za-z]{10,100}" title="<spring:message code="validate.description" />" required >${offer.description}</textarea></span>
 
 

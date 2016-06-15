@@ -14,9 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <style type="text/css">
-        .search_box form input[type="submit"]{
+/*        .search_box form input[type="submit"]{
             margin-top: <spring:message code="search.icon.margin-top" />px;
-        }
+        }*/
     </style>
 </head>
 <body>

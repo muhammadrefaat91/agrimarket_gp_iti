@@ -142,7 +142,7 @@
 
                                 <div class="price-details">
                                     <div class="price-number">
-                                        <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p>
+                                        <p style="direction: <spring:message code="signup.text.login.dir"  />"><span class="rupees">${offer.price}  <spring:message code="preview.money"  />/${requestScope.lang eq 'en'?offer.unitByPricePerUnitId.nameEn:offer.unitByPricePerUnitId.nameAr}</span></p>
                                     </div>
                                     <div class="add-cart">								
                                         <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
