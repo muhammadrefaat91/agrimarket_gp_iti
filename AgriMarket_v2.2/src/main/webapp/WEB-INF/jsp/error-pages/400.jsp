@@ -25,9 +25,9 @@
                 <h1>
                     Oops!</h1>
                 <h2>
-                    404 Not Found</h2>
+                    400 bad request</h2>
                 <div class="error-details">
-                    Sorry, an error has occured, Requested page not found!
+                    Sorry, an error has occured, invalid parameters
                 </div>
                 <div class="error-actions">
                     <a style="cursor: pointer;" href="${pageContext.request.contextPath}/index.htm" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>

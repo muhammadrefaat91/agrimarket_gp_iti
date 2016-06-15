@@ -101,7 +101,7 @@
                     </a>
                     <div class="add-cart">
                         <h4>
-                            <a s href="${pageContext.request.contextPath}/web/edit-profile.htm" style="position: absolute;
+                            <a s href="${pageContext.request.contextPath}/web/uprofile.htm" style="position: absolute;
                                margin-left: -31px;background-color: white;background-repeat: no-repeat;padding-bottom: 97px;background-image: url('${pageContext.request.contextPath}/resources/images/ic_mode_edit_black_24dp_1x.png')">
                             </a>
                         </h4>

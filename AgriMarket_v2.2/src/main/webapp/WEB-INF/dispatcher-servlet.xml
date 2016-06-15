@@ -75,7 +75,7 @@
     <!--    <mvc:view-controller path="/offers.htm" view-name="offers_page" />
     --><mvc:view-controller path="/web/profile.htm" view-name="profile" />
     <mvc:view-controller path="/web/user.htm" view-name="view_user" />
-    <mvc:view-controller path="/web/edit-profile.htm" view-name="edit-profile" />
+    <!--<mvc:view-controller path="/web/edit-profile.htm" view-name="edit-profile" />-->
     <mvc:view-controller path="/web/preview.htm" view-name="preview" />
     <mvc:view-controller path="/admin/preview.htm" view-name="admin/preview" />
     <mvc:view-controller path="/about.htm" view-name="about" />

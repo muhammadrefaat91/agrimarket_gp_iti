@@ -110,7 +110,7 @@ public class UserController {
 
     @RequestMapping(value = {"/uprofile.htm"},method = RequestMethod.POST)
     public String updateUserProfile(@RequestParam(value = "fullName", required = true) String fullName,
-            @RequestParam(value = "mail", required = true) String mail, @RequestParam(value = "mobile", required = true) String mobil,
+           @RequestParam(value = "mobile", required = true) String mobil,
             @RequestParam(value = "governerate", required = true) String governerate,
             @RequestParam(value = "file", required = false) MultipartFile file,
             HttpServletRequest request, Locale locale, Model model) {
@@ -155,7 +155,7 @@ public class UserController {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            user.setMail(mail);
+            
             user.setMobile(mobil);
             int res = userService.updateUser(user);
             if (res != 0) {
@@ -166,7 +166,7 @@ public class UserController {
         }
         model.addAttribute("lang", locale);
 
-        return "/web/profile.htm";
+        return "profile";
     }
 
     @RequestMapping(value = {"/logout.htm"})

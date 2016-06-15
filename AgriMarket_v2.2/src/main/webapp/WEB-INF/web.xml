@@ -63,7 +63,7 @@
     </welcome-file-list>
     
     <!--Erro pages-->
-    <error-page>
+<!--    <error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/jsp/error-pages/404-error.jsp</location>
     </error-page>
@@ -74,7 +74,7 @@
     <error-page>
         <error-code>403</error-code>
         <location>/WEB-INF/jsp/error-pages/403-error.jsp</location>
-    </error-page>
+    </error-page>-->
 <!--    <error-page>
         <error-code>500</error-code>
         <location>/WEB-INF/jsp/error-pages/500-error.jsp</location>
