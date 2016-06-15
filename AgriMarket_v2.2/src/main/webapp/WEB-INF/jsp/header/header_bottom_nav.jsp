@@ -15,7 +15,7 @@
             $("#about").attr("class", "active");
         else if (window.location.pathname == "${pageContext.request.contextPath}/index.htm")
             $("#home").attr("class", "active");
-        else if (window.location.pathname == "${pageContext.request.contextPath}/web/getoffers.htm")
+        else if (window.location.pathname == "${pageContext.request.contextPath}/web/offers.htm")
             $("#products").attr("class", "active");
     });
 </script>
@@ -51,7 +51,7 @@
     <div class="search_box" style="float: <spring:message code="header-nav.css.div.search-box.float" />;
          margin-left: <spring:message code="header-nav.css.div.search-box.margin-left" />px;">
         <form action="${pageContext.request.contextPath}/web/offers.htm" method="get">
-            <input style="margin-left:<spring:message code="header-nav.css.div.search-box.input-text,margin-left" />px;" type="text" value="${param.name}" name="name" placeholder="<spring:message code="input.header_bottom.searchtext" />">
+            <input style="float: <spring:message code="header-nav.css.div.search-box.input-text,margin-left" />;" type="text" value="${param.name}" name="name" placeholder="<spring:message code="input.header_bottom.searchtext" />">
             <input type="submit" value=""  >
             <!--style= margin-top:<spring:message code="header-nav.css.div.search-box.input-text,margin-top" />px;-->
         </form>

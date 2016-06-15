@@ -21,7 +21,11 @@
 
 
         <link href="<spring:url value="/resources/css/main.css" />" rel="stylesheet">
-
+        <style type="text/css">
+            .search_box form input[type="submit"]{
+                margin-top: <spring:message code="search.icon.margin-top" />px;
+            }
+        </style>
     </head>
     <body>
         <div class="wrap">
@@ -56,7 +60,7 @@
                                             </div>                                       
                                             <div >
                                                 <span><label><spring:message code="text.preview.quantity" /></label></span>
-                                                <span> <input   id="quantity" type="number" class="form-control"  name="quantity"  name="quantity" required  min="1" max="10" title = "<spring:message code="validate.quantity" />" /></span>
+                                                <span> <input   id="quantity" type="number" class="form-control"  name="quantity"  name="quantity" required  min="1"  title = "<spring:message code="validate.quantity" />" /></span>
                                                 <span><label><spring:message code="text.addoffer.quantityunit" /></label></span> 
                                                 <span>
                                                     <select name="quantityunit">
@@ -67,7 +71,7 @@
                                                 </span>
                                                 <div>
                                                     <span> <label><spring:message code="dropdown.offer_page.price" /> </label></span>
-                                                    <span> <input   id="quantity" type="number" class="form-control"  name="price" required  min="1" ma="10"     /></span>
+                                                    <span> <input   id="quantity" type="number" class="form-control"  name="price" required  min="1"      /></span>
                                                     <span><label><spring:message code="text.addoffer.css.per" /> </label></span>
                                                     <span>
                                                         <select name="unitprice">

@@ -45,7 +45,34 @@
             });
         });
     </script>
+    <style type="text/css">
+        #noresults{ 
+               width: 650px;
+            /*margin-right: 0px;*/
+            /*margin-left: -14px <spring:message code="view-user.css.margin-left" />;*/
+            text-align: left;
+            padding: 0px 8px;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        }
+        #noresults h4{
+            
+            color: #4CAF50;
+              height: 73px;
+            margin-top: 21px;
+            direction: <spring:message code="view_user.css.user-products.dir" />;
+        }
+        #noresults h4 strong{
+            margin-left: 213px;
+            font-size: xx-large;
 
+          
+        }
+    </style>
 </head>
 <body>
     <div class="wrap">
@@ -65,7 +92,7 @@
 
         <hr class="">
         <div class="container target" style=" 
-    margin-bottom: 248px;  width: 105%;">
+             margin-bottom: 248px;  width: 105%;">
             <div class="row">
                 <div class="col-sm-2" style="float: <spring:message code="view_user.css.row.col-sm-3.float" />;">
                     <a href="/users" class="pull-right">
@@ -86,7 +113,7 @@
                 <div class="col-sm-3" style="float: <spring:message code="view_user.css.row.col-sm-3.float" />;">
                     <!--left col-->
                     <ul class="list-group">
-                        <li class="list-group-item text-muted" contenteditable="false">${user.fullName}</li>
+                        <li class="list-group-item text-muted" contenteditable="false">${sessionScope.user.fullName}</li>
                         <!--<li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined</strong></span> 2.13.2014</li>-->
                         <li style="text-align: <spring:message code="view-user.rate.text-align"/>;
                             direction:<spring:message code="view_user.css.rate.panel.dir"/>;"
@@ -94,19 +121,19 @@
                             <span style="    margin-left: <spring:message code="view-user.rate.span.margin-left"/>px;"
                                   class="pull-left"><strong class="">
                                     <spring:message code="text.user.mobile" /></strong>
-                            </span>${user.mobile}</li>
+                            </span>${sessionScope.user.mobile}</li>
                         <li style="    text-align: <spring:message code="view-user.rate.text-align"/>;" 
                             class="list-group-item text-right">
                             <span style="margin-left: <spring:message code="view-user.rate.margin-left"/>px; direction: <spring:message code="view_user.css.rate.panel.dir"/>;" class="pull-left">
                                 <strong class="">
                                     <spring:message code="text.user.email" /></strong>
-                            </span> ${user.mail}</li>
+                            </span> ${sessionScope.user.mail}</li>
                         <li style="    text-align: <spring:message code="view-user.rate.text-align"/>;" 
                             class="list-group-item text-right">
                             <span style="margin-left: <spring:message code="view-user.rate.margin-left"/>px; direction: <spring:message code="view_user.css.rate.panel.dir"/>;" class="pull-left">
                                 <strong class="">
                                     <spring:message code="text.addoffer.governerate" /></strong>
-                            </span> ${user.governerate}</li>
+                            </span> ${sessionScope.user.governerate}</li>
                     </ul>
                     <div class="panel panel-default" style="height: 2px;">
                         <div class="panel-heading" style="text-align: <spring:message code="view-user.panel-heading.text-align"/>">
@@ -118,13 +145,13 @@
                              margin-top:-15px;">
                             <div class="rating-block">
                                 <!--<h4>Average user rating</h4>-->
-                                <h2 class="bold padding-bottom-7">${user.ratesAverage} <small>/ 5</small></h2>
-                                <c:forEach begin="1" end="${user.ratesAverage}">
+                                <h2 class="bold padding-bottom-7">${sessionScope.user.ratesAverage} <small>/ 5</small></h2>
+                                <c:forEach begin="1" end="${sessionScope.user.ratesAverage}">
                                     <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
                                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                     </button>
                                 </c:forEach>
-                                <c:forEach begin="1" end="${5-user.ratesAverage}">
+                                <c:forEach begin="1" end="${5-sessionScope.user.ratesAverage}">
 
                                     <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
                                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -150,29 +177,29 @@
                              /*border: 1px solid rgba(128, 128, 128, 0.13);*/
                              overflow: auto;">
                             <!--<div class="row">-->
-                            <c:forEach items="${user.userOfferProductFixeds}" var="offer">
+                            <c:forEach items="${sessionScope.user.userOfferProductFixeds}" var="offer">
 
                                 <div class="grid_1_of_4 images_1_of_4" style="
                                      float: <spring:message code="offer_page.css.heading.float" />;">
                                     <div class="add-cart">
-                                             <h4> <a s href="${pageContext.request.contextPath}/web/removeoffer.htm?offerid=${offer.id}" style="position: absolute;
-    margin-left: -31px;background-image: url('${pageContext.request.contextPath}/resources/images/ic_delete_black_24dp_1x.png')"></a></h4>
-                                         </div>
-                                         <div class="add-cart" style="    margin-top: 21px;">
-                                             <h4> <a s href="${pageContext.request.contextPath}/web/updateoffer.htm?offerId=${offer.id}" style="position: absolute;
-    margin-left: -31px;background-image: url('${pageContext.request.contextPath}/resources/images/ic_mode_edit_black_24dp_1x.png')"></a></h4>
-                                         </div>
+                                        <h4> <a s href="${pageContext.request.contextPath}/web/removeoffer.htm?offerid=${offer.id}" style="position: absolute;
+                                                margin-left: -31px;background-image: url('${pageContext.request.contextPath}/resources/images/ic_delete_black_24dp_1x.png')"></a></h4>
+                                    </div>
+                                    <div class="add-cart" style="    margin-top: 21px;">
+                                        <h4> <a s href="${pageContext.request.contextPath}/web/updateoffer.htm?offerId=${offer.id}" style="position: absolute;
+                                                margin-left: -31px;background-image: url('${pageContext.request.contextPath}/resources/images/ic_mode_edit_black_24dp_1x.png')"></a></h4>
+                                    </div>
                                     <!--<div class="thumbnail grid_1_of_4">-->
                                     <a href="preview.htm?id=${offer.id}">
                                         <img 
-                                        style="border: 1.1px solid #2969b0;
-                                        border-bottom: none; width: 220px; height: 150px;" alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
+                                            style="border: 1.1px solid #2969b0;
+                                            border-bottom: none; width: 220px; height: 150px;" alt="300x200" src="${pageContext.request.contextPath}${offer.imageUrl}" /></a>
                                     <h2 align="center">${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr}</h2>
 
                                     <div  class="caption">
                                         <div class="price-details">
                                             <div class="price-number">
-                                                <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p> 
+                                                <p style="direction:<spring:message code="view_user.css.rate.panel.dir" />;"><span style=" font-size: 0.9em;" class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p> 
                                             </div>
                                             <div class="add-cart">								
                                                 <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
@@ -193,10 +220,19 @@
                     <div class="panel panel-default" style="margin-left: <spring:message code="view-user.css.review.margin-left" />; direction: <spring:message code="view_user.css.panel-default.dir"/>;    width: 79.333333%; margin-top: 2px;">
                         <div class="panel-heading">
                             <a style="cursor: pointer;     margin-left: -9px;" data-toggle="collapse" data-target="#demo2"><spring:message code="text.view_user.reviews" /></a></div>
+                            <c:if test="${empty userHasOffer.userRatesUsersForRatedId}">
+                            <!--<div class="container">-->
+                            <!--<div class="row">-->
+                            <div class="">            
+                                <div id="noresults" ><h4><strong> <spring:message code="view-user.text.noresults" /></strong></h4></div>
+                            </div>
+                            <!--</div>-->
+                            <!--</div>-->
+                        </c:if>
                         <div class="row" style="    margin-left: -14px;">
                             <div class="col-sm-7" style="width: 99.333333%; margin-top: 3px;">
                                 <!--<hr/>-->
-                                <c:forEach items="${user.userRatesUsersForRatedId}"  var="rater">
+                                <c:forEach items="${sessionScope.user.userRatesUsersForRatedId}"  var="rater">
                                     <div class="review-block">
                                         <div class="row">
                                             <div class="col-sm-3" style="float: <spring:message code="offer_page.css.heading.float"/>;">

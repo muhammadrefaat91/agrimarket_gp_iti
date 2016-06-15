@@ -299,7 +299,8 @@ public class OfferServiceImpl implements OfferService {
     }
       @Override
       public UserOfferProductFixed findUserOfferProductFixed(Integer id){
-      return dAOInterface.findUserOfferProductFixed(id);}
+      return dAOInterface.findUserOfferProductFixed(id);
+      }
       @Override
     public List<UserOfferProductFixed> getOffersByCategory(Integer categoryId) {
         List<Category> children = categoryService.getChildrenOf(categoryId);

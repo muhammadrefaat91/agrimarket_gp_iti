@@ -58,7 +58,7 @@
                                     <spring:message code="text.preview.price" />
                                     <p style="font-size: 0.6125em; direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />"><span style="    margin-left: 26px;">${offerProduct.price}  <spring:message code="preview.money"  />/ ${requestScope.lang eq 'en'?offerProduct.unitByUnitId.nameEn:offerProduct.unitByUnitId.nameAr}</span></p>
                                     <spring:message code="text.preview.date" />
-                                    
+
                                     <p style="font-size: 0.6125em; direction: <spring:message code="preview.css.desc span_3_of_2.div.dir"  />">
                                         <span style="    margin-left: 26px;">${offerProduct.startDate}</span>
                                     </p>
@@ -66,7 +66,12 @@
 
                                 </div>
                                 <div class="available">
-                                    <p><spring:message code="text.preview.name" /> <a href="${pageContext.request.contextPath}/web/user.htm?id=${offerProduct.user.id}"><span>${offerProduct.user.fullName}</span></a></p>
+                                    <c:if test="${sessionScope.user.fullName == offerProduct.user.fullName}">
+                                        <p><spring:message code="text.preview.name" /> <a href="${pageContext.request.contextPath}/web/profile.htm"><span>${offerProduct.user.fullName}</span></a></p>
+                                    </c:if>
+                                    <c:if test="${sessionScope.user.fullName != offerProduct.user.fullName}">
+                                        <p><spring:message code="text.preview.name" /> <a href="${pageContext.request.contextPath}/web/user.htm?id=${offerProduct.user.id}"><span>${offerProduct.user.fullName}</span></a></p>
+                                    </c:if>
                                     <p><spring:message code="text.preview.location" /> <span>${offerProduct.userLocation}</span></p>
                                 </div>   
                             </div>

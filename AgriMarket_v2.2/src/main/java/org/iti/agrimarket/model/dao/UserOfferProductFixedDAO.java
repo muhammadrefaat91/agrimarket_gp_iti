@@ -220,8 +220,16 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
     //Refaat
     @Override
     public UserOfferProductFixed findUserOfferProductFixed(Integer id) {
-        return (UserOfferProductFixed) getHibernateTemplate().execute((Session sn) -> sn.createQuery("from UserOfferProductFixed offer where offer.id=:id")
-                .setInteger("id", id).uniqueResult());
+        return (UserOfferProductFixed) getHibernateTemplate().execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session sn) throws HibernateException {
+         UserOfferProductFixed offerProductFixed = (UserOfferProductFixed) sn.createQuery("from UserOfferProductFixed offer where offer.id=:id").setInteger("id", id).uniqueResult();
+         Hibernate.initialize(offerProductFixed.getProduct());
+         return offerProductFixed;
+            }
+        });
+                
     }
 
     @Override

@@ -38,7 +38,32 @@
         </script>
         <script type="text/javascript" src="<spring:url value="/resources/js/jquery-1.7.2.min.js" />"></script>
         <script type="text/javascript" src="<spring:url value="/resources/js/jquery.cookie.js" />"></script>
-
+        <style type="text/css">
+            #noresults{ 
+    width: 760px;
+    /* display: none; */
+    margin: auto;
+    text-align: left;
+    margin-top: 12px;
+    padding: 0px 8px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    height: 199px;
+}
+#noresults h4{
+    margin-top: 80px;
+        color: #4CAF50;
+        direction: <spring:message code="view_user.css.user-products.dir" />;
+}
+#noresults h4 strong{
+        margin-left: 213px;
+    font-size: xx-large;
+}
+        </style>
     </head>
     <body>
 
@@ -50,7 +75,7 @@
             <div class="call" style="    margin-top: -34px;">
                 <p style="direction: <spring:message code="addoffer.css.contactform.dir" />;"> <spring:message code="text.lang" /> : <a class="lang" href="?name=${param['name']}&lang=en"><spring:message code="text.lang.english" /></a>|<a class="lang" href="?name=${param['name']}&lang=ar_EG"><spring:message code="text.lang.arbic" /></a></p>
             </div>
-           
+
             <!---include header top -->
             <jsp:include page="header/header_top.jsp" />
             <jsp:include page="header/header_bottom_nav.jsp" />
@@ -97,6 +122,15 @@
                     <!--view all offers -->
                     <div class="section group" style="  width: 106%;margin-left: -38px;
                          margin-left: <spring:message code="offer-page.css.margin" />px;  ">
+                        <c:if test="${empty getAllOfferProducts}">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-12 text-center">            
+                                        <div id="noresults" ><h4><strong> <spring:message code="offer-page.text.noresults" /></strong></h4></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:if>
                         <c:forEach items="${getAllOfferProducts}" var="offer">
                             <div class="grid_1_of_4 images_1_of_4" style="margin-left: <spring:message code="offer-page.css.padding.product.margin-left" />px;margin-right: 29px;float: <spring:message code="offer_page.css.heading.float" />;">
                                 <a href="preview.htm?id=${offer.id}">

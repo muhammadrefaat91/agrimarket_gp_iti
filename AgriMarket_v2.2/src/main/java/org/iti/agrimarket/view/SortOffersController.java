@@ -46,7 +46,7 @@ public class SortOffersController {
     
     
     @RequestMapping(value = "/sort.htm",method = RequestMethod.GET)
-    public String addRate(HttpServletRequest request ,@RequestParam(value = "sortType", required = false) String sortType,
+    public String sortOffers(HttpServletRequest request ,@RequestParam(value = "sortType", required = false) String sortType,
             @RequestParam(value = "searchText", required = false) String productName,Locale locale, Model model) {
         SortOffers sortOffers;
         locale = LocaleContextHolder.getLocale();
@@ -54,7 +54,7 @@ public class SortOffersController {
         System.out.println("List<UserOfferProductFixed> fixeds"+offers);
        
         System.out.println("Sort....."+sortType);
-        
+        if(offers != null && !offers.isEmpty()){
         if (sortType != null &&  (sortType.equals("Price") || sortType.equals("السعر"))){
             sortOffers = new SortOffersByPrice();
             sortOffers.sort(offers, 0, offers.size()-1);
@@ -66,6 +66,7 @@ public class SortOffersController {
             sortOffers.sort(offers, 0, offers.size()-1);
         }else{
             offers = offerService.getAllOfferProducts();
+        }
         }
         model.addAttribute("getAllOfferProducts", offers);
         System.out.println("sorted"+offers);
