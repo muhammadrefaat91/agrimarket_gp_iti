@@ -66,10 +66,10 @@
 
                                 </div>
                                 <div class="available">
-                                    <c:if test="${sessionScope.user.fullName == offerProduct.user.fullName}">
+                                    <c:if test="${sessionScope.user.mail == offerProduct.user.mail}">
                                         <p><spring:message code="text.preview.name" /> <a href="${pageContext.request.contextPath}/web/profile.htm"><span>${offerProduct.user.fullName}</span></a></p>
                                     </c:if>
-                                    <c:if test="${sessionScope.user.fullName != offerProduct.user.fullName}">
+                                    <c:if test="${sessionScope.user.mail != offerProduct.user.mail}">
                                         <p><spring:message code="text.preview.name" /> <a href="${pageContext.request.contextPath}/web/user.htm?id=${offerProduct.user.id}"><span>${offerProduct.user.fullName}</span></a></p>
                                     </c:if>
                                     <p><spring:message code="text.preview.location" /> <span>${offerProduct.userLocation}</span></p>

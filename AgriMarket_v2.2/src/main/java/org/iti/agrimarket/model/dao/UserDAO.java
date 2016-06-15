@@ -186,6 +186,7 @@ public class UserDAO implements UserDAOInterface {
                     for (Iterator iterator = offers.iterator(); iterator.hasNext();) {
                         UserOfferProductFixed next = (UserOfferProductFixed) iterator.next();
                         Hibernate.initialize(next.getProduct());
+                        Hibernate.initialize(next.getUnitByPricePerUnitId());
                     }
                     Hibernate.initialize(user.getUserRatesUsersForRatedId());
                     UserRatesUser u1;
@@ -223,6 +224,7 @@ public class UserDAO implements UserDAOInterface {
                 for (Iterator iterator = offers.iterator(); iterator.hasNext();) {
                     UserOfferProductFixed next = (UserOfferProductFixed) iterator.next();
                     Hibernate.initialize(next.getProduct());
+                    Hibernate.initialize(next.getUnitByPricePerUnitId());
                 }
                 Hibernate.initialize(user.getUserRatesUsersForRatedId());
                 UserRatesUser u1;

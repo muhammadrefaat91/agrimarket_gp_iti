@@ -103,11 +103,12 @@ public class UserController {
         model.addAttribute("states_us", countryArr);
 
         System.out.println("hello################  new profile");
+        model.addAttribute("lang", locale);
         return new ModelAndView("edit-profile");
     }
 
 
-    @RequestMapping(value = {"/uprofile.htm"})
+    @RequestMapping(value = {"/uprofile.htm"},method = RequestMethod.POST)
     public String updateUserProfile(@RequestParam(value = "fullName", required = true) String fullName,
             @RequestParam(value = "mail", required = true) String mail, @RequestParam(value = "mobile", required = true) String mobil,
             @RequestParam(value = "governerate", required = true) String governerate,
@@ -165,7 +166,7 @@ public class UserController {
         }
         model.addAttribute("lang", locale);
 
-        return "profile";
+        return "/web/profile.htm";
     }
 
     @RequestMapping(value = {"/logout.htm"})

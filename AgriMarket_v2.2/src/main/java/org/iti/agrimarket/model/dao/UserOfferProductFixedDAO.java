@@ -130,6 +130,8 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
                     for (int i = 0; i < results.size(); i++) {
                         UserOfferProductFixed get = results.get(i);
                         Hibernate.initialize(get.getProduct());
+                        Hibernate.initialize(get.getUnitByPricePerUnitId());
+                        
                     }
                     return results;
                 } catch (Exception ex) {
@@ -359,6 +361,7 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
                     for (int i = 0; i < results.size(); i++) {
                         UserOfferProductFixed get = results.get(i);
                         Hibernate.initialize(get.getProduct());
+//                        Hibernate.initialize(get.getUnitByUnitId());
                         Hibernate.initialize(get.getUnitByPricePerUnitId());
                     }
                     return results;
@@ -457,6 +460,7 @@ public class UserOfferProductFixedDAO implements UserOfferProductFixedDAOInterfa
                 for (int i = 0; i < results.size(); i++) {
                     UserOfferProductFixed get = results.get(i);
                     Hibernate.initialize(get.getProduct());
+                    Hibernate.initialize(get.getUnitByPricePerUnitId());
                 }
                 return results;
             } catch (Exception ex) {

@@ -76,10 +76,10 @@
 
                             <div class="price-details">
                                 <div class="price-number">
-                                    <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p>
+                                    <p><span class="rupees" style="    font-size: 17px;">${offer.price}  <spring:message code="preview.money"  />/${requestScope.lang eq 'en'?offer.unitByPricePerUnitId.nameEn:offer.unitByPricePerUnitId.nameAr}</span></p>
                                 </div>
                                 <div class="add-cart">								
-                                    <h4><a href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
+                                    <h4><a href="${pageContext.request.contextPath}/web/preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
                                 </div>
                                 <div class="clear"></div>
                             </div>

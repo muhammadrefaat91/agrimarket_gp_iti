@@ -148,7 +148,7 @@
                                     <h2>${requestScope.lang eq 'en'?offer.product.nameEn:offer.product.nameAr} </h2>
                                     <div class="price-details">
                                         <div class="price-number">
-                                            <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  /></span></p>
+                                            <p><span class="rupees">${offer.price}  <spring:message code="preview.money"  />/${requestScope.lang eq 'en'?offer.unitByPricePerUnitId.nameEn:offer.unitByPricePerUnitId.nameAr}</span></p>
                                         </div>
                                         <div class="add-cart">								
                                             <h4><a  href="preview.htm?id=${offer.id}"><spring:message code="link.More.details" /></a></h4>
@@ -170,7 +170,7 @@
                         </div>
                     </c:if>
                     <c:if test="${not empty sessionScope.user}">  
-                        <c:if test="${sessionScope.user.fullName != userHasOffer.fullName}">
+                        <c:if test="${sessionScope.user.mail != userHasOffer.mail}">
                             <div class="panel panel-default" style="    width: 79%;margin-left: <spring:message code="view-user.css.review.margin-left" />;">
                                 <div class="panel-heading"><a style="cursor: pointer;margin-left: <spring:message code="view_user.css.panel-heading.margin-left" />px;" data-toggle="collapse" data-target="#demo"><spring:message code="text.user.ratetext" /></a></div>
                                 <div class="review collapse" id="demo"  >

@@ -28,7 +28,7 @@
         <c:if test="${empty sessionScope.user}">
             <c:redirect url="/web/signup.htm"/>
         </c:if>
-        
+
         <div class="wrap">
             <div class="fb-like" data-href="https://www.facebook.com/ChatAppJits/" data-width="200" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
             <!---include header description -->
@@ -40,34 +40,34 @@
             <!---include nav bar -->
             <jsp:include page="header/header_bottom_nav.jsp" />
             <form class="form-horizontal" method="post" enctype="multipart/form-data" action="uprofile.htm" role="form" >
-            <div class="container" style="padding-top: 60px;    margin-top: -72px;
-    margin-left: -25px;
-    margin-bottom: 215px;    width: 104%;">
-                <h1 class="page-header"><spring:message code="edit-profile.text.editprofile" /></h1>
-                
-                <div class="row" style="direction:  <spring:message code="edit-profile.css.dir" />;">
-                    <!-- left column -->
-                    <div class="col-md-4 col-sm-6 col-xs-12" style="direction:  <spring:message code="edit-profile.css.dir" />;"></h1>
+                <div class="container" style="padding-top: 60px;    margin-top: -72px;
+                     margin-left: -25px;
+                     margin-bottom: 215px;    width: 104%;">
+                    <h1 class="page-header"><spring:message code="edit-profile.text.editprofile" /></h1>
 
-                        <div class="text-center">
-                            <img style="height: 117px;margin-right: 85px;" alt="avatar" title="<spring:message code="img.title.text.view_user.profileimage" />"
-                                 class="avatar img-circle img-thumbnail" src="${pageContext.request.contextPath}${sessionScope.user.imageUrl}">
-                            <h6><spring:message code="edit-profile.text.uploadimage" /></h6>
-                           
-                            <!--<input type="file" class="text-center center-block well well-sm" />-->
-                            <input type="file" name="file"  class="form-control"   />
+                    <div class="row" style="direction:  <spring:message code="edit-profile.css.dir" />;">
+                        <!-- left column -->
+                        <div class="col-md-4 col-sm-6 col-xs-12" style="direction:  <spring:message code="edit-profile.css.dir" />;"></h1>
+
+                            <div class="text-center">
+                                <img style="height: 117px;margin-right: 85px;" alt="avatar" title="<spring:message code="img.title.text.view_user.profileimage" />"
+                                     class="avatar img-circle img-thumbnail" src="${pageContext.request.contextPath}${sessionScope.user.imageUrl}">
+                                <h6><spring:message code="edit-profile.text.uploadimage" /></h6>
+
+                                <!--<input type="file" class="text-center center-block well well-sm" />-->
+                                <input type="file" name="file"  class="form-control"   />
+                            </div>
                         </div>
-                    </div>
-                    <!-- edit form column -->
-                    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-                        <div class="alert alert-info alert-dismissable">
-                            <a class="panel-close close" data-dismiss="alert">×</a> 
-                            <i class="fa fa-coffee"></i>
-                            <spring:message code="edit-profile.text.note" />
-                        </div>
+                        <!-- edit form column -->
+                        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+                            <div class="alert alert-info alert-dismissable">
+                                <a class="panel-close close" data-dismiss="alert">×</a> 
+                                <i class="fa fa-coffee"></i>
+                                <spring:message code="edit-profile.text.note" />
+                            </div>
                             <h3 style="padding-bottom: 10px;"><spring:message code="edit-profile.text.userinfo" /></h3>
-                        
-                        <div class="form-group" style="padding-bottom: 13px;">
+
+                            <div class="form-group" style="padding-bottom: 13px;">
                                 <label class="col-lg-3 control-label"><spring:message code="edit-profile.fullname" /></label>
                                 <div class="col-lg-8">
                                     <input class="form-control" value="${sessionScope.user.fullName}" maxlength="55" required name="fullName" min="11" title="<spring:message code="validate.fullname" />" type="text">
@@ -79,54 +79,39 @@
                                     <input class="form-control" value="${sessionScope.user.mobile}" name="mobile"   pattern="(01)\d{9}" title="<spring:message code="validate.mobile" />" required   type="tel">
                                 </div>
                             </div>
-                            <div class="form-group" style="padding-bottom: 13px;">
+<!--                            <div class="form-group" style="padding-bottom: 13px;">
                                 <label class="col-lg-3 control-label"><spring:message code="text.user.email"  /></label>
                                 <div class="col-lg-8">
                                     <input class="form-control" value="${sessionScope.user.mail}" name="mail" maxlength="55" required min="10"  pattern="^[a-z0-9_\-\.]{2,}@[a-z0-9_\-\.]{2,}\.[a-z]{2,}$" title="<spring:message code="validate.email" />" >
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="form-group" style="padding-bottom: 13px;">
                                 <label class="col-lg-3 control-label"><spring:message code="text.addoffer.governerate" /></label>
                                 <div class="col-lg-8">
-                                           
-                                             
-               
-                                                     <span>
-                                                        <select name="governerate" >
-                                                            <c:forEach var="item" items="${requestScope.lang eq 'en'?states_us:states_ar}">
-                                                                <option class="textbox" value="${item}">${item}</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </span>
-                                                      
-                                                
-                                        
+                                    <span>
+                                        <select name="governerate" >
+                                            <c:forEach var="item" items="${requestScope.lang eq 'en'?states_us:states_ar}">
+                                                <option class="textbox" value="${item}">${item}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </span>  
                                 </div>
                             </div>
-                            
                             <div class="form-group">
                                 <label class="col-md-3 control-label"></label>
                                 <div class="col-md-8">
                                     <input class="btn btn-primary" value="<spring:message code="edit-profile.button.savechange" />" type="submit">
                                 </div>
                             </div>
-                        <!--</form>-->
+                            <!--</form>-->
+                        </div>
                     </div>
                 </div>
-            </div>
             </form>
         </div>
-    </div>
-
-</div>		
-</div> 
-</div>
-</div>
-
-</div>
-</div>
-</body>
-</html>
+ 
+ 
 
 <jsp:include  page="footer/footer.jsp"/>
 </body>
+</html>
