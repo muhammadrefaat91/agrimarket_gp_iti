@@ -20,22 +20,22 @@ public class SortOffersByQuantity implements SortOffers{
         UserOfferProductFixed tmp;
         UserOfferProductFixed pivot = arr.get((left + right) / 2);
         while (i <= j) {
-            while (arr.get(i).getQuantity() < pivot.getQuantity()) {
-               if (arr.get(i).getUnitByUnitId().getId() == pivot.getUnitByUnitId().getId()) {
-                    while (arr.get(i).getQuantity() < pivot.getQuantity())
-                        i++;
-                }else{
+            while (arr.get(i).getQuantity() > pivot.getQuantity()) {
+//               if (arr.get(i).getUnitByUnitId().getId() == pivot.getUnitByUnitId().getId()) {
+//                    while (arr.get(i).getQuantity() > pivot.getQuantity())
+//                        i++;
+//                }else{
                     i++;
                 }
-            }
-            while (arr.get(j).getQuantity() > pivot.getQuantity()) {
-                if (arr.get(i).getUnitByUnitId().getId() == pivot.getUnitByUnitId().getId()) {
-                    while (arr.get(i).getQuantity() > pivot.getQuantity())
+            
+            while (arr.get(j).getQuantity() < pivot.getQuantity()) {
+//                if (arr.get(i).getUnitByUnitId().getId() == pivot.getUnitByUnitId().getId()) {
+//                    while (arr.get(i).getQuantity() < pivot.getQuantity())
                          j--;
-                }else{
-                     j--;
+//                }else{
+//                     j--;
                 }
-            }
+//            }
             if (i <= j) {
                 tmp = arr.get(i);
                  arr.set(i, arr.get(j));

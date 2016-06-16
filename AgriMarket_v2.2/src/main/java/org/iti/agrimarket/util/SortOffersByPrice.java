@@ -45,22 +45,22 @@ public class SortOffersByPrice implements SortOffers{
 
         while (i <= j) {
             while (arr.get(i).getUnitByUnitId().getId() < pivot.getUnitByUnitId().getId()) {
-                if (arr.get(i).getUnitByUnitId().getId() == pivot.getUnitByUnitId().getId()) {
-                    while (arr.get(i).getPrice() < pivot.getPrice())
+//                if (arr.get(i).getUnitByUnitId().getId() == pivot.getUnitByUnitId().getId()) {
+//                    while (arr.get(i).getPrice() < pivot.getPrice())
                         i++;
-                }else{
-                    i++;
-                }
+//                }else{
+//                    i++;
+//                }
             }
             while (arr.get(j).getUnitByUnitId().getId() > pivot.getUnitByUnitId().getId()) {
 //                j--;
                 
-                 if (arr.get(i).getUnitByUnitId().getId() == pivot.getUnitByUnitId().getId()) {
-                    while (arr.get(i).getPrice() > pivot.getPrice())
-                         j--;
-                }else{
+//                 if (arr.get(i).getUnitByUnitId().getId() == pivot.getUnitByUnitId().getId()) {
+//                    while (arr.get(i).getPrice() > pivot.getPrice())
+//                         j--;
+//                }else{
                      j--;
-                }
+//                }
             }
             if (i <= j) {
                 tmp = arr.get(i);
